@@ -9,6 +9,7 @@ namespace Domain.Common
         public string City { get; }
         public string Postalcode { get; }
         public string Street { get; }
+        //testcomment
 
         public Address(string country, string city, string postalcode, string street)
         {
