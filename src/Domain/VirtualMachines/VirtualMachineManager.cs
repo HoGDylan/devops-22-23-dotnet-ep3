@@ -1,5 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Domain.Common;
+using Domain.Server;
 using Domain.Users;
 using System.Collections;
 
@@ -7,22 +8,26 @@ namespace Domain.VirtualMachines
 {
     public class VirtualMachineManager
     {
-        public IEnumerable<VirtualMachine> VirtualMachines { get; set; }
+        private IList<VirtualMachine> _vms = new List<VirtualMachine>();
+        private IList<FysiekeServer> _fysiekeServers = new List<FysiekeServer>();
 
         //for testing
-        public VirtualMachineManager(List<VirtualMachine> current_machines)
+        public VirtualMachineManager(IList<VirtualMachine> current_machines)
         {
-            this.VirtualMachines = Guard.Against.NullOrEmpty(current_machines);
+            _vms = Guard.Against.Null(current_machines);
+            _fysiekeServers = Guard.Against.Null(_fysiekeServers);
+
         }
+
 
         public VirtualMachine GetVirtualMachineById(int id)
         {
-            return VirtualMachines.First(x => x.Id == id);
+            return _vms.First(x => x.Id == id);
         }
 
-        public List<VirtualMachine> GetAllVirtualMachines()
+        public List<VirtualMachine> GetAll_vms()
         {
-            return VirtualMachines.ToList();
+            return _vms.ToList();
         }
 
         public VirtualMachine CreateVM(Klant klant, OperatingSystemEnum os, Hardware hw, BackUpType type)
@@ -39,27 +44,26 @@ namespace Domain.VirtualMachines
 
         public bool DeleteVM(int id)
         {
-            int check = VirtualMachines.Count();
-            VirtualMachines = VirtualMachines.Where(x => x.Id != id).ToList();
-            return VirtualMachines.Count() < check;
+            int check = _vms.Count();
+            _vms = _vms.Where(x => x.Id != id).ToList();
+            return _vms.Count() < check;
         }
 
         public void EditVM(int id, Hardware hw, BackUpType type, Klant k, VMConnection connection)
         {
-            VirtualMachine vm = VirtualMachines.First(x => x.Id == id);
+            VirtualMachine vm = _vms.First(x => x.Id == id);
 
             if (vm != null)
             {
                 //Deletes vm out of the list of VMS
-                VirtualMachines = VirtualMachines.Where(x => x.Id != id).ToList();
-
+                DeleteVM(id);
                 vm.Hardware = hw;
                 vm.BackUp.Type = type;
                 vm.Project = k.Project;
                 vm.Connection = connection;
 
                 //Adds it again after changing it
-                VirtualMachines.Append(vm);
+                _vms.Append(vm);
 
             }
 

@@ -2,6 +2,7 @@
 using Domain.Common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,9 @@ namespace Domain.VirtualMachines
 {
     public class VirtualMachine : Entity
     {
+        private Contract _contract;
+
+
         public int Id;
         public String Name { get; set; }
         public String Project { get; set; }
@@ -23,7 +27,7 @@ namespace Domain.VirtualMachines
 
 
 
-        public VirtualMachine(string name, string project, OperatingSystemEnum os, Hardware h, Backup b)
+        public VirtualMachine(string name, string project, OperatingSystemEnum os, Hardware h, Backup b, Contract c)
         {
             this.Name = Guard.Against.NullOrEmpty(name, nameof(name));
             this.Project = Guard.Against.NullOrEmpty(project, nameof(project));
@@ -31,6 +35,7 @@ namespace Domain.VirtualMachines
             this.Hardware = h; //validated in constructor of Hardware
             this.BackUp = b; //validated in constructor of BackUp
             this.Mode = VirtualMachineMode.STOPPED;
+            this._contract = c;
 
         }
     }
