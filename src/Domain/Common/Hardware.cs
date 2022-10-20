@@ -19,9 +19,9 @@ namespace Domain.Common
 
         public Hardware(int m, int s, int a_vCPU)
         {
-            Memory = m;
-            Storage = s;
-            Amount_vCPU = a_vCPU;
+            Memory = Guard.Against.NegativeOrZero(m, nameof(m));
+            Storage = Guard.Against.NegativeOrZero(s, nameof(s));
+            Amount_vCPU = Guard.Against.NegativeOrZero(a_vCPU, nameof(a_vCPU));
         }
         protected override IEnumerable<object> GetEqualityComponents()
         {
