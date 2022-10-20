@@ -1,5 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Domain.Common;
+using Domain.Contract;
 using Domain.Server;
 using Domain.Users;
 using System.Collections;

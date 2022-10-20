@@ -1,9 +1,10 @@
 ﻿using Ardalis.GuardClauses;
+using Domain.Common;
 using Domain.Validators;
 
 namespace Domain
 {
-    public abstract class Gebruiker
+    public abstract class Gebruiker : Entity
     {
         public int Id { get; set; }
         public String Name { get; set; }

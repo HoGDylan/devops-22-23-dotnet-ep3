@@ -1,5 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Domain.Common;
+using Domain.Contract;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -11,7 +12,7 @@ namespace Domain.VirtualMachines
 {
     public class VirtualMachine : Entity
     {
-        private Contract _contract;
+        private VMContract? _contract = null;
 
 
         public int Id;
@@ -27,7 +28,7 @@ namespace Domain.VirtualMachines
 
 
 
-        public VirtualMachine(string name, string project, OperatingSystemEnum os, Hardware h, Backup b, Contract c)
+        public VirtualMachine(string name, string project, OperatingSystemEnum os, Hardware h, Backup b)
         {
             this.Name = Guard.Against.NullOrEmpty(name, nameof(name));
             this.Project = Guard.Against.NullOrEmpty(project, nameof(project));
@@ -35,8 +36,12 @@ namespace Domain.VirtualMachines
             this.Hardware = h; //validated in constructor of Hardware
             this.BackUp = b; //validated in constructor of BackUp
             this.Mode = VirtualMachineMode.STOPPED;
-            this._contract = c;
-
         }
+
+        public void SetContract(VMContract c)
+        {
+            _contract = c;
+        }
+
     }
 }
