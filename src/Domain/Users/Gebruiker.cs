@@ -1,21 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Ardalis.GuardClauses;
+using Domain.Validators;
 
 namespace Domain
 {
-    public class Gebruiker
+    public abstract class Gebruiker
     {
         public int Id { get; set; }
         public String Name { get; set; }
-        public int PhoneNumber { get; set; }
-
-        public EmailAddressAttribute EmailAddress { get; set; }
+        public String PhoneNumber { get; set; }
+        public String Email { get; set; }
         public String Password { get; set; }
-        public Boolean Active { get; set; }
+
+        /*
+         * Password validation: 
+             *  Min length: 6
+             *  Max Length: ? 
+             *  1 Uppercase letter
+             *  1 Lowercase letter
+             *  1 Digit
+         */
+
+        public Gebruiker(string name, string phoneNumber, string email, string password)
+        {
+            this.Name = Guard.Against.NullOrEmpty(name, nameof(name));
+            if (Validator.IsPhoneNumberValid(phoneNumber)) PhoneNumber = phoneNumber;
+            if (Validator.IsValidEmail(email)) Email = email;
+            this.Password = Guard.Against.InvalidFormat(password, nameof(password), @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$");
+        }
 
     }
 }

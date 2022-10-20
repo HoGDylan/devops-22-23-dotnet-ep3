@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Validators
 {
-    public class EmailValidator
+    public class Validator
     {
 
-        public static bool ValidEmail(string mail)
+        public static bool IsValidEmail(string mail)
         {
             if (mail == null) throw new ArgumentException("Email can't be null");
             if (!mail.Contains("@")) throw new ArgumentException("Invalid Email");
@@ -18,17 +18,24 @@ namespace Domain.Validators
             if (!mail.Split("@")[1].Contains(".")) throw new ArgumentException("Email has no suffix");
             if (mail.Split("@")[1].Split(".")[1].Length < 2) throw new ArgumentException("Email suffix length must be 2 or larger");
 
+
             return true;
         }
+        public static bool IsPhoneNumberValid(string phoneNumber)
+        {
+            if (!phoneNumber.StartsWith("0")) throw new ArgumentException("Phone number must start with 0");
+            if (phoneNumber.StartsWith("04") && phoneNumber.Length != 10) throw new ArgumentException("Phone number is not correct");
+            if (!phoneNumber.StartsWith("04") && phoneNumber.Length != 9) throw new ArgumentException("Landline number is not correct");
 
-
-
+            return true;
+        }
     }
-
 }
+
+
 
 /*
        //School email
        if (mail_to_lower.Split("@")[1].Equals("student.hogent.be") || mail_to_lower.Split("@")[1].Equals("hogent.be") && (mail_to_lower.Split("@")[0].Contains("."))) {
-           EmailAdress = mail;
+          
        }*/

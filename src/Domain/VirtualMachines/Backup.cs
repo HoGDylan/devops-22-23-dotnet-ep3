@@ -12,14 +12,13 @@ namespace Domain.VirtualMachines
     {
 
         public BackUpType Type { get; set; }
-        public DateTime LastBackup { get; set; }
+        public DateTime? LastBackup { get; set; }        //lastBackup can be null
 
 
-
-        public Backup(BackUpType type, DateTime lastBackup)
+        public Backup(BackUpType type, DateTime? lastBackup)
         {
             this.Type = Guard.Against.Null(type, nameof(type));
-            this.LastBackup = lastBackup; //lastBackup can be null
+            this.LastBackup = lastBackup;
         }
 
 
@@ -27,7 +26,7 @@ namespace Domain.VirtualMachines
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return (int)Type;
-            yield return LastBackup.Millisecond;
+            yield return LastBackup.HasValue ? LastBackup.Value.Millisecond : 0;
             
         }
     }

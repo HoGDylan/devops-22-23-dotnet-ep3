@@ -28,9 +28,6 @@ namespace Domain.Common
          */
             
 
-
-
-
         public VMConnection(string FQDN, string hostname, string username, string password)
         {
             this.FQDN = Guard.Against.NullOrEmpty(FQDN, nameof(FQDN));
