@@ -7,12 +7,14 @@ using Bogus;
 
 namespace Domain.VirtualMachines
 {
+
     public class VirtualMachineFaker : Faker<VirtualMachine>
     {
         public VirtualMachineFaker()
         {
-            CustomInstantiator(f => new VirtualMachine());
-            //RuleFor
+            CustomInstantiator(f => new VirtualMachine(f.));
+            RuleFor(x => x.Id, f => f.Random.Int(1));
+            
         }
     }
 }

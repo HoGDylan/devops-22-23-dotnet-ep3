@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.VirtualMachines
 {
-    public class VirtualMachine: Entity
+    public class VirtualMachine : Entity
     {
         public int Id;
         public String Name { get; set; }
@@ -16,7 +16,7 @@ namespace Domain.VirtualMachines
         public OperatingSystemEnum OperatingSystem { get; set; }
         public VirtualMachineMode Mode { get; set; }
         public Hardware Hardware { get; set; }
-        public VMConnection? Connection { get; set; } 
+        public VMConnection? Connection { get; set; }
         //VMConnection kan null zijn? Stel je voor dat je een VM aanmaakt. Is die dan al meteen geconnecteerd aan internet, of is er nog proces dat deze geset wordt achteraf?
 
         public Backup BackUp { get; set; }
@@ -33,6 +33,5 @@ namespace Domain.VirtualMachines
             this.Mode = VirtualMachineMode.STOPPED;
 
         }
-
     }
 }

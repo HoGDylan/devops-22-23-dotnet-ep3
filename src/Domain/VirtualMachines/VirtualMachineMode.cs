@@ -8,8 +8,8 @@ namespace Domain.VirtualMachines;
 
 public enum VirtualMachineMode
 {
-    STOPPED = 0,
-    RUNNING = 1,
+    STOPPED,
+    RUNNING,
     SUSPENDED,
     TERMINATED,
     PAUSED
