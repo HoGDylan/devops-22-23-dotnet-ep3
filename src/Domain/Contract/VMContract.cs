@@ -31,9 +31,7 @@ namespace Domain.Contract
             this.VMId = vm_id;
             this.BeheerderId = beh_id;
             this.StartDate = start_d;
-            this.EndDate = end_d;
-
-         
+            this.EndDate = end_d;         
         }
     }
 }

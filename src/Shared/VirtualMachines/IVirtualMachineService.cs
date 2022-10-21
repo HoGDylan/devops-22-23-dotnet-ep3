@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Users;
 using Domain.VirtualMachines;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,6 @@ public interface IVirtualMachineService
     Task<VirtualMachineDto.Detail> GetDetailAsync(int id);
     Task DeleteAsync(int id);
     Task CreateAsync(string name, string project, OperatingSystemEnum os, Hardware h, Backup b);
-    Task EditVMInformation(int id, string name, string project, Backup b);
-    Task EditVMHardware(int id, OperatingSystem os, Hardware h);
+    Task EditVMInformation(int id, string name, Klant k);
+    Task EditVMHardware(int id, OperatingSystem os, Hardware h, Backup b);
 }
