@@ -14,10 +14,10 @@ public static class VirtualMachineDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public VirtualMachineMode mode;
+
     }
     public class Detail : Index
     {
-        public Hardware 
+        public Hardware Hardware { get; set; }
     }
 }

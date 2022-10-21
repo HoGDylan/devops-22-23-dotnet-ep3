@@ -18,8 +18,8 @@ namespace Domain.Contract
 
 
         public int Id { get; set; }
-        public int CustomerId { get { return _customerId; } set { Guard.Against.NegativeOrZero(_customerId ,nameof(_customerId)); }
-        public int VMId { get { return _vmId; } set { Guard.Against.NegativeOrZero(_vmId, nameof(_vmId)); }       }
+        public int CustomerId { get { return _customerId; } set { Guard.Against.NegativeOrZero(_customerId, nameof(_customerId)); } }
+        public int VMId { get { return _vmId; } set { Guard.Against.NegativeOrZero(_vmId, nameof(_vmId)); }}
         public int BeheerderId { get { return _beheerderId; }  set { Guard.Against.NegativeOrZero(_beheerderId, nameof(_beheerderId)); } }
         public DateTime StartDate { get { return _startDate; } set { Guard.Against.Null(_startDate, nameof(_startDate)); } }
         public DateTime EndDate { get { return _endDate; } set { Guard.Against.Null(_endDate, nameof(_endDate)) ; } }

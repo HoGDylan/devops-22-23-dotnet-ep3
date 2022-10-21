@@ -26,7 +26,7 @@ namespace Domain.Common
             set { Guard.Against.NegativeOrZero(_storage, nameof(_storage)); }
         }
         public int Amount_vCPU {
-            get { return _amountVCPU}
+            get { return _amountVCPU; }
             set { Guard.Against.NegativeOrZero(_amountVCPU, nameof(_amountVCPU)); }
         }
    

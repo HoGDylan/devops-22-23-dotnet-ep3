@@ -38,7 +38,7 @@ namespace Domain.VirtualMachines
             this.OperatingSystem = os;
             this.Hardware = h;
             this.BackUp = b;
-            this.Mode = VirtualMachineMode.STOPPED;
+            this.Mode = VirtualMachineMode.CREATED;
         }
 
         public void SetContract(VMContract c)

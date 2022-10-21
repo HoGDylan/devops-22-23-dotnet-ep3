@@ -18,7 +18,7 @@ namespace Domain.Common
         public String FQDN { get { return _fqdn; } set { Guard.Against.NullOrEmpty(_fqdn, nameof(_fqdn)); } }
         public String Hostname { get { return _hostname; } set { Guard.Against.NullOrEmpty(_hostname, nameof(_hostname)); } }
         public String Username { get { return _username; } set { Guard.Against.NullOrEmpty(_username, nameof(_username)); } } 
-        public String Password { get { return _password; } set { Guard.Against.InvalidFormat(password, nameof(password), @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");} }
+        public String Password { get { return _password; } set { Guard.Against.InvalidFormat(_password, nameof(_password), @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");} }
 
         /*
          

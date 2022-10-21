@@ -12,8 +12,8 @@ namespace Domain.VirtualMachines
     {
         public VirtualMachineFaker()
         {
-            CustomInstantiator(f => new VirtualMachine(f.));
-            RuleFor(x => x.Id, f => f.Random.Int(1));
+          //  CustomInstantiator(f => new VirtualMachine(f.));
+          //  RuleFor(x => x.Id, f => f.Random.Int(1));
             
         }
     }

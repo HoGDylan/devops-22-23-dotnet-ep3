@@ -23,7 +23,7 @@ namespace Domain.Server
         public Hardware HardWare { get { return _hardWare; } set { Guard.Against.Null(_hardWare, nameof(_hardWare)); } }
         public int MemoryAvailable { get { return _memoryAvailable; } set { Guard.Against.Negative(_memoryAvailable, nameof(_memoryAvailable)); } }
         public int StorageAvailable { get { return _storageAvailable; } set { Guard.Against.Negative(_storageAvailable, nameof(_storageAvailable)); } }
-        public int VCPUsAvailable { get { return _vCPUsAvailable; } set { Guard.Against.Negative(_vCPUsAvailable, nameof(_vCPUsAvailable)) }; }
+        public int VCPUsAvailable { get { return _vCPUsAvailable; } set { Guard.Against.Negative(_vCPUsAvailable, nameof(_vCPUsAvailable)); } }
 
 
 
