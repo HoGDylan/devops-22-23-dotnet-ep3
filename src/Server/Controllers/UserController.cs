@@ -9,7 +9,7 @@ namespace VirtualMachine.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
 
     public class UserController : ControllerBase
     {
@@ -26,10 +26,10 @@ namespace VirtualMachine.Server.Controllers
             var users = await _managementApiClient.Users.GetAllAsync(new GetUsersRequest(), new PaginationInfo());
             return users.Select(x => new UserDto.Index
             {
-                Email = x.Email,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                Blocked = x.Blocked ?? false,
+                Name = x.name,
+                PhoneNumber = x.phoneNumber,
+                Email = x.email,
+                Password = x.password,
             });
         }
 
@@ -38,10 +38,10 @@ namespace VirtualMachine.Server.Controllers
         {
             var createRequest = new UserCreateRequest
             {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Password = user.Password,
+                Name = user.name,
+                PhoneNumber = user.phoneNumber,
+                Email = user.email,
+                Password = user.password,
                 Connection = "Username-Password-Authentication",
             };
             var createdUser = await _managementApiClient.Users.CreateAsync(createRequest);
