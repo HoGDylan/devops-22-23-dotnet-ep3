@@ -13,7 +13,9 @@ public static class VirtualMachineDto
     public class Index
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public String Name { get; set; }
+        public VirtualMachineMode Mode { get; set; }
+         
 
     }
     public class Detail : Index
