@@ -1,0 +1,42 @@
+﻿<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="https://www.hogent.be/">
+            <img src="https://www.hogent.be/themes/hogent/assets/images/HOGENT_Logo.png" width="112" height="28">
+        </a>
+
+        <a role="button" @onclick="ToggleMenuDisplay" class="navbar-burger @isOpenClass" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div class="navbar-menu @isOpenClass">
+        <div class="navbar-start">
+            <NavLink class="navbar-item" href="" ActiveClass="is-active" Match="NavLinkMatch.All">
+                Virtual Machines
+            </NavLink>
+            <NavLink class="navbar-item" href="" ActiveClass="is-active" Match="NavLinkMatch.All">
+                Klanten
+            </NavLink>
+            <NavLink class="navbar-item" href="" ActiveClass="is-active" Match="NavLinkMatch.All">
+                Beheerders
+            </NavLink>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <AccessControl />
+            </div>
+        </div>
+    </div>
+</nav>
+
+@code {
+    private bool isOpen;
+    private string isOpenClass => isOpen ? "is-active" : null;
+    private void ToggleMenuDisplay()
+    {
+        isOpen = !isOpen;
+    }
+}

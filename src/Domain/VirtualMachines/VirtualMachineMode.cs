@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.VirtualMachines;
-
-public enum VirtualMachineMode
+namespace Domain.VirtualMachines
 {
-    STOPPED,
-    RUNNING,
-    SUSPENDED,
-    TERMINATED,
-    PAUSED
-}
 
+    public enum VirtualMachineMode
+    {
+        STOPPED,
+        RUNNING,
+        SUSPENDED,
+        TERMINATED,
+        PAUSED
+    }
+};
