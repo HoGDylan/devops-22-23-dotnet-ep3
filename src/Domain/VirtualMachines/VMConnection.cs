@@ -10,11 +10,16 @@ namespace Domain.Common
     public class VMConnection : ValueObject
     {
 
-        public String FQDN { get; set; }
-        public String Hostname { get; set; }
-        public String Username { get; set; } 
-        public String Password { get; set; }  
-        
+        private string _fqdn;
+        private string _hostname;
+        private string _username;
+        private string _password;
+
+        public String FQDN { get { return _fqdn; } set { Guard.Against.NullOrEmpty(_fqdn, nameof(_fqdn)); } }
+        public String Hostname { get { return _hostname; } set { Guard.Against.NullOrEmpty(_hostname, nameof(_hostname)); } }
+        public String Username { get { return _username; } set { Guard.Against.NullOrEmpty(_username, nameof(_username)); } } 
+        public String Password { get { return _password; } set { Guard.Against.InvalidFormat(password, nameof(password), @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");} }
+
         /*
          
          * Password validation: 
@@ -26,14 +31,14 @@ namespace Domain.Common
              *  1 Special character
          
          */
-            
+
 
         public VMConnection(string FQDN, string hostname, string username, string password)
         {
-            this.FQDN = Guard.Against.NullOrEmpty(FQDN, nameof(FQDN));
-            this.Hostname = Guard.Against.NullOrEmpty(hostname, nameof(hostname));
-            this.Username = Guard.Against.NullOrEmpty(username, nameof(username));
-            this.Password = Guard.Against.InvalidFormat(password, nameof(password), @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
+            this.FQDN = FQDN;
+            this.Hostname = hostname;
+            this.Username = username;
+            this.Password = password;
         }
 
 

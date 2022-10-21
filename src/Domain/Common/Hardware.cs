@@ -10,18 +10,34 @@ namespace Domain.Common
     public class Hardware : ValueObject
     {
 
-        public int Memory { get; set; }
-        public int Storage { get;set; }
-        public int Amount_vCPU { get; set; }
+        private int _memory;
+        private int _storage;
+        private int _amountVCPU;
+
+
+
+        public int Memory {
+            get { return _memory; }
+            set { Guard.Against.NegativeOrZero(_memory, nameof(_memory)); } 
+        }       
+        public int Storage
+        {
+            get { return _storage; }
+            set { Guard.Against.NegativeOrZero(_storage, nameof(_storage)); }
+        }
+        public int Amount_vCPU {
+            get { return _amountVCPU}
+            set { Guard.Against.NegativeOrZero(_amountVCPU, nameof(_amountVCPU)); }
+        }
    
         //Bandwidth? Gaan we hier rekening meehouden?
 
 
         public Hardware(int m, int s, int a_vCPU)
         {
-            Memory = Guard.Against.NegativeOrZero(m, nameof(m));
-            Storage = Guard.Against.NegativeOrZero(s, nameof(s));
-            Amount_vCPU = Guard.Against.NegativeOrZero(a_vCPU, nameof(a_vCPU));
+            this.Memory = m;
+            this.Storage = s;
+            this.Amount_vCPU = a_vCPU;
         }
         protected override IEnumerable<object> GetEqualityComponents()
         {

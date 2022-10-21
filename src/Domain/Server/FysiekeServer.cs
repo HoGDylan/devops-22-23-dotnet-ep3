@@ -10,25 +10,32 @@ namespace Domain.Server
 {
     public class FysiekeServer : Entity
     {
-        public int Id { get; set; }
-        public String Naam { get; set; }
-        public String ServerAddress { get; set; }
+        private string _name;
+        private string _serverAddress;
+        private Hardware _hardWare;
+        private int _memoryAvailable;
+        private int _storageAvailable;
+        private int _vCPUsAvailable;
 
-        public Hardware HardWare { get; set; }
-        public int MemoryAvailable { get; set; }
-        public int StorageAvailable { get; set; }
-        public int VCPUsAvailable { get; set; }
+        public int Id { get; set; }
+        public String Naam { get { return _name; } set { Guard.Against.NullOrEmpty(_name, nameof(_name)); } }
+        public String ServerAddress { get { return _serverAddress; } set { Guard.Against.NullOrEmpty(_serverAddress, nameof(_serverAddress)); } }
+        public Hardware HardWare { get { return _hardWare; } set { Guard.Against.Null(_hardWare, nameof(_hardWare)); } }
+        public int MemoryAvailable { get { return _memoryAvailable; } set { Guard.Against.Negative(_memoryAvailable, nameof(_memoryAvailable)); } }
+        public int StorageAvailable { get { return _storageAvailable; } set { Guard.Against.Negative(_storageAvailable, nameof(_storageAvailable)); } }
+        public int VCPUsAvailable { get { return _vCPUsAvailable; } set { Guard.Against.Negative(_vCPUsAvailable, nameof(_vCPUsAvailable)) }; }
 
 
 
         public FysiekeServer(string naam, Hardware hw,  string s_adres, int mem_available, int stor_available, int vCPU_avaiable)
         {
-            this.Naam = Guard.Against.NullOrEmpty(naam, nameof(naam));
-            this.ServerAddress = Guard.Against.NullOrEmpty(s_adres, nameof(s_adres));
-            this.MemoryAvailable = Guard.Against.Negative(mem_available, nameof(mem_available));
-            this.StorageAvailable = Guard.Against.Negative(stor_available, nameof(stor_available));
-            this.VCPUsAvailable = Guard.Against.Negative(vCPU_avaiable, nameof(vCPU_avaiable));
-            this.HardWare = Guard.Against.Null(hw, nameof(hw));
+
+            this.Naam = naam;
+            this.HardWare = hw;
+            this.ServerAddress = s_adres;
+            this.MemoryAvailable = mem_available;
+            this.StorageAvailable = stor_available;
+            this.VCPUsAvailable = vCPU_avaiable ;
         }
 
     }
