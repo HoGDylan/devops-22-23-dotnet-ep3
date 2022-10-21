@@ -8,5 +8,7 @@ namespace Shared.VirtualMachines;
 
 internal interface IVitrualMachineService
 {
-    Task<>
+    Task<IEnumerable<VirtualMachineDto.Index>> GetIndexAsync();
+    Task<VirtualMachineDto.Detail> GetDetailAsync(int virtualMachineId);
+    Task DeleteAsync(int virtualMachineId);
 }
