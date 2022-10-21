@@ -18,6 +18,6 @@ public static class VirtualMachineDto
     }
     public class Detail : Index
     {
-        public Hardware 
+        //public Hardware 
     }
 }

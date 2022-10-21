@@ -1,0 +1,54 @@
+﻿<!--
+
+@if (virtualmachines is null)
+{
+    <p>Loading...</p>
+}
+else{
+    <div>
+        <div>
+            <h2>
+                Virtual Machines
+            </h2>
+            <button>Voeg Toe</button>
+        </div>
+        <div>
+            <table>
+                <thead>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Virtual Machine
+                </th>
+                <th>
+                    Klant
+                </th>
+                <th>
+                    Project
+                </th>
+                <th>
+                    Acties
+                </th>
+                </thead>
+                <tbody>
+                    @foreach (var vm in virtualmachines)
+                    {
+                        <tr>
+                            <td>@vm.status</td>
+                            <td>@vm.naam</td>
+                            <td>@vm.klant</td>
+                            <td>@vm.project</td>
+                            <td>
+                                <button @onclick=getDetailsService>Details</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+}-->
+

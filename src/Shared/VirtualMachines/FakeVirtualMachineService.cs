@@ -16,21 +16,21 @@ namespace Shared.VirtualMachines
         {
             var virtualMachineIds = 0;
             var virtualMachineFaker = new Faker<VirtualMachineDto.Detail>()
-                .UseSeed(1337)
-                .RuleFor(x => x.Id, _ => ++virtualMachineIds)
-                .RuleFor(x => x.Name, f => f.Internet.Url)
-                .RuleFor(x => x.Description, f => f.Internet.Description);
-            _virtualMachines = virtualMachineFaker.Generate(30);
+                .UseSeed(1337);
+                //.RuleFor(x => x.Id, _ => ++virtualMachineIds)
+                //.RuleFor(x => x.Name, f => f.Internet.Url)
+                //.RuleFor(x => x.Description, f => f.Internet.Description);
+            //_virtualMachines = virtualMachineFaker.Generate(30);
         }
 
-        public Task<IEnumerable<VirtualMachineDto.Index>> GetIndexAsync()
+        /*public Task<IEnumerable<VirtualMachineDto.Index>> GetIndexAsync()
         {
-            return TaskFromResult(_virtualMachines.Select(x => new ProductDto.Index
+            /*return TaskFromResult(_virtualMachines.Select(x => new ProductDto.Index
             {
                 Id = x.Id,
                 Name = x.Name,
 
             }));
-        }
+        }*/
     }
 }

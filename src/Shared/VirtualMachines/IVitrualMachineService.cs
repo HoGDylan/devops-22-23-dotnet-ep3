@@ -8,5 +8,5 @@ namespace Shared.VirtualMachines;
 
 internal interface IVitrualMachineService
 {
-    Task<>
+    //Task<>
 }
