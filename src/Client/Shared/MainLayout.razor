@@ -7,6 +7,14 @@
 
     <main>
         <div class="top-row px-4">
+            <div class="buttons">
+                <button class="button is-primary is-fullwidth" @onclick="OpenFilterForm">
+                    <span class="icon">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span>Filter</span>
+                </button>
+            </div>
             <div>
                 <input class="input" type="search" placeholder="Zoeken...">
                 <span class="icon is-left">
@@ -22,5 +30,15 @@
         <article class="content px-4">
             @Body
         </article>
+        <Sidepanel/>
     </main>
 </div>
+
+@code {
+    [Inject] public ISidepanelService Sidepanel { get; set; }
+
+    private void OpenFilterForm()
+    {
+        Sidepanel.Open<Client.Pages.Counter>("Virtual Machines", "Filter");
+    }
+}
