@@ -1,59 +1,38 @@
-using Auth0.ManagementApi;
-using Auth0.ManagementApi.Models;
-using Auth0.ManagementApi.Paging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using VirtualMachine.Shared;
+using Shared.Users;
+using System.Threading.Tasks;
 
-namespace VirtualMachine.Server.Controllers
+namespace Server.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     [ApiController]
-    [Route("[controller]")]
-    //[Authorize(Roles = "Administrator")]
-
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly ManagementApiClient _managementApiClient;
+        private readonly IUserService userService;
 
-        public UserController(ManagementApiClient managementApiClient)
+        public UserController(IUserService userService)
         {
-            _managementApiClient = managementApiClient;
+            this.userService = userService;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<UserDto.Index>> GetUsers()
+        /*[HttpGet]
+        public Task<UserResponse.GetIndex> GetIndexAsync([FromQuery] UserRequest.GetIndex request)
         {
-            var users = await _managementApiClient.Users.GetAllAsync(new GetUsersRequest(), new PaginationInfo());
-            return users.Select(x => new UserDto.Index
-            {
-                Name = x.name,
-                PhoneNumber = x.phoneNumber,
-                Email = x.email,
-                Password = x.password,
-            });
+            return userService.GetIndexAsync(request);
+        }*/
+
+
+        public String GetIndexAsync()
+        {
+            return "userService.GetIndexAsync(request)";
         }
 
         [HttpPost]
-        public async Task CreateUser(UserDto.Create user)
+        public Task<UserResponse.Create> CreateAsync([FromBody] UserRequest.Create request)
         {
-            var createRequest = new UserCreateRequest
-            {
-                Name = user.name,
-                PhoneNumber = user.phoneNumber,
-                Email = user.email,
-                Password = user.password,
-                Connection = "Username-Password-Authentication",
-            };
-            var createdUser = await _managementApiClient.Users.CreateAsync(createRequest);
-
-            var allRoles = await _managementApiClient.Roles.GetAllAsync(new GetRolesRequest());
-            var adminRole = allRoles.First(x => x.Name == "Administrator");
-
-            var assignRoleRequest = new AssignRolesRequest
-            {
-                Roles = new string[] { adminRole.Id }
-            };
-            await _managementApiClient.Users.AssignRolesAsync(createdUser?.UserId, assignRoleRequest);
+            return userService.CreateAsync(request);
         }
     }
 }

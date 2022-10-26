@@ -1,42 +1,54 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Example.Shared;
+using Shared.VirtualMachines;
+using System.Threading.Tasks;
 
-namespace Example.Server.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-[Authorize]
-public class VirtualMachineController : ControllerBase
+namespace Server.Controllers
 {
-    private readonly ILogger<VirtualMachineController> _logger;
-
-    public VirtualMachineController(ILogger<VirtualMachineController> logger)
+    [Authorize(Roles = "Administrator")]
+    [ApiController]
+    [Route("api/[controller]")]
+    public class VirtualMachineController : ControllerBase
     {
-        _logger = logger;
-    }
+        private readonly IVirtualMachineService virtualMachineService;
 
-    [HttpGet]
-    public Task<IEnumerable<VirtualMachineDto.Index>> GetIndexAsync()
-    {
-        return virtualMachineService.GetIndexAsync();
-    }
+        public VirtualMachineController(IVirtualMachineService virtualMachineService)
+        {
+            this.virtualMachineService = virtualMachineService;
+        }
 
-    [HttpGet("id")]
-    public Task<VirtualMachineDto.Detail> GetDetailAsync(int id)
-    {
-        return virtualMachineService.GetDetailAsync(id);
-    }
 
-    [HttpDelete("id")]
-    public Task DeleteAsync(int id)
-    {
-        return virtualMachineService.DeleteAsync(id);
-    }
+        [AllowAnonymous]
+        [HttpGet]
+        public Task<VirtualMachineResponse.GetIndex> GetIndexAsync([FromQuery] VirtualMachineRequest.GetIndex request)
+        {
+            return virtualMachineService.GetIndexAsync(request);
+        }
 
-    [HttpPost]
-    public async Task<ActionResult<int>> CreateAsync(VirtualMachineDto.Create model)
-    {
-        var id = await virtualMachineService.CreateAsync(model);
-        return CreatedAtAction("GetDetail", id);
+        [AllowAnonymous]
+        [HttpGet("{VirtualMachineId}")]
+        public Task<VirtualMachineResponse.GetDetail> GetDetailAsync([FromRoute] VirtualMachineRequest.GetDetail request)
+        {
+            return virtualMachineService.GetDetailAsync(request);
+        }
+
+        [Authorize(Roles = "Administrator,Secretary")]
+        [HttpDelete("{VirtualMachineId}")]
+        public Task DeleteAsync([FromRoute] VirtualMachineRequest.Delete request)
+        {
+            return virtualMachineService.DeleteAsync(request);
+        }
+
+        [HttpPost]
+        public Task<VirtualMachineResponse.Create> CreateAsync([FromBody] VirtualMachineRequest.Create request)
+        {
+            return virtualMachineService.CreateAsync(request);
+        }
+
+        [HttpPut]
+        public Task<VirtualMachineResponse.Edit> EditAsync([FromBody] VirtualMachineRequest.Edit request)
+        {
+            return virtualMachineService.EditAsync(request);
+        }
     }
 }
