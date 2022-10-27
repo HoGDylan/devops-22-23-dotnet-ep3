@@ -1,6 +1,7 @@
 ﻿using Ardalis.GuardClauses;
 using Domain.Common;
 using Domain.Validators;
+using System;
 
 namespace Domain
 {

@@ -1,9 +1,9 @@
 ﻿using Ardalis.GuardClauses;
 using Domain.Common;
-using Domain.Contract;
 using Domain.Server;
 using Domain.Users;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.VirtualMachines
 {
@@ -15,8 +15,8 @@ namespace Domain.VirtualMachines
         //for testing
         public VirtualMachineManager(IList<VirtualMachine> current_machines)
         {
-            _vms = Guard.Against.Null(current_machines);
-            _fysiekeServers = Guard.Against.Null(_fysiekeServers);
+            //_vms = Guard.Against.Null(current_machines);
+            //_fysiekeServers = Guard.Against.Null(_fysiekeServers);
 
         }
 

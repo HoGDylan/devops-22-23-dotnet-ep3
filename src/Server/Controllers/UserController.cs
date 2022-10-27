@@ -17,16 +17,16 @@ namespace Server.Controllers
             this.userService = userService;
         }
 
-        /*[HttpGet]
+        [HttpGet]
         public Task<UserResponse.GetIndex> GetIndexAsync([FromQuery] UserRequest.GetIndex request)
         {
             return userService.GetIndexAsync(request);
-        }*/
+        }
 
-
-        public String GetIndexAsync()
+        [HttpGet("[action]")]
+        public string Index()
         {
-            return "userService.GetIndexAsync(request)";
+            return "hello.  You called Index";
         }
 
         [HttpPost]

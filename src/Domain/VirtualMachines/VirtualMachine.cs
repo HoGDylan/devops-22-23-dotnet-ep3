@@ -38,6 +38,11 @@ namespace Domain.VirtualMachines
             this.Mode = VirtualMachineMode.STOPPED;
         }
 
+        public VirtualMachine(string name)
+        {
+            Name = name;
+        }
+
         public void SetContract(VMContract c)
         {
             _contract = c;
