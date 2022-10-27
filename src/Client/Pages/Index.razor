@@ -4,6 +4,27 @@
 
 <h1>Hello, world!</h1>
 
+<div class="buttons">
+    <button class="button is-primary" @onclick="ToggleFilterForm">
+        <!--
+        <span class="icon">
+            <i class="fas fa-plus"></i>
+        </span>
+        -->
+        <span>Filter</span>
+    </button>
+</div>
+
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+@code {
+    [Inject] public ISidepanelService Sidepanel { get; set; }
+
+    private void ToggleFilterForm()
+    {
+        if (Sidepanel.IsOpen) Sidepanel.Close();
+        else Sidepanel.Open<Client.Pages.VMFilter>("Virtual Machines", "Filter"); 
+    }
+}
