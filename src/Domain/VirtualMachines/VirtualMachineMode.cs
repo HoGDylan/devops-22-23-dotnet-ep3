@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Domain.VirtualMachines
 {
-
-    public enum VirtualMachineMode
-    {
-        STOPPED,
-        RUNNING,
-        SUSPENDED,
-        TERMINATED,
-        PAUSED
-    }
+public enum VirtualMachineMode
+  {
+      CREATED = 0,
+      STOPPED,
+      RUNNING,
+      SUSPENDED,
+      TERMINATED,
+      PAUSED
+  }
 };

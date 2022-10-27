@@ -9,19 +9,21 @@ namespace Domain.Users
 {
     public abstract class Klant : Gebruiker
     {
-        public Gebruiker ContactPersoon { get; set; }
-        public Gebruiker ContactPersoonReserve { get; set; }
-        public String Project { get; set; }
 
-        protected Klant(string name, string phoneNumber, string email, string password, Gebruiker contactPersoon, Gebruiker contactPersoon2, string project) : base(name, phoneNumber, email, password){
-            this.ContactPersoon = Guard.Against.Null(contactPersoon, nameof(contactPersoon));
-            this.ContactPersoonReserve = Guard.Against.Null(contactPersoon2, nameof(contactPersoon2));
-            this.Project = Guard.Against.NullOrEmpty(project, nameof(project));
+
+        private Gebruiker _contactPs;
+        private Gebruiker _contactPs2;
+        private string _project;
+
+        public Gebruiker ContactPersoon { get { return _contactPs; } set { Guard.Against.Null(_contactPs, nameof(_contactPs)); } }
+        public Gebruiker ContactPersoonReserv { get { return _contactPs2; } set { Guard.Against.Null(_contactPs2, nameof(_contactPs2)); } }
+        public String Project { get { return _project; } set { Guard.Against.NullOrEmpty(_project, nameof(_project)); } }
+
+        protected Klant(string name, string phoneNumber, string email, string password, Gebruiker contactPersoon, Gebruiker contactPersoon2, string project) : base(name, phoneNumber, email, password)
+        {
+            this.ContactPersoon = contactPersoon;
+            this.ContactPersoonReserv = contactPersoon2;
+            this.Project = project;
         }
-
-
-
-
- 
     }
 }

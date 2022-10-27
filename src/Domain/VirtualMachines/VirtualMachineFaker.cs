@@ -14,7 +14,6 @@ namespace Domain.VirtualMachines
         {
             //CustomInstantiator(f => new VirtualMachine(f.));
             RuleFor(x => x.Id, f => f.Random.Int(1));
-            
         }
     }
 }

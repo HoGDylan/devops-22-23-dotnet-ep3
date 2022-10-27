@@ -10,22 +10,28 @@ namespace Domain.Contract
 {
     public class VMContract : Entity
     {
+        private int _customerId;
+        private int _vmId;
+        private int _beheerderId;
+        private DateTime _startDate;
+        private DateTime _endDate;
+
 
         public int Id { get; set; }
-        public int CustomerId { get; set; }
-        public int VMId { get; set; }
-        public int BeheerderId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public int CustomerId { get { return _customerId; } set { Guard.Against.NegativeOrZero(_customerId, nameof(_customerId)); } }
+        public int VMId { get { return _vmId; } set { Guard.Against.NegativeOrZero(_vmId, nameof(_vmId)); }}
+        public int BeheerderId { get { return _beheerderId; }  set { Guard.Against.NegativeOrZero(_beheerderId, nameof(_beheerderId)); } }
+        public DateTime StartDate { get { return _startDate; } set { Guard.Against.Null(_startDate, nameof(_startDate)); } }
+        public DateTime EndDate { get { return _endDate; } set { Guard.Against.Null(_endDate, nameof(_endDate)) ; } }
 
 
         public VMContract(int c_id, int vm_id, int beh_id, DateTime start_d, DateTime end_d)
         {
-            CustomerId = Guard.Against.NegativeOrZero(c_id, nameof(c_id));
-            VMId = Guard.Against.NegativeOrZero(vm_id, nameof(vm_id));
-            BeheerderId = Guard.Against.NegativeOrZero(beh_id, nameof(beh_id));
-            StartDate = Guard.Against.Null(start_d, nameof(start_d));
-            EndDate = Guard.Against.Null(end_d, nameof(end_d));
+            this.CustomerId = c_id;
+            this.VMId = vm_id;
+            this.BeheerderId = beh_id;
+            this.StartDate = start_d;
+            this.EndDate = end_d;         
         }
     }
 }
