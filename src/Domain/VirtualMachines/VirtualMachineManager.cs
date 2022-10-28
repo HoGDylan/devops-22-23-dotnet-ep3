@@ -31,7 +31,7 @@ namespace Domain.VirtualMachines
             return _vms.ToList();
         }
 
-        public VirtualMachine CreateVM(Klant klant, OperatingSystemEnum os, Hardware hw, BackUpType type)
+        public VirtualMachine CreateVM(Klant klant, OperatingSystemEnum os, Hardware hw, BackUpType type, VMContract contract)
         {
 
             FysiekeServer server = _fysiekeServers.First(e => e.IsEnabled && e.VCPUsAvailable > hw.Amount_vCPU && e.StorageAvailable > hw.Storage && e.MemoryAvailable > hw.Memory);
@@ -49,11 +49,11 @@ namespace Domain.VirtualMachines
 
             _fysiekeServers.Add(server);
 
-            return new VirtualMachine(os, hw, new Backup(type, null), klant);
+            return new VirtualMachine(os, hw, new Backup(type, null), klant, contract);
         }
-        public VirtualMachine CreateVM(Klant klant)
+        public VirtualMachine CreateVM(Klant klant, VMContract contract)
         {
-            return new VirtualMachine(klant);
+            return new VirtualMachine(klant, contract);
         }
 
         public bool DeleteVM(int id)
