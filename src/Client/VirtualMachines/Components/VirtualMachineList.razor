@@ -31,20 +31,7 @@ else{
                     Acties
                 </th>
                 </thead>
-                <tbody>
-                    @foreach (var vm in virtualmachines)
-                    {
-                        <tr>
-                            <td>@vm.status</td>
-                            <td>@vm.naam</td>
-                            <td>@vm.klant</td>
-                            <td>@vm.project</td>
-                            <td>
-                                <button @onclick=getDetailsService>Details</button>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
+                
             </table>
         </div>
 
