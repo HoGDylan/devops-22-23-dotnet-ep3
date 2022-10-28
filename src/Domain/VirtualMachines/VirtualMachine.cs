@@ -35,29 +35,27 @@ namespace Domain.VirtualMachines
         public VMContract Contract { get { return _vmContract; } set { Guard.Against.Null(_vmContract, nameof(_vmContract)); } }
 
         //virtual machine used for templates.
-        //builder will add: VMconnection
-        public VirtualMachine(string name, string project, OperatingSystemEnum os, Hardware h, Backup b, Klant k, VMContract vm_c)
+        //builder will add: VMconnection, VMContract
+        public VirtualMachine(OperatingSystemEnum os, Hardware h, Backup b, Klant k)
         {
-            this.Name = name;
-            this.Project = project;
+            this.Name = $"{os}-{h.Memory}Gb.{k.Project}"; 
+            this.Project = k.Project;
             this.OperatingSystem = os;
             this.Hardware = h;
             this.BackUp = b;
             this.Customer = k;
             this.Mode = VirtualMachineMode.CREATED;
-            this.Contract = vm_c;
 
         }
 
         //virtual machine for custom (made with builder)
-        //builder will add hardware, operating system, backup, VMConnection
-        public VirtualMachine(string name, string project, Klant g, VMContract vm_c)
+        //builder will add hardware, operating system, backup, VMConnection, Contract, Name
+        public VirtualMachine(Klant g)
         {
-            this.Name = name;
-            this.Project = project;
+            this.Project = g.Project;
             this.Mode = VirtualMachineMode.CREATED;
             this.Customer = g;
-            this.Contract = vm_c;
+
         }
 
    
