@@ -9,10 +9,12 @@ namespace Domain.VirtualMachines
 public enum VirtualMachineMode
   {
       CREATED = 0,
+      READY, // When the VM is build succesfully AKA ready for deployment
       STOPPED,
       RUNNING,
-      SUSPENDED,
+      SUSPENDED, 
       TERMINATED,
-      PAUSED
+      PAUSED,
+      
   }
 };

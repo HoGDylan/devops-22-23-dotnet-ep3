@@ -31,17 +31,30 @@ namespace Domain.VirtualMachines
             return _vms.ToList();
         }
 
-        public VirtualMachine CreateVM(Klant klant, OperatingSystemEnum os, Hardware hw, BackUpType type)
+        public VirtualMachine CreateVM(Klant klant, OperatingSystemEnum os, Hardware hw, BackUpType type, VMContract contract)
         {
 
-            // Check if server has enough resources for hardWare
-            //if( Server.hasEnoughSpecs(hw) ) of iets dergelijks
+            FysiekeServer server = _fysiekeServers.First(e => e.IsEnabled && e.VCPUsAvailable > hw.Amount_vCPU && e.StorageAvailable > hw.Storage && e.MemoryAvailable > hw.Memory);
 
+            if(server == null)
+            {
+                throw new ArgumentException("None of the servers have the available resources available or the server that has resources available is not enabled.");
+            }
 
-            string VM_name = $"{os.ToString().ToLower()}.{hw.Memory}GB_RAM.";
-            return new VirtualMachine(VM_name, klant.Project, os, hw, new Backup(type, null));
+            _fysiekeServers.Remove(server);
+
+            server.MemoryAvailable -= hw.Memory;
+            server.VCPUsAvailable -= hw.Amount_vCPU;
+            server.StorageAvailable -= hw.Storage;
+
+            _fysiekeServers.Add(server);
+
+            return new VirtualMachine(os, hw, new Backup(type, null), klant, contract);
         }
-
+        public VirtualMachine CreateVM(Klant klant, VMContract contract)
+        {
+            return new VirtualMachine(klant, contract);
+        }
 
         public bool DeleteVM(int id)
         {

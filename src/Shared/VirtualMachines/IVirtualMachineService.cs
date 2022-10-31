@@ -11,10 +11,9 @@ namespace Shared.VirtualMachines;
 
 public interface IVirtualMachineService
 {
-    Task<IEnumerable<VirtualMachineDto.Index>> GetIndexAsync();
-    Task<VirtualMachineDto.Detail> GetDetailAsync(int id);
-    Task DeleteAsync(int id);
-    Task CreateAsync(string name, string project, OperatingSystemEnum os, Hardware h, Backup b);
-    Task EditVMInformation(int id, string name, Klant k);
-    Task EditVMHardware(int id, OperatingSystem os, Hardware h, Backup b);
+    Task<IEnumerable<VirtualMachineResponse.GetIndex>> GetIndexAsync(VirtualMachineRequest.GetIndex request);
+    Task<VirtualMachineResponse.GetDetail> GetDetailAsync(VirtualMachineRequest.GetDetail request);
+    Task DeleteAsync(VirtualMachineResponse.Delete request);
+    Task CreateAsync(VirtualMachineResponse.Create request);
+    Task Edit(VirtualMachineResponse.Edit request);
 }
