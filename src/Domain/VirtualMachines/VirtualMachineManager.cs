@@ -3,89 +3,98 @@ using Domain.Common;
 using Domain.Contract;
 using Domain.Projecten;
 using Domain.Server;
-using Domain.Users;
-using System.Collections;
 
 namespace Domain.VirtualMachines
 {
     public class VirtualMachineManager
     {
-        private IList<VirtualMachine> _vms = new List<VirtualMachine>();
         private IList<FysiekeServer> _fysiekeServers = new List<FysiekeServer>();
+        private IList<Project> _projecten = new List<Project>();
+        private IList<VirtualMachine> _allVms = new List<VirtualMachine>();
 
         //for testing
-        public VirtualMachineManager(IList<VirtualMachine> current_machines)
+        public VirtualMachineManager()
         {
-            _vms = Guard.Against.Null(current_machines);
-            _fysiekeServers = Guard.Against.Null(_fysiekeServers);
 
+        }
+        public Project GetProject(int id)
+        {
+            return _projecten.First(e => e.Id == id);
+        }
+        public FysiekeServer GetServer(int id)
+        {
+            return _fysiekeServers.First(e => e.Id == id);
         }
 
 
-        public VirtualMachine GetVirtualMachineById(int id)
-        {
-            return _vms.First(x => x.Id == id);
-        }
-
-        public List<VirtualMachine> GetAll_vms()
-        {
-            return _vms.ToList();
-        }
-
-        public VirtualMachine CreateVM(string name, Project p, OperatingSystemEnum os, Hardware hw, Backup b, Klant k, DateTime start, DateTime end)
+        public VirtualMachine CreateVM(string name, Project project, OperatingSystemEnum os, Hardware hw, Backup b, int customer_id, DateTime start, DateTime end)
         {
 
-            FysiekeServer server = _fysiekeServers.First(e => e.IsEnabled && e.VCPUsAvailable > hw.Amount_vCPU && e.StorageAvailable > hw.Storage && e.MemoryAvailable > hw.Memory);
+            FysiekeServer server = _fysiekeServers.First(e => e.VCPUsAvailable > hw.Amount_vCPU && e.StorageAvailable > hw.Storage && e.MemoryAvailable > hw.Memory);
 
-            if(server == null)
+            if (server == null)
             {
-                throw new ArgumentException("None of the servers have the available resources available or the server that has resources available is not enabled.");
+                throw new ArgumentException("None of the servers have the available resources available.");
             }
 
             _fysiekeServers.Remove(server);
 
-            server.MemoryAvailable -= hw.Memory;
-            server.VCPUsAvailable -= hw.Amount_vCPU;
-            server.StorageAvailable -= hw.Storage;
 
+
+            VirtualMachine vm = new VirtualMachine(name, os, hw, b);
+            vm.Contract = new VMContract(customer_id, vm.Id, start, end);
+            server.AddToServer(vm);
+
+            Project proj = GetProject(project.Id);
+
+            if (proj == null)
+            {
+                proj = new Project(project.Name);
+            }
+            else
+            {
+                _projecten.Remove(proj);
+            }
+
+            proj.AddVirtualMachine(vm);
+
+
+            _projecten.Add(proj);
             _fysiekeServers.Add(server);
+            _allVms.Add(vm);
 
-            return new VirtualMachine(name, p, os, hw, b, k, start, end);
+            return vm;
         }
 
 
 
         public bool DeleteVM(int id)
         {
-            VirtualMachine? vm = _vms.FirstOrDefault(x => x.Id == id, null);
-            
+            VirtualMachine? vm = _allVms.FirstOrDefault(e => e.Id == id, null);
 
             if (vm == null) return false;
-            
 
-            _vms.Remove(vm);
-
-            if (vm.Server == null) return true;
+            Project p = GetProject(vm.Project.Id);
+            FysiekeServer? f = _fysiekeServers.First(e => e.GetVirtualMachineById(id) != null);
 
 
-
-            FysiekeServer? server = _fysiekeServers.FirstOrDefault(x => x.Id == vm.Server.Id, null);
-
-            if(server == null)
+            if (f != null)
             {
-                throw new ArgumentException("VM was connected with a server that is not known by the VM Manager.");
+                _fysiekeServers.Remove(f);
+                f.RemoveFromServer(vm);
+                _fysiekeServers.Add(f);
             }
 
-            _fysiekeServers.Remove(server);
+            _projecten.Remove(p);
+            p.RemoveVirtualMachine(vm);
+            _projecten.Add(p);
 
-            server.HardWare = new Hardware(vm.Hardware.Memory + vm.Server.HardWare.Memory, vm.Hardware.Storage + vm.Server.HardWare.Storage, vm.Hardware.Amount_vCPU + vm.Server.HardWare.Amount_vCPU);
-
-            _fysiekeServers.Add(server);
 
             return true;
 
         }
-
+    }
+}
 
 
 
@@ -111,5 +120,3 @@ namespace Domain.VirtualMachines
             
         }
         */
-    }
-}

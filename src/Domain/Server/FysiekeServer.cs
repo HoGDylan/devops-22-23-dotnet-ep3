@@ -1,5 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Domain.Common;
+using Domain.VirtualMachines;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace Domain.Server
 {
     public class FysiekeServer : Entity
     {
+
+        private List<VirtualMachine> _vms = new();
         private string _name;
         private string _serverAddress;
         private Hardware _hardWare;
@@ -37,6 +40,34 @@ namespace Domain.Server
             this.StorageAvailable = stor_available;
             this.VCPUsAvailable = vCPU_avaiable ;
         }
+
+
+
+        public void AddToServer(VirtualMachine vm)
+        {
+            MemoryAvailable -= vm.Hardware.Memory;
+            VCPUsAvailable -= vm.Hardware.Amount_vCPU;
+            StorageAvailable -= vm.Hardware.Storage;
+
+            _vms.Add(vm);
+        }
+
+        public void RemoveFromServer(VirtualMachine vm)
+        {
+            if (_vms.Contains(vm))
+            {
+                MemoryAvailable += vm.Hardware.Memory;
+                VCPUsAvailable += vm.Hardware.Amount_vCPU;
+                StorageAvailable += vm.Hardware.Storage;
+                _vms.Remove(vm);
+            }
+        }
+
+        public VirtualMachine GetVirtualMachineById(int id)
+        {
+            return _vms.First(x => x.Id == id);
+        }
+
 
     }
 }
