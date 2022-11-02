@@ -1,6 +1,7 @@
 ﻿using Ardalis.GuardClauses;
 using Domain.Common;
 using Domain.Contract;
+using Domain.Projecten;
 using Domain.Server;
 using Domain.Users;
 using System.Collections;
@@ -31,7 +32,7 @@ namespace Domain.VirtualMachines
             return _vms.ToList();
         }
 
-        public VirtualMachine CreateVM(Klant klant, OperatingSystemEnum os, Hardware hw, BackUpType type, VMContract contract)
+        public VirtualMachine CreateVM(string name, Project p, OperatingSystemEnum os, Hardware hw, Backup b, Klant k, DateTime start, DateTime end)
         {
 
             FysiekeServer server = _fysiekeServers.First(e => e.IsEnabled && e.VCPUsAvailable > hw.Amount_vCPU && e.StorageAvailable > hw.Storage && e.MemoryAvailable > hw.Memory);
@@ -49,20 +50,46 @@ namespace Domain.VirtualMachines
 
             _fysiekeServers.Add(server);
 
-            return new VirtualMachine(os, hw, new Backup(type, null), klant, contract);
+            return new VirtualMachine(name, p, os, hw, b, k, start, end);
         }
-        public VirtualMachine CreateVM(Klant klant, VMContract contract)
-        {
-            return new VirtualMachine(klant, contract);
-        }
+
+
 
         public bool DeleteVM(int id)
         {
-            int check = _vms.Count();
-            _vms = _vms.Where(x => x.Id != id).ToList();
-            return _vms.Count() < check;
+            VirtualMachine? vm = _vms.FirstOrDefault(x => x.Id == id, null);
+            
+
+            if (vm == null) return false;
+            
+
+            _vms.Remove(vm);
+
+            if (vm.Server == null) return true;
+
+
+
+            FysiekeServer? server = _fysiekeServers.FirstOrDefault(x => x.Id == vm.Server.Id, null);
+
+            if(server == null)
+            {
+                throw new ArgumentException("VM was connected with a server that is not known by the VM Manager.");
+            }
+
+            _fysiekeServers.Remove(server);
+
+            server.HardWare = new Hardware(vm.Hardware.Memory + vm.Server.HardWare.Memory, vm.Hardware.Storage + vm.Server.HardWare.Storage, vm.Hardware.Amount_vCPU + vm.Server.HardWare.Amount_vCPU);
+
+            _fysiekeServers.Add(server);
+
+            return true;
+
         }
 
+
+
+
+        /*
         public void EditVM(int id, Hardware hw, BackUpType type, Klant k, VMConnection connection)
         {
             VirtualMachine vm = _vms.First(x => x.Id == id);
@@ -83,5 +110,6 @@ namespace Domain.VirtualMachines
 
             
         }
+        */
     }
 }
