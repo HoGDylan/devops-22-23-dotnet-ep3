@@ -23,12 +23,6 @@ namespace Server.Controllers
             return userService.GetIndexAsync(request);
         }
 
-        [HttpGet("[action]")]
-        public string Index()
-        {
-            return "hello.  You called Index";
-        }
-
         [HttpPost]
         public Task<UserResponse.Create> CreateAsync([FromBody] UserRequest.Create request)
         {

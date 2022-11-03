@@ -32,7 +32,7 @@ namespace Server.Controllers
             return virtualMachineService.GetDetailAsync(request);
         }
 
-        [Authorize(Roles = "Administrator,Secretary")]
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{VirtualMachineId}")]
         public Task DeleteAsync([FromRoute] VirtualMachineRequest.Delete request)
         {
