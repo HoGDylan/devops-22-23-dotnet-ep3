@@ -78,13 +78,16 @@ namespace Domain.VirtualMachines
             FysiekeServer? f = _fysiekeServers.First(e => e.GetVirtualMachineById(id) != null);
 
 
+           
+            // if f == null  -> de aanvraag werd niet goegekeurd door beheerder dus had nog geen server, wel een project
+
             if (f != null)
             {
                 _fysiekeServers.Remove(f);
                 f.RemoveFromServer(vm);
                 _fysiekeServers.Add(f);
             }
-
+           
             _projecten.Remove(p);
             p.RemoveVirtualMachine(vm);
             _projecten.Add(p);

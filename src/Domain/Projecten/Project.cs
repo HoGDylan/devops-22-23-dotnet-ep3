@@ -1,27 +1,27 @@
 ﻿using Ardalis.GuardClauses;
+using Domain.Common;
+using Domain.Users;
 using Domain.VirtualMachines;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Projecten
 {
 
-    public class Project
+    public class Project : Entity
     {
 
         private List<VirtualMachine> _vms = new();
         private string _name;
-
+        private Klant _klant;
 
 
         public int Id { get; set; }
         public String Name { get { return _name; } set {Guard.Against.NullOrEmpty(_name, nameof(_name)); } }
+        public Klant Klant { get { return _klant; } set { Guard.Against.Null(_klant, nameof(_klant));} }
 
-        public Project(string name) {
+
+        public Project(string name, Klant k) {
             this.Name = name;
+            this.Klant = k;
         }
 
 
