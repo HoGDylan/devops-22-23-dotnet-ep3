@@ -39,7 +39,8 @@ namespace Domain.VirtualMachines
 
 
             string VM_name = $"{os.ToString().ToLower()}.{hw.Memory}GB_RAM.";
-            return new VirtualMachine(VM_name, klant.Project, os, hw, new Backup(type, null));
+            //return new VirtualMachine(VM_name, klant.Project, os, hw, new Backup(type, null));
+            return null;
         }
 
 
