@@ -12,7 +12,7 @@ namespace Domain.VirtualMachines
 {
     public class VirtualMachine : Entity
     {
-        private VMContract? _contract = null;
+        public VMContract? _contract;
 
 
         public int Id;

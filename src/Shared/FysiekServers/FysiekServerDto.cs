@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 
-namespace Shared.FysiekServers
+namespace Shared.FysiekeServers
 {
-    public static class FysiekServerDto
+    public static class FysiekeServerDto
     {
         public class Index
         {
@@ -23,7 +23,6 @@ namespace Shared.FysiekServers
 
         public class Mutate
         {
-            public int Id { get; set; }
             public String Naam { get; set; }
             public String ServerAddress { get; set; }
             public int Memory { get; set; }

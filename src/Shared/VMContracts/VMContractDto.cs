@@ -7,27 +7,30 @@ namespace Shared.VMContracts
         public class Index
         {
             public int Id { get; set; }
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public decimal Price { get; set; }
-            public string Imagepath { get; set; }
+            public int CustomerId { get; set; }
+            public int VMId { get; set; }
+            public int BeheerderId { get; set; }
+            public DateTime StartDate { get; set; }
+            public DateTime EndDate { get; set; }
         }
 
         public class Detail : Index
         {
-            public bool IsEnabled { get; set; }
-            public string CategoryName { get; set; }
-            public bool IsInStock { get; set; }
+            public int Id { get; set; }
+            public int CustomerId { get; set; }
+            public int VMId { get; set; }
+            public int BeheerderId { get; set; }
+            public DateTime StartDate { get; set; }
+            public DateTime EndDate { get; set; }
         }
 
         public class Mutate
         {
-            public string Name { get; set; }
-            public decimal Price { get; set; }
-            public string Description { get; set; }
-            public string Category { get; set; }
-            public bool InStock { get; set; }
-            public int ImageAmount { get; set; }
+            public int CustomerId { get; set; }
+            public int VMId { get; set; }
+            public int BeheerderId { get; set; }
+            public DateTime StartDate { get; set; }
+            public DateTime EndDate { get; set; }
 
             /*public class Validator : AbstractValidator<Mutate>
             {

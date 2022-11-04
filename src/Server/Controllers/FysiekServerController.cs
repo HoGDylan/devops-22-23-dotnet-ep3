@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.FysiekServers;
+using Shared.FysiekeServers;
 using System.Threading.Tasks;
 
 namespace Server.Controllers
@@ -8,43 +8,43 @@ namespace Server.Controllers
     [Authorize(Roles = "Administrator")]
     [ApiController]
     [Route("api/[controller]")]
-    public class FysiekServerController : ControllerBase
+    public class FysiekeServerController : ControllerBase
     {
-        private readonly IFysiekServerService fysiekServerService;
+        private readonly IFysiekeServerService fysiekServerService;
 
-        public FysiekServerController(IFysiekServerService fysiekServerService)
+        public FysiekeServerController(IFysiekeServerService fysiekServerService)
         {
             this.fysiekServerService = fysiekServerService;
         }
 
 
         [HttpGet]
-        public Task<FysiekServerResponse.GetIndex> GetIndexAsync([FromQuery] FysiekServerRequest.GetIndex request)
+        public Task<FysiekeServerResponse.GetIndex> GetIndexAsync([FromQuery] FysiekeServerRequest.GetIndex request)
         {
             return fysiekServerService.GetIndexAsync(request);
         }
 
-        [HttpGet("{FysiekServerId}")]
-        public Task<FysiekServerResponse.GetDetail> GetDetailAsync([FromRoute] FysiekServerRequest.GetDetail request)
+        [HttpGet("{FysiekeServerId}")]
+        public Task<FysiekeServerResponse.GetDetail> GetDetailAsync([FromRoute] FysiekeServerRequest.GetDetail request)
         {
             return fysiekServerService.GetDetailAsync(request);
         }
 
         [Authorize(Roles = "Administrator")]
-        [HttpDelete("{FysiekServerId}")]
-        public Task DeleteAsync([FromRoute] FysiekServerRequest.Delete request)
+        [HttpDelete("{FysiekeServerId}")]
+        public Task DeleteAsync([FromRoute] FysiekeServerRequest.Delete request)
         {
             return fysiekServerService.DeleteAsync(request);
         }
 
         [HttpPost]
-        public Task<FysiekServerResponse.Create> CreateAsync([FromBody] FysiekServerRequest.Create request)
+        public Task<FysiekeServerResponse.Create> CreateAsync([FromBody] FysiekeServerRequest.Create request)
         {
             return fysiekServerService.CreateAsync(request);
         }
 
         [HttpPut]
-        public Task<FysiekServerResponse.Edit> EditAsync([FromBody] FysiekServerRequest.Edit request)
+        public Task<FysiekeServerResponse.Edit> EditAsync([FromBody] FysiekeServerRequest.Edit request)
         {
             return fysiekServerService.EditAsync(request);
         }

@@ -52,7 +52,7 @@ namespace Services.VirtualMachines
 
                 // You could use a VirtualMachine.Edit method here.
                 virtualMachine.Name = model.Name;
- 
+
                 _dbContext.Entry(virtualMachine).State = EntityState.Modified;
                 await _dbContext.SaveChangesAsync();
                 response.VirtualMachineId = virtualMachine.Id;

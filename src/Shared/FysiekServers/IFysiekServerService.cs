@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
 
-namespace Shared.FysiekServers
+namespace Shared.FysiekeServers
 {
-    public interface IFysiekServerService
+    public interface IFysiekeServerService
     {
-        Task<FysiekServerResponse.GetIndex> GetIndexAsync(FysiekServerRequest.GetIndex request);
-        Task<FysiekServerResponse.GetDetail> GetDetailAsync(FysiekServerRequest.GetDetail request);
-        Task DeleteAsync(FysiekServerRequest.Delete request);
-        Task<FysiekServerResponse.Create> CreateAsync(FysiekServerRequest.Create request);
-        Task<FysiekServerResponse.Edit> EditAsync(FysiekServerRequest.Edit request);
+        Task<FysiekeServerResponse.GetIndex> GetIndexAsync(FysiekeServerRequest.GetIndex request);
+        Task<FysiekeServerResponse.GetDetail> GetDetailAsync(FysiekeServerRequest.GetDetail request);
+        Task DeleteAsync(FysiekeServerRequest.Delete request);
+        Task<FysiekeServerResponse.Create> CreateAsync(FysiekeServerRequest.Create request);
+        Task<FysiekeServerResponse.Edit> EditAsync(FysiekeServerRequest.Edit request);
     }
 }

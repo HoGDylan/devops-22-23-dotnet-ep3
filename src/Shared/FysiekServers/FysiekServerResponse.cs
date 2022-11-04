@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Shared.FysiekServers
+namespace Shared.FysiekeServers
 {
-    public static class FysiekServerResponse
+    public static class FysiekeServerResponse
     {
         public class GetIndex
         {
-            public List<FysiekServerDto.Index> FysiekServers { get; set; } = new();
+            public List<FysiekeServerDto.Index> FysiekeServers { get; set; } = new();
             public int TotalAmount { get; set; }
         }
 
         public class GetDetail
         {
-            public FysiekServerDto.Detail FysiekServer { get; set; }
+            public FysiekeServerDto.Detail FysiekeServer { get; set; }
         }
 
         public class Delete
@@ -22,13 +22,13 @@ namespace Shared.FysiekServers
 
         public class Create
         {
-            public int FysiekServerId { get; set; }
+            public int FysiekeServerId { get; set; }
             public Uri UploadUri { get; set; }
         }
 
         public class Edit
         {
-            public int FysiekServerId { get; set; }
+            public int FysiekeServerId { get; set; }
         }
     }
 }

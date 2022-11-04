@@ -1,6 +1,6 @@
-namespace Shared.FysiekServers
+namespace Shared.FysiekeServers
 {
-    public static class FysiekServerRequest
+    public static class FysiekeServerRequest
     {
         public class GetIndex
         {
@@ -10,23 +10,23 @@ namespace Shared.FysiekServers
 
         public class GetDetail
         {
-            public int FysiekServerId { get; set; }
+            public int FysiekeServerId { get; set; }
         }
 
         public class Delete
         {
-            public int FysiekServerId { get; set; }
+            public int FysiekeServerId { get; set; }
         }
 
         public class Create
         {
-            public FysiekServerDto.Mutate FysiekServer { get; set; }
+            public FysiekeServerDto.Mutate FysiekeServer { get; set; }
         }
 
         public class Edit
         {
-            public int FysiekServerId { get; set; }
-            public FysiekServerDto.Mutate FysiekServer { get; set; }
+            public int FysiekeServerId { get; set; }
+            public FysiekeServerDto.Mutate FysiekeServer { get; set; }
         }
     }
 }
