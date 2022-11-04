@@ -29,7 +29,7 @@ namespace Shared.VMContracts
             public bool InStock { get; set; }
             public int ImageAmount { get; set; }
 
-            public class Validator : AbstractValidator<Mutate>
+            /*public class Validator : AbstractValidator<Mutate>
             {
                 public Validator()
                 {
@@ -38,7 +38,7 @@ namespace Shared.VMContracts
                     RuleFor(x => x.Category).NotEmpty().Length(1, 250);
                     RuleFor(x => x.ImageAmount).GreaterThanOrEqualTo(1);
                 }
-            }
+            }*/
         }
     }
 }
