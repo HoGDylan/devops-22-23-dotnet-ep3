@@ -6,6 +6,8 @@ namespace Shared.VirtualMachines
         {
             public string SearchTerm { get; set; }
 
+            public bool OnlyActiveVirtualMachines { get; set; }
+
         }
 
         public class GetDetail
