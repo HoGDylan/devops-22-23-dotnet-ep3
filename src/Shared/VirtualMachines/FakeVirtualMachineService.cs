@@ -49,8 +49,7 @@ namespace Shared.VirtualMachines
                 Hardware = e.Hardware,
                 Mode = e.Mode,
                 OperatingSystem = e.OperatingSystem,
-                Project = e.Project,
-                Klant = e.Customer
+                Project = e.Project
 
             }).SingleOrDefault(f => f.Id == request.VirtualMachineId);
 

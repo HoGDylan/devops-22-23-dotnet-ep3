@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Projecten;
 using Domain.VirtualMachines;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Shared.VirtualMachines
             public string SearchTerm { get; set; }
             public VirtualMachineMode Status { get; set; }
             public OperatingSystemEnum OperatingSystem { get; set; }
+            public Project project { get; set; }
             public int MinStorage { get; set; }
             public int MaxStorage { get; set; }
             public int MinMemory { get; set; }
@@ -27,7 +29,6 @@ namespace Shared.VirtualMachines
         public class GetDetail
         {
             public int VirtualMachineId { get; set;}
-
         }
 
         public class Delete
