@@ -1,5 +1,5 @@
 ﻿using System.Security.Cryptography;
-
+using System.Text;
 
 namespace Shared.Utility
 {
@@ -8,7 +8,7 @@ namespace Shared.Utility
 
         public static string CreatePassword(int length, int amount_upper, int amount_lower, int amount_numbers, int amount_symbols)
         {
-            string output = "";
+            StringBuilder output = new StringBuilder();
 
             string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string lower = upper.ToLower();
@@ -42,7 +42,8 @@ namespace Shared.Utility
                 output.Append(all[RandomNumberGenerator.GetInt32(all.Length)]);
             }
 
-            return new string(output.ToCharArray().OrderBy(e => (new Random().Next(2) % 2) == 0).ToArray());
+
+            return new string(output.ToString().ToCharArray().OrderBy(e => (new Random().Next(2) % 2) == 0).ToArray());
 
         }
 
