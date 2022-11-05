@@ -1,12 +1,9 @@
 ﻿using Ardalis.GuardClauses;
 using Domain.Common;
 using Domain.VirtualMachines;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Shared.Utility;
+using System.Security.Cryptography;
+ 
 namespace Domain.Server
 {
     public class FysiekeServer : Entity
@@ -42,13 +39,21 @@ namespace Domain.Server
         }
 
 
+        public void AddConnection(VirtualMachine vm)
+        {
+            string pass = PasswordGenerator.CreatePassword(RandomNumberGenerator.GetInt32(10)+20, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(3) + 1);
+
+            vm.Connection = new VMConnection(ServerAddress, vm.Project.Klant.Name, "admin", pass);
+            vm.Mode = VirtualMachineMode.READY;
+        }
+
 
         public void AddToServer(VirtualMachine vm)
         {
             MemoryAvailable -= vm.Hardware.Memory;
             VCPUsAvailable -= vm.Hardware.Amount_vCPU;
             StorageAvailable -= vm.Hardware.Storage;
-
+            AddConnection(vm);
             _vms.Add(vm);
         }
 
@@ -60,6 +65,8 @@ namespace Domain.Server
                 VCPUsAvailable += vm.Hardware.Amount_vCPU;
                 StorageAvailable += vm.Hardware.Storage;
                 _vms.Remove(vm);
+                vm.FysiekeServer = null;
+                vm.Mode = VirtualMachineMode.TERMINATED;
             }
         }
 

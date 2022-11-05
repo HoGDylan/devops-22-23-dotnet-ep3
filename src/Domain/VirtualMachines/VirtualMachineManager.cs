@@ -3,6 +3,7 @@ using Domain.Common;
 using Domain.Contract;
 using Domain.Projecten;
 using Domain.Server;
+using Domain.Users;
 
 namespace Domain.VirtualMachines
 {
@@ -27,7 +28,7 @@ namespace Domain.VirtualMachines
         }
 
 
-        public VirtualMachine CreateVM(string name, Project project, OperatingSystemEnum os, Hardware hw, Backup b, int customer_id, DateTime start, DateTime end)
+        public VirtualMachine CreateVM(string name, Project project, OperatingSystemEnum os, Hardware hw, Backup b, Klant k, DateTime start, DateTime end)
         {
 
             FysiekeServer server = _fysiekeServers.First(e => e.VCPUsAvailable > hw.Amount_vCPU && e.StorageAvailable > hw.Storage && e.MemoryAvailable > hw.Memory);
@@ -42,14 +43,14 @@ namespace Domain.VirtualMachines
 
 
             VirtualMachine vm = new VirtualMachine(name, os, hw, b);
-            vm.Contract = new VMContract(customer_id, vm.Id, start, end);
+            vm.Contract = new VMContract(k.Id, vm.Id, start, end);
             server.AddToServer(vm);
 
             Project proj = GetProject(project.Id);
 
             if (proj == null)
             {
-                proj = new Project(project.Name);
+                proj = new Project(project.Name, k);
             }
             else
             {
