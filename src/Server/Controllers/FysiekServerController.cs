@@ -5,48 +5,48 @@ using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Admin")]
     [ApiController]
     [Route("api/[controller]")]
     public class FysiekeServerController : ControllerBase
     {
-        private readonly IFysiekeServerService fysiekServerService;
+        private readonly IFysiekeServerService fysiekeServerService;
 
-        public FysiekeServerController(IFysiekeServerService fysiekServerService)
+        public FysiekeServerController(IFysiekeServerService fysiekeServerService)
         {
-            this.fysiekServerService = fysiekServerService;
+            this.fysiekeServerService = fysiekeServerService;
         }
 
 
         [HttpGet]
         public Task<FysiekeServerResponse.GetIndex> GetIndexAsync([FromQuery] FysiekeServerRequest.GetIndex request)
         {
-            return fysiekServerService.GetIndexAsync(request);
+            return fysiekeServerService.GetIndexAsync(request);
         }
 
         [HttpGet("{FysiekeServerId}")]
         public Task<FysiekeServerResponse.GetDetail> GetDetailAsync([FromRoute] FysiekeServerRequest.GetDetail request)
         {
-            return fysiekServerService.GetDetailAsync(request);
+            return fysiekeServerService.GetDetailAsync(request);
         }
 
         [Authorize(Roles = "Administrator")]
         [HttpDelete("{FysiekeServerId}")]
         public Task DeleteAsync([FromRoute] FysiekeServerRequest.Delete request)
         {
-            return fysiekServerService.DeleteAsync(request);
+            return fysiekeServerService.DeleteAsync(request);
         }
 
         [HttpPost]
         public Task<FysiekeServerResponse.Create> CreateAsync([FromBody] FysiekeServerRequest.Create request)
         {
-            return fysiekServerService.CreateAsync(request);
+            return fysiekeServerService.CreateAsync(request);
         }
 
         [HttpPut]
         public Task<FysiekeServerResponse.Edit> EditAsync([FromBody] FysiekeServerRequest.Edit request)
         {
-            return fysiekServerService.EditAsync(request);
+            return fysiekeServerService.EditAsync(request);
         }
     }
 }

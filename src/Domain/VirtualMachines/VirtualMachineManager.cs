@@ -10,13 +10,13 @@ namespace Domain.VirtualMachines
     public class VirtualMachineManager
     {
         private IList<VirtualMachine> _vms = new List<VirtualMachine>();
-        private IList<FysiekeServer> _fysiekeServers = new List<FysiekeServer>();
+        private IList<FysiekeServer> _fysiekeeServers = new List<FysiekeServer>();
 
         //for testing
         public VirtualMachineManager(IList<VirtualMachine> current_machines)
         {
             //_vms = Guard.Against.Null(current_machines);
-            //_fysiekeServers = Guard.Against.Null(_fysiekeServers);
+            //_fysiekeeServers = Guard.Against.Null(_fysiekeeServers);
 
         }
 
@@ -68,7 +68,7 @@ namespace Domain.VirtualMachines
 
             }
 
-            
+
         }
     }
 }

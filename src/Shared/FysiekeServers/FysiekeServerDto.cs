@@ -7,12 +7,8 @@ namespace Shared.FysiekeServers
         public class Index
         {
             public int Id { get; set; }
-            public String Naam { get; set; }
+            public String Name { get; set; }
             public String ServerAddress { get; set; }
-        }
-
-        public class Detail : Index
-        {
             public int Memory { get; set; }
             public int Storage { get; set; }
             public int Amount_vCPU { get; set; }
@@ -21,9 +17,14 @@ namespace Shared.FysiekeServers
             public int VCPUsAvailable { get; set; }
         }
 
+        public class Detail : Index
+        {
+
+        }
+
         public class Mutate
         {
-            public String Naam { get; set; }
+            public String Name { get; set; }
             public String ServerAddress { get; set; }
             public int Memory { get; set; }
             public int Storage { get; set; }

@@ -25,8 +25,15 @@ namespace Domain.VirtualMachines
         //VMConnection kan null zijn? Stel je voor dat je een VM aanmaakt. Is die dan al meteen geconnecteerd aan internet, of is er nog proces dat deze geset wordt achteraf?
 
         public Backup BackUp { get; set; }
-
-
+        public OperatingSystemEnum OperatingSystem1 { get; }
+        public VirtualMachineMode Mode1 { get; }
+        public int Memory { get; }
+        public int Storage { get; }
+        public int Amount_vCPU { get; }
+        public VMContract Contract { get; }
+        public VMConnection Connection1 { get; }
+        public BackUpType Type { get; }
+        public DateTime LastBackup { get; }
 
         public VirtualMachine(string name, string project, OperatingSystemEnum os, Hardware h, Backup b)
         {
@@ -41,6 +48,20 @@ namespace Domain.VirtualMachines
         public VirtualMachine(string name)
         {
             Name = name;
+        }
+
+        public VirtualMachine(string name, string project, OperatingSystemEnum operatingSystem, VirtualMachineMode mode, int memory, int storage, int amount_vCPU, VMContract contract, VMConnection connection, BackUpType type, DateTime lastBackup) : this(name)
+        {
+            Project = project;
+            OperatingSystem1 = operatingSystem;
+            Mode1 = mode;
+            Memory = memory;
+            Storage = storage;
+            Amount_vCPU = amount_vCPU;
+            Contract = contract;
+            Connection1 = connection;
+            Type = type;
+            LastBackup = lastBackup;
         }
 
         public void SetContract(VMContract c)

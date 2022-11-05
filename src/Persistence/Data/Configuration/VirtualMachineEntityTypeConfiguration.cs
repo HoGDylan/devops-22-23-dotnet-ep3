@@ -15,7 +15,7 @@ namespace Persistence.Data.Configuration
             builder.Property(p => p.Hardware.Memory).IsRequired();
             builder.Property(p => p.Hardware.Storage).IsRequired();
             builder.Property(p => p.Hardware.Amount_vCPU).IsRequired();
-            builder.Property(p => p._contract).IsRequired();
+            builder.Property(p => p._contract);
             builder.Property(p => p.Connection).IsRequired();
             builder.Property(p => p.BackUp.Type).IsRequired();
             builder.Property(p => p.BackUp.LastBackup).IsRequired();

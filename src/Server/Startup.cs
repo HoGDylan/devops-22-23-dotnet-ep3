@@ -29,9 +29,9 @@ namespace Server
         public void ConfigureServices(IServiceCollection services)
         {
             var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("DotNet"));
-            /*<DotNetDbContext>(options =>
+            services.AddDbContext<DotNetDbContext>(options =>
                 options.UseSqlServer(builder.ConnectionString)
-                    .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));*/
+                    .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
 
             services.AddControllersWithViews().AddFluentValidation(config =>
             {
@@ -58,15 +58,15 @@ namespace Server
             services.AddAuth0ManagementClient().AddManagementAccessToken();
 
             services.AddRazorPages();
-            //services.AddScoped<IUserService, UserService>();
-            //services.AddScoped<IVirtualMachineService, VirtualMachineService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IVirtualMachineService, VirtualMachineService>();
             services.AddScoped<IStorageService, BlobStorageService>();
-            //services.AddScoped<DotNetDataInitializer>();
+            services.AddScoped<DotNetDataInitializer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env/*, DbContext dbContext,
-            DotNetDataInitializer dataInitializer*/)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+            DotNetDataInitializer dataInitializer)
         {
             if (env.IsDevelopment())
             {

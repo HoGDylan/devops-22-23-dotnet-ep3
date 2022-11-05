@@ -23,8 +23,10 @@ namespace Services.Users
             response.Users = users.Select(x => new UserDto.Index
             {
                 Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
                 Firstname = x.FirstName,
                 Lastname = x.LastName,
+                //HogentEmail = x.HogentEmail
             }).ToList();
 
             return response;
@@ -37,9 +39,11 @@ namespace Services.Users
             var auth0Request = new UserCreateRequest
             {
                 Email = request.User.Email,
+                PhoneNumber = request.User.PhoneNumber,
                 FirstName = request.User.Firstname,
                 LastName = request.User.Lastname,
                 Password = request.User.Password,
+                //HogentEmail = request.User.HogentEmail,
                 Connection = "Username-Password-Authentication" // Name of the Database connection
             };
 

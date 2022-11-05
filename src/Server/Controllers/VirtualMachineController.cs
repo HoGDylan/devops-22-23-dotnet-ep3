@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Admin")]
     [ApiController]
     [Route("api/[controller]")]
     public class VirtualMachineController : ControllerBase
@@ -24,6 +24,13 @@ namespace Server.Controllers
         {
             return virtualMachineService.GetIndexAsync(request);
         }
+
+        /*[AllowAnonymous]
+        [HttpGet]
+        public string GetIndexAsync()
+        {
+            return "hello";
+        }*/
 
         [AllowAnonymous]
         [HttpGet("{VirtualMachineId}")]

@@ -34,8 +34,8 @@ namespace Client
                 options.ProviderOptions.AdditionalProviderParameters.Add("audience", builder.Configuration["Auth0:Audience"]);
             }).AddAccountClaimsPrincipalFactory<ArrayClaimsPrincipalFactory<RemoteUserAccount>>();
 
-            //builder.Services.AddScoped<IVirtualMachineService, VirtualMachineService>();
-            //builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IVirtualMachineService, VirtualMachineService>();
+            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddSidepanel();
             builder.Services.AddHttpClient<StorageService>();
             await builder.Build().RunAsync();

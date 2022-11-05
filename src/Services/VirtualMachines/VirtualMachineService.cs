@@ -82,6 +82,7 @@ namespace Services.VirtualMachines
             return response;
         }
 
+
         public async Task<VirtualMachineResponse.GetDetail> GetDetailAsync(VirtualMachineRequest.GetDetail request)
         {
             VirtualMachineResponse.GetDetail response = new();
@@ -93,13 +94,13 @@ namespace Services.VirtualMachines
                     Project = x.Project,
                     OperatingSystem = x.OperatingSystem,
                     Mode = x.Mode,
-                    Hardware.Memory = x.Memory,
-                    Hardware.Storage = x.Storage,
-                    Hardware.Amount_vCPU = x.Amount_vCPU,
+                    Memory = x.Hardware.Memory,
+                    Storage = x.Hardware.Storage,
+                    Amount_vCPU = x.Hardware.Amount_vCPU,
                     _contract = x._contract,
                     Connection = x.Connection,
-                    BackUp.Type = x.Type,
-                    BackUp.LastBackup = x.LastBackup
+                    Type = x.BackUp.Type,
+                    LastBackup = (DateTime)x.BackUp.LastBackup
                 })
                 .SingleOrDefaultAsync();
             return response;
@@ -127,13 +128,13 @@ namespace Services.VirtualMachines
                 Project = x.Project,
                 OperatingSystem = x.OperatingSystem,
                 Mode = x.Mode,
-                Hardware.Memory = x.Memory,
-                Hardware.Storage = x.Storage,
-                Hardware.Amount_vCPU = x.Amount_vCPU,
+                Memory = x.Hardware.Memory,
+                Storage = x.Hardware.Storage,
+                Amount_vCPU = x.Hardware.Amount_vCPU,
                 _contract = x._contract,
                 Connection = x.Connection,
-                BackUp.Type = x.Type,
-                BackUp.LastBackup = x.LastBackup
+                Type = x.BackUp.Type,
+                LastBackup = (DateTime)x.BackUp.LastBackup
             }).ToListAsync();
             return response;
         }

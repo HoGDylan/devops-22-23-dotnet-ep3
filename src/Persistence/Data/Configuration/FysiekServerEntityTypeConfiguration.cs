@@ -8,7 +8,7 @@ namespace Persistence.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<FysiekeServer> builder)
         {
-            builder.Property(p => p.Naam).IsRequired();
+            builder.Property(p => p.Name).IsRequired();
             builder.Property(p => p.ServerAddress).IsRequired();
             builder.Property(p => p.HardWare.Memory).IsRequired();
             builder.Property(p => p.HardWare.Storage).IsRequired();
