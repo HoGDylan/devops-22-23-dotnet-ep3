@@ -9,7 +9,7 @@ namespace Domain.Users
         public String Bedrijfsnaam { get { return _bedrijfsNaam; } set { Guard.Against.NullOrEmpty(_bedrijfsNaam, nameof(_bedrijfsNaam)); } }
 
 
-        public ExterneKlant(string name, string phoneNumber, string email, string password, Gebruiker contactPersoon, Gebruiker contactPersoon2, string project, string bedrijfsnaam) : base(name, phoneNumber, email, password, contactPersoon, contactPersoon2, project)
+        public ExterneKlant(string name, string phoneNumber, string email, string password, Gebruiker contactPersoon, Gebruiker contactPersoon2, string bedrijfsnaam) : base(name, phoneNumber, email, password, contactPersoon, contactPersoon2)
         {
             this.Bedrijfsnaam = bedrijfsnaam;
 

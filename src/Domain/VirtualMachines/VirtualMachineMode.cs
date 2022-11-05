@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace Domain.VirtualMachines
 {
-public enum VirtualMachineMode
-  {
-      CREATED = 0,
-      READY, // When the VM is build succesfully AKA ready for deployment
-      STOPPED,
-      RUNNING,
-      SUSPENDED, 
-      TERMINATED,
-      PAUSED,
-      
-  }
+    public enum VirtualMachineMode
+    {
+        WAITING_APPROVEMENT,       // No connection || No server
+        READY,                     // has connection && server
+        RUNNING,
+        PAUSED,
+        STOPPED,
+        TERMINATED // == destroyed ?
+    }
 };

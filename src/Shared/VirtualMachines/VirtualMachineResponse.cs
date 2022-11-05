@@ -22,7 +22,7 @@ namespace Shared.VirtualMachines
 
         public class Delete
         {
-
+            //TODO
         }
 
         public class Create
