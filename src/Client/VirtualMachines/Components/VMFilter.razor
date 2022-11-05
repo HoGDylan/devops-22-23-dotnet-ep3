@@ -1,6 +1,7 @@
 ﻿@page "/klanten"
 
 
+<aside>
 <div class="field">
     <label class="label has-text-grey " @onclick="@(e => collapseStatusFilter = !collapseStatusFilter)">Status</label>
     <div class="control has-icons-left columns @StatusFilterCssClass">
@@ -114,8 +115,7 @@
         </div>
     </div>
 </div>
-
-
+</aside>
 @code {
     private bool collapseStatusFilter = false;
     private bool collapseZoektermFilter = false;
