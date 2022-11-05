@@ -7,6 +7,9 @@ using Domain.Users;
 
 namespace Domain.VirtualMachines
 {
+    //Deze klasse mag weg, maar is nog nice om op terug te kijken bij het imlpementeren van de echte service
+    // BV project moet vm verwijderen,  Server moet vm verwijderen, Hierna pas de VM (ook voor wrs geen foreign key constraint error en zulke shit te krijgen)
+
     public class VirtualMachineManager
     {
         private IList<FysiekeServer> _fysiekeServers = new List<FysiekeServer>();

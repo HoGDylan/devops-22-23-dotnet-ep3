@@ -41,7 +41,7 @@ namespace Domain.Server
 
         public void AddConnection(VirtualMachine vm)
         {
-            string pass = PasswordGenerator.CreatePassword(RandomNumberGenerator.GetInt32(10)+20, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(3) + 1);
+            string pass = PasswordGenerator.Generate(RandomNumberGenerator.GetInt32(10)+20, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(3) + 1);
 
             vm.Connection = new VMConnection(ServerAddress, vm.Project.Klant.Name, "admin", pass);
             vm.Mode = VirtualMachineMode.READY;
@@ -65,8 +65,6 @@ namespace Domain.Server
                 VCPUsAvailable += vm.Hardware.Amount_vCPU;
                 StorageAvailable += vm.Hardware.Storage;
                 _vms.Remove(vm);
-                vm.FysiekeServer = null;
-                vm.Mode = VirtualMachineMode.TERMINATED;
             }
         }
 
