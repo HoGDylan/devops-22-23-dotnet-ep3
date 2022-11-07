@@ -16,7 +16,6 @@
 
         public class Delete
         {   
-            public int VM_Id { get; set; }
 
         }
 

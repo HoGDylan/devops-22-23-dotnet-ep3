@@ -28,7 +28,14 @@ public static class VirtualMachineDto
         public VMContract? Contract { get; set; }
         public Backup BackUp { get; set; }
     }
+    public class Edit
+    {
+        public String Name { get; set; }
+        public VirtualMachineMode Mode { get; set; }
+        public Backup Backup { get; set; }
+        public Project Project { get; set; }
 
+    }
     public class Mutate
     {
         public String Name { get; set; }   
@@ -37,6 +44,10 @@ public static class VirtualMachineDto
         public OperatingSystemEnum OperatingSystem { get; set; }
         public VMContract Contract { get; set; }
         public Backup Backup { get; set; }
+        public Project Project { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+
 
     }
 }
