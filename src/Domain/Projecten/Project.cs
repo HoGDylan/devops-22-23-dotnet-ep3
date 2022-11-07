@@ -10,6 +10,7 @@ namespace Domain.Projecten
     {
 
         private List<VirtualMachine> _vms = new();
+
         private string _name;
         private Klant _klant;
 

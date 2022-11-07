@@ -1,4 +1,5 @@
-﻿using Domain.Common;
+﻿using Bogus;
+using Domain.Common;
 using Domain.Users;
 using Domain.VirtualMachines;
 using System;

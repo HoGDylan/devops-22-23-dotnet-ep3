@@ -13,7 +13,7 @@ namespace Shared.VirtualMachines
     {
         public class GetIndex
         {
-            public string SearchTerm { get; set; }
+            public string SearchTerm { get; set; } 
             public VirtualMachineMode Status { get; set; }
             public OperatingSystemEnum OperatingSystem { get; set; }
             public Project project { get; set; }

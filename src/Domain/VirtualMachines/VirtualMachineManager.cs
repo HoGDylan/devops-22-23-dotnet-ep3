@@ -5,11 +5,12 @@ using Domain.Projecten;
 using Domain.Server;
 using Domain.Users;
 
-namespace Domain.VirtualMachines
-{
+namespace Domain.VirtualMachines;
     //Deze klasse mag weg, maar is nog nice om op terug te kijken bij het imlpementeren van de echte service
     // BV project moet vm verwijderen,  Server moet vm verwijderen, Hierna pas de VM (ook voor wrs geen foreign key constraint error en zulke shit te krijgen)
 
+
+    /*
     public class VirtualMachineManager
     {
         private IList<FysiekeServer> _fysiekeServers = new List<FysiekeServer>();
@@ -30,7 +31,7 @@ namespace Domain.VirtualMachines
             return _fysiekeServers.First(e => e.Id == id);
         }
 
-
+        
         public VirtualMachine CreateVM(string name, Project project, OperatingSystemEnum os, Hardware hw, Backup b, Klant k, DateTime start, DateTime end)
         {
 
@@ -105,7 +106,7 @@ namespace Domain.VirtualMachines
 
 
 
-        /*
+       
         public void EditVM(int id, Hardware hw, BackUpType type, Klant k, VMConnection connection)
         {
             VirtualMachine vm = _vms.First(x => x.Id == id);

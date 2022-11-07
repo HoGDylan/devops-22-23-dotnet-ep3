@@ -11,9 +11,9 @@ namespace Shared.VirtualMachines
     public class FakeVirtualMachineService : IVirtualMachineService
     {
 
-        private static readonly List<VirtualMachine> _virtualMachines = new();
+        private List<VirtualMachine> _virtualMachines = new();
 
-        static FakeVirtualMachineService()
+        public FakeVirtualMachineService()
         {
             var vmFaker = new VirtualMachineFaker();
 
@@ -39,19 +39,18 @@ namespace Shared.VirtualMachines
         {
             await Task.Delay(100);
             VirtualMachineResponse.GetDetail response = new();
+
             response.VirtualMachine = _virtualMachines.Select(e => new VirtualMachineDto.Detail
             {
                 Id = e.Id,
                 Name = e.Name,
-                BackUp = e.BackUp,
-                Connection = e.Connection,
-                Contract = e.Contract,
-                Hardware = e.Hardware,
                 Mode = e.Mode,
+                Hardware = e.Hardware,
                 OperatingSystem = e.OperatingSystem,
-                Project = e.Project
+                Contract = e.Contract,
+                BackUp = e.BackUp
 
-            }).SingleOrDefault(f => f.Id == request.VirtualMachineId);
+            }).Single(f => f.Id == request.VirtualMachineId);
 
             return response;
 
