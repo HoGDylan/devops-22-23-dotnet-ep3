@@ -1,6 +1,13 @@
 ﻿<QuickGrid Items="@vms">
-    <PropertyColumn Property="@(p => p.Name)" Sortable="true" />
-    <PropertyColumn Property="@(p => p.Project)" Sortable="true" />
-    <PropertyColumn Property="@(p => p.OperatingSystem)" />
-    <PropertyColumn Property="@(p => p.Hardware)"  />
+    <PropertyColumn Title="Naam" Property="@(vm => vm.Name)" Sortable="true" />
+    <PropertyColumn Title="Klant" Property="@(vm => vm.Klant)" Sortable="true" />
+    <PropertyColumn Title="Operatingsysteem" Property="@(vm => vm.Os)" Sortable="true" />
+    <PropertyColumn Title="Harware" Property="@(vm => vm.Hardware)" Sortable="true" />
+    <PropertyColumn Title="Laatste Backup" Property="@(vm => vm.BackUp)" Sortable="true" />
+        <TemplateColumn Title="Acties" >
+        <button @onclick="OpenVirtualMachine">
+            Details
+            <span class="e-icons e-edit e-small"></span>
+        </button>
+    </TemplateColumn>
 </QuickGrid>
