@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Domain.Common;
-using Domain.VirtualMachines;
+﻿using Domain.Common;
 using Domain.Projecten;
+using Domain.VirtualMachines;
+using Shared.VirtualMachines;
 
-namespace Shared.VirtualMachines
+namespace Services.VirtualMachines
 {
     public class FakeVirtualMachineService : IVirtualMachineService
     {
@@ -144,7 +141,7 @@ namespace Shared.VirtualMachines
 
             int id = _virtualMachines.Max(x => x.Id) + 1;
 
-            VirtualMachine vm = new VirtualMachine(name, os, hw, backup) { Id = id, Project = p, Contract = new VMContract(request.CustomerId,id, model.Start, model.End) };
+            VirtualMachine vm = new VirtualMachine(name, os, hw, backup) { Id = id, Project = p, Contract = new VMContract(request.CustomerId, id, model.Start, model.End) };
 
             _virtualMachines.Add(vm);
 

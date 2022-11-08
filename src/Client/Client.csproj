@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -14,11 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Shared.csproj" />
+	  <!--TIJDELIJK LINK NAAR SERVICES OM DE MOCK SERVICE TE INJECTEREN-->
+    <ProjectReference Include="..\Services\Services.csproj" />
 	  
-	  <!--TIJDELIJK ENKEL OM MOCK DATA TE KUNNEN GENEREREN (FAKE SERVICE TE INJECTEREN) IS ER EEN PROJECT LINK NAAR SERVICES -->
-	  <ProjectReference Include="..\..\Services\Services.csproj" />
-
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>
