@@ -1,5 +1,4 @@
 ﻿using Domain.Common;
-using Domain.Contract;
 using Domain.Projecten;
 using Domain.Server;
 using Domain.Users;

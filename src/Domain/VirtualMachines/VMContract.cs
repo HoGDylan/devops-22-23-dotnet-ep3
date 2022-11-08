@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Contract
+namespace Domain.VirtualMachines
 {
     public class VMContract : Entity
     {
@@ -18,17 +18,17 @@ namespace Domain.Contract
 
         public int Id { get; set; }
         public int CustomerId { get { return _customerId; } set { Guard.Against.NegativeOrZero(_customerId, nameof(_customerId)); } }
-        public int VMId { get { return _vmId; } set { Guard.Against.NegativeOrZero(_vmId, nameof(_vmId)); }}
+        public int VMId { get { return _vmId; } set { Guard.Against.NegativeOrZero(_vmId, nameof(_vmId)); } }
         public DateTime StartDate { get { return _startDate; } set { Guard.Against.Null(_startDate, nameof(_startDate)); } }
-        public DateTime EndDate { get { return _endDate; } set { Guard.Against.Null(_endDate, nameof(_endDate)) ; } }
+        public DateTime EndDate { get { return _endDate; } set { Guard.Against.Null(_endDate, nameof(_endDate)); } }
 
 
         public VMContract(int c_id, int vm_id, DateTime start_d, DateTime end_d)
         {
-            this.CustomerId = c_id;
-            this.VMId = vm_id;
-            this.StartDate = start_d;
-            this.EndDate = end_d;         
+            CustomerId = c_id;
+            VMId = vm_id;
+            StartDate = start_d;
+            EndDate = end_d;
         }
     }
 }
