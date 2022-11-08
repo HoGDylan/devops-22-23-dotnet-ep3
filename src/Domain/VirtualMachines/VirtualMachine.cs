@@ -1,6 +1,5 @@
 ﻿using Ardalis.GuardClauses;
 using Domain.Common;
-using Domain.Contract;
 using Domain.Projecten;
 using Domain.Server;
 using System.Net;

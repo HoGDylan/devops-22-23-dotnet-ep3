@@ -1,5 +1,4 @@
 ﻿using Ardalis.GuardClauses;
-using Domain.Contract;
 
 namespace Domain.Users
 {

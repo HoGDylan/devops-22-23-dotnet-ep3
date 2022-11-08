@@ -15,6 +15,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj" />
+	  
+	  <!--TIJDELIJK ENKEL OM MOCK DATA TE KUNNEN GENEREREN (FAKE SERVICE TE INJECTEREN) IS ER EEN PROJECT LINK NAAR SERVICES -->
+	  <ProjectReference Include="..\..\Services\Services.csproj" />
+
   </ItemGroup>
 
 </Project>
