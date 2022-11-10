@@ -108,6 +108,7 @@
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    Klant = x.Klant
                     
                 }).ToList();
 
