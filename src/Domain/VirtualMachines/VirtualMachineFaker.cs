@@ -33,7 +33,7 @@ namespace Domain.VirtualMachines
                 ));
 
             RuleFor(x => x.Id, _ => id++);
-            RuleFor(x => x.Connection, _ => new Random().Next(0,2) % 1 == 0?  new VMConnection("MOCK-FQDN", GetRandomIpAddress() , "MOCK-USER", "MOCK-PASWORD"): null);
+            RuleFor(x => x.Connection, _ => new Random().Next(0,2) % 1 == 0?  new VMConnection("MOCK-FQDN", GetRandomIpAddress() , "MOCK-USER", "MOCK-PASWORD@aa123"): null);
             RuleFor(x => x.Project, _ => null);
             RuleFor(x => x.Contract, _ => null);
             RuleFor(x => x.Mode, x => x.PickRandom<VirtualMachineMode>());
