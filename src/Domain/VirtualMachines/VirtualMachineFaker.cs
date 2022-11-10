@@ -31,8 +31,9 @@ namespace Domain.VirtualMachines
                 e.PickRandom(_hardWareOptions),
                 e.PickRandom(_backupOptions)
                 ));
+
             RuleFor(x => x.Id, _ => id++);
-            RuleFor(x => x.Connection, _ => new Random().Next(0,2) % 1 == 0?  new VMConnection("MOCK-FQDN", new IPAddress(new byte[4]) , "MOCK-USER", "MOCK-PASWORD"): null);
+            RuleFor(x => x.Connection, _ => new Random().Next(0,2) % 1 == 0?  new VMConnection("MOCK-FQDN", GetRandomIpAddress() , "MOCK-USER", "MOCK-PASWORD"): null);
             RuleFor(x => x.Project, _ => null);
             RuleFor(x => x.Contract, _ => null);
             RuleFor(x => x.Mode, x => x.PickRandom<VirtualMachineMode>());
@@ -92,6 +93,15 @@ namespace Domain.VirtualMachines
             }
             return res;
 
+        }
+
+        private static IPAddress GetRandomIpAddress()
+        {
+            var random = new Random();
+            var data = new byte[4];
+            random.NextBytes(data);
+
+            return new IPAddress(data);
         }
     }
 }

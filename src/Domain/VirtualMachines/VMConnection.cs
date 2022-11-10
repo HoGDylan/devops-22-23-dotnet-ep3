@@ -16,10 +16,10 @@ namespace Domain.Common
         private string _username;
         private string _password;
 
-        public String FQDN { get { return _fqdn; } set { Guard.Against.NullOrEmpty(_fqdn, nameof(_fqdn)); } }
-        public IPAddress Hostname { get { return _hostname; } set { Guard.Against.Null(_hostname, nameof(_hostname)); } }
-        public String Username { get { return _username; } set { Guard.Against.NullOrEmpty(_username, nameof(_username)); } } 
-        public String Password { get { return _password; } set { Guard.Against.InvalidFormat(_password, nameof(_password), @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");} }
+        public String FQDN { get { return _fqdn; } set { _fqdn =  Guard.Against.NullOrEmpty(value, nameof(_fqdn)); } }
+        public IPAddress Hostname { get { return _hostname; } set { _hostname =  Guard.Against.Null(value, nameof(_hostname)); } }
+        public String Username { get { return _username; } set {_username =  Guard.Against.NullOrEmpty(value, nameof(_username)); } } 
+        public String Password { get { return _password; } set {_password =  Guard.Against.InvalidFormat(value, nameof(_password), @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");} }
 
         /*
          

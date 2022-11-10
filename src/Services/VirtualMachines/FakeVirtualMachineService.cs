@@ -39,7 +39,7 @@ namespace Services.VirtualMachines
                 Contract = e.Contract,
                 BackUp = e.BackUp
 
-            }).Single(f => f.Id == request.VirtualMachineId);
+            }).SingleOrDefault(f => f.Id == request.VirtualMachineId);
 
             return response;
 
@@ -54,7 +54,7 @@ namespace Services.VirtualMachines
 
             if (!string.IsNullOrWhiteSpace(request.SearchTerm))
             {
-                query = query.Where(e => e.Project.Klant.Name.Contains(request.SearchTerm, StringComparison.OrdinalIgnoreCase) || e.Name.Contains(request.SearchTerm, StringComparison.OrdinalIgnoreCase) || e.Project.Name.Contains(request.SearchTerm, StringComparison.OrdinalIgnoreCase));
+                query = query.Where(e =>  e.Name.Contains(request.SearchTerm, StringComparison.OrdinalIgnoreCase) ||  e.Project == null? false : e.Project.Name.Contains(request.SearchTerm, StringComparison.OrdinalIgnoreCase));
             }
             if (request.Status is not null)
             {
@@ -67,7 +67,7 @@ namespace Services.VirtualMachines
             }
             if (request.MinMemory is not null)
             {
-                query = query.Where(e => e.Hardware.Memory > request.MaxMemory);
+                query = query.Where(e => e.Hardware.Memory > request.MinMemory);
 
             }
             if (request.MinAmountCPU is not null)
@@ -113,20 +113,26 @@ namespace Services.VirtualMachines
 
             var model = request.VirtualMachine;
 
-            var name = model.Name;
-            var backup = model.Backup;
-            var project = model.Project;
+            if (vm == null)
+            {
+                response.VM_Id = -1;
+            }
+            else
+            {
+                var name = model.Name;
+                var backup = model.Backup;
+                var project = model.Project;
 
-            vm.Name = name;
-            vm.BackUp = backup;
-            vm.Project = project;
+                vm.Name = name;
+                vm.BackUp = backup;
+                vm.Project = project;
 
-            response.VM_Id = vm.Id;
+                response.VM_Id = vm.Id;
+            }
 
             return response;
-
-
         }
+
         public async Task<VirtualMachineResponse.Create> CreateAsync(VirtualMachineRequest.Create request)
         {
             await Task.Delay(100);

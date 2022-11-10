@@ -12,13 +12,13 @@ namespace Domain.Users
     {
 
 
-        private Gebruiker _contactPs;
-        private Gebruiker _contactPs2;
-        private List<Project>? _projecten;
+        private Gebruiker? _contactPs;
+        private Gebruiker? _contactPs2;
+        private List<Project> _projecten = new();
 
-        public Gebruiker ContactPersoon { get { return _contactPs; } set { Guard.Against.Null(_contactPs, nameof(_contactPs)); } }
-        public Gebruiker ContactPersoonReserv { get { return _contactPs2; } set { Guard.Against.Null(_contactPs2, nameof(_contactPs2)); } }
-
+        public Gebruiker ContactPersoon { get { return _contactPs; } set { _contactPs=  Guard.Against.Null(value, nameof(_contactPs)); } }
+        public Gebruiker ContactPersoonReserv { get { return _contactPs2; } set {_contactPs2 =  Guard.Against.Null(value, nameof(_contactPs2)); } }
+        public List<Project> Projecten { get { return _projecten; } }
         public Klant(string name, string phoneNumber, string email, string password, Gebruiker contactPersoon, Gebruiker contactPersoon2) : base(name, phoneNumber, email, password)
         {
             this.ContactPersoon = contactPersoon;

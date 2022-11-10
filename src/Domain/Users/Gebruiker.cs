@@ -14,10 +14,10 @@ namespace Domain
         private string _password;
 
         public int Id { get; set; }
-        public String Name { get { return _name; } set { Guard.Against.NullOrEmpty(_name, nameof(_name)); } }
+        public String Name { get { return _name; } set { _name =  Guard.Against.NullOrEmpty(value, nameof(_name)); } }
         public String PhoneNumber{ get { return _phoneNr; } set{if (Validator.IsPhoneNumberValid(value)) _phoneNr = value;}}
         public String Email { get { return _email; } set { if (Validator.IsValidEmail(value)) _email = value; } }
-        public String Password { get { return _password;} set { Guard.Against.InvalidFormat(_password, nameof(_password), @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$"); } }
+        public String Password { get { return _password;} set { _password = Guard.Against.InvalidFormat(value, nameof(_password), @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$"); } }
 
         /*
          * Password validation: 

@@ -18,16 +18,16 @@ namespace Domain.Common
 
         public int Memory {
             get { return _memory; }
-            set { Guard.Against.NegativeOrZero(_memory, nameof(_memory)); } 
+            set { _memory =  Guard.Against.NegativeOrZero(value, nameof(_memory)); } 
         }       
         public int Storage
         {
             get { return _storage; }
-            set { Guard.Against.NegativeOrZero(_storage, nameof(_storage)); }
+            set { _storage = Guard.Against.NegativeOrZero(value, nameof(_storage)); }
         }
         public int Amount_vCPU {
             get { return _amountVCPU; }
-            set { Guard.Against.NegativeOrZero(_amountVCPU, nameof(_amountVCPU)); }
+            set { _amountVCPU =  Guard.Against.NegativeOrZero(value, nameof(_amountVCPU)); }
         }
    
         //Bandwidth? Gaan we hier rekening meehouden?
