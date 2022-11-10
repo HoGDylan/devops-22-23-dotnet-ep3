@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Home</PageTitle>
 <h1 class="title is-1">Virtual Machines</h1>
 
 <div class="buttons">
@@ -10,9 +10,39 @@
             <i class="fas fa-plus"></i>
         </span>
         -->
-        <span>Filter</span>
+        <span class="oi oi-pencil" aria-hidden="true"></span>
     </button>
 </div>
+<table class="table is-striped is-hoverable">
+    <thead>
+        <tr>
+            <th>Status</th>
+            <th>Virtual Machine</th>
+            <th>Klant</th>
+            <th>Acties</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="dot is-green"></span>Actief</td>
+            <td>VM3Gb-Windows</td>
+            <td>HoGent</td>
+            <td><button>Details</button><button>More</button></td>
+        </tr>
+        <tr class="is-active">
+            <td><span class="dot is-orange"></span>Pauze</td>
+            <td>VM1.5Gb-Windows</td>
+            <td>Delaware</td>
+            <td><button>Details</button><button>More</button></td>
+        </tr>
+        <tr>
+            <td><span class="dot is-red"></span>Gestopt</td>
+            <td>VM8Gb-Linux</td>
+            <td>HoGent</td>
+            <td><button>Details</button><button>More</button></td>
+        </tr>
+    </tbody>
+</table>
 
 Welcome to your new app.
 
