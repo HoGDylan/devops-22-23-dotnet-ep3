@@ -13,7 +13,7 @@ namespace Shared.Projects
     {
         public class All
         {
-            public string SearchTerm { get; set; } //filter will search on: project name + name of customer
+            public string? SearchTerm { get; set; } //filter will search on: project name + name of customer
 
         }
 

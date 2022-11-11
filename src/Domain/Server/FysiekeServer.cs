@@ -16,29 +16,23 @@ namespace Domain.Server
         private string _name;
         private string _serverAddress;
         private Hardware _hardWare;
-        private int _memoryAvailable;
-        private int _storageAvailable;
-        private int _vCPUsAvailable;
+
 
         public int Id { get; set; }
         public String Naam { get { return _name; } set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
         public String ServerAddress { get { return _serverAddress; } set { _serverAddress =  Guard.Against.NullOrEmpty(value, nameof(_serverAddress)); } }
         public Hardware HardWare { get { return _hardWare; } set {_hardWare =  Guard.Against.Null(value, nameof(_hardWare)); } }
-        public int MemoryAvailable { get { return _memoryAvailable; } set {_memoryAvailable =  Guard.Against.Negative(value, nameof(_memoryAvailable)); } }
-        public int StorageAvailable { get { return _storageAvailable; } set { _storageAvailable = Guard.Against.Negative(value, nameof(_storageAvailable)); } }
-        public int VCPUsAvailable { get { return _vCPUsAvailable; } set { _vCPUsAvailable = Guard.Against.Negative(value, nameof(_vCPUsAvailable)); } }
+        public Hardware HardWareAvailable { get; set; }
 
 
 
-        public FysiekeServer(string naam, Hardware hw,  string s_adres, int mem_available, int stor_available, int vCPU_avaiable)
+        public FysiekeServer(string naam, Hardware hw, string s_adres)
         {
 
             this.Naam = naam;
             this.HardWare = hw;
             this.ServerAddress = s_adres;
-            this.MemoryAvailable = mem_available;
-            this.StorageAvailable = stor_available;
-            this.VCPUsAvailable = vCPU_avaiable ;
+            this.HardWareAvailable = hw;
         }
 
 
@@ -57,9 +51,9 @@ namespace Domain.Server
 
         public void AddToServer(VirtualMachine vm)
         {
-            MemoryAvailable -= vm.Hardware.Memory;
-            VCPUsAvailable -= vm.Hardware.Amount_vCPU;
-            StorageAvailable -= vm.Hardware.Storage;
+            HardWareAvailable.Memory -= vm.Hardware.Memory;
+            HardWareAvailable.Amount_vCPU -= vm.Hardware.Amount_vCPU;
+            HardWareAvailable.Storage -= vm.Hardware.Storage;
             AddConnection(vm);
             _vms.Add(vm);
         }
@@ -68,9 +62,9 @@ namespace Domain.Server
         {
             if (_vms.Contains(vm))
             {
-                MemoryAvailable += vm.Hardware.Memory;
-                VCPUsAvailable += vm.Hardware.Amount_vCPU;
-                StorageAvailable += vm.Hardware.Storage;
+                HardWareAvailable.Memory += vm.Hardware.Memory;
+                HardWareAvailable.Amount_vCPU += vm.Hardware.Amount_vCPU;
+                HardWareAvailable.Storage += vm.Hardware.Storage;
                 _vms.Remove(vm);
             }
         }

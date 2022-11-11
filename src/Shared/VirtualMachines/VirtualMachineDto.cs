@@ -27,6 +27,7 @@ public static class VirtualMachineDto
         public OperatingSystemEnum OperatingSystem { get; set; }
         public VMContract Contract { get; set; }
         public Backup BackUp { get; set; }
+        public FysiekeServer? FysiekeServer { get; set; }
     }
     public class Edit
     {

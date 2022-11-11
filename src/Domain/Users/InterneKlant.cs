@@ -15,7 +15,7 @@ namespace Domain.Users
         public Course Opleiding { get { return _opleiding; } set {_opleiding =  Guard.Against.Null(value, nameof(_opleiding)); }
         }
 
-        public InterneKlant(string name, string phoneNumber, string email, string password, Gebruiker contactPersoon, Gebruiker contactPersoon2, Course opleiding) : base(name, phoneNumber, email, password, contactPersoon, contactPersoon2)
+        public InterneKlant(string name, string firstname, string phoneNumber, string email, string password,Course opleiding) : base(name, firstname, phoneNumber, email, password)
         {
             this.Opleiding = opleiding;
         }

@@ -37,7 +37,8 @@ namespace Services.VirtualMachines
                 Hardware = e.Hardware,
                 OperatingSystem = e.OperatingSystem,
                 Contract = e.Contract,
-                BackUp = e.BackUp
+                BackUp = e.BackUp,
+                FysiekeServer = e.FysiekeServer
 
             }).SingleOrDefault(f => f.Id == request.VirtualMachineId);
 

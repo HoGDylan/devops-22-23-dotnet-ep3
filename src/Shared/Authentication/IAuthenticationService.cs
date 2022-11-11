@@ -2,7 +2,7 @@
 {
     public interface IAuthenticationService
     {
-        public Task<AuthenticationResponse.Login.Any> Login(AuthenticationRequest.Login);
-        public Task<AuthenticationResponse.Register.Any> Register(AuthenticationRequest.Register);
+        public Task<AuthenticationResponse.Login.Any> Login(AuthenticationRequest.Login request);
+        public Task<AuthenticationResponse.Register.Any> Register(AuthenticationRequest.Register request);
     }
 }

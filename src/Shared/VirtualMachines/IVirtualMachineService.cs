@@ -1,5 +1,4 @@
-﻿
-namespace Shared.VirtualMachines;
+﻿namespace Shared.VirtualMachines;
 
 public interface IVirtualMachineService
 {

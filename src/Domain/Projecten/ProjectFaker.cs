@@ -1,10 +1,7 @@
 ﻿using Bogus;
+using Domain.Users;
 using Domain.VirtualMachines;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Domain.Projecten
 {
@@ -17,7 +14,8 @@ namespace Domain.Projecten
             CustomInstantiator(e => new Project(e.Commerce.ProductName()));
             RuleFor(x => x.Id, _ => id++);
             RuleFor(x => x.VirtualMachines, _ => new VirtualMachineFaker().GenerateBetween(1, 5));
-            RuleFor(x => x.Klant, _ => new KlantFaker().Generate(1));
+            RuleFor(x => x.Klant, _ => new KlantFaker().Generate());
+
         }
     }
 }

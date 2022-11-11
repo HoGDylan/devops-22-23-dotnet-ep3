@@ -14,10 +14,10 @@ namespace Domain.VirtualMachines
     public class VirtualMachineFaker : Faker<VirtualMachine>
     {
 
-        private static readonly int[]  _memoryOptions = { 1, 2, 4, 8, 16, 32, 64 };
-        private static readonly int[] _storageOptions =  { 30, 50, 75, 100, 150, 200, 250, 300, 500 };
+        private static readonly int[] _memoryOptions = { 1, 2, 4, 8, 16, 32, 64 };
+        private static readonly int[] _storageOptions = { 30, 50, 75, 100, 150, 200, 250, 300, 500 };
 
-        private readonly IEnumerable<DateTime?> _dateOptions = GenerateRandomDatesIncNull();
+        //private readonly IEnumerable<DateTime?> _dateOptions = GenerateRandomDatesIncNull();
         private readonly IEnumerable<Hardware> _hardWareOptions = GenerateRandomHardware();
         private readonly IEnumerable<Backup> _backupOptions = GenerateRandomBackups();
 
@@ -78,9 +78,9 @@ namespace Domain.VirtualMachines
                 Backup a;
 
                 if (r == 1)
-                    a = new Backup(BackUpType.DAILY, new DateTime().Subtract(TimeSpan.FromMinutes(i + 1 * 20)));
+                    a = new Backup(BackUpType.DAILY, new DateTime().Subtract(TimeSpan.FromMinutes((i + 1) * 20)));
                 else if(r == 2)
-                    a = new Backup(BackUpType.CUSTOM, new DateTime().Subtract(TimeSpan.FromHours(i + 3 * 5)));
+                    a = new Backup(BackUpType.CUSTOM, new DateTime().Subtract(TimeSpan.FromHours((i + 1) * 50)));
                 else if(r <= 6)
                     a = new Backup(BackUpType.WEEKLY, new DateTime().Subtract(TimeSpan.FromDays(new Random().NextDouble() * 7)));
                 else
