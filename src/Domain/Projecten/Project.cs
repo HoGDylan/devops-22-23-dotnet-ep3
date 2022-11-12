@@ -9,7 +9,7 @@ namespace Domain.Projecten
     public class Project : Entity 
     {
 
-        private readonly List<VirtualMachine> _vms = new();
+        private readonly List<VirtualMachine> _vms = new(); //contains all VMS on a certain project | inclusive not approved.
 
         private string _name;
         private Klant _klant;
