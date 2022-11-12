@@ -1,5 +1,5 @@
 ﻿using Domain.Users;
-using Domain.VirtualMachines;
+using Domain.VirtualMachines.VirtualMachine;
 using FluentValidation;
 
 namespace Shared.Projects;

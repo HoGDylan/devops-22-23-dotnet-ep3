@@ -1,6 +1,7 @@
 ﻿using Domain.Common;
 using Domain.Projecten;
-using Domain.VirtualMachines;
+using Domain.VirtualMachines.BackUp;
+using Domain.VirtualMachines.VirtualMachine;
 using Shared.VirtualMachines;
 
 namespace Services.VirtualMachines

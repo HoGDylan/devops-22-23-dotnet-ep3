@@ -1,5 +1,4 @@
-﻿using Domain.VirtualMachines;
-
+﻿using Domain.VirtualMachines.VirtualMachine;
 
 namespace Shared.VirtualMachines
 {

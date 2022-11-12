@@ -1,7 +1,7 @@
 ﻿using Ardalis.GuardClauses;
 using Domain.Common;
 using Domain.Users;
-using Domain.VirtualMachines;
+using Domain.VirtualMachines.VirtualMachine;
 using Shared.Utility;
 using System.Net;
 using System.Security.Cryptography;

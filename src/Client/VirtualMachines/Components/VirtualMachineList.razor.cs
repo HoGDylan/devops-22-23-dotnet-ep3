@@ -1,5 +1,6 @@
 ﻿using Domain.Common;
-using Domain.VirtualMachines;
+using Domain.VirtualMachines.BackUp;
+using Domain.VirtualMachines.VirtualMachine;
 using Microsoft.AspNetCore.Components.QuickGrid;
 
 namespace Client.VirtualMachines.Components;

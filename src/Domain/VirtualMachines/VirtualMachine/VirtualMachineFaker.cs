@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using Bogus;
 using Domain.Common;
 using Domain.Projecten;
+using Domain.VirtualMachines.BackUp;
 
-namespace Domain.VirtualMachines
+namespace Domain.VirtualMachines.VirtualMachine
 {
-  
+
     public class VirtualMachineFaker : Faker<VirtualMachine>
     {
 
@@ -33,7 +34,7 @@ namespace Domain.VirtualMachines
                 ));
 
             RuleFor(x => x.Id, _ => id++);
-            RuleFor(x => x.Connection, _ => new Random().Next(0,2) % 1 == 0?  new VMConnection("MOCK-FQDN", GetRandomIpAddress() , "MOCK-USER", "MOCK-PASWORD@aa123"): null);
+            RuleFor(x => x.Connection, _ => new Random().Next(0, 2) % 1 == 0 ? new VMConnection("MOCK-FQDN", GetRandomIpAddress(), "MOCK-USER", "MOCK-PASWORD@aa123") : null);
             RuleFor(x => x.Project, _ => null);
             RuleFor(x => x.Contract, _ => null);
             RuleFor(x => x.Mode, x => x.PickRandom<VirtualMachineMode>());
@@ -72,23 +73,23 @@ namespace Domain.VirtualMachines
         {
             List<Backup> res = new();
 
-            for(int i = 0; i < 100; i++)
+            for (int i = 0; i < 100; i++)
             {
                 int r = new Random().Next(0, 10);
                 Backup a;
 
                 if (r == 1)
                     a = new Backup(BackUpType.DAILY, new DateTime().Subtract(TimeSpan.FromMinutes((i + 1) * 20)));
-                else if(r == 2)
+                else if (r == 2)
                     a = new Backup(BackUpType.CUSTOM, new DateTime().Subtract(TimeSpan.FromHours((i + 1) * 50)));
-                else if(r <= 6)
+                else if (r <= 6)
                     a = new Backup(BackUpType.WEEKLY, new DateTime().Subtract(TimeSpan.FromDays(new Random().NextDouble() * 7)));
                 else
                     a = new Backup(BackUpType.MONTHLY, new DateTime().Subtract(TimeSpan.FromDays(new Random().Next(30))));
 
 
                 res.Append(a);
-            
+
 
             }
             return res;

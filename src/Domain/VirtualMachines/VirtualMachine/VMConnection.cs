@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Common
+namespace Domain.VirtualMachines.VirtualMachine
 {
     public class VMConnection : ValueObject
     {
@@ -16,10 +16,10 @@ namespace Domain.Common
         private string _username;
         private string _password;
 
-        public String FQDN { get { return _fqdn; } set { _fqdn =  Guard.Against.NullOrEmpty(value, nameof(_fqdn)); } }
-        public IPAddress Hostname { get { return _hostname; } set { _hostname =  Guard.Against.Null(value, nameof(_hostname)); } }
-        public String Username { get { return _username; } set {_username =  Guard.Against.NullOrEmpty(value, nameof(_username)); } } 
-        public String Password { get { return _password; } set {_password =  Guard.Against.InvalidFormat(value, nameof(_password), @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");} }
+        public string FQDN { get { return _fqdn; } set { _fqdn = Guard.Against.NullOrEmpty(value, nameof(_fqdn)); } }
+        public IPAddress Hostname { get { return _hostname; } set { _hostname = Guard.Against.Null(value, nameof(_hostname)); } }
+        public string Username { get { return _username; } set { _username = Guard.Against.NullOrEmpty(value, nameof(_username)); } }
+        public string Password { get { return _password; } set { _password = Guard.Against.InvalidFormat(value, nameof(_password), @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"); } }
 
         /*
          
@@ -37,9 +37,9 @@ namespace Domain.Common
         public VMConnection(string FQDN, IPAddress hostname, string username, string password)
         {
             this.FQDN = FQDN;
-            this.Hostname = hostname;
-            this.Username = username;
-            this.Password = password;
+            Hostname = hostname;
+            Username = username;
+            Password = password;
         }
 
 
