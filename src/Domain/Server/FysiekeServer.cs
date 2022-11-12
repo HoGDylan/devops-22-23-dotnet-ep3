@@ -12,18 +12,19 @@ namespace Domain.Server
     public class FysiekeServer : Entity
     {
 
-        private List<VirtualMachine> _vms = new();
+        private readonly List<VirtualMachine> _vms;
+
         private string _name;
         private string _serverAddress;
         private Hardware _hardWare;
 
 
         public int Id { get; set; }
-        public String Naam { get { return _name; } set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
-        public String ServerAddress { get { return _serverAddress; } set { _serverAddress =  Guard.Against.NullOrEmpty(value, nameof(_serverAddress)); } }
-        public Hardware HardWare { get { return _hardWare; } set {_hardWare =  Guard.Against.Null(value, nameof(_hardWare)); } }
-        public Hardware HardWareAvailable { get; set; }
-
+        public String Naam { get { return _name; } private set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
+        public String ServerAddress { get { return _serverAddress; } private set { _serverAddress =  Guard.Against.NullOrEmpty(value, nameof(_serverAddress)); } }
+        public Hardware HardWare { get { return _hardWare; } private set {_hardWare =  Guard.Against.Null(value, nameof(_hardWare)); } }
+        public Hardware HardWareAvailable { get; private set; }
+        public List<VirtualMachine> VirtualMachines { get; private set; }
 
 
         public FysiekeServer(string naam, Hardware hw, string s_adres)
@@ -33,6 +34,7 @@ namespace Domain.Server
             this.HardWare = hw;
             this.ServerAddress = s_adres;
             this.HardWareAvailable = hw;
+            this.VirtualMachines = new();
         }
 
 

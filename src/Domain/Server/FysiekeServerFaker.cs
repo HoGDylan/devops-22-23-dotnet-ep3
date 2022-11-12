@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using Domain.Common;
+using Domain.VirtualMachines;
 using System;
 
 namespace Domain.Server
@@ -16,6 +17,7 @@ namespace Domain.Server
 
             CustomInstantiator(e => new FysiekeServer("Server " + id, e.PickRandom(_hardWareOptions), e.Internet.DomainName() + "." + "hogent.be"));
             RuleFor(e => e.Id, _ => id++);
+            RuleFor(e => e.VirtualMachines, _ => new VirtualMachineFaker().GenerateBetween(0, 20));
             
         }
 

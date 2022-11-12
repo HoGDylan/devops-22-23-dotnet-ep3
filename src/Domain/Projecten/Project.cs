@@ -9,7 +9,8 @@ namespace Domain.Projecten
     public class Project : Entity 
     {
 
-        private List<VirtualMachine> _vms = new();
+        private readonly List<VirtualMachine> _vms = new();
+
         private string _name;
         private Klant _klant;
 
@@ -17,13 +18,12 @@ namespace Domain.Projecten
 
         public int Id { get; set; }
         public String Name { get { return _name; } set {_name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
-        public List<VirtualMachine> VirtualMachines { get { return _vms; } set { _vms = Guard.Against.Null(value, nameof(_vms)); } }
         public Klant Klant { get { return _klant; } set { _klant = Guard.Against.Null(value, nameof(_vms)); } }
+        public List<VirtualMachine> VirtualMachines { get { return _vms; } }
+
         public Project(string name) {
             this.Name = name;
         }
-
-
         public VirtualMachine GetVirtualMachineById(int id)
         {
             return _vms.First(e => e.Id == id);
