@@ -21,7 +21,6 @@ namespace Domain.VirtualMachines.VirtualMachine
         private FysiekeServer? _server;
 
         public string Name { get { return _name; } set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
-
         public OperatingSystemEnum OperatingSystem { get { return _operatingSystem; } set { _operatingSystem = Guard.Against.Null(value, nameof(_operatingSystem)); } }
         public VirtualMachineMode Mode { get { return _mode; } set { _mode = Guard.Against.Null(value, nameof(_mode)); } }
         public Hardware Hardware { get; set; }
