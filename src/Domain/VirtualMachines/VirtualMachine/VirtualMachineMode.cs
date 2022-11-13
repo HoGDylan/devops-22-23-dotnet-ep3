@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.VirtualMachines
+namespace Domain.VirtualMachines.VirtualMachine
 {
     public enum VirtualMachineMode
     {

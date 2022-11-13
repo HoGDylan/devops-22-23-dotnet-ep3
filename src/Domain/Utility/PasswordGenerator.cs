@@ -6,7 +6,7 @@ namespace Shared.Utility
     public class PasswordGenerator
     {
 
-        public static string CreatePassword(int length, int amount_upper, int amount_lower, int amount_numbers, int amount_symbols)
+        public static string Generate(int length, int amount_upper, int amount_lower, int amount_numbers, int amount_symbols)
         {
             StringBuilder output = new StringBuilder();
 

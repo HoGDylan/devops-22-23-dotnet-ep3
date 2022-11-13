@@ -1,4 +1,10 @@
 ﻿@page "/virtualmachines"
+
+if(virtualMachines is null){
+    <p>Loading ....</p>
+}
+else{
+
 @using Client.VirtualMachines.Components
 
 <PageTitle>VirtualMachines</PageTitle>
@@ -9,5 +15,8 @@
     <VirtualMachineList />
    
 </div>
+}
+
+
 
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shared.VirtualMachines
+﻿namespace Shared.VirtualMachines
 {
     public static class VirtualMachineResponse
     {
@@ -21,8 +15,8 @@ namespace Shared.VirtualMachines
         }
 
         public class Delete
-        {
-            //TODO
+        {   
+
         }
 
         public class Create
