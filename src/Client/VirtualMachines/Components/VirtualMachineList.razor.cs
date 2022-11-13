@@ -28,10 +28,10 @@ public partial class VirtualMachineList
 
     protected override async Task OnInitializedAsync()
     {
-        VirtualMachineRequest.GetIndex request = new();
+        /*VirtualMachineRequest.GetIndex request = new();
         var response = await VirtualMachineService.GetIndexAsync(request);
         virtualMachines = response.VirtualMachines;
-        _total = response.TotalAmount;
+        _total = response.TotalAmount;*/
 
     }
 

@@ -2,11 +2,10 @@
     <h3>Hardware</h3>
     <br />
     <div>
-        <p>Operating System: <!--@Vm.OperatingSystem--></p>
-        <p>Memory: </p>
-        <p>Storage: </p>
-        <p>#Vcpu cores: </p>
-        <p>Server: </p>
+        <p>Memory: @vm.Hardware.Memory</p>
+        <p>Storage: @vm.Hardware.Storage</p>
+        <p>#Vcpu cores: @vm.Hardware.Amount_vCPU</p>
+        <p>Server: @vm.FysiekeServer</p>
     </div>
     <div>
         <a @onclick="NavigateToReport" >Naar Rapportage</a>

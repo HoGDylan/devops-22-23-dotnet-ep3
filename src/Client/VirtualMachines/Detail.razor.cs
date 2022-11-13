@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Components;
 using Shared.VirtualMachines;
+using Client.VirtualMachines.Components;
 
 namespace Client.VirtualMachines;
 
 public partial class Detail
 {
 
-    private VirtualMachineDto.Detail? _vm;
-    [Inject] public IVirtualMachineService _vmService { get; set; } = default!;
+    private VirtualMachineDto.Detail? vm;
+    [Inject] public IVirtualMachineService vmService { get; set; } = default!;
     [Parameter] public int ProductId { get; set; }
 
 

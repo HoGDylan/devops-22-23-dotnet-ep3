@@ -2,16 +2,16 @@
     <h3>Algemeen</h3>
     <br />
     <div>
-        <p>Naam: </p>
+        <p>Naam: @vm.Name</p>
+        <p>Operatingsystem: @vm.OperatingSystem</p>
         <p>Project: </p>
-        <p>Klant: </p>
-        <p>Hostnaam:</p>
+        <p>Klant: @vm.</p>
         <p>Projectnaam: </p>
-        <p>FQDN:</p>
-        <p>Mode: </p>
+        <p>FQDN: </p>
+        <p>Mode: @vm.Mode</p>
     </div>
     <div>
-        <a>Naar Klant</a>
+        <a @onclick="NavigateToKlant" >Naar Klant</a>
     </div>
 </div>
 
