@@ -1,6 +1,6 @@
 ﻿namespace Shared.Users
 {
-    public class IUserService
+    public interface IUserService
     {
 
     }

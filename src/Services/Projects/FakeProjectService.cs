@@ -1,9 +1,9 @@
 ﻿    using Domain.Common;
     using Domain.Projecten;
     using Shared.Projects;
+using Shared.VirtualMachines;
 
-
-    namespace Services.Projects
+namespace Services.Projects
     {
         public class FakeProjectService : IProjectService
         {
@@ -75,13 +75,23 @@
                 await Task.Delay(100);
                 ProjectResponse.Detail response = new();
 
-                response.Project = _projects.Select(e => new ProjectDto.Detail
-                {
-                    Id = e.Id,
-                    Klant = e.Klant,
-                    Name = e.Name,
-                    VirtualMachines = e.VirtualMachines
-                }).SingleOrDefault(e => e.Id == request.ProjectId);
+
+                response.Project = _projects.Select(e => {
+
+                    List<VirtualMachineDto.Index> vms = new();
+                    e.VirtualMachines.ForEach(e => vms.Add(new VirtualMachineDto.Index() { Id = e.Id, Mode = e.Mode, Name = e.Name }));
+
+
+                    return new ProjectDto.Detail
+                    {
+                        Id = e.Id,
+                        Klant = e.Klant,
+                        Name = e.Name,
+                        VirtualMachines = vms
+                    };
+
+                    
+                }).Single(e => e.Id == request.ProjectId);
 
                 return response;
             }
