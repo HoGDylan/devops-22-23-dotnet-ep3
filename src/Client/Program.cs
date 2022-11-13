@@ -11,7 +11,7 @@ using Services.Projects;
 using Shared.Authentication;
 using Shared.FysiekeServers;
 using Services.FysiekeServer;
-using Shared.VMContract;
+using Shared.VMContracts;
 using Services.VMContracts;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
