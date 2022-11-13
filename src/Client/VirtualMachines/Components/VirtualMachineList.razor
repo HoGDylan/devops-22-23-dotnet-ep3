@@ -1,9 +1,6 @@
-﻿<QuickGrid Items="@vms">
-    <PropertyColumn Title="Naam" Property="@(vm => vm.Name)" Sortable="true" />
-    <PropertyColumn Title="Klant" Property="@(vm => vm.Klant)" Sortable="true" />
-    <PropertyColumn Title="Operatingsysteem" Property="@(vm => vm.Os)" Sortable="true" />
-    <PropertyColumn Title="Harware" Property="@(vm => vm.Hardware)" Sortable="true" />
-    <PropertyColumn Title="Laatste Backup" Property="@(vm => vm.BackUp)" Sortable="true" />
+﻿<QuickGrid Items="@virtualMachines">
+    <PropertyColumn Title="Naam" Property="@(vm.Name)" Sortable="true" />
+    <PropertyColumn Title="Klant" Property="@(vm.Mode)" Sortable="true" />
         <TemplateColumn Title="Acties" >
         <button @onclick="OpenVirtualMachine">
             Details

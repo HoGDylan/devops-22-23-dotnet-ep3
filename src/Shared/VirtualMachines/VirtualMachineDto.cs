@@ -3,6 +3,7 @@ using Domain.Projecten;
 using Domain.Server;
 using Domain.Users;
 using Domain.VirtualMachines.BackUp;
+using Domain.VirtualMachines.Contract;
 using Domain.VirtualMachines.VirtualMachine;
 using FluentValidation;
 using System;
