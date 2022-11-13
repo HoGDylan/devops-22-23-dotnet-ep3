@@ -1,5 +1,5 @@
 ﻿using Domain.VirtualMachines.Contract;
-using Shared.VMContract;
+using Shared.VMContracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
