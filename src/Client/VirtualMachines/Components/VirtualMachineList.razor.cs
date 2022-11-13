@@ -30,8 +30,13 @@ public partial class VirtualMachineList
     {
         /*VirtualMachineRequest.GetIndex request = new();
         var response = await VirtualMachineService.GetIndexAsync(request);
+<<<<<<< HEAD
         virtualMachines = response.VirtualMachines;
         _total = response.TotalAmount;*/
+=======
+        //virtualMachines = response.VirtualMachines;
+        _total = response.TotalAmount;
+>>>>>>> c8cc2a0f784d40329dd9b353d93c50bf9189e153
 
     }
 
