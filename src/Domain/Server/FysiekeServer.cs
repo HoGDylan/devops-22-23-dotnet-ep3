@@ -12,7 +12,7 @@ namespace Domain.Server
     public class FysiekeServer : Entity
     {
 
-        private readonly List<VirtualMachine> _vms;
+        private readonly List<VirtualMachine> _vms; //only contains active VMs running on this server
 
         private string _name;
         private string _serverAddress;
