@@ -1,13 +1,15 @@
 ﻿using Client.Extentions;
 using Shared.Projects;
 using System.Net;
+using System.Net.Http.Json;
 
 namespace Client.VirtualMachines
 {
-    private readonly HttpClient client;
-    private const string endpoint = "api/project";
     public class ProjectService : IProjectService
     {
+        private readonly HttpClient client;
+        private string endpoint = "api/project";
+
         public Task<ProjectResponse.Create> CreateAsync(ProjectRequest.Create request)
         {
             throw new NotImplementedException();
@@ -30,9 +32,12 @@ namespace Client.VirtualMachines
 
         public Task<ProjectResponse.All> GetIndexAsync(ProjectRequest.All request)
         {
+            /*
             var queryParameters = request.GetQueryString();
             var response = await client.GetFromJsonAsync<ProjectResponse.All>($"{endpoint}?{queryParameters}");
             return response;
+            */
+            return null;
         }
     }
 }

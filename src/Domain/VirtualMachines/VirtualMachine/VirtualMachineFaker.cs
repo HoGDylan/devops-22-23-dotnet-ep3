@@ -19,12 +19,14 @@ namespace Domain.VirtualMachines.VirtualMachine
         private static readonly int[] _storageOptions = { 30, 50, 75, 100, 150, 200, 250, 300, 500 };
 
         //private readonly IEnumerable<DateTime?> _dateOptions = GenerateRandomDatesIncNull();
-        private readonly IEnumerable<Hardware> _hardWareOptions = GenerateRandomHardware();
-        private readonly IEnumerable<Backup> _backupOptions = GenerateRandomBackups();
+        private readonly List<Hardware> _hardWareOptions = GenerateRandomHardware();
+        private readonly List<Backup> _backupOptions = GenerateRandomBackups();
 
         public VirtualMachineFaker()
         {
             int id = 1;
+
+
 
             CustomInstantiator(e => new VirtualMachine(
                 e.Commerce.ProductName(),
@@ -35,8 +37,6 @@ namespace Domain.VirtualMachines.VirtualMachine
 
             RuleFor(x => x.Id, _ => id++);
             RuleFor(x => x.Connection, _ => new Random().Next(0, 2) % 1 == 0 ? new VMConnection("MOCK-FQDN", GetRandomIpAddress(), "MOCK-USER", "MOCK-PASWORD@aa123") : null);
-            RuleFor(x => x.Project, _ => null);
-            RuleFor(x => x.Contract, _ => null);
             RuleFor(x => x.Mode, x => x.PickRandom<VirtualMachineMode>());
 
         }
@@ -64,7 +64,7 @@ namespace Domain.VirtualMachines.VirtualMachine
 
             for (int i = 0; i < 100; i++)
             {
-                res.Append(new Hardware(_memoryOptions[new Random().Next(0, _memoryOptions.Count())], _storageOptions[new Random().Next(0, _storageOptions.Count())], new Random().Next(1, 13)));
+                res.Add(new Hardware(_memoryOptions[new Random().Next(0, _memoryOptions.Count())], _storageOptions[new Random().Next(0, _storageOptions.Count())], new Random().Next(1, 13)));
             }
             return res;
         }
@@ -78,17 +78,19 @@ namespace Domain.VirtualMachines.VirtualMachine
                 int r = new Random().Next(0, 10);
                 Backup a;
 
+
+
                 if (r == 1)
-                    a = new Backup(BackUpType.DAILY, new DateTime().Subtract(TimeSpan.FromMinutes((i + 1) * 20)));
+                    a = new Backup(BackUpType.DAILY, DateTime.Now.Subtract(TimeSpan.FromMinutes((i + 1) * 20)));
                 else if (r == 2)
-                    a = new Backup(BackUpType.CUSTOM, new DateTime().Subtract(TimeSpan.FromHours((i + 1) * 50)));
+                    a = new Backup(BackUpType.CUSTOM, DateTime.Now.Subtract(TimeSpan.FromHours((i + 1) * 50)));
                 else if (r <= 6)
-                    a = new Backup(BackUpType.WEEKLY, new DateTime().Subtract(TimeSpan.FromDays(new Random().NextDouble() * 7)));
+                    a = new Backup(BackUpType.WEEKLY, DateTime.Now.Subtract(TimeSpan.FromDays(new Random().NextDouble() * 7)));
                 else
-                    a = new Backup(BackUpType.MONTHLY, new DateTime().Subtract(TimeSpan.FromDays(new Random().Next(30))));
+                    a = new Backup(BackUpType.MONTHLY, DateTime.Now.Subtract(TimeSpan.FromDays(new Random().Next(30))));
 
 
-                res.Append(a);
+                res.Add(a);
 
 
             }

@@ -46,5 +46,6 @@ namespace Domain.Common
             yield return Amount_vCPU;
         }
 
+        public override string ToString() => $"{Amount_vCPU} {Storage} {Memory}";
     }
 }
