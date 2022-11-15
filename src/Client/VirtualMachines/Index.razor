@@ -7,12 +7,18 @@
     @foreach (var project in _projects){
         <div class="columns is-multiline">
                 <div class="card is-clickable w-100">
-                    <div class="card-content" @onclick="ExpandProject">
+                    <div class="card-content">
                         <div class="content">
                             <h1 class="title is-size-4">@project.Name</h1>
                             <p>Id: @project.Id</p>
                             <p>Klant: @project.Klant.Name</p>
+                            <button @onclick="() => ExpandProject()"  >Toon virtualmachines</button>
                         </div>
+                        @if(showVms){
+                            <div>
+                                <VirtualMachineList ProjectId=project.Id />
+                            </div>
+                        }
                     </div>
                 </div>
         </div>

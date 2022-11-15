@@ -10,10 +10,13 @@ namespace Client.VirtualMachines.Components;
 
 public partial class VirtualMachineList
 {
-    private VirtualMachineDto.Index vm;
+    [Parameter] public int ProjectId { get; set; }
     [Inject] NavigationManager NavigationManager { get; set; }
-    [Inject] public IVirtualMachineService VirtualMachineService { get; set; }
+    [Inject] public IProjectService ProjectService { get; set; }
+    private List<VirtualMachineDto.Index> virtualmachinesOfProject = new();
+    private VirtualMachineDto.Index vm;
     private ProjectDto.Detail virtualMachines;
+    private IQueryable<VirtualMachineDto.Index> virtualmachinesQuery;
     private int _total;
     /*record VirtualMachine(string Name, string Klant, string Os, string Hardware, DateOnly BackUp);*/
     /*IQueryable<VirtualMachine> vms = new[]
@@ -30,16 +33,14 @@ public partial class VirtualMachineList
     {
         /*VirtualMachineRequest.GetIndex request = new();
         var response = await VirtualMachineService.GetIndexAsync(request);
-<<<<<<< HEAD
         virtualMachines = response.VirtualMachines;
         _total = response.TotalAmount;*/
-=======
         //virtualMachines = response.VirtualMachines;
-        _total = response.TotalAmount;
->>>>>>> c8cc2a0f784d40329dd9b353d93c50bf9189e153
-
+        ProjectRequest.Detail request = new() { ProjectId = ProjectId };
+        var response = await ProjectService.GetDetailAsync(request);
+        virtualmachinesOfProject = response.Project.VirtualMachines;
+        virtualmachinesQuery = virtualmachinesOfProject.AsQueryable();
     }
-
 
     private void NavigateToDetail()
     {

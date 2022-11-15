@@ -25,9 +25,11 @@ namespace Client.VirtualMachines
             throw new NotImplementedException();
         }
 
-        public Task<ProjectResponse.Detail> GetDetailAsync(ProjectRequest.Detail request)
+        public async Task<ProjectResponse.Detail> GetDetailAsync(ProjectRequest.Detail request)
         {
-            throw new NotImplementedException();
+            var queryParameters = request.GetQueryString();
+            var response = await client.GetFromJsonAsync<ProjectResponse.Detail>($"{endpoint}?{queryParameters}");
+            return response;
         }
 
         public Task<ProjectResponse.All> GetIndexAsync(ProjectRequest.All request)

@@ -8,7 +8,7 @@ public partial class Detail
 {
 
     private VirtualMachineDto.Detail? vm;
-    [Inject] public IVirtualMachineService vmService { get; set; } = default!;
+    [Inject] public IVirtualMachineService vmService { get; set; }
     [Parameter] public int ProductId { get; set; }
 
 

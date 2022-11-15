@@ -11,13 +11,21 @@ namespace Client.VirtualMachines
         [Inject] public ISidepanelService SidePanel { get; set; }
 
         [Inject] public IProjectService ProjectService { get; set; }
-
         private List<ProjectDto.Index> _projects;
-
+        private bool showVms = false;
 
         public void ExpandProject()
         {
-
+            
+            if (showVms)
+            {
+                showVms = false;
+            }
+            else
+            {
+                showVms = true;
+            }
+            
         }
 
         protected override async Task OnInitializedAsync()
