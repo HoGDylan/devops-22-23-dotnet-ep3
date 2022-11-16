@@ -15,13 +15,7 @@ else if (_projects.Count() == 0) {
                         <div class="card-title">@project.Id. @project.Name</div>
                     </div>
                 @if (Collapsed.ContainsKey(project.Id) && Collapsed[project.Id] == true)
-                {
-                    if (!_details.ContainsKey(project.Id))
-                    {
-                        //hier zou nog moeten gewacht worden
-                        @GetVirtualMachines(project.Id);
-                    }
-
+                {          
                     if(_details.ContainsKey(project.Id)){
                         if(_details[project.Id].VirtualMachines.Count() > 0){
                             <table>
@@ -61,16 +55,22 @@ else if (_projects.Count() == 0) {
     [Parameter]
     public Dictionary<int,bool> Collapsed { get; set; } = new Dictionary<int, bool>();
 
-    public void Toggle(int id) {
+    public async void Toggle(int id) {
+        bool check = false;
+
         if (!Collapsed.ContainsKey(id))
         {
+            check = true;
             Collapsed.Add(id, true);
         }
         else
         {
             Collapsed[id] = !Collapsed[id];
         }
-        
+
+        if(check){
+            await GetVirtualMachines(id);
+        }
         StateHasChanged();
     }
 

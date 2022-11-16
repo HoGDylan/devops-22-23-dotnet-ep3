@@ -18,7 +18,6 @@ namespace Client.VirtualMachines
 
         private Dictionary<int, ProjectDto.Detail> _details = new Dictionary<int, ProjectDto.Detail>();
 
-
         protected override async Task OnInitializedAsync()
         {
 
