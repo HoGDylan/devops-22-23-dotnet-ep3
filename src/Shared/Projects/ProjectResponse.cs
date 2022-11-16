@@ -1,4 +1,5 @@
-﻿using Shared.VirtualMachines;
+﻿using Domain.Users;
+using Shared.VirtualMachines;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Shared.Projects
         }
 
         public class Detail {
-            public ProjectDto.Detail Project { get; set; }        
+            public ProjectDto.Detail Project { get; set; }
         }
 
         public class Edit { 

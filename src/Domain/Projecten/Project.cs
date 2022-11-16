@@ -9,7 +9,7 @@ namespace Domain.Projecten
     public class Project : Entity 
     {
 
-        private readonly List<VirtualMachine> _vms = new(); //contains all VMS on a certain project | inclusive not approved.
+        private  List<VirtualMachine> _vms = new(); //contains all VMS on a certain project | inclusive not approved.
 
         private string _name;
         private Klant _klant;
@@ -18,8 +18,8 @@ namespace Domain.Projecten
 
         public int Id { get; set; }
         public String Name { get { return _name; } set {_name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
-        public Klant Klant { get { return _klant; } set { _klant = Guard.Against.Null(value, nameof(_vms)); } }
-        public List<VirtualMachine> VirtualMachines { get { return _vms; } }
+        public Klant Klant { get { return _klant; } set { _klant = Guard.Against.Null(value, nameof(_klant)); } }
+        public List<VirtualMachine> VirtualMachines { get { return _vms; } set { _vms = Guard.Against.Null(value, nameof(_vms)); } }
 
         public Project(string name) {
             this.Name = name;

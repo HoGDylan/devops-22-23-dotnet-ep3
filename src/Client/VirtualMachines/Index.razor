@@ -1,28 +1,92 @@
 ﻿@page "/virtualMachines"
 
-@if(_projects is null){
-    <p>Loading ...</p>
-}else{
-    <div class="vm-projectList">
-    @foreach (var project in _projects){
-        <div class="columns is-multiline">
-                <div class="card is-clickable w-100">
-                    <div class="card-content">
-                        <div class="content">
-                            <h1 class="title is-size-4">@project.Name</h1>
-                            <p>Id: @project.Id</p>
-                            <p>Klant: @project.Klant.Name</p>
-                            <button @onclick="() => ExpandProject()"  >Toon virtualmachines</button>
-                        </div>
-                        @if(showVms){
-                            <div>
-                                <VirtualMachineList ProjectId=project.Id />
-                            </div>
-                        }
-                    </div>
-                </div>
-        </div>
-    }
-    </div>
-                        
+
+@if (_projects is null)
+{
+    <p>Even geduld ...</p>
 }
+else if (_projects.Count() == 0) { 
+    <p>Je hebt geen projecten.</p>
+}else{
+    <div class="accordion" id="accordionVirtualMachines">
+        @foreach (var project in _projects){
+                <div class="card w-100 mb-3 (@Collapsed? '' : 'active')" @onclick="@(() => Toggle(project.Id))">
+                    <div class="card-header">
+                        <div class="card-title">@project.Id. @project.Name</div>
+                    </div>
+                @if (Collapsed.ContainsKey(project.Id) && Collapsed[project.Id] == true)
+                {
+                    if (!_details.ContainsKey(project.Id))
+                    {
+                        //hier zou nog moeten gewacht worden
+                        @GetVirtualMachines(project.Id);
+                    }
+
+                    if(_details.ContainsKey(project.Id)){
+                        if(_details[project.Id].VirtualMachines.Count() > 0){
+                            <table>
+                                <tr>
+                                    <th>VM Mode</th>
+                                    <th>VM Id</th>
+                                    <th>VM Naam</th>
+                                    <th>Klant naam</th>
+                                    <th>Klant Email</th>
+                                    <th>Klant Gsmnummer</th>
+                                </tr>
+                                @foreach (var vm in _details[project.Id].VirtualMachines)
+                                {
+                                    <tr>
+                                        <td>@vm.Mode - omzetten naar bolleke</td>
+                                        <td>@vm.Id</td>
+                                        <td>@vm.Name</td>
+                                        <td>@project.Klant.FirstName @project.Klant.Name</td>
+                                        <td>@project.Klant.Email</td>
+                                        <td>@project.Klant.PhoneNumber</td>
+                                    </tr>
+         
+                                }
+                            </table>
+                        }
+                    }
+                }    
+                </div>
+        }
+        </div>
+        }
+
+
+@code{
+
+
+    [Parameter]
+    public Dictionary<int,bool> Collapsed { get; set; } = new Dictionary<int, bool>();
+
+    public void Toggle(int id) {
+        if (!Collapsed.ContainsKey(id))
+        {
+            Collapsed.Add(id, true);
+        }
+        else
+        {
+            Collapsed[id] = !Collapsed[id];
+        }
+        
+        StateHasChanged();
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
