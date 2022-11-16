@@ -10,7 +10,7 @@ else if (_projects.Count() == 0) {
 }else{
     <div class="accordion" id="accordionVirtualMachines">
         @foreach (var project in _projects){
-                <div class="card w-100 mb-3 (@Collapsed? '' : 'active')" @onclick="@(() => Toggle(project.Id))">
+                <div class="card w-100 mb-3 is-clickable @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id]? "active-accordeon": "inactive-accordeon")" @onclick="@(() => Toggle(project.Id))">
                     <div class="card-header">
                         <div class="card-title">@project.Id. @project.Name</div>
                     </div>
