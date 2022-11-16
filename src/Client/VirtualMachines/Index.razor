@@ -10,36 +10,48 @@ else if (_projects.Count() == 0) {
 }else{
     <div class="accordion" id="accordionVirtualMachines">
         @foreach (var project in _projects){
-                <div class="card w-100 mb-3 is-clickable @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id]? "active-accordeon": "inactive-accordeon")" @onclick="@(() => Toggle(project.Id))">
+                <div class="card w-100 mb-3 is-clickable @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id]? "active-accordion": "inactive-accordion")" @onclick="@(() => Toggle(project.Id))">
                     <div class="card-header">
                         <div class="card-title">@project.Id. @project.Name</div>
                     </div>
-                @if (Collapsed.ContainsKey(project.Id) && Collapsed[project.Id] == true)
+                    @if(Loading.Contains(project.Id)){
+                        <div class="card-body">
+                            <p>Even geduld ...</p>
+                        </div>
+                    }
+        
+                 else if (Collapsed.ContainsKey(project.Id) && Collapsed[project.Id])
                 {          
                     if(_details.ContainsKey(project.Id)){
                         if(_details[project.Id].VirtualMachines.Count() > 0){
-                            <table>
-                                <tr>
-                                    <th>VM Mode</th>
-                                    <th>VM Id</th>
-                                    <th>VM Naam</th>
-                                    <th>Klant naam</th>
-                                    <th>Klant Email</th>
-                                    <th>Klant Gsmnummer</th>
-                                </tr>
-                                @foreach (var vm in _details[project.Id].VirtualMachines)
-                                {
+                            <div class="card-body">
+                                <table>
                                     <tr>
-                                        <td>@vm.Mode - omzetten naar bolleke</td>
-                                        <td>@vm.Id</td>
-                                        <td>@vm.Name</td>
-                                        <td>@project.Klant.FirstName @project.Klant.Name</td>
-                                        <td>@project.Klant.Email</td>
-                                        <td>@project.Klant.PhoneNumber</td>
+                                        <th>VM Mode</th>
+                                        <th>VM Id</th>
+                                        <th>VM Naam</th>
+                                        <th>Klant naam</th>
+                                        <th>Klant Email</th>
+                                        <th>Klant Gsmnummer</th>
                                     </tr>
+                                    @foreach (var vm in _details[project.Id].VirtualMachines)
+                                    {
+                                        <tr>
+                                            <td>@vm.Mode - omzetten naar bolleke</td>
+                                            <td>@vm.Id</td>
+                                            <td>@vm.Name</td>
+                                            <td>@project.Klant.FirstName @project.Klant.Name</td>
+                                            <td>@project.Klant.Email</td>
+                                            <td>@project.Klant.PhoneNumber</td>
+                                        </tr>
          
-                                }
-                            </table>
+                                    }
+                                </table>
+                            </div>
+                        }else{
+                            <div class="card-body">
+                                <p>/</p>
+                            </div>
                         }
                     }
                 }    
@@ -54,9 +66,13 @@ else if (_projects.Count() == 0) {
 
     [Parameter]
     public Dictionary<int,bool> Collapsed { get; set; } = new Dictionary<int, bool>();
+    //public Tuple<int, bool> Loading { get; set; } = new Tuple<int, bool>(-1, false);
+    public List<int> Loading { get; set; } = new();
+
 
     public async void Toggle(int id) {
         bool check = false;
+
 
         if (!Collapsed.ContainsKey(id))
         {
@@ -69,7 +85,11 @@ else if (_projects.Count() == 0) {
         }
 
         if(check){
+            //Loading = Tuple.Create(id, true);
+            Loading.Add(id);
             await GetVirtualMachines(id);
+            Loading.Remove(id);
+            //Loading = Tuple.Create(id, false);
         }
         StateHasChanged();
     }

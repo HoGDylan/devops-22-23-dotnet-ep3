@@ -73,7 +73,7 @@ namespace Services.Projects
 
             public async Task<ProjectResponse.Detail> GetDetailAsync(ProjectRequest.Detail request)
             {
-                await Task.Delay(100);
+                await Task.Delay(1000);
                 ProjectResponse.Detail response = new();
 
                 Project project = _projects.Single(e => e.Id == request.ProjectId);
