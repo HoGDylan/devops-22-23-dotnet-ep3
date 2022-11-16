@@ -1,4 +1,5 @@
 ﻿@page "/virtualMachines"
+@using Domain.VirtualMachines.VirtualMachine
 
 
 @if (_projects is null)
@@ -10,42 +11,43 @@ else if (_projects.Count() == 0) {
 }else{
     <div class="accordion" id="accordionVirtualMachines">
         @foreach (var project in _projects){
-                <div class="card w-100 mb-3 is-clickable @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id]? "active-accordion": "inactive-accordion")" @onclick="@(() => Toggle(project.Id))">
-                    <div class="card-header">
-                        <div class="card-title">@project.Id. @project.Name</div>
+                <div class="card w-100 mb-3 @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id]? "active-accordion": "inactive-accordion")">
+                <div class="card-header" @onclick="@(() => Toggle(project.Id))">
+                        <h3 class="card-title">@project.Id. @project.Name</h3>
                     </div>
                     @if(Loading.Contains(project.Id)){
                         <div class="card-body">
-                            <p>Even geduld ...</p>
+                            <p class="card-text">Even geduld ...</p>
                         </div>
                     }
-        
-                 else
-                {          
+
+                else if (Collapsed.ContainsKey(project.Id) && Collapsed[project.Id])
+                {
                     if(_details.ContainsKey(project.Id)){
                         if(_details[project.Id].VirtualMachines.Count() > 0){
-                            <div class="card-body">
+                            <div class="card-body table is-striped is-hoverable">
                                 <table>
-                                    <tr>
-                                        <th>VM Mode</th>
-                                        <th>VM Id</th>
-                                        <th>VM Naam</th>
-                                        <th>Klant naam</th>
-                                        <th>Klant Email</th>
-                                        <th>Klant Gsmnummer</th>
-                                    </tr>
-                                    @foreach (var vm in _details[project.Id].VirtualMachines)
-                                    {
+                                    <thead>
                                         <tr>
-                                            <td>@vm.Mode - omzetten naar bolleke</td>
-                                            <td>@vm.Id</td>
-                                            <td>@vm.Name</td>
-                                            <td>@project.Klant.FirstName @project.Klant.Name</td>
-                                            <td>@project.Klant.Email</td>
-                                            <td>@project.Klant.PhoneNumber</td>
+                                            <th>Status</th>
+                                            <th>Virtual Machine</th>
+                                            <th>Klant</th>
+                                            <th>Acties</th>
                                         </tr>
-         
-                                    }
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var vm in _details[project.Id].VirtualMachines)
+                                        {
+       
+                                            <tr>
+                                                <td><span class="@ParseMode(vm.Mode).Item1"></span>@ParseMode(vm.Mode).Item2</td>
+                                                <td>@vm.Name</td>
+                                                <td>@(project.Klant.FirstName + project.Klant.Name)</td>
+                                                <td><button>Details</button><button>Meer</button></td>
+                                            </tr>
+
+                                        }
+                                        </tbody>
                                 </table>
                             </div>
                         }else{
@@ -73,7 +75,7 @@ else if (_projects.Count() == 0) {
     public async void Toggle(int id) {
         bool check = false;
 
-
+        Console.WriteLine("yo");
         if (!Collapsed.ContainsKey(id))
         {
             check = true;
@@ -92,6 +94,24 @@ else if (_projects.Count() == 0) {
             //Loading = Tuple.Create(id, false);
         }
         StateHasChanged();
+    }
+
+    public Tuple<string, string> ParseMode(VirtualMachineMode mode){
+        switch(mode){
+            case VirtualMachineMode.STOPPED:
+                return Tuple.Create("dot is-red", "Gestopt");
+            case VirtualMachineMode.READY:
+                return Tuple.Create("dot is-blue", "Gereed");
+            case VirtualMachineMode.RUNNING:
+                return Tuple.Create("dot is-green", "Actief");
+            case VirtualMachineMode.WAITING_APPROVEMENT:
+                return Tuple.Create("dot is-grey", "Wachten op goedkeuring");
+            case VirtualMachineMode.PAUSED:
+                return Tuple.Create("dot is-yellow", "Gepauzeerd");
+
+            default:
+                throw new ArgumentException("received invalid virtualmachinemode: " + mode.ToString());
+        }
     }
 
 }
