@@ -13,6 +13,6 @@ namespace Domain.VirtualMachines.VirtualMachine
         RUNNING,
         PAUSED,
         STOPPED,
-        TERMINATED // == destroyed ?
+
     }
 };

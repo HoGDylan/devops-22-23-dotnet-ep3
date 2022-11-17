@@ -16,7 +16,7 @@ namespace Domain.Projecten
             int id = 1;
             CustomInstantiator(e => new Project($"Project: {e.Company.CompanyName()}"));
             RuleFor(x => x.Id, _ => id++);
-            RuleFor(x => x.VirtualMachines, _ => new VirtualMachineFaker().GenerateBetween(2,5));
+            RuleFor(x => x.VirtualMachines, _ => VirtualMachineFaker.Instance.GenerateBetween(2,5));
             RuleFor(x => x.Klant, _ => new UserFaker.Klant().Generate());
 
         }
