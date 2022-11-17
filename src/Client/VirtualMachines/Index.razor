@@ -1,28 +1,129 @@
 ﻿@page "/virtualMachines"
+@using Domain.VirtualMachines.VirtualMachine
 
-@if(_projects is null){
-    <p>Loading ...</p>
+
+@if (_projects is null)
+{
+    <p>Even geduld ...</p>
+}
+else if (_projects.Count() == 0) { 
+    <p>Je hebt geen projecten.</p>
 }else{
-    <div class="vm-projectList">
-    @foreach (var project in _projects){
-            <div class="columns is-multiline">
-                <div class="card is-clickable w-100 mb-2">
-                    <div class="card-content">
-                        <div class="content">
-                            <h1 class="title is-size-4">@project.Name</h1>
-                            <p>Id: @project.Id</p>
-                            <p>Klant: @project.Klant.Name</p>
-                            <button @onclick="() => ExpandProject()"  >Toon virtualmachines</button>
+    <h1 class="title is-3">Virtual Machines</h1>
+    
+    <div class="accordion"> <!--id="accordionVirtualMachines" weggenomen omdat css anders genegeerd wordt-->
+        @foreach (var project in _projects){
+            <div class="card w-100 mb-3 (@Collapsed? '' : 'active')" @onclick="@(() => Toggle(project.Id))">
+                <header class="card-header">
+                    <p class="card-header-title">@project.Id. @project.Name</p>
+                    <button class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                            <i class="oi @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id] ? "oi-chevron-bottom" : "oi-chevron-right")" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </header>
+                    @if(Loading.Contains(project.Id)){
+                        <div class="card-body">
+                            <p class="card-text">Even geduld ...</p>
                         </div>
-                        @if(showVms){
-                            <div>
-                                <VirtualMachineList ProjectId=project.Id />
+                    }
+
+                else if (Collapsed.ContainsKey(project.Id) && Collapsed[project.Id])
+                {
+                    if(_details.ContainsKey(project.Id)){
+                        if(_details[project.Id].VirtualMachines.Count() > 0){
+                            <div class="card-body table is-striped is-hoverable">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>Virtual Machine</th>
+                                            <th>Klant</th>
+                                            <th>Acties</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var vm in _details[project.Id].VirtualMachines)
+                                        {
+       
+                                            <tr>
+                                                <td><span class="@ParseMode(vm.Mode).Item1"></span>@ParseMode(vm.Mode).Item2</td>
+                                                <td>@vm.Name</td>
+                                                <td>@(project.Klant.FirstName + project.Klant.Name)</td>
+                                                <td><button>Details</button><button>Meer</button></td>
+                                            </tr>
+
+                                        }
+                                        </tbody>
+                                </table>
+                            </div>
+                        }else{
+                            <div class="card-body">
+                                <p>/</p>
                             </div>
                         }
-                    </div>
+                    }
+                }    
                 </div>
+        }
         </div>
+        }
+
+
+@code{
+    [Inject] public ISidepanelService Sidepanel { get; set; }
+
+    [Parameter]
+    public Dictionary<int,bool> Collapsed { get; set; } = new Dictionary<int, bool>();
+    //public Tuple<int, bool> Loading { get; set; } = new Tuple<int, bool>(-1, false);
+    public List<int> Loading { get; set; } = new();
+
+    private void ToggleFilterForm()
+        {
+            if (Sidepanel.IsOpen) Sidepanel.Close();
+            else Sidepanel.Open<Client.VirtualMachines.Components.VMFilter>("Virtual Machines", "Filter");
+        }
+
+    public async void Toggle(int id) {
+        bool check = false;
+
+        Console.WriteLine("yo");
+        if (!Collapsed.ContainsKey(id))
+        {
+            check = true;
+            Collapsed.Add(id, true);
+        }
+        else
+        {
+            Collapsed[id] = !Collapsed[id];
+        }
+
+        if(check){
+            //Loading = Tuple.Create(id, true);
+            Loading.Add(id);
+            await GetVirtualMachines(id);
+            Loading.Remove(id);
+            //Loading = Tuple.Create(id, false);
+        }
+        StateHasChanged();
     }
-    </div>
-                        
+    
+    public Tuple<string, string> ParseMode(VirtualMachineMode mode){
+        switch(mode){
+            case VirtualMachineMode.STOPPED:
+                return Tuple.Create("dot is-red", "Gestopt");
+            case VirtualMachineMode.READY:
+                return Tuple.Create("dot is-blue", "Gereed");
+            case VirtualMachineMode.RUNNING:
+                return Tuple.Create("dot is-green", "Actief");
+            case VirtualMachineMode.WAITING_APPROVEMENT:
+                return Tuple.Create("dot is-orange", "Wachten op goedkeuring");
+            case VirtualMachineMode.PAUSED:
+                return Tuple.Create("dot is-yellow", "Gepauzeerd");
+
+            default:
+                throw new ArgumentException("received invalid virtualmachinemode: " + mode.ToString());
+        }
+    }
+
 }

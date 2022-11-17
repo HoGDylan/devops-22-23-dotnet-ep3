@@ -1,6 +1,7 @@
 ﻿    using Domain.Common;
     using Domain.Projecten;
-    using Shared.Projects;
+using Domain.VirtualMachines.VirtualMachine;
+using Shared.Projects;
 using Shared.VirtualMachines;
 
 namespace Services.Projects
@@ -70,26 +71,16 @@ namespace Services.Projects
 
             public async Task<ProjectResponse.Detail> GetDetailAsync(ProjectRequest.Detail request)
             {
-                await Task.Delay(100);
+                await Task.Delay(1000);
                 ProjectResponse.Detail response = new();
 
+                Project project = _projects.Single(e => e.Id == request.ProjectId);
+                List<VirtualMachineDto.Index> vms = new();
+                project.VirtualMachines.ForEach(e => vms.Add(new VirtualMachineDto.Index() { Id = e.Id, Mode = e.Mode, Name = e.Name }));
 
-                response.Project = _projects.Select(e => {
+                response.Project = new ProjectDto.Detail() { Id = project.Id, Klant = project.Klant, VirtualMachines = vms };
 
-                    List<VirtualMachineDto.Index> vms = new();
-                    e.VirtualMachines.ForEach(e => vms.Add(new VirtualMachineDto.Index() { Id = e.Id, Mode = e.Mode, Name = e.Name }));
-
-
-                    return new ProjectDto.Detail
-                    {
-                        Id = e.Id,
-                        Klant = e.Klant,
-                        Name = e.Name,
-                        VirtualMachines = vms
-                    };
-
-                    
-                }).Single(e => e.Id == request.ProjectId);
+            
 
                 return response;
             }

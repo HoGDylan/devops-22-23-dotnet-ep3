@@ -9,6 +9,7 @@ namespace Shared.Projects
 {
     public interface IProjectService
     {
+
         Task<ProjectResponse.All> GetIndexAsync(ProjectRequest.All request); // can be used for searching on name 
         Task<ProjectResponse.Detail> GetDetailAsync(ProjectRequest.Detail request); // can be used to select a project and send ID as param
         Task DeleteAsync(ProjectRequest.Delete request);

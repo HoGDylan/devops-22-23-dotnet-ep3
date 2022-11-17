@@ -22,11 +22,20 @@ namespace Domain.VirtualMachines.VirtualMachine
         private readonly List<Hardware> _hardWareOptions = GenerateRandomHardware();
         private readonly List<Backup> _backupOptions = GenerateRandomBackups();
 
+        private static VirtualMachineFaker instance = null;
+    
+        public static VirtualMachineFaker Instance { get {
+                if (instance == null)
+                {
+                    instance = new VirtualMachineFaker();
+                }
+                return instance;
+            } }
+        
+
         public VirtualMachineFaker()
         {
             int id = 1;
-
-
 
             CustomInstantiator(e => new VirtualMachine(
                 e.Commerce.ProductName(),

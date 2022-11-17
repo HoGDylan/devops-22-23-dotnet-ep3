@@ -5,5 +5,5 @@ namespace Client.Users;
 
 public partial class index
 {
-    [Inject] public IUserService UserService;
+    //[Inject] public IUserService UserService;
 }
