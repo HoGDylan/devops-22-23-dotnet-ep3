@@ -1,0 +1,21 @@
+﻿using Domain.Users;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Shared.Users;
+
+public static class AdminUserDto
+{
+    public class Index
+    {
+        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string Password { get; set; }
+        public AdminRole Role { get; set; }
+        public bool Actief { get; set; }
+
+    }
+}

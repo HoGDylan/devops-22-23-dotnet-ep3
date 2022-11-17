@@ -10,15 +10,20 @@
 else if (_projects.Count() == 0)
 {
     <p>Je hebt geen projecten.</p>
-}
-else
-{
-    <div class="accordion" id="accordionVirtualMachines">
+}else{
+    <h1 class="title is-3">Virtual Machines</h1>
+    
+    <div class="accordion"> <!--id="accordionVirtualMachines" weggenomen omdat css anders genegeerd wordt-->
         @foreach (var project in _projects){
-                <div class="card w-100 mb-3 @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id]? "active-accordion": "inactive-accordion")">
-                <div class="card-header" @onclick="@(() => Toggle(project.Id))">
-                        <h3 class="card-title">@project.Id. @project.Name</h3>
-                    </div>
+            <div class="card w-100 mb-3 (@Collapsed? '' : 'active')" @onclick="@(() => Toggle(project.Id))">
+                <header class="card-header">
+                    <p class="card-header-title">@project.Id. @project.Name</p>
+                    <button class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                            <i class="oi @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id] ? "oi-chevron-bottom" : "oi-chevron-right")" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </header>
                     @if(Loading.Contains(project.Id)){
                         <div class="card-body">
                             <p class="card-text">Even geduld ...</p>
@@ -69,13 +74,18 @@ else
 }
 
 
-@code {
-
+@code{
+    [Inject] public ISidepanelService Sidepanel { get; set; }
 
     [Parameter]
     public Dictionary<int, bool> Collapsed { get; set; } = new Dictionary<int, bool>();
     public List<int> Loading { get; set; } = new();
 
+    private void ToggleFilterForm()
+        {
+            if (Sidepanel.IsOpen) Sidepanel.Close();
+            else Sidepanel.Open<Client.VirtualMachines.Components.VMFilter>("Virtual Machines", "Filter");
+        }
 
     public async void Toggle(int id)
     {
@@ -94,7 +104,7 @@ else
 
         StateHasChanged();
     }
-
+    
     public Tuple<string, string> ParseMode(VirtualMachineMode mode){
         switch(mode){
             case VirtualMachineMode.STOPPED:
@@ -104,7 +114,7 @@ else
             case VirtualMachineMode.RUNNING:
                 return Tuple.Create("dot is-green", "Actief");
             case VirtualMachineMode.WAITING_APPROVEMENT:
-                return Tuple.Create("dot is-grey", "Wachten op goedkeuring");
+                return Tuple.Create("dot is-orange", "Wachten op goedkeuring");
             case VirtualMachineMode.PAUSED:
                 return Tuple.Create("dot is-yellow", "Gepauzeerd");
 
@@ -113,18 +123,3 @@ else
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
