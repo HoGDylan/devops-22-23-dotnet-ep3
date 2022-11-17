@@ -1,7 +1,6 @@
-﻿namespace Shared.Users
-{
-    public interface IUserService
-    {
+﻿namespace Shared.Users;
 
-    }
+public interface IUserService
+{
+    //Task<UserResponse>
 }

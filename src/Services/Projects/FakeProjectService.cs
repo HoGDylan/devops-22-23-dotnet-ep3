@@ -15,7 +15,6 @@ namespace Services.Projects
                 _projects = projectFaker.Generate(15);
             }
 
-
             public async Task<ProjectResponse.Create> CreateAsync(ProjectRequest.Create request)
             {
                 await Task.Delay(100);
@@ -36,7 +35,6 @@ namespace Services.Projects
 
                 return response;
             }
-
 
 
             public async Task DeleteAsync(ProjectRequest.Delete request)

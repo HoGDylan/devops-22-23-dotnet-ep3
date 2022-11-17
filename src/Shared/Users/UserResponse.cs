@@ -1,6 +1,25 @@
-﻿namespace Shared.Users
+﻿namespace Shared.Users;
+
+public static class UserResponse
 {
-    public class UserResponse
+    public class AllKlantenIndex
     {
+        public List<KlantDto.Index> Klanten { get; set; } = new();
+        public int Total { get; set; }
+    }
+
+    public class DetailKlant
+    {
+        public KlantDto.Detail Klant { get; set; }
+    }
+
+    public class Edit
+    {
+        public int Id { get; set; }
+    }
+
+    public class Create
+    {
+        
     }
 }
