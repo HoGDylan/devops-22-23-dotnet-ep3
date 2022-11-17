@@ -12,8 +12,9 @@ namespace Client.VirtualMachines
 {
     public partial class Index 
     {
-        [Inject] public ISidepanelService SidePanel { get; set; }
         [Inject] public IProjectService ProjectService { get; set; }
+        [Inject] public ISidepanelService Sidepanel { get; set; }
+
 
         [Inject] NavigationManager Router { get; set; }
 
