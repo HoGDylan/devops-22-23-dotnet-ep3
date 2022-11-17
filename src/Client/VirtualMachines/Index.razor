@@ -11,19 +11,28 @@
 else if (_projects.Count() == 0) { 
     <p>Je hebt geen projecten.</p>
 }else{
-<div class="accordion" id="accordionVirtualMachines">
+    <h1 class="title is-3">Virtual Machines</h1>
+
+<div class="accordion">
     @foreach (var project in _projects)
     {
-        <div class="card w-100 mb-3 @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id]? "active-accordion": "inactive-accordion")">
-            <div class="card-header" @onclick="@(() => Toggle(project.Id))">
-                <h3 class="card-title">@project.Id. @project.Name</h3>
-            </div>
-            @if (Loading.Contains(project.Id))
-            {
-                <div class="card-body">
-                    <p class="card-text">Even geduld ...</p>
-                </div>
-            }
+        <div class="card w-100 mb-3 @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id]? "active": "")">
+            <header class="card-header" @onclick="@(() => Toggle(project.Id))">
+                    <p class="card-header-title">@project.Id. @project.Name</p>
+                    <button class="card-header-icon" aria-label="more options">
+                 <span class="icon">
+                   <i class="oi @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id] ? "fa-solid fa-chevron-down" : "fa-solid fa-chevron-right")" aria-hidden="true"></i>
+                 </span>
+                 </button>
+            </header>
+                @if (Loading.Contains(project.Id))
+                {
+                    <div class="card-body center">
+                        <span class="icon is-large">
+                            <i class="fas fa-lg fa-solid fa-spinner fa-spin"></i>
+                        </span>
+                    </div>
+                }
 
             else if (Collapsed.ContainsKey(project.Id) && Collapsed[project.Id])
             {
@@ -73,17 +82,19 @@ else if (_projects.Count() == 0) {
 
 @code{
 
-
-    [Parameter]
     public Dictionary<int,bool> Collapsed { get; set; } = new Dictionary<int, bool>();
     //public Tuple<int, bool> Loading { get; set; } = new Tuple<int, bool>(-1, false);
     public List<int> Loading { get; set; } = new();
 
+    private void ToggleFilterForm()
+    {
+        if (Sidepanel.IsOpen) Sidepanel.Close();
+        else Sidepanel.Open<Client.VirtualMachines.Components.VMFilter>("Virtual Machines", "Filter");
+    }
 
     public async void Toggle(int id) {
         bool check = false;
 
-        Console.WriteLine("yo");
         if (!Collapsed.ContainsKey(id))
         {
             check = true;
