@@ -22,7 +22,7 @@ public static class VirtualMachineDto
     {
         public Hardware Hardware { get; set; }
         public OperatingSystemEnum OperatingSystem { get; set; }
-        public Domain.VirtualMachines.Contract.VMContract Contract { get; set; }
+        public VMContract Contract { get; set; }
         public Backup BackUp { get; set; }
         public FysiekeServer? FysiekeServer { get; set; }
         public Project Project { get; set; }

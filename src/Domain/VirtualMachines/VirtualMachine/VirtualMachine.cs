@@ -17,7 +17,6 @@ namespace Domain.VirtualMachines.VirtualMachine
         private string _name;
         private OperatingSystemEnum _operatingSystem;
         private VirtualMachineMode _mode;
-        private Project _project;
         private FysiekeServer? _server;
 
         public string Name { get { return _name; } set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
@@ -27,7 +26,6 @@ namespace Domain.VirtualMachines.VirtualMachine
         public Backup BackUp { get; set; }
         public VMConnection? Connection { get; set; }
         public VMContract Contract { get { return _vmContract; } set { _vmContract = Guard.Against.Null(value, nameof(_vmContract)); } }
-        public Project Project { get { return _project; } set { _project = Guard.Against.Null(value, nameof(_project)); } }
         public FysiekeServer? FysiekeServer { get { return _server; } set { Guard.Against.Null(_server, nameof(_server)); } }
 
         public VirtualMachine(string n, OperatingSystemEnum os, Hardware h, Backup b)

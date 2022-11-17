@@ -18,7 +18,7 @@ namespace Domain.Server
 
             CustomInstantiator(e => new FysiekeServer("Server " + id, e.PickRandom(_hardWareOptions), e.Internet.DomainName() + "." + "hogent.be"));
             RuleFor(e => e.Id, _ => id++);
-            RuleFor(e => e.VirtualMachines, _ => VirtualMachineFaker.Instance.GenerateBetween(0, 20));
+            RuleFor(e => e.VirtualMachines, _ => VirtualMachineFaker.Instance.Generate(10));
             
         }
 

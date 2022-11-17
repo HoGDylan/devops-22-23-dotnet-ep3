@@ -8,6 +8,18 @@ namespace Domain.Projecten
     public class ProjectFaker : Faker<Project>
     {
 
+        private List<Project> _projects = new();
+
+
+        private static ProjectFaker? _instance;
+        
+        public static ProjectFaker Instance { get {
+        if (_instance == null)
+        {
+            _instance = new ProjectFaker();
+        }
+        return _instance;
+    } }
 
 
         public ProjectFaker()
@@ -16,10 +28,47 @@ namespace Domain.Projecten
             int id = 1;
             CustomInstantiator(e => new Project($"Project: {e.Company.CompanyName()}"));
             RuleFor(x => x.Id, _ => id++);
-            RuleFor(x => x.VirtualMachines, _ => VirtualMachineFaker.Instance.GenerateBetween(2,5));
+            RuleFor(x => x.VirtualMachines, _ => VirtualMachineFaker.Instance.Generate(5));
             RuleFor(x => x.Klant, _ => new UserFaker.Klant().Generate());
+
+
 
         }
 
+
+
+        public override List<Project> Generate(int count, string ruleSets = null)
+        {
+            List<Project> output = new();
+
+
+            
+
+            if(_projects.Count() < count)
+            {
+                output = base.Generate(count, ruleSets);
+                output.ForEach(e => _projects.Add(e));
+            }
+            else
+            {
+                output = _projects.GetRange(0, count - 1);
+            }
+
+            Console.WriteLine(output[0].Name);
+            return output;
+        }
+
+    
+
+    public  Project Generate()
+    {
+       if(_projects.Count() == 0)
+            {
+                _projects.Add(base.Generate());
+            }
+
+            return _projects[0];
     }
+
+}
 }
