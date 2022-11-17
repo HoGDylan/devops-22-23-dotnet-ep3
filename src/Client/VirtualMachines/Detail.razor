@@ -11,42 +11,12 @@ else{
             <br />
             <div>
                 <p>Naam: @Virtualmachine.Name</p>
-                <p>Operatingsystem: @Virtualmachine.OperatingSystem</p>
-                <p>Project: @Virtualmachine.Project.Name</p>
-                <p>Klant: @Virtualmachine</p>
-                <p>Conection: @Virtualmachine.FysiekeServer.ServerAddress</p>
+                <p>Operatingsystem: @Virtualmachine.OperatingSystem</p>   
+                <p>Klant: @Virtualmachine.Project.Klant</p>
                 <p>Mode: @Virtualmachine.Mode</p>
             </div>
             <div>
                 <a @onclick="NavigateToKlant">Naar Klant</a>
-            </div>
-        </div>
-        <div>
-            <h3>Contract</h3>
-            <br />
-            <div>
-                <p>
-                    Contractnummer : @Virtualmachine.Contract.Id
-                </p>
-                <p>
-                    Startdatum :@Virtualmachine.Contract.StartDate
-                </p>
-                <p>
-                    Einddatum :@Virtualmachine.Contract.EndDate
-                </p>
-            </div>
-        </div>
-        <div>
-            <h3>Hardware</h3>
-            <br />
-            <div>
-                <p>Memory: @Virtualmachine.Hardware.Memory</p>
-                <p>Storage: @Virtualmachine.Hardware.Storage</p>
-                <p>#Vcpu cores: @Virtualmachine.Hardware.Amount_vCPU</p>
-                <p>Server: @Virtualmachine.FysiekeServer</p>
-            </div>
-            <div>
-                <a @onclick="NavigateToReport">Naar Rapportage</a>
             </div>
         </div>
     </div>
