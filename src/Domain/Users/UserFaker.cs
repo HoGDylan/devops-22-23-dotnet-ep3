@@ -38,7 +38,6 @@ namespace Domain.Users
                    ));
                 }
 
-                //RuleFor(e => e.Projecten, new ProjectFaker().GenerateBetween(0, 5));
                 RuleFor(e => e.Id, _ => id++);
             }
         }

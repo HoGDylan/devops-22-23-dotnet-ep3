@@ -22,4 +22,10 @@ public static class UserResponse
     {
         
     }
+
+    public class AllAdminsIndex
+    {
+        public List<AdminUserDto.Index> Admins { get; set; } = new();
+        public int Total { get; set; }
+    }
 }

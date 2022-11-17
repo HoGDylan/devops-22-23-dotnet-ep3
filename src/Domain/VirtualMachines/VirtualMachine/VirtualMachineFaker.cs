@@ -2,18 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Bogus;
 using Domain.Common;
 using Domain.Projecten;
+using Domain.Server;
+using Domain.Users;
 using Domain.VirtualMachines.BackUp;
+using Domain.VirtualMachines.Contract;
 
 namespace Domain.VirtualMachines.VirtualMachine
 {
 
     public class VirtualMachineFaker : Faker<VirtualMachine>
     {
+
+        private List<VirtualMachine> _virtualMachines = new();
+
+
 
         private static readonly int[] _memoryOptions = { 1, 2, 4, 8, 16, 32, 64 };
         private static readonly int[] _storageOptions = { 30, 50, 75, 100, 150, 200, 250, 300, 500 };
@@ -36,6 +44,7 @@ namespace Domain.VirtualMachines.VirtualMachine
         public VirtualMachineFaker()
         {
             int id = 1;
+            int c_id = 1;
 
             CustomInstantiator(e => new VirtualMachine(
                 e.Commerce.ProductName(),
@@ -44,12 +53,13 @@ namespace Domain.VirtualMachines.VirtualMachine
                 e.PickRandom(_backupOptions)
                 ));
 
-            RuleFor(x => x.Id, _ => id++);
+            RuleFor(x => x.Id, _ => id);
             RuleFor(x => x.Connection, _ => new Random().Next(0, 2) % 1 == 0 ? new VMConnection("MOCK-FQDN", GetRandomIpAddress(), "MOCK-USER", "MOCK-PASWORD@aa123") : null);
             RuleFor(x => x.Mode, x => x.PickRandom<VirtualMachineMode>());
+            RuleFor(x => x.Contract, _ => new VMContract(c_id, id++, DateTime.Now.Subtract(TimeSpan.FromMinutes(RandomNumberGenerator.GetInt32(100000))), DateTime.Now.AddHours(RandomNumberGenerator.GetInt32(1000000))));
+            //RuleFor(x => x.FysiekeServer, _ => new FysiekeServer("Mock Server", _hardWareOptions[0], "mock-server_adres.hogent.be"));  geeft error
 
         }
-
 
         private static List<DateTime?> GenerateRandomDatesIncNull()
         {

@@ -1,6 +1,8 @@
 ﻿@page "/virtualMachines"
 @using Domain.VirtualMachines.VirtualMachine
 
+@attribute [Authorize]
+
 
 @if (_projects is null)
 {

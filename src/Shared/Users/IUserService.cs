@@ -2,5 +2,7 @@
 
 public interface IUserService
 {
-    //Task<UserResponse>
+    Task<UserResponse.AllKlantenIndex> GetAllKlanten(UserRequest.AllKlantenIndex request);
+    Task<UserResponse.DetailKlant> GetDetailKlant(UserRequest.DetailKlant request);
+    Task<UserResponse.AllAdminsIndex> GetAllAdminsIndex(UserRequest.AllAdminUsers request);
 }

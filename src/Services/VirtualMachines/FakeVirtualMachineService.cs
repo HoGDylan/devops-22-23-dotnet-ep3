@@ -14,9 +14,8 @@ namespace Services.VirtualMachines
 
         public FakeVirtualMachineService()
         {
-            var vmFaker = new VirtualMachineFaker();
 
-            _virtualMachines = vmFaker.Generate(25);
+            _virtualMachines = VirtualMachineFaker.Instance.Generate(25);
         }
 
         public async Task DeleteAsync(VirtualMachineRequest.Delete request)
@@ -41,7 +40,6 @@ namespace Services.VirtualMachines
                 Contract = e.Contract,
                 BackUp = e.BackUp,
                 FysiekeServer = e.FysiekeServer,
-                Project = e.Project,
                 VMConnection = e.Connection
             }).SingleOrDefault(f => f.Id == request.VirtualMachineId);
 
@@ -58,7 +56,7 @@ namespace Services.VirtualMachines
 
             if (!string.IsNullOrWhiteSpace(request.SearchTerm))
             {
-                query = query.Where(e =>  e.Name.Contains(request.SearchTerm, StringComparison.OrdinalIgnoreCase) ||  e.Project == null? false : e.Project.Name.Contains(request.SearchTerm, StringComparison.OrdinalIgnoreCase));
+                query = query.Where(e => e.Name.Contains(request.SearchTerm, StringComparison.OrdinalIgnoreCase));
             }
             if (request.Status is not null)
             {
@@ -125,11 +123,9 @@ namespace Services.VirtualMachines
             {
                 var name = model.Name;
                 var backup = model.Backup;
-                var project = model.Project;
 
                 vm.Name = name;
                 vm.BackUp = backup;
-                vm.Project = project;
 
                 response.VM_Id = vm.Id;
             }
@@ -151,7 +147,7 @@ namespace Services.VirtualMachines
 
             int id = _virtualMachines.Max(x => x.Id) + 1;
 
-            VirtualMachine vm = new VirtualMachine(name, os, hw, backup) { Id = id, Project = p, Contract = new VMContract(request.CustomerId, id, model.Start, model.End) };
+            VirtualMachine vm = new VirtualMachine(name, os, hw, backup) { Id = id, Contract = new VMContract(request.CustomerId, id, model.Start, model.End) };
 
             _virtualMachines.Add(vm);
 

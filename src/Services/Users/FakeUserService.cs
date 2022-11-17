@@ -18,7 +18,12 @@ namespace Services.Users
 
         }
 
-        public async Task<UserResponse.AllKlantenIndex> GetAllKlantenIndexAsync(UserRequest.AllKlantenIndex request)
+        public Task<UserResponse.AllAdminsIndex> GetAllAdminsIndex(UserRequest.AllAdminUsers request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<UserResponse.AllKlantenIndex> GetAllKlanten(UserRequest.AllKlantenIndex request)
         {
             await Task.Delay(100);
             UserResponse.AllKlantenIndex response = new();
@@ -35,7 +40,7 @@ namespace Services.Users
             return response;
         }
 
-        public async Task<UserResponse.DetailKlant> GetDetailKlantAsync(UserRequest.DetailKlant request)
+        public async Task<UserResponse.DetailKlant> GetDetailKlant(UserRequest.DetailKlant request)
         {
             await Task.Delay(100);
             List<ProjectDto.Index> projecten = new();
@@ -73,6 +78,23 @@ namespace Services.Users
             
             return response;
         }
+
+        /*public async Task<UserResponse.AllAdminsIndex> GetAllAdminsIndex(UserRequest.AllAdminUsers request)
+        {
+            await Task.Delay(100);
+            UserResponse.AllKlantenIndex response = new();
+            List<Administrator> admins;
+
+           response.Klanten = admins.Select(x => new AdminUserDto.Index
+            {
+                Id = x.Id,
+                FirstName = x.FirstName,
+                Name = x.Name,
+                Password = x.Password,
+                Role = x.Role,
+            })
+
+        }*/
 
         // create shit
     }

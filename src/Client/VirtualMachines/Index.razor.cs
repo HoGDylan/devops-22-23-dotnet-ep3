@@ -28,7 +28,6 @@ namespace Client.VirtualMachines
 
             var response = await ProjectService.GetIndexAsync(request);
             _projects = response.Projects;
-            
 
         }
 

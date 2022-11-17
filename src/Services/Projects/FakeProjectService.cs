@@ -12,11 +12,14 @@ namespace Services.Projects
 
             public FakeProjectService()
             {
-                var projectFaker = new ProjectFaker();
-                _projects = projectFaker.Generate(15);
-            }
+            Console.WriteLine("Generating projects ... ");
+            _projects = ProjectFaker.Instance.Generate(15);
+            Console.WriteLine("Projects generated");
 
-            public async Task<ProjectResponse.Create> CreateAsync(ProjectRequest.Create request)
+
+        }
+
+        public async Task<ProjectResponse.Create> CreateAsync(ProjectRequest.Create request)
             {
                 await Task.Delay(100);
 
