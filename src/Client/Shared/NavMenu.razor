@@ -7,24 +7,44 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <nav class="flex-column">
-        <div class="nav-item px-3">
+        <div class="nav-item px-2">
             <NavLink class="nav-link subtitle is-6" href="virtualmachines" Match="NavLinkMatch.All">
-                <span class="oi oi-monitor" aria-hidden="true"></span> Virtual Machines
+                <span class="icon-text">
+                    <span class="icon is-medium">
+                        <i class="fas fa-computer"></i>
+                    </span>
+                    <span class="navtab-name">Virtual Machines</span>
+                </span>
             </NavLink>
         </div>
-        <div class="nav-item px-3">
+        <div class="nav-item px-2">
             <NavLink class="nav-link subtitle is-6" href="klanten">
-                <span class="oi oi-people" aria-hidden="true"></span> Klanten
+                <span class="icon-text">
+                    <span class="icon is-medium">
+                        <i class="fas fa-users"></i>
+                    </span>
+                    <span class="navtab-name">Klanten</span>
+                </span>
             </NavLink>
         </div>
-        <div class="nav-item px-3">
+        <div class="nav-item px-2">
             <NavLink class="nav-link subtitle is-6" href="beheerders">
-                <span class="oi oi-key" aria-hidden="true"></span> Beheerders
+                <span class="icon-text">
+                    <span class="icon is-medium">
+                        <i class="fas fa-key"></i>
+                    </span>
+                    <span class="navtab-name">Beheerders</span>
+                </span>
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="virtualmachines/add">
-                <span class="oi oi-plus" aria-hidden="true"></span> VirtualMachines
+        <div class="nav-item px-2">
+            <NavLink class="nav-link subtitle is-6" href="virtualmachines/add">
+                <span class="icon-text">
+                    <span class="icon is-medium">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span class="navtab-name">Add Virtual Machine</span>
+                </span>
             </NavLink>
         </div>
     </nav>
