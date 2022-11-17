@@ -8,23 +8,17 @@ namespace Client.VirtualMachines.Components;
 partial class Algemeen
 {
     private ProjectDto.Index project;
-    private VirtualMachineDto.Detail vm;
-    [Parameter] public int Id { get; set; }
-    [Inject] VirtualMachineService VirtualMachineService { get; set; }
+    [Parameter] public VirtualMachineDto.Detail Virtualmachine { get; set; }
     [Inject] NavigationManager NavMan { get; set; }
 
-    protected override async Task OnParametersSetAsync()
+ /*   private async Task GetVirtualMachineAsync()
     {
-        await GetVirtualMachineAsync();
-    }
-    private async Task GetVirtualMachineAsync()
-    {
-        VirtualMachineRequest.GetDetail request = new() { VirtualMachineId = Id };
+        VirtualMachineRequest.GetDetail request = new() { VirtualMachineId = vm.Id };
         var response = await VirtualMachineService.GetDetailAsync(request);
         vm = response.VirtualMachine;
-    }
+    }*/
     private void NavigateToKlant()
     {
-        NavMan.NavigateTo($"/virtualmachine{Id}/Klant");
+        NavMan.NavigateTo($"/virtualmachine{Virtualmachine.Id}/Klant");
     }
 }

@@ -1,13 +1,12 @@
-﻿@page "/virtualmachine/{Id:int}"
-if(vm is null){
+﻿@page "/virtualmachines/{Id:int}"
+@if (Virtualmachine is null)
+{
     <p>Loading ...</p>
 }
 else{
-    <h1>@vm.Name</h1>
+    <h1>@Virtualmachine.Name</h1>
     <div class="details">
-        <Algemeen @Id=@vm.Id/>
-        <Hardware @Id=@vm.Id/>
-        <Contract @Id=@vm.Id/>
+        <Algemeen @Virtualmachine=Virtualmachine />
     </div>
 }
 

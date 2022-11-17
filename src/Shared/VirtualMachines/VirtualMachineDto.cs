@@ -25,13 +25,14 @@ public static class VirtualMachineDto
         public Domain.VirtualMachines.Contract.VMContract Contract { get; set; }
         public Backup BackUp { get; set; }
         public FysiekeServer? FysiekeServer { get; set; }
+        public Project Project { get; set; }
+        public VMConnection? VMConnection { get; set; }
     }
     public class Edit
     {
         public String Name { get; set; }
         public Backup Backup { get; set; }
         public Project Project { get; set; }
-
     }
     public class Mutate
     {

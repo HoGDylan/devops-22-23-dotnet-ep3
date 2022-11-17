@@ -40,8 +40,9 @@ namespace Services.VirtualMachines
                 OperatingSystem = e.OperatingSystem,
                 Contract = e.Contract,
                 BackUp = e.BackUp,
-                FysiekeServer = e.FysiekeServer
-
+                FysiekeServer = e.FysiekeServer,
+                Project = e.Project,
+                VMConnection = e.Connection
             }).SingleOrDefault(f => f.Id == request.VirtualMachineId);
 
             return response;
