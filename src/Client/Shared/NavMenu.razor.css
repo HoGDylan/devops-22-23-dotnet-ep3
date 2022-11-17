@@ -14,12 +14,8 @@
     color: #FFFFFF;
 }
 
-.oi {
-    width: 2rem;
-    font-size: 1.1rem;
-    vertical-align: text-top;
-    top: -2px;
-    margin-left: 1rem;
+.navtab-name {
+    padding-top: 0.25rem;
 }
 
 .nav-item {

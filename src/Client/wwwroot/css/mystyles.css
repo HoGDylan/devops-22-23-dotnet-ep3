@@ -5235,32 +5235,3 @@ a.navbar-item,
             padding: 18rem 6rem;
         }
 }
-
-/*zelf geschreven*/
-.dot {
-    height: 10px;
-    width: 10px;
-    background-color: #bbb;
-    border-radius: 50%;
-    margin-right: 5px;
-    display: inline-block;
-}
-
-    .dot.is-green {
-        background-color: limegreen;
-    }
-
-    .dot.is-orange {
-        background-color: orange; 
-    }
-
-    .dot.is-red {
-        background-color: red;
-    }
-
-    .dot.is-blue {
-        background-color: blue;
-    }
-    .dot.is-yellow{
-        background-color: #ffee08;
-    }
