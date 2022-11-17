@@ -19,6 +19,5 @@ public partial class Detail
         await base.OnInitializedAsync();
         var vm_request = await vmService.GetDetailAsync(request);
         Virtualmachine = vm_request.VirtualMachine;
-        Console.WriteLine(Virtualmachine.Hardware.ToString());
     }
 }
