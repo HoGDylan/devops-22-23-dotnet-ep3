@@ -49,13 +49,6 @@ namespace Client.VirtualMachines
                 };
 
 
-                Console.WriteLine("--DEBUG--");
-                Console.WriteLine("Received: " + resp.Id);
-                Console.WriteLine("vm count: " + resp.VirtualMachines.Count());
-                Console.WriteLine("customer name: " + resp.Klant.Name);
-
-
-
                 _details.Add(id, resp);
 
           
