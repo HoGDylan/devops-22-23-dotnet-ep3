@@ -8,11 +8,12 @@ using Shared.Projects;
 using Shared.Users;
 using Services.Users;
 using Services.Projects;
-using Shared.Authentication;
 using Shared.FysiekeServers;
 using Services.FysiekeServer;
 using Shared.VMContracts;
 using Services.VMContracts;
+using Microsoft.AspNetCore.Components.Authorization;
+using Client.Shared;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -22,9 +23,12 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
     builder.Services.AddSingleton<IVirtualMachineService, FakeVirtualMachineService>();
     builder.Services.AddSingleton<IUserService, FakeUserService>();
     builder.Services.AddSingleton<IProjectService, FakeProjectService>();
-    //builder.Services.AddSingleton<IAuthenticationService, >
     builder.Services.AddSingleton<IFysiekeServerService, FakeServerService>();
     builder.Services.AddSingleton<IVMContractService, FakeVMContractService>();
+
+//AUTHENTICATION
+    builder.Services.AddAuthorizationCore();
+    builder.Services.AddSingleton<AuthenticationStateProvider, FakeAuthenticationProvider>();
 
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });

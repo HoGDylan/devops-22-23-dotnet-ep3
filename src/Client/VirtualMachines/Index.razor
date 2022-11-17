@@ -5,25 +5,32 @@
 {
     <p>Even geduld ...</p>
 }
-else if (_projects.Count() == 0) { 
+else if (_projects.Count() == 0)
+{
     <p>Je hebt geen projecten.</p>
-}else{
+}
+else
+{
     <div class="accordion" id="accordionVirtualMachines">
-        @foreach (var project in _projects){
-                <div class="card w-100 mb-3 is-clickable @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id]? "active-accordion": "inactive-accordion")" @onclick="@(() => Toggle(project.Id))">
-                    <div class="card-header">
-                        <div class="card-title">@project.Id. @project.Name</div>
+        @foreach (var project in _projects)
+        {
+            <div class="card w-100 mb-3 is-clickable @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id]? "active-accordion": "inactive-accordion")" @onclick="@(() => Toggle(project.Id))">
+                <div class="card-header">
+                    <div class="card-title">@project.Id. @project.Name</div>
+                </div>
+                @if (Loading.Contains(project.Id))
+                {
+                    <div class="card-body">
+                        <p>Even geduld ...</p>
                     </div>
-                    @if(Loading.Contains(project.Id)){
-                        <div class="card-body">
-                            <p>Even geduld ...</p>
-                        </div>
-                    }
-        
-                 else
-                {          
-                    if(_details.ContainsKey(project.Id)){
-                        if(_details[project.Id].VirtualMachines.Count() > 0){
+                }
+
+                else
+                {
+                    if (_details.ContainsKey(project.Id))
+                    {
+                        if (_details[project.Id].VirtualMachines.Count() > 0)
+                        {
                             <div class="card-body">
                                 <table>
                                     <tr>
@@ -44,33 +51,36 @@ else if (_projects.Count() == 0) {
                                             <td>@project.Klant.Email</td>
                                             <td>@project.Klant.PhoneNumber</td>
                                         </tr>
-         
+
                                     }
                                 </table>
                             </div>
-                        }else{
+                        }
+                        else
+                        {
                             <div class="card-body">
                                 <p>/</p>
                             </div>
                         }
                     }
-                }    
-                </div>
+                }
+            </div>
         }
-        </div>
-        }
+    </div>
+}
 
 
-@code{
+@code {
 
 
     [Parameter]
-    public Dictionary<int,bool> Collapsed { get; set; } = new Dictionary<int, bool>();
+    public Dictionary<int, bool> Collapsed { get; set; } = new Dictionary<int, bool>();
     //public Tuple<int, bool> Loading { get; set; } = new Tuple<int, bool>(-1, false);
     public List<int> Loading { get; set; } = new();
 
 
-    public async void Toggle(int id) {
+    public async void Toggle(int id)
+    {
         bool check = false;
 
 
@@ -84,7 +94,8 @@ else if (_projects.Count() == 0) {
             Collapsed[id] = !Collapsed[id];
         }
 
-        if(check){
+        if (check)
+        {
             //Loading = Tuple.Create(id, true);
             Loading.Add(id);
             await GetVirtualMachines(id);
@@ -94,7 +105,7 @@ else if (_projects.Count() == 0) {
         StateHasChanged();
     }
 
-}
+                                }
 
 
 
