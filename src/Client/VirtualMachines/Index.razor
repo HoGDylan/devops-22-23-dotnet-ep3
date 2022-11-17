@@ -53,7 +53,7 @@ else if (_projects.Count() == 0)
                                             <tr>
                                                 <td><span class="@ParseMode(vm.Mode).Item1"></span>@ParseMode(vm.Mode).Item2</td>
                                                 <td>@vm.Name</td>
-                                                <td>@(project.Klant.FirstName + project.Klant.Name)</td>
+                                                <td>@(project.Klant.FirstName + " " + project.Klant.Name)</td>
                                                 <td><button @onclick="() => NavigateToVMDetails(vm.Id)">Details</button><button>Meer</button></td>
                                             </tr>
 
