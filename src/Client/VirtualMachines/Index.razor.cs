@@ -4,6 +4,8 @@ using Shared.Projects;
 using Client.VirtualMachines.Components;
 using Microsoft.AspNetCore.Components.Web;
 using JetBrains.Annotations;
+using System;
+using Microsoft.AspNetCore.Components.Routing;
 
 
 namespace Client.VirtualMachines
@@ -11,8 +13,9 @@ namespace Client.VirtualMachines
     public partial class Index 
     {
         [Inject] public ISidepanelService SidePanel { get; set; }
-
         [Inject] public IProjectService ProjectService { get; set; }
+
+        [Inject] NavigationManager Router { get; set; }
 
         private List<ProjectDto.Index> _projects;
 
@@ -55,7 +58,12 @@ namespace Client.VirtualMachines
 
                 _details.Add(id, resp);
 
-            }            
+          
+        }
+        public void NavigateToVMDetails(int id)
+        {
+            Router.NavigateTo("virtualmachines/" + id);
+        }
 
-        }   
+    }   
 }

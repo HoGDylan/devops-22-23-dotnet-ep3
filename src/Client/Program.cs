@@ -14,6 +14,7 @@ using Shared.VMContracts;
 using Services.VMContracts;
 using Microsoft.AspNetCore.Components.Authorization;
 using Client.Shared;
+using System.Security.Claims;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -27,8 +28,16 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
     builder.Services.AddSingleton<IVMContractService, FakeVMContractService>();
 
 //AUTHENTICATION
-    builder.Services.AddAuthorizationCore();
-    builder.Services.AddSingleton<AuthenticationStateProvider, FakeAuthenticationProvider>();
+    builder.Services.AddAuthorizationCore(options =>
+    {
+        options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin-Consultant", "Admin-Beheer"));
+        options.AddPolicy("BeheerOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin-Beheer"));
+
+    });
+// builder.Services.AddSingleton<AuthenticationStateProvider, FakeAuthenticationProvider>();
+    builder.Services.AddScoped<FakeAuthenticationProvider>();
+     builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<FakeAuthenticationProvider>());
+
 
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });

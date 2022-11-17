@@ -6,22 +6,24 @@ namespace Client.Shared
 {
     public class FakeAuthenticationProvider : AuthenticationStateProvider
     {
-        public static ClaimsPrincipal Anonymous => new(new ClaimsIdentity());
+        public static ClaimsPrincipal Anonymous => new(new ClaimsIdentity(new[] { 
+            new Claim(ClaimTypes.Name, "Guest"),
+        }));
         public static ClaimsPrincipal AdminConsultant => new(new ClaimsIdentity(new[]
         {
             new Claim(ClaimTypes.Name, "Fake Consultant Admin"),
-            new Claim(ClaimTypes.Email, "fake-adminCONSULT@gmail.com"),
-            new Claim(ClaimTypes.Role, "Admin-"+AdminRole.CONSULTEREN.ToString()),
+            new Claim(ClaimTypes.Email, "fake-consultant@gmail.com"),
+            new Claim(ClaimTypes.Role, "Admin-Consultant"),
         }, "Fake Authentication"));
 
-        public static ClaimsPrincipal AdminApproval => new(new ClaimsIdentity(new[]
+        public static ClaimsPrincipal AdminBeheer => new(new ClaimsIdentity(new[]
         {
-            new Claim(ClaimTypes.Name, "Fake Editor Admin"),
-            new Claim(ClaimTypes.Email, "fake-adminEDIT@gmail.com"),
-            new Claim(ClaimTypes.Role, "Admin-" + AdminRole.BEHEREN.ToString()),
+            new Claim(ClaimTypes.Name, "Fake Beheer Admin"),
+            new Claim(ClaimTypes.Email, "fake-beheer@gmail.com"),
+            new Claim(ClaimTypes.Role, "Admin-Beheer"),
         }, "Fake Authentication"));
 
-        public static ClaimsPrincipal Cutomer => new(new ClaimsIdentity(new[]
+        public static ClaimsPrincipal Customer => new(new ClaimsIdentity(new[]
 {
             new Claim(ClaimTypes.Name, "Fake Customer"),
             new Claim(ClaimTypes.Email, "fake-customer@gmail.com"),
@@ -29,11 +31,18 @@ namespace Client.Shared
         }, "Fake Authentication"));
 
 
+        public ClaimsPrincipal Current { get; set; } = Anonymous;
 
 
         public override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            return Task.FromResult(new AuthenticationState(Anonymous));
+            return Task.FromResult(new AuthenticationState(Current));
+        }
+
+        public void ChangeAuthenticationState(ClaimsPrincipal claims)
+        {
+            Current = claims;
+            NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         }
     }
 }

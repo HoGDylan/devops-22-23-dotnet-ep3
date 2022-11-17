@@ -1,6 +1,7 @@
 ﻿@page "/virtualMachines"
 @using Domain.VirtualMachines.VirtualMachine
 
+ @attribute [Authorize]
 
 @if (_projects is null)
 {
@@ -46,7 +47,7 @@ else
                                                 <td><span class="@ParseMode(vm.Mode).Item1"></span>@ParseMode(vm.Mode).Item2</td>
                                                 <td>@vm.Name</td>
                                                 <td>@(project.Klant.FirstName + project.Klant.Name)</td>
-                                                <td><button>Details</button><button>Meer</button></td>
+                                                <td><button @onclick="() => NavigateToVMDetails(vm.Id)">Details</button><button>Meer</button></td>
                                             </tr>
 
                                         }
@@ -73,33 +74,24 @@ else
 
     [Parameter]
     public Dictionary<int, bool> Collapsed { get; set; } = new Dictionary<int, bool>();
-    //public Tuple<int, bool> Loading { get; set; } = new Tuple<int, bool>(-1, false);
     public List<int> Loading { get; set; } = new();
 
 
     public async void Toggle(int id)
     {
-        bool check = false;
 
-        Console.WriteLine("yo");
         if (!Collapsed.ContainsKey(id))
         {
-            check = true;
+            Loading.Add(id);
             Collapsed.Add(id, true);
+            await GetVirtualMachines(id);
+            Loading.Remove(id);
         }
         else
         {
             Collapsed[id] = !Collapsed[id];
         }
 
-        if (check)
-        {
-            //Loading = Tuple.Create(id, true);
-            Loading.Add(id);
-            await GetVirtualMachines(id);
-            Loading.Remove(id);
-            //Loading = Tuple.Create(id, false);
-        }
         StateHasChanged();
     }
 
@@ -120,7 +112,6 @@ else
                 throw new ArgumentException("received invalid virtualmachinemode: " + mode.ToString());
         }
     }
-
 }
 
 
