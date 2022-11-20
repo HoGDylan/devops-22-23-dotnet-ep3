@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using Domain.Common;
 using Domain.Projecten;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,14 @@ namespace Domain.Users
     {
 
 
-        private Gebruiker? _contactPs;
-        private Gebruiker? _contactPs2;
+        private ContactDetails? _contactPs;
+        private ContactDetails? _contactPs2;
         private List<Project> _projecten = new();
 
 
 
-        public Gebruiker ContactPersoon { get { return _contactPs; } set { _contactPs=  Guard.Against.Null(value, nameof(_contactPs)); } }
-        public Gebruiker ContactPersoonReserv { get { return _contactPs2; } set {_contactPs2 =  Guard.Against.Null(value, nameof(_contactPs2)); } }
+        public ContactDetails? ContactPersoon { get { return _contactPs; } set { _contactPs= Guard.Against.Null(value, nameof(_contactPs)); } }
+        public ContactDetails? ContactPersoonReserv { get { return _contactPs2; } set {_contactPs2 = Guard.Against.Null(value, nameof(_contactPs2)); } }
         public List<Project> Projecten { get { return _projecten; } }
 
 

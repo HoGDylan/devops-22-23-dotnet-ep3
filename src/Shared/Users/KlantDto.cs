@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Common;
 using Domain.Users;
 using Shared.Projects;
 using System;
@@ -26,7 +27,7 @@ public static class KlantDto
         public string? Bedrijf { get; set; }
         public Course? Opleiding { get; set; }
         public List<ProjectDto.Index> Projects { get; set; }
-        public Gebruiker? contactPersoon { get; set; }
-        public Gebruiker? ReserveContactPersoon { get; set; }
+        public ContactDetails? contactPersoon { get; set; }
+        public ContactDetails? ReserveContactPersoon { get; set; }
     }
 }
