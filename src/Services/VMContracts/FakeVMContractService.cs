@@ -10,7 +10,7 @@ namespace Services.VMContracts
 
         public FakeVMContractService()
         {
-            _contracts = new VMContractFaker().Generate(50);
+            _contracts = VMContractFaker.Instance.Generate(100);
 
         }
 

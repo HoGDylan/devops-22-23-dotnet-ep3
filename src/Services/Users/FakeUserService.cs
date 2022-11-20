@@ -75,7 +75,7 @@ namespace Services.Users
                 ExterneKlant kE = (ExterneKlant)k;
                 kdto.Bedrijf = kE.Bedrijfsnaam;
             }
-            
+            response.Klant = kdto;
             return response;
         }
 

@@ -12,6 +12,7 @@ using Domain.Server;
 using Domain.Users;
 using Domain.VirtualMachines.BackUp;
 using Domain.VirtualMachines.Contract;
+using Shared.Utility;
 
 namespace Domain.VirtualMachines.VirtualMachine
 {
@@ -19,7 +20,7 @@ namespace Domain.VirtualMachines.VirtualMachine
     public class VirtualMachineFaker : Faker<VirtualMachine>
     {
 
-        private List<VirtualMachine> _virtualMachines = new();
+
 
 
 
@@ -29,6 +30,11 @@ namespace Domain.VirtualMachines.VirtualMachine
         //private readonly IEnumerable<DateTime?> _dateOptions = GenerateRandomDatesIncNull();
         private readonly List<Hardware> _hardWareOptions = GenerateRandomHardware();
         private readonly List<Backup> _backupOptions = GenerateRandomBackups();
+
+
+
+        private List<VirtualMachine> _virtualMachines = new();
+
 
         private static VirtualMachineFaker instance = null;
     
@@ -44,7 +50,6 @@ namespace Domain.VirtualMachines.VirtualMachine
         public VirtualMachineFaker()
         {
             int id = 1;
-            int c_id = 1;
 
             CustomInstantiator(e => new VirtualMachine(
                 e.Commerce.ProductName(),
@@ -53,10 +58,10 @@ namespace Domain.VirtualMachines.VirtualMachine
                 e.PickRandom(_backupOptions)
                 ));
 
-            RuleFor(x => x.Id, _ => id);
-            RuleFor(x => x.Connection, _ => new Random().Next(0, 2) % 1 == 0 ? new VMConnection("MOCK-FQDN", GetRandomIpAddress(), "MOCK-USER", "MOCK-PASWORD@aa123") : null);
+            RuleFor(x => x.Id, _ => id++);
+            RuleFor(x => x.Connection, _ => new Random().Next(0, 2) % 1 == 0 ? new VMConnection("MOCK-FQDN", GetRandomIpAddress(), "MOCK-USER", PasswordGenerator.Generate(20, 3, 3, 3, 3)) : null);
             RuleFor(x => x.Mode, x => x.PickRandom<VirtualMachineMode>());
-            RuleFor(x => x.Contract, _ => new VMContract(c_id, id++, DateTime.Now.Subtract(TimeSpan.FromMinutes(RandomNumberGenerator.GetInt32(100000))), DateTime.Now.AddHours(RandomNumberGenerator.GetInt32(1000000))));
+            RuleFor(x => x.Contract, _ => VMContractFaker.Instance.GenerateOne());
             //RuleFor(x => x.FysiekeServer, _ => new FysiekeServer("Mock Server", _hardWareOptions[0], "mock-server_adres.hogent.be"));  geeft error
 
         }
@@ -65,28 +70,25 @@ namespace Domain.VirtualMachines.VirtualMachine
         public override List<VirtualMachine> Generate(int count, string ruleSets = null)
         {
             List<VirtualMachine> output = new();
-            if (_virtualMachines.Count == 0)
+            if (_virtualMachines.Count() == 0)
             {
-                _virtualMachines =  base.Generate(count, ruleSets);
+                _virtualMachines = base.Generate(count, ruleSets);
                 output = _virtualMachines;
             }
-            else if(_virtualMachines.Count < count)
+            else if (_virtualMachines.Count < count)
             {
                 output = base.Generate(count - _virtualMachines.Count());
                 output.ForEach(e => _virtualMachines.Add(e));
                 output = _virtualMachines.GetRange(0, count);
-
             }
             else
             {
+     
                 output = _virtualMachines.GetRange(0, count);
 
             }
             return output;
         }
-
-
-
 
 
         private static List<DateTime?> GenerateRandomDatesIncNull()
@@ -153,5 +155,8 @@ namespace Domain.VirtualMachines.VirtualMachine
 
             return new IPAddress(data);
         }
+
+
+
     }
 }

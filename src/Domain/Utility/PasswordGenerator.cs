@@ -13,7 +13,7 @@ namespace Shared.Utility
             string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string lower = upper.ToLower();
             string numbers = "0123456789";
-            string symbols = "!,./@#$%^&*_-=+";
+            string symbols = "?=.*?[#?!@$%^&*-]";
 
             string all = upper + lower + numbers + symbols;
 

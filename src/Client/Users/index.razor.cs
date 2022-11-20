@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Shared.Users;
 
 namespace Client.Users;
@@ -16,7 +17,10 @@ public partial class Index
         var response = await UserService.GetAllKlanten(request);
         Klanten = response.Klanten;
     }
-
+    private void NavToDetail(int id)
+    {
+        NavigationManager.NavigateTo($"klant/{id}");
+    }
     public void Toast()
     {
         

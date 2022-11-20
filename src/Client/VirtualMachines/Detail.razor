@@ -1,29 +1,88 @@
-﻿@page "/virtualmachines/{Id:int}"
+﻿@page "/virtualmachine/{Id:int}"
 @attribute [Authorize]
+
 
 @if (!Initialized)
 {
-    <p>Even geduld ...</p>
-}else if(Virtualmachine is null){
-    <p>An error has happened</p>
+    <p>Even geduld...</p>
 }
-else{
-    <h1>@Virtualmachine.Name</h1>
-    <div class="details">
-        <div>
-            <h3>Algemeen</h3>
-            <br />
-            <div>
-                <p>Naam: @Virtualmachine.Name</p>
-                <p>Operatingsystem: @Virtualmachine.OperatingSystem</p>   
-                <p>Mode: @Virtualmachine.Mode</p>
+else if (Virtualmachine.Id == -1)
+{
+    <p>Je hebt een verkeerde Id meegegeven. Of deze VM werd niet teruggevonden (error).</p>
+}
+else
+{
+    <h1>Detailpagina</h1>
+    <div class="columns is-5-desktop-only is-3-mobile vm-detail-container">
+        <div class="column is-one-third">
+            <div class="card">
+                <h3 class="card-title">Algemeen</h3>
+                <div class="card-body">
+                    <p>ID: @Virtualmachine.Id</p>
+                    <p>Naam: @Virtualmachine.Name</p>
+                    <p>Operating System: @Virtualmachine.OperatingSystem.ToString().ToLowerInvariant()</p>
+                    <p>Status: @Virtualmachine.Mode.ToString().ToLower()</p>
+                </div>
+            </div>  
+        </div>
+        <div class="column is-one-third">
+            <div class="card">
+                <h3 class="card-title">Back Up</h3>
+                <div class="card-body">
+                    <p>Backup Type: @Virtualmachine.BackUp.Type.ToString().ToLower()</p>
+                    <p>Laatste Back up: @Virtualmachine.BackUp.LastBackup.ToString()</p>
+                </div>
             </div>
-            <div>
-                <a @onclick="NavigateToKlant">Naar Klant</a>
+        </div>
+        <div class="column is-one-third">
+            <div class="card">
+                <h3 class="card-title">VM Periode</h3>
+                <div class="card-body">
+                    <p>ID: @Virtualmachine.Contract.Id</p>
+                    <p>Datum start: @Virtualmachine.Contract.StartDate.ToString()</p>
+                    <p>Datum einde: @Virtualmachine.Contract.EndDate.ToString()</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    <div class="columns is-5-desktop-only is-3-mobile vm-detail-container">
+        <div class="column is-one-third">
+            <div class="card">
+                <h3 class="card-title">Hardware</h3>
+                <div class="card-body">
+                    <p>Memory: @(Virtualmachine.Hardware.Memory > 1000 ? (Virtualmachine.Hardware.Memory / 1000.0).ToString() + " GB" : Virtualmachine.Hardware.Memory +  " MB") </p>
+                    <p>Aantal Cores: @Virtualmachine.Hardware.Amount_vCPU</p>
+                    <p>Storage: @(Virtualmachine.Hardware.Storage > 1000 ? (Virtualmachine.Hardware.Storage / 1000.0).ToString() + " GB" : Virtualmachine.Hardware.Storage + " MB")</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-one-third">
+            <div class="card">
+                <h3 class="card-title">Connectie</h3>
+                <div class="card-body">
+                    @if (Virtualmachine.VMConnection is null)
+                    {
+                        <p>Wachtend op goedkeuring.</p>
+                    }
+                    else
+                    {
+                        <p>Server Adres: @Virtualmachine.VMConnection.FQDN</p>
+                        <p>IP-adress: @Virtualmachine.VMConnection.Hostname</p>
+                        <p>Username: @Virtualmachine.VMConnection.Username</p>
+                        <p>Wachtwoord: @Virtualmachine.VMConnection.Password</p>
+                    }
+                </div>
             </div>
         </div>
     </div>
-}
+
+        <AuthorizeView Policy="AdminOnly">
+            <div>
+                <a @onclick="NavigateToKlant">Naar Klant</a>
+            </div>
+        </AuthorizeView>
 
 
 
+ }
