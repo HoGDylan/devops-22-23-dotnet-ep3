@@ -4,7 +4,8 @@ using Shared.Users;
 namespace Client.Users;
 
 public partial class Details
-{
+{   
+    public bool Edit = false;
     public bool Intern = false;
     private KlantDto.Detail Klant;
     [Parameter] public int Id { get; set; }
@@ -27,5 +28,10 @@ public partial class Details
             Intern = true;
         }
         Console.WriteLine(Klant.Projects.Count()==0);
+    }
+
+    private void ToggleEdit()
+    {
+        Edit = !Edit;
     }
 }

@@ -1,21 +1,24 @@
 ﻿@page "/klant/{Id:int}"
 @using Client.Users.Components
-<h1>Details @Klant.FirstName @Klant.Name</h1
+<h1>Details @Klant.FirstName @Klant.Name</h1>
 
 <div>
    <div class="ml-4">
-        <h2 class="mb-2">Algemene info</h2>
-            <div class="ml-4">
-            @if(Intern){
-               <h3 class="mb-2 mt-0">Interne Klant</h3>
-            }
-            else{
-                <h3 class="mb-2 mt-0">Externe Klant</h3>
-            }
+        <h2 class="mb-2">Algemene info</h2> 
+        <div class="ml-4">
+        <button class="btn btn-primary" type="button" onclick="@ToggleEdit">
+            Klant bewerken
+         </button>  
+        @if(Intern){
+            <h3 class="mb-2 mt-0">Interne Klant</h3>
+        }
+        else{
+            <h3 class="mb-2 mt-0">Externe Klant</h3>
+        }
+        @if(!Edit)
+        {
             <div class="ml-8">
                 <div>
-                    <label>Voornaam :</label>
-                    <input />
                     <p> @Klant.FirstName</p>
                 </div>
                 <div>
@@ -38,7 +41,10 @@
                 }
                 </div>
             </div>
-            </div>
-            <Edit Id="@Id"/>
+            }
+            else{
+                <Edit klant="@Klant"/>
+            }
+        </div>
     </div>
 </div>

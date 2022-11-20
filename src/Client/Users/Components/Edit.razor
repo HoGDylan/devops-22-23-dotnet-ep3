@@ -1,35 +1,22 @@
 ﻿<EditForm Model="@model">
     <FluentValidationValidator />
     <ValidationSummary />
-
-    <div class="field">
-        <label class="label">Voornaam:</label>
-        <div class="control">
-            <InputText class="input" @bind-Value="model.FirstName" />
+        <div>
+            <label class="label">Voornaam: </label>
+            <InputText class="input" @bind-Value="@klant.FirstName" />
         </div>
-    </div>
-
-    <div class="field">
-        <label class="label">Naam:</label>
-        <div class="control">
-            <InputText class="textarea" @bind-Value="model.Name" />
+        <div>
+            <label class="label">Naam: </label>
+        <InputText class="input" @bind-Value="@klant.Name" />
         </div>
-    </div>
-
-    <div class="field">
-        <label class="label">Prijs</label>
         <div class="control">
-            <InputText class="input" @bind-Value="model.PhoneNumber" />
+            <label class="label">Email: </label>
+            <InputText class="input" @bind-Value="@klant.Email" />
         </div>
-    </div>
-
-    <div class="field">
-        <label class="label">Categorie</label>
         <div class="control">
-            <InputText class="input" @bind-Value="model.Email" />
+            <label class="label">Gms-nummer: </label>
+            <InputText class="input" @bind-Value="@klant.PhoneNumber" />
         </div>
-    </div>
-
    @* <div class="field">
         <div class="control">
             <label class="checkbox">
