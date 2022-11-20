@@ -55,7 +55,7 @@ namespace Client.VirtualMachines
         }
         public void NavigateToVMDetails(int id)
         {
-            Router.NavigateTo("virtualmachines/" + id);
+            Router.NavigateTo("virtualmachine/" + id);
         }
 
     }   

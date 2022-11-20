@@ -10,11 +10,14 @@ namespace Domain.VirtualMachines.Contract
 {
     public class VMContractFaker : Faker<VMContract>
     {
+        private static int id = 1;
+
 
         public VMContractFaker()
         {
-
-            CustomInstantiator(e => new VMContract(e.Random.Int(1, 30), e.Random.Int(1, 30), new DateTime(1650000000000 + new Random().NextInt64(15000000000)), new DateTime().AddDays(new Random().NextDouble() * 1000))); 
+            CustomInstantiator(e => new VMContract(id, id, DateTime.Now.Subtract(TimeSpan.FromDays(RandomNumberGenerator.GetInt32(300))), DateTime.Now.AddDays(RandomNumberGenerator.GetInt32(200))));
+            RuleFor(e => e.Id, _ => id++);
+        
         }
     }
 }

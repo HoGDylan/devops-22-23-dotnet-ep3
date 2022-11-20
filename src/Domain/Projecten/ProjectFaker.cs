@@ -12,14 +12,18 @@ namespace Domain.Projecten
 
 
         private static ProjectFaker? _instance;
-        
-        public static ProjectFaker Instance { get {
-        if (_instance == null)
+
+        public static ProjectFaker Instance
         {
-            _instance = new ProjectFaker();
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new ProjectFaker();
+                }
+                return _instance;
+            }
         }
-        return _instance;
-    } }
 
 
         public ProjectFaker()
@@ -42,9 +46,9 @@ namespace Domain.Projecten
             List<Project> output = new();
 
 
-            
 
-            if(_projects.Count() < count)
+
+            if (_projects.Count() < count)
             {
                 output = base.Generate(count, ruleSets);
                 output.ForEach(e => _projects.Add(e));
@@ -54,21 +58,8 @@ namespace Domain.Projecten
                 output = _projects.GetRange(0, count - 1);
             }
 
-            Console.WriteLine(output[0].Name);
             return output;
         }
 
-    
-
-    public  Project Generate()
-    {
-       if(_projects.Count() == 0)
-            {
-                _projects.Add(base.Generate());
-            }
-
-            return _projects[0];
     }
-
-}
 }
