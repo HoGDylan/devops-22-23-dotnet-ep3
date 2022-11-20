@@ -13,8 +13,8 @@ else if (Virtualmachine.Id == -1)
 else
 {
     <h1>Detailpagina</h1>
-    <div class="columns is-5-desktop-only is-3-mobile vm-detail-container">
-        <div class="column is-one-third">
+    <div class="columns is-desktop is-multiline">
+        <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
                 <h3 class="card-title">Algemeen</h3>
                 <div class="card-body">
@@ -25,7 +25,7 @@ else
                 </div>
             </div>  
         </div>
-        <div class="column is-one-third">
+        <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
                 <h3 class="card-title">Back Up</h3>
                 <div class="card-body">
@@ -34,7 +34,7 @@ else
                 </div>
             </div>
         </div>
-        <div class="column is-one-third">
+        <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
                 <h3 class="card-title">VM Periode</h3>
                 <div class="card-body">
@@ -44,9 +44,8 @@ else
                 </div>
             </div>
         </div>
-        </div>
-    <div class="columns is-5-desktop-only is-3-mobile vm-detail-container">
-        <div class="column is-one-third">
+
+        <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
                 <h3 class="card-title">Hardware</h3>
                 <div class="card-body">
@@ -56,8 +55,7 @@ else
                 </div>
             </div>
         </div>
-
-        <div class="column is-one-third">
+        <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
                 <h3 class="card-title">Connectie</h3>
                 <div class="card-body">
@@ -75,8 +73,7 @@ else
                 </div>
             </div>
         </div>
-    </div>
-
+        </div>
         <AuthorizeView Policy="AdminOnly">
             <div>
                 <a @onclick="NavigateToKlant">Naar Klant</a>
