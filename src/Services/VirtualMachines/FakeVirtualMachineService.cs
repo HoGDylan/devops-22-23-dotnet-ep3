@@ -14,7 +14,6 @@ namespace Services.VirtualMachines
 
         public FakeVirtualMachineService()
         {
-
             _virtualMachines = VirtualMachineFaker.Instance.Generate(25);
         }
 
@@ -30,21 +29,36 @@ namespace Services.VirtualMachines
             await Task.Delay(100);
             VirtualMachineResponse.GetDetail response = new();
 
-            response.VirtualMachine = _virtualMachines.Select(e => new VirtualMachineDto.Detail
+            Console.WriteLine("Incoming ID: " + request.VirtualMachineId);
+            Console.WriteLine("Found VM: " + (_virtualMachines.Count(e => e.Id == request.VirtualMachineId) == 1).ToString());
+            Console.WriteLine("Total VMs:" + _virtualMachines.Count());
+
+            VirtualMachine vm = _virtualMachines.Single(x => x.Id == request.VirtualMachineId);
+
+            if (vm is not null)
             {
-                Id = e.Id,
-                Name = e.Name,
-                Mode = e.Mode,
-                Hardware = e.Hardware,
-                OperatingSystem = e.OperatingSystem,
-                Contract = e.Contract,
-                BackUp = e.BackUp,
-                FysiekeServer = e.FysiekeServer,
-                VMConnection = e.Connection
-            }).SingleOrDefault(f => f.Id == request.VirtualMachineId);
+                response.VirtualMachine = new VirtualMachineDto.Detail
+                {
+                    Id = vm.Id,
+                    BackUp = vm.BackUp,
+                    Contract = vm.Contract,
+                    FysiekeServer = vm.FysiekeServer,
+                    Hardware = vm.Hardware,
+                    Mode = vm.Mode,
+                    Name = vm.Name,
+                    OperatingSystem = vm.OperatingSystem,
+                    VMConnection = vm.Connection
+                };
 
+            }
+            else
+            {
+                response.VirtualMachine = new VirtualMachineDto.Detail
+                {
+                    Id = request.VirtualMachineId
+                };
+            }
             return response;
-
         }
 
         public async Task<VirtualMachineResponse.GetIndex> GetIndexAsync(VirtualMachineRequest.GetIndex request)

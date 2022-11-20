@@ -31,7 +31,7 @@ namespace Client.Shared
         }, "Fake Authentication"));
 
 
-        public ClaimsPrincipal Current { get; set; } = Anonymous;
+        public ClaimsPrincipal Current { get; set; } = AdminBeheer;
 
 
         public override Task<AuthenticationState> GetAuthenticationStateAsync()

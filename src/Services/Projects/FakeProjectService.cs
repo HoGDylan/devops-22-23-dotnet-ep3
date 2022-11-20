@@ -12,9 +12,7 @@ namespace Services.Projects
 
             public FakeProjectService()
             {
-            Console.WriteLine("Generating projects ... ");
             _projects = ProjectFaker.Instance.Generate(15);
-            Console.WriteLine("Projects generated");
 
 
         }

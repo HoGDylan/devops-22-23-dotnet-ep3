@@ -61,6 +61,34 @@ namespace Domain.VirtualMachines.VirtualMachine
 
         }
 
+
+        public override List<VirtualMachine> Generate(int count, string ruleSets = null)
+        {
+            List<VirtualMachine> output = new();
+            if (_virtualMachines.Count == 0)
+            {
+                _virtualMachines =  base.Generate(count, ruleSets);
+                output = _virtualMachines;
+            }
+            else if(_virtualMachines.Count < count)
+            {
+                output = base.Generate(count - _virtualMachines.Count());
+                output.ForEach(e => _virtualMachines.Add(e));
+                output = _virtualMachines.GetRange(0, count);
+
+            }
+            else
+            {
+                output = _virtualMachines.GetRange(0, count);
+
+            }
+            return output;
+        }
+
+
+
+
+
         private static List<DateTime?> GenerateRandomDatesIncNull()
         {
             List<DateTime?> res = new();

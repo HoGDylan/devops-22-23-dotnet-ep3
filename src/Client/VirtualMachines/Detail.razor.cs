@@ -13,14 +13,15 @@ public partial class Detail
     [Inject] NavigationManager NavMan { get; set; }
     [Parameter] public int Id { get; set; }
 
+    public bool Initialized { get; set; } =  false;
 
     protected override async Task OnInitializedAsync()
     {
         var request = new VirtualMachineRequest.GetDetail();
         request.VirtualMachineId = Id;
-        await base.OnInitializedAsync();
-        var vm_request = await vmService.GetDetailAsync(request);
-        Virtualmachine = vm_request.VirtualMachine;
+        var response = await vmService.GetDetailAsync(request);
+        Virtualmachine = response.VirtualMachine;
+        Initialized = true;
     }
 
     private void NavigateToKlant()
