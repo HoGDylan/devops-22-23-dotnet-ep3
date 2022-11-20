@@ -17,15 +17,9 @@ public partial class Index
         var response = await UserService.GetAllKlanten(request);
         Klanten = response.Klanten;
     }
-
-    private void NavigateToKlantDetail(int id)
+    private void NavToDetail(int id)
     {
         NavigationManager.NavigateTo($"klant/{id}");
-    }
-
-    private void NavigateCallback(int id)
-    {
-        Invoke(() => NavigateToKlantDetail(id);
     }
     public void Toast()
     {

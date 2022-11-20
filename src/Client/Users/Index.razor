@@ -24,7 +24,7 @@ else{
                             <td>@kl.PhoneNumber</td>
                             <td>@kl.Email</td>
                             <td>
-                            <button @onclick=(NavigateToKlantDetail(kl.Id))>
+                            <button @onclick="() => NavToDetail(kl.Id)">
                                     Details
                                 </button>
                             </td>

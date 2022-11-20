@@ -1,0 +1,41 @@
+﻿<EditForm Model="@model">
+    <FluentValidationValidator />
+    <ValidationSummary />
+
+    <div class="field">
+        <label class="label">Voornaam:</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="model.FirstName" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Naam:</label>
+        <div class="control">
+            <InputText class="textarea" @bind-Value="model.Name" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Prijs</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="model.PhoneNumber" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Categorie</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="model.Email" />
+        </div>
+    </div>
+
+   @* <div class="field">
+        <div class="control">
+            <label class="checkbox">
+                Opleding
+            </label>
+            <InputTextArea @bind-Value="model.Opleiding"/>
+        </div>
+    </div>*@
+</EditForm>

@@ -1,3 +1,44 @@
-﻿<h3>Details</h3>
+﻿@page "/klant/{Id:int}"
+@using Client.Users.Components
+<h1>Details @Klant.FirstName @Klant.Name</h1
 
-
+<div>
+   <div class="ml-4">
+        <h2 class="mb-2">Algemene info</h2>
+            <div class="ml-4">
+            @if(Intern){
+               <h3 class="mb-2 mt-0">Interne Klant</h3>
+            }
+            else{
+                <h3 class="mb-2 mt-0">Externe Klant</h3>
+            }
+            <div class="ml-8">
+                <div>
+                    <label>Voornaam :</label>
+                    <input />
+                    <p> @Klant.FirstName</p>
+                </div>
+                <div>
+                    <p>Naam : @Klant.Name</p>
+                </div>
+                <div>
+                    <p>Email : @Klant.Email</p>
+                </div>
+                <div>
+                    <p>Gsm-nummer : @Klant.PhoneNumber</p>
+                </div>
+                <div>
+                @if(Intern)
+                {
+                    <p>Opleiding : @Klant.Opleiding</p>
+                }
+                else
+                {
+                    <p>Bedrijf : @Klant.Bedrijf</p>
+                }
+                </div>
+            </div>
+            </div>
+            <Edit Id="@Id"/>
+    </div>
+</div>
