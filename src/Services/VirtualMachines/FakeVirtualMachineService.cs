@@ -1,4 +1,4 @@
-﻿using Domain.Common;
+using Domain.Common;
 using Domain.Projecten;
 using Domain.VirtualMachines.BackUp;
 using Domain.VirtualMachines.Contract;
@@ -33,7 +33,7 @@ namespace Services.VirtualMachines
             Console.WriteLine("Found VM: " + (_virtualMachines.Count(e => e.Id == request.VirtualMachineId) == 1).ToString());
             Console.WriteLine("Total VMs:" + _virtualMachines.Count());
 
-            VirtualMachine vm = _virtualMachines.Single(x => x.Id == request.VirtualMachineId);
+            VirtualMachine? vm = _virtualMachines.SingleOrDefault(x => x.Id == request.VirtualMachineId);
 
             if (vm is not null)
             {
@@ -55,7 +55,7 @@ namespace Services.VirtualMachines
             {
                 response.VirtualMachine = new VirtualMachineDto.Detail
                 {
-                    Id = request.VirtualMachineId
+                    Id = -1
                 };
             }
             return response;
