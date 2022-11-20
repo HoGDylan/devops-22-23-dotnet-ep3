@@ -14,7 +14,7 @@ namespace Services.VirtualMachines
 
         public FakeVirtualMachineService()
         {
-            _virtualMachines = VirtualMachineFaker.Instance.Generate(25);
+            _virtualMachines = VirtualMachineFaker.Instance.Generate(100);
         }
 
         public async Task DeleteAsync(VirtualMachineRequest.Delete request)
@@ -30,9 +30,10 @@ namespace Services.VirtualMachines
             VirtualMachineResponse.GetDetail response = new();
 
             Console.WriteLine("Incoming ID: " + request.VirtualMachineId);
-            Console.WriteLine("Found VM: " + (_virtualMachines.Count(e => e.Id == request.VirtualMachineId) == 1).ToString());
+            Console.WriteLine("Found VM: " + (_virtualMachines.Count(e => e.Id == request.VirtualMachineId)));
             Console.WriteLine("Total VMs:" + _virtualMachines.Count());
 
+            _virtualMachines.Select(e => e.Id).ToList().ForEach(e => Console.WriteLine(e));
             VirtualMachine? vm = _virtualMachines.SingleOrDefault(x => x.Id == request.VirtualMachineId);
 
             if (vm is not null)
