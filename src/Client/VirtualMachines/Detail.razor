@@ -1,13 +1,17 @@
 ﻿@page "/virtualmachines/{Id:int}"
 @attribute [Authorize]
 
+
 @if (!Initialized)
 {
-    <p>Even geduld ...</p>
-}else if(Virtualmachine is null){
-    <p>An error has happened</p>
+    <p>Even gedult</p>
 }
-else{
+else if (Virtualmachine.Id == -1)
+{
+    <p>Je hebt een verkeerde Id meegegeven. Of deze VM werd niet teruggevonden.</p>
+}
+else
+{
     <h1>@Virtualmachine.Name</h1>
     <div class="details">
         <div>
@@ -15,7 +19,7 @@ else{
             <br />
             <div>
                 <p>Naam: @Virtualmachine.Name</p>
-                <p>Operatingsystem: @Virtualmachine.OperatingSystem</p>   
+                <p>Operatingsystem: @Virtualmachine.OperatingSystem</p>
                 <p>Mode: @Virtualmachine.Mode</p>
             </div>
             <div>
@@ -23,7 +27,8 @@ else{
             </div>
         </div>
     </div>
-}
+    }
+
 
 
 

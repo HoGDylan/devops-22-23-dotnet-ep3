@@ -26,7 +26,7 @@ public partial class Detail
 
     private void NavigateToKlant()
     {
-        NavMan.NavigateTo($"/virtualmachine{Virtualmachine.Id}/Klant");
+        NavMan.NavigateTo($"/klanten/{Virtualmachine.Contract.CustomerId}");
     }
 
     public void NavigateToReport()
