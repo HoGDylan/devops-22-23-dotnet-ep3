@@ -83,7 +83,6 @@ else if (_projects.Count() == 0) {
 @code{
 
     public Dictionary<int,bool> Collapsed { get; set; } = new Dictionary<int, bool>();
-    //public Tuple<int, bool> Loading { get; set; } = new Tuple<int, bool>(-1, false);
     public List<int> Loading { get; set; } = new();
 
     private void ToggleFilterForm()
@@ -106,11 +105,9 @@ else if (_projects.Count() == 0) {
         }
 
         if(check){
-            //Loading = Tuple.Create(id, true);
             Loading.Add(id);
             await GetVirtualMachines(id);
             Loading.Remove(id);
-            //Loading = Tuple.Create(id, false);
         }
         StateHasChanged();
     }
