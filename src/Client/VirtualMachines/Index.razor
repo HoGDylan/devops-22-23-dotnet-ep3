@@ -124,7 +124,7 @@ else if (_projects.Count() == 0) {
             case VirtualMachineMode.RUNNING:
                 return Tuple.Create("dot is-green", "Actief");
             case VirtualMachineMode.WAITING_APPROVEMENT:
-                return Tuple.Create("dot is-grey", "Wachten op goedkeuring");
+                return Tuple.Create("dot is-orange", "Wachten op goedkeuring");
             case VirtualMachineMode.PAUSED:
                 return Tuple.Create("dot is-yellow", "Gepauzeerd");
 
