@@ -1,0 +1,103 @@
+﻿@page "/beheerders"
+
+<form>
+    <div class="field columns">
+        <div class="column">
+            <label class="label">Voornaam</label>
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Jan">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                </span>
+            </p>
+        </div>
+        <div class="column">
+            <label class="label">Achternaam</label>
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Jansens">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Email</label>
+        <p class="control has-icons-left has-icons-right">
+            <input class="input @(isEmail ? "" : "is-danger")" type="email" placeholder="user@@example.be">
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+                <i class="@(isEmail ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
+            </span>
+            @if(!isEmail) {
+                <p class="has-text-danger">Dit is geen geldig email!</p>
+            }
+        </p>
+    </div>
+    <div class="field">
+        <label class="label">Wachtwoord</label>
+        <p class="control has-icons-left has-icons-right">
+            <input class="input @(validPassword ? "" : "is-danger")" type="password" placeholder="Wachtwoord">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+            <span class="icon is-small is-right">
+                <i class="@(isEmail ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
+            </span>
+            @if (!validPassword) {
+            <!--Dit moet specifieker zeggen waaraan niet wordt voldaan-->
+            <p class="has-text-danger">Dit is geen geldig wachtwoord!</p>
+            }
+        </p>
+    </div>
+    <div class="field">
+        <label class="label">Telefoon</label>
+        <p class="control has-icons-left has-icons-right">
+            <input class="input @(isPhonenumber ? "" : "is-danger")" type="tel" placeholder="Telefoonnummer">
+            <span class="icon is-small is-left">
+                <i class="fas fa-phone"></i>
+            </span>
+            <span class="icon is-small is-right">
+                <i class="@(isPhonenumber ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
+            </span>
+            @if (!validPassword)
+            {
+                <!--Dit moet specifieker zeggen waaraan niet wordt voldaan-->
+            <p class="has-text-danger">Dit is geen geldig telefoonnummer!</p>
+            }
+        </p>
+    </div>
+    <div class="field">
+        <label class="label">Relatie</label>
+        <div class="control has-icons-left">
+            <div class="select is-primary">
+                <select>
+                    <option>Intern</option>
+                    <option>Extern</option>
+                </select>
+            </div>
+            <div class="icon is-small is-left">
+                <i class="fas fa-globe"></i>
+            </div>
+        </div>
+    </div>
+    @if(isIntern) {
+        <p>Interne klantinfo invullen</p>
+    }else {
+        <p>Externe klantinfo invullen</p>
+    }
+</form>
+
+@code {
+    public Boolean isEmail { get; set; } = false;
+    public Boolean validPassword { get; set; } = false;
+    public Boolean isPhonenumber { get; set; } = false;
+    public Boolean isIntern { get; set; } = false;
+
+    public async void checkEmail() {
+        //TODO: checken met regex
+        isEmail = !isEmail;
+    }
+}

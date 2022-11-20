@@ -31,3 +31,10 @@
     margin: auto;
     width: 10%;
 }
+
+.input {
+    border-color: #00000066;
+}
+.select {
+    border-color: #00000066;
+}
