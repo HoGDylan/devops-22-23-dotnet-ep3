@@ -49,7 +49,7 @@ else
             <div class="card">
                 <h3 class="card-title">Hardware</h3>
                 <div class="card-body">
-                    <p>Memory: @(Virtualmachine.Hardware.Memory > 1000 ? (Virtualmachine.Hardware.Memory / 1000.0).ToString() + " GB" : Virtualmachine.Hardware.Memory +  " MB") </p>
+                    <p>Memory/RAM: @Virtualmachine.Hardware.Memory GB </p>
                     <p>Aantal Cores: @Virtualmachine.Hardware.Amount_vCPU</p>
                     <p>Storage: @(Virtualmachine.Hardware.Storage > 1000 ? (Virtualmachine.Hardware.Storage / 1000.0).ToString() + " GB" : Virtualmachine.Hardware.Storage + " MB")</p>
                 </div>
