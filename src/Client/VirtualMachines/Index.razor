@@ -55,7 +55,7 @@ else if (_projects.Count() == 0) {
                                     {
 
                                         <tr>
-                                            <td><span class="@ParseMode(vm.Mode).Item1"></span>@ParseMode(vm.Mode).Item2</td>
+                                            <td><span class="@vm.Mode.GetDotIcon()"></span>@vm.Mode.GetString()</td>
                                             <td>@vm.Name</td>
                                             <td>@(project.Klant.FirstName + " " +  project.Klant.Name)</td>
                                             <td><button @onclick="() => NavigateToVMDetails(vm.Id)">Details</button><button>Meer</button></td>
@@ -112,23 +112,7 @@ else if (_projects.Count() == 0) {
         StateHasChanged();
     }
 
-    public Tuple<string, string> ParseMode(VirtualMachineMode mode){
-        switch(mode){
-            case VirtualMachineMode.STOPPED:
-                return Tuple.Create("dot is-red", "Gestopt");
-            case VirtualMachineMode.READY:
-                return Tuple.Create("dot is-blue", "Gereed");
-            case VirtualMachineMode.RUNNING:
-                return Tuple.Create("dot is-green", "Actief");
-            case VirtualMachineMode.WAITING_APPROVEMENT:
-                return Tuple.Create("dot is-orange", "Wachten op goedkeuring");
-            case VirtualMachineMode.PAUSED:
-                return Tuple.Create("dot is-yellow", "Gepauzeerd");
 
-            default:
-                throw new ArgumentException("received invalid virtualmachinemode: " + mode.ToString());
-        }
-    }
 
 }
 

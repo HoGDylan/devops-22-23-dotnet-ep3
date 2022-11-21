@@ -1,6 +1,6 @@
 ﻿@page "/virtualmachine/{Id:int}"
 @attribute [Authorize]
-@using System.Globalization;
+
 
 @if (!Initialized)
 {
@@ -21,7 +21,7 @@ else
                     <p>ID: @Virtualmachine.Id</p>
                     <p>Naam: @FormatCapitalLetter(Virtualmachine.Name)</p>
                     <p>Operating System: @FormatCapitalLetter(@Virtualmachine.OperatingSystem.ToString())</p>
-                    <p>Status: @FormatCapitalLetter(Virtualmachine.Mode.ToString())</p>
+                    <p>Status: @Virtualmachine.Mode.GetString()</p>
                 </div>
             </div>  
         </div>
@@ -66,7 +66,7 @@ else
                     else
                     {
                         <p>Server Adres: @Virtualmachine.VMConnection.FQDN</p>
-                        <p>IP-adress: @Virtualmachine.VMConnection.Hostname</p>
+                        <p>IP-adres: @Virtualmachine.VMConnection.Hostname</p>
                         <p>Username: @Virtualmachine.VMConnection.Username</p>
                         <p>Wachtwoord: @Virtualmachine.VMConnection.Password</p>
                     }

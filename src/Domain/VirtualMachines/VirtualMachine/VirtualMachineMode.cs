@@ -12,7 +12,50 @@ namespace Domain.VirtualMachines.VirtualMachine
         READY,                     // has connection && server
         RUNNING,
         PAUSED,
-        STOPPED,
+        STOPPED
 
     }
+
+    public static class Format{
+        public static String GetString(this VirtualMachineMode mode)
+        {
+            switch (mode)
+            {
+                case VirtualMachineMode.WAITING_APPROVEMENT: return "Wachten op goedkeuring";
+                    break;
+                case VirtualMachineMode.STOPPED: return "Gestopt";
+                    break;
+                case VirtualMachineMode.READY: return "Gereed";
+                    break;
+                case VirtualMachineMode.RUNNING: return "Actief";
+                    break;
+                case VirtualMachineMode.PAUSED: return "Gepauzeerd";
+                    break;
+                default: throw new ArgumentException("No Case for: " + mode.ToString());
+
+            }
+        }
+        public static String GetDotIcon(this VirtualMachineMode mode)
+        {
+            switch (mode)
+            {
+                case VirtualMachineMode.STOPPED:
+                    return "dot is-red";
+                case VirtualMachineMode.READY:
+                    return "dot is-blue";
+                case VirtualMachineMode.RUNNING:
+                    return "dot is-green";
+                case VirtualMachineMode.WAITING_APPROVEMENT:
+                    return "dot is-orange";
+                case VirtualMachineMode.PAUSED:
+                    return "dot is-yellow";
+
+                default:
+                    throw new ArgumentException("received invalid virtualmachinemode: " + mode.ToString());
+            }
+        }
+    }
+
+
+
 };
