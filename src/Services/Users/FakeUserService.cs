@@ -17,6 +17,15 @@ namespace Services.Users
             _admins = new UserFaker.Administrators().Generate(3);
 
         }
+        public async void EditAsync(UserRequest.Edit request)
+        {
+            await Task.Delay(100);
+            Klant klant = _klanten.Find(k => k.Id == request.KlantId);
+            klant.FirstName = request.Klant.FirstName;
+            klant.Name= request.Klant.Name;
+            klant.Email = request.Klant.Email;
+            klant.PhoneNumber = request.Klant.PhoneNumber;
+        }
 
         public Task<UserResponse.AllAdminsIndex> GetAllAdminsIndex(UserRequest.AllAdminUsers request)
         {

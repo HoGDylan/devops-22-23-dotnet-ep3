@@ -4,7 +4,8 @@ using Shared.Users;
 namespace Client.Users;
 
 public partial class Details
-{
+{   
+    public bool Edit = false;
     public bool Intern = false;
     private KlantDto.Detail Klant;
     [Parameter] public int Id { get; set; }
@@ -12,6 +13,7 @@ public partial class Details
 
     protected override async Task OnInitializedAsync()
     {
+        StateHasChanged();
         await GetKlantAsync();
         
     }
@@ -27,5 +29,12 @@ public partial class Details
             Intern = true;
         }
         Console.WriteLine(Klant.Projects.Count()==0);
+    }
+    public async void KlantChangedAsync()
+    {
+        if(!Edit)
+        {
+            GetKlantAsync().Wait();
+        }
     }
 }

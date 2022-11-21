@@ -1,41 +1,50 @@
-﻿<EditForm Model="@model">
-    <FluentValidationValidator />
+﻿<EditForm Model="@model" OnValidSubmit="@EditKlant">
+    <DataAnnotationsValidator/>
     <ValidationSummary />
-
-    <div class="field">
-        <label class="label">Voornaam:</label>
-        <div class="control">
-            <InputText class="input" @bind-Value="model.FirstName" />
+        <div>
+            <label class="label">Voornaam: </label>
+        <InputText class="input" @bind-Value="@model.FirstName" />
         </div>
-    </div>
-
-    <div class="field">
-        <label class="label">Naam:</label>
-        <div class="control">
-            <InputText class="textarea" @bind-Value="model.Name" />
+        <div>
+            <label class="label">Naam: </label>
+        <InputText class="input" @bind-Value="@model.Name" />
         </div>
-    </div>
-
-    <div class="field">
-        <label class="label">Prijs</label>
         <div class="control">
-            <InputText class="input" @bind-Value="model.PhoneNumber" />
+            <label class="label">Email: </label>
+        <InputText class="input" @bind-Value="@model.Email" />
         </div>
-    </div>
-
-    <div class="field">
-        <label class="label">Categorie</label>
         <div class="control">
-            <InputText class="input" @bind-Value="model.Email" />
+            <label class="label">Gms-nummer: </label>
+        <InputText class="input" @bind-Value="@model.PhoneNumber" />
+        </div> 
+        @if (model.Opleiding is not null)
+        {
+@*        <div>
+                <label>Opleiding</label>
+                <InputText class="input" @bind-Value="@model.Opleiding"/>
+        </div>*@
+        }
+        else
+        {
+        <div>
+            <label>Bedrijf</label>
+            <InputText class="input" @bind-Value="@model.Bedrijf" />
         </div>
-    </div>
-
-   @* <div class="field">
-        <div class="control">
-            <label class="checkbox">
-                Opleding
-            </label>
-            <InputTextArea @bind-Value="model.Opleiding"/>
+        
+        }
+    @if(model.contactPersoon is not null)
+        {
+        <div>
+                    <p class="label">Contcatpersoon: </p>
+                    <div>
+                            <label class="label">Email Contactpersoon</label>
+                            <InputText class="input" readonly type="@model.contactPersoon.Email" />
+                    </div>
+                    <div>
+                        <label class="label">Gsm-nummer Contactpersoon</label>
+                        <InputText class="input" readonly type="@model.contactPersoon.PhoneNumber"/>
+                    </div> 
         </div>
-    </div>*@
+        }
+        <button class="button mt-2" @onclick="@EditKlant">Klant wijzigen</button>
 </EditForm>

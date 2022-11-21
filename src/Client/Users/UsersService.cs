@@ -1,4 +1,5 @@
 ﻿using Client.Extentions;
+using Shared.Projects;
 using Shared.Users;
 using System.Net.Http.Json;
 
@@ -24,6 +25,10 @@ namespace Client.Users
             var queryParam = request.GetQueryString();
             var response = await _httpClient.GetFromJsonAsync<UserResponse.DetailKlant>($"{endpoint}?queryParam");
             return response;
+        }
+        public void EditAsync(UserRequest.Edit request)
+        {
+            
         }
 
         public Task<UserResponse.AllAdminsIndex> GetAllAdminsIndex(UserRequest.AllAdminUsers request)
