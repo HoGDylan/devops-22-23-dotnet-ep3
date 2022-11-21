@@ -1,6 +1,6 @@
 ﻿@page "/virtualmachine/{Id:int}"
 @attribute [Authorize]
-
+@using System.Globalization;
 
 @if (!Initialized)
 {
@@ -19,9 +19,9 @@ else
                 <h3 class="card-title">Algemeen</h3>
                 <div class="card-body">
                     <p>ID: @Virtualmachine.Id</p>
-                    <p>Naam: @Virtualmachine.Name</p>
-                    <p>Operating System: @Virtualmachine.OperatingSystem.ToString().ToLowerInvariant()</p>
-                    <p>Status: @Virtualmachine.Mode.ToString().ToLower()</p>
+                    <p>Naam: @FormatCapitalLetter(Virtualmachine.Name)</p>
+                    <p>Operating System: @FormatCapitalLetter(@Virtualmachine.OperatingSystem.ToString())</p>
+                    <p>Status: @FormatCapitalLetter(Virtualmachine.Mode.ToString())</p>
                 </div>
             </div>  
         </div>
@@ -29,7 +29,7 @@ else
             <div class="card">
                 <h3 class="card-title">Back Up</h3>
                 <div class="card-body">
-                    <p>Backup Type: @Virtualmachine.BackUp.Type.ToString().ToLower()</p>
+                    <p>Backup Type: @FormatCapitalLetter(Virtualmachine.BackUp.Type.ToString())</p>
                     <p>Laatste Back up: @Virtualmachine.BackUp.LastBackup.ToString()</p>
                 </div>
             </div>
@@ -81,5 +81,43 @@ else
         </AuthorizeView>
 
 
+@code{
+    public string FormatCapitalLetter(string s){
 
- }
+        string output = "";
+
+        char[] delimiters = { ' ', '_', '-','\t' };
+
+
+        string[] splitted = s.Split(delimiters);
+
+        if(splitted.Count() == 0){
+            try{
+                output = char.ToUpper(s[0]) + s.Substring(1).ToLower();
+            }catch(Exception e){
+                //name is 1 letter
+                output = s.ToUpper();
+            }
+        }else{
+            foreach (var i in splitted)
+            {
+                if(i.Length == 0){
+                    continue;
+                }
+                if(i.Length == 1){
+                    output += i.ToUpper();
+                }
+                if(i.Length > 1){
+                    output +=  (char.ToUpper(i[0]) + i.Substring(1).ToLower());
+                }
+                output += " ";
+            }
+        }
+            if(output.Last().Equals(" ")){
+                output.Substring(0, output.Length - 1);
+            }
+            return output;
+
+        }   
+    }
+}
