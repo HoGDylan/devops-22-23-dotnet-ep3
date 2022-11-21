@@ -19,4 +19,10 @@ public static class UserRequest
     {
         public int KlantId { get; set; }
     }
+
+    public class Edit
+    {
+        public int KlantId { get; set; }
+        public KlantDto.Mutate Klant { get; set; }
+    }
 }

@@ -13,6 +13,7 @@ public partial class Details
 
     protected override async Task OnInitializedAsync()
     {
+        StateHasChanged();
         await GetKlantAsync();
         
     }
@@ -29,9 +30,11 @@ public partial class Details
         }
         Console.WriteLine(Klant.Projects.Count()==0);
     }
-
-    private void ToggleEdit()
+    public async void KlantChangedAsync()
     {
-        Edit = !Edit;
+        if(!Edit)
+        {
+            GetKlantAsync().Wait();
+        }
     }
 }
