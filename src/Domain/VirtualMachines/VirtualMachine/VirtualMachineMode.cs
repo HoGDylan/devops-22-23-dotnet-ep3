@@ -21,16 +21,17 @@ namespace Domain.VirtualMachines.VirtualMachine
         {
             switch (mode)
             {
-                case VirtualMachineMode.WAITING_APPROVEMENT: return "Wachten op goedkeuring";
-                    break;
-                case VirtualMachineMode.STOPPED: return "Gestopt";
-                    break;
-                case VirtualMachineMode.READY: return "Gereed";
-                    break;
-                case VirtualMachineMode.RUNNING: return "Actief";
-                    break;
-                case VirtualMachineMode.PAUSED: return "Gepauzeerd";
-                    break;
+                case VirtualMachineMode.WAITING_APPROVEMENT: 
+                    return "Wachten op goedkeuring";
+                case VirtualMachineMode.STOPPED: 
+                    return "Gestopt";
+                case VirtualMachineMode.READY: 
+                    return "Gereed";
+                case VirtualMachineMode.RUNNING: 
+                    return "Actief";
+                case VirtualMachineMode.PAUSED: 
+                    return "Gepauzeerd";
+
                 default: throw new ArgumentException("No Case for: " + mode.ToString());
 
             }
