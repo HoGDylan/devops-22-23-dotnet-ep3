@@ -26,7 +26,7 @@ namespace Client.Users
             var response = await _httpClient.GetFromJsonAsync<UserResponse.DetailKlant>($"{endpoint}?queryParam");
             return response;
         }
-        public void EditAsync(UserRequest.Edit request)
+        public async Task EditAsync(UserRequest.Edit request)
         {
             
         }

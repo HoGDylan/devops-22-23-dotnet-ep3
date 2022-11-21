@@ -5,6 +5,7 @@ namespace Client.Users.Components;
 
 partial class Edit
 {
+
     public event Action OnKlantChanged;
     [Parameter] public KlantDto.Detail klant{ get; set; }
     private KlantDto.Mutate model = new();
@@ -14,15 +15,17 @@ partial class Edit
     {
         ObjectToMutate();
     }
-    private void EditKlant()
+    private async void EditKlant()
     {
-        UserRequest.Edit resquest = new()
+        UserRequest.Edit request = new()
         {
             KlantId = klant.Id,
             Klant = model
         };
-        UserService.EditAsync(resquest);
-        StateHasChanged();
+        await UserService.EditAsync(request);
+        
+        var response = await UserService.GetDetailKlant(new UserRequest.DetailKlant() { KlantId = klant.Id });
+        klant = response.Klant;
     }
 
     public void ObjectToMutate()

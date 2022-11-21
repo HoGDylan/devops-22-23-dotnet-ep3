@@ -17,7 +17,7 @@ namespace Services.Users
             _admins = new UserFaker.Administrators().Generate(3);
 
         }
-        public async void EditAsync(UserRequest.Edit request)
+        public async Task EditAsync(UserRequest.Edit request)
         {
             await Task.Delay(100);
             Klant klant = _klanten.Find(k => k.Id == request.KlantId);
