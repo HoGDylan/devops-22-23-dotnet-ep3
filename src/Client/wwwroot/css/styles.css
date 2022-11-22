@@ -38,3 +38,7 @@
 .select {
     border-color: #00000066;
 }
+.is-rechts {
+    float: right;
+    margin-bottom: 1rem;
+}
