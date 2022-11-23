@@ -5,7 +5,7 @@ using Domain.VirtualMachines.Statistics;
 
 namespace Domain.VirtualMachines.Statistieken
 {
-    public class Statistics
+    public class Statistic
     {
 
 
@@ -18,7 +18,7 @@ namespace Domain.VirtualMachines.Statistieken
         public Hardware Hardware { get; set; }
 
 
-        public Statistics(DateTime start, DateTime end, Hardware hardware)
+        public Statistic(DateTime start, DateTime end, Hardware hardware)
         {
             StartTime = start;
             EndTime = end;

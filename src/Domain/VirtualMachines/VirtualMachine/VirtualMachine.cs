@@ -4,6 +4,7 @@ using Domain.Projecten;
 using Domain.Server;
 using Domain.VirtualMachines.BackUp;
 using Domain.VirtualMachines.Contract;
+using Domain.VirtualMachines.Statistieken;
 using System.Net;
 
 namespace Domain.VirtualMachines.VirtualMachine
@@ -18,6 +19,8 @@ namespace Domain.VirtualMachines.VirtualMachine
         private OperatingSystemEnum _operatingSystem;
         private VirtualMachineMode _mode;
         private FysiekeServer? _server;
+        private Statistic _statistics;
+
 
         public string Name { get { return _name; } set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
         public OperatingSystemEnum OperatingSystem { get { return _operatingSystem; } set { _operatingSystem = Guard.Against.Null(value, nameof(_operatingSystem)); } }
@@ -26,7 +29,9 @@ namespace Domain.VirtualMachines.VirtualMachine
         public Backup BackUp { get; set; }
         public VMConnection? Connection { get; set; }
         public VMContract Contract { get { return _vmContract; } set { _vmContract = Guard.Against.Null(value, nameof(_vmContract)); } }
-        public FysiekeServer? FysiekeServer { get { return _server; } set { Guard.Against.Null(_server, nameof(_server)); } }
+        public FysiekeServer? FysiekeServer { get { return _server; } set { _server = Guard.Against.Null(value, nameof(_server)); } }
+
+        public Statistic Statistics { get { return _statistics; } set {_statistics = Guard.Against.Null(value, nameof(_statistics)); } }
 
         public VirtualMachine(string n, OperatingSystemEnum os, Hardware h, Backup b)
         {

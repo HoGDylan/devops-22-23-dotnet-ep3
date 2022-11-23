@@ -23,7 +23,13 @@ namespace Services.FysiekeServer
 
         public Task<FysiekeServerResponse.Details> GetDetailsAsync(FysiekeServerRequest.Detail request)
         {
-            throw new NotImplementedException();
+            FysiekeServerResponse.Details response = new();
+            
+            if(_servers.Any(e => e.Id == request.ServerId))
+            {
+                !
+                response.Server.Id = request.ServerId;
+                
         }
 
         public Task<FysiekeServerResponse.Launched> DeployVirtualMachine(FysiekeServerRequest.Approve request)
