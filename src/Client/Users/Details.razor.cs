@@ -33,11 +33,8 @@ public partial class Details
         Console.WriteLine(Klant.Projects.Count()==0);
         Loading = false;
     }
-    public async void KlantChangedAsync()
+    public void Toggle()
     {
-        if(!Edit)
-        {
-            GetKlantAsync().Wait();
-        }
+        Edit = !Edit;
     }
 }

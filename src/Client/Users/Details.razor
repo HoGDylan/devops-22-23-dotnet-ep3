@@ -24,7 +24,7 @@ else
             <h2 class="mb-2">Algemene info</h2> 
             <div class="ml-4">
                 <div class="form-check form-switch">
-                    <input @onclick="@KlantChangedAsync" class="form-check-input" type="checkbox" id="switch" @bind="@Edit" />
+                    <input @onclick="@Toggle" class="form-check-input" type="checkbox" id="switch" @bind="@Edit" />
                     <label class="form-check-labelv" for="switch">Klant wijzigen?</label>
                  </div>
             @if(Intern){
