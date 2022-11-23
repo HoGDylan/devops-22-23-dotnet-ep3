@@ -6,8 +6,9 @@ namespace Client.Shared
 {
     public class FakeAuthenticationProvider : AuthenticationStateProvider
     {
-        public static ClaimsPrincipal Anonymous => new(new ClaimsIdentity(new[] { 
+        public static ClaimsPrincipal Anonymous => new(new ClaimsIdentity(new[] {
             new Claim(ClaimTypes.Name, "Guest"),
+            new Claim(ClaimTypes.Role, "Guest")
         }));
         public static ClaimsPrincipal AdminConsultant => new(new ClaimsIdentity(new[]
         {
