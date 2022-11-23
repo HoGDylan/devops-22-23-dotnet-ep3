@@ -2,7 +2,7 @@
 using Domain.Common;
 using Domain.Users;
 using Domain.VirtualMachines.VirtualMachine;
-using Shared.Utility;
+using Domain.Utility;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;

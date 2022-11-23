@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Shared.Utility
+namespace Domain.Utility
 {
     public class PasswordGenerator
     {

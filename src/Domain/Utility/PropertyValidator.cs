@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Validators
+namespace Domain.Utility
 {
-    public class Validator
+    public class PropertyValidator
     {
 
         public static bool IsValidEmail(string mail)

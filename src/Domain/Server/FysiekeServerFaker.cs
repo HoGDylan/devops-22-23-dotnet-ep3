@@ -13,13 +13,17 @@ namespace Domain.Server
         {
             int id = 1;
 
-            Hardware hw = GenerateRandomHardware();
+            Hardware hw = null;
 
 
-            CustomInstantiator(e => new FysiekeServer("Server " + id, hw, e.Internet.DomainName() + "." + "hogent.be"));
+            CustomInstantiator(e => {
+                hw = GenerateRandomHardware();
+                return new FysiekeServer("Server " + id, hw, e.Internet.DomainName() + "." + "hogent.be");
+                });
+       
             RuleFor(e => e.Id, _ => id++);
             RuleFor(e => e.VirtualMachines, _ => VirtualMachineFaker.Instance.Generate(10));
-            RuleFor(e => e.HardWareAvailable, _ => new Hardware((int) Math.Floor(hw.Memory * new Random().NextDouble()), (int) Math.Floor(hw.Storage * new Random().NextDouble()), (int) Math.Floor(hw.Amount_vCPU * new Random().NextDouble())));
+            RuleFor(e => e.HardWareAvailable, _ => new Hardware( hw.Memory - new Random().Next(1, hw.Memory), hw.Storage -  new Random().Next(1, hw.Storage), hw.Amount_vCPU - new Random().Next(1, hw.Amount_vCPU)));
             
         }
 

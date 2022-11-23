@@ -14,7 +14,7 @@ using Domain.Users;
 using Domain.VirtualMachines.BackUp;
 using Domain.VirtualMachines.Contract;
 using Domain.Statistics;
-using Shared.Utility;
+using Domain.Utility;
 
 namespace Domain.VirtualMachines.VirtualMachine
 {
@@ -46,20 +46,24 @@ namespace Domain.VirtualMachines.VirtualMachine
         public VirtualMachineFaker()
         {
             int id = 1;
-            VMContract contract = VMContractFaker.Instance.GenerateOne();
-            Hardware hardware = GenerateRandomHardware(false);
+            VMContract contract = null;
+            Hardware hardware = null; 
 
-            CustomInstantiator(e => new VirtualMachine(
-                e.Commerce.ProductName(),
-                e.PickRandom<OperatingSystemEnum>(),
-                e.PickRandom(hardware),
-                e.PickRandom(GenerateRandomBackups())
-                ));
+            CustomInstantiator(e =>
+            {
+                hardware = GenerateRandomHardware(false);
+                return new VirtualMachine(
+                    e.Commerce.ProductName(),
+                    e.PickRandom<OperatingSystemEnum>(),
+                    e.PickRandom(hardware),
+                    e.PickRandom(GenerateRandomBackups())
+             );
+            });
 
             RuleFor(x => x.Id, _ => id++);
             RuleFor(x => x.Connection, _ => new Random().Next(0, 2) % 1 == 0 ? new VMConnection("MOCK-FQDN", GetRandomIpAddress(), "MOCK-USER", PasswordGenerator.Generate(20, 3, 3, 3, 3)) : null);
             RuleFor(x => x.Mode, x => x.PickRandom<VirtualMachineMode>());
-            RuleFor(x => x.Contract, _ => VMContractFaker.Instance.GenerateOne());
+            RuleFor(x => x.Contract, _ => { contract = VMContractFaker.Instance.GenerateOne(); return contract; });
             RuleFor(x => x.FysiekeServer, _ => new FysiekeServer("Mock Server", GenerateRandomHardware(true), "mock-server_adres.hogent.be"));
             RuleFor(x => x.Statistics, _ => new Statistic(contract.StartDate, contract.EndDate, hardware));
 

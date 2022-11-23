@@ -1,6 +1,6 @@
 ﻿using Bogus;
 using Domain.Projecten;
-using Shared.Utility;
+using Domain.Utility;
 using System.Security.Cryptography;
 
 namespace Domain.Users

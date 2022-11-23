@@ -1,5 +1,7 @@
 ﻿using Domain.Common;
 using Domain.Users;
+using Domain.Utility;
+using Domain.Utility;
 using FluentValidation;
 using Shared.Projects;
 using System.ComponentModel.DataAnnotations;
@@ -29,14 +31,14 @@ public static class KlantDto
 
     public class Mutate
     {
-        [Required(ErrorMessage = "Je moet een voornaam ingeven.")]
-        [StringLength(20, ErrorMessage = "Naam is te lang")]
+      //  [Required(ErrorMessage = "Je moet een voornaam ingeven.")]
+      //  [StringLength(20, ErrorMessage = "Naam is te lang")]
         public string FirstName { get; set; }
-        [Required(ErrorMessage = "Je moet een naam ingeven.")]
+       // [Required(ErrorMessage = "Je moet een naam ingeven.")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Je moet een gsm-nummer ingeven.")]
+       // [Required(ErrorMessage = "Je moet een gsm-nummer ingeven.")]
         public string PhoneNumber { get; set; }
-        [Required(ErrorMessage = "Je moet een email ingeven.")]
+        //[Required(ErrorMessage = "Je moet een email ingeven.")]
         public string Email { get; set; }
         public Course? Opleiding { get; set; }
         public string? Bedrijf { get; set; }
@@ -49,8 +51,8 @@ public static class KlantDto
             {
                 RuleFor(x => x.FirstName).NotNull().NotEmpty().Length(1, 250);
                 RuleFor(x => x.Name).NotNull().NotEmpty().Length(1, 250);
-                RuleFor(x => x.PhoneNumber).NotNull().NotEmpty();
-                RuleFor(x => x.Email).NotNull().NotEmpty().Length(1, 250);
+                RuleFor(x => PropertyValidator.IsValidEmail(x.Email));
+                RuleFor(x => PropertyValidator.IsPhoneNumberValid(x.PhoneNumber));
                 RuleFor(x => x.Opleiding).NotEmpty();
                 RuleFor(x => x.Bedrijf).NotEmpty();
             }

@@ -1,9 +1,6 @@
 ﻿using Ardalis.GuardClauses;
-using Domain.Validators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Domain.Utility;
+
 using System.Threading.Tasks;
 
 namespace Domain.Common
@@ -16,8 +13,8 @@ namespace Domain.Common
         private string _fName;
         private string _lName;
 
-        public String PhoneNumber { get { return _phoneNumber; } set { if (Validator.IsPhoneNumberValid(value)) _phoneNumber = value;  } }
-        public String Email { get { return _email; } set { if (Validator.IsValidEmail(value)) _email = value; } }
+        public String PhoneNumber { get { return _phoneNumber; } set { if (PropertyValidator.IsPhoneNumberValid(value)) _phoneNumber = value;  } }
+        public String Email { get { return _email; } set { if (PropertyValidator.IsValidEmail(value)) _email = value; } }
         public String FirstName { get { return _fName; } set { _fName = Guard.Against.NullOrEmpty(value, nameof(_fName)); } }
         public String LastName { get { return _lName; } set { _lName = Guard.Against.NullOrEmpty(value, nameof(_lName)); } }
 
