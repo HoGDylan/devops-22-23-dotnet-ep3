@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Shared.FysiekeServers;
+using Smart.Blazor;
 using UnlockedData.Chartist.Blazor;
 using UnlockedData.Chartist.Blazor.Core.Data;
 
@@ -9,8 +10,9 @@ partial class Details
 {
     string[] chartFilter = new string[] { "Per Uur", "Dagelijks", "Wekenlijks", "Maandenlijks" };
     [Parameter] public int Id { get; set; }
+    public string Model { get; set; }
     [Inject] IFysiekeServerService Service { get; set; }
-
+    public string KeuzeChart { get; set; }
     private FysiekeServerDto.Detail server_response;
     ExtendedChartData _lineData { get; set; }
     LineOptions _defaultOptions { get; set; } = new();
@@ -23,16 +25,11 @@ partial class Details
         
     }
 
-    private void MakeDynamicChart()
+    public static void MakeDynamicChart()
     {
-/*        switch ()
-        {
+   
+       
 
-        }
-        _lineData = new UnlockedData.Chartist.Blazor.Core.Data.ExtendedChartData()
-        {
-            Labels = new List<string> { "" }
-        };*/
     }
 
 }

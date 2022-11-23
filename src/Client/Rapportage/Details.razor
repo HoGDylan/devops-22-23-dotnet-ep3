@@ -1,0 +1,13 @@
+@page "/servers/{Id:int}"
+@attribute [Authorize("AdminOnly")]
+
+<div>
+    <EditForm Model="@Model">
+        <InputSelect @onchange="MakeDynamicChart" Value="@KeuzeChart" class="form-control">
+            @foreach (var optie in chartFilter)
+            {
+                <option value="@optie">@optie</option>
+            }
+        </InputSelect>
+    </EditForm>
+</div>
