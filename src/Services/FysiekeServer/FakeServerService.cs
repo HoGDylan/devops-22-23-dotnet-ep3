@@ -30,5 +30,20 @@ namespace Services.FysiekeServer
         {
             throw new NotImplementedException();
         }
+
+        public async Task<FysiekeServerResponse.Available> GetAllServers()
+        {
+            FysiekeServerResponse.Available respons = new();
+            respons.Servers = _servers.Select(s =>  new FysiekeServerDto.Index{
+                Id = s.Id,
+                Name = s.Naam,
+                Hardware = s.HardWare,
+                HardWareAvailable = s.HardWareAvailable,
+                ServerAddress = s.ServerAddress
+            }).ToList();
+
+            respons.Count = _servers.Count();
+            return respons;
+        }
     }
 }

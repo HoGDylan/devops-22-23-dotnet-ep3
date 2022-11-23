@@ -14,7 +14,7 @@ namespace Shared.FysiekeServers
 
         public Task<FysiekeServerResponse.Details> GetDetailsAsync(FysiekeServerRequest.Detail request); // admin can request all running VMs on a particular server
 
-        
+        public Task<FysiekeServerResponse.Available> GetAllServers();
 
         /*
         

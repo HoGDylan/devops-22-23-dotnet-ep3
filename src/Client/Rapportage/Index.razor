@@ -1,0 +1,26 @@
+﻿@page "/rapportage"
+
+@if (Servers is null)
+{
+    <p>Loading ...</p>
+}
+else
+{
+    <h1>Fysieke Servers</h1>
+    <div class="columns is-desktop is-multiline">
+        @foreach (var server in Servers)
+        {
+            <div class="column is-one-third-widescreen is-half-desktop">
+                <div class="card">
+                    <h3 class="card-title">@server.Name</h3>
+                    <div>
+                        @server.
+                    </div>
+                </div>
+            </div>
+
+        }
+   </div>
+
+}
+
