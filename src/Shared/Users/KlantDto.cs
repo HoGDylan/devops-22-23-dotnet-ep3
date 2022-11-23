@@ -35,7 +35,7 @@ public static class KlantDto
         [Required(ErrorMessage = "Je moet een naam ingeven.")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Je moet een gsm-nummer ingeven.")]
-        [RegularExpression(@"^[0 - 9] *$)", ErrorMessage ="Je moet een geldig gsm-nummer ingeven.")]
+        [RegularExpression(@"^[0 - 9]+", ErrorMessage ="Je moet een geldig gsm-nummer ingeven.")]
         public string PhoneNumber { get; set; }
         [Required(ErrorMessage = "Je moet een email ingeven.")]
         public string Email { get; set; }
