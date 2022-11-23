@@ -5,7 +5,7 @@ using Shared.Users;
 
 namespace Services.Users
 {
-    public class FakeUserService: IUserService
+    public class FakeUserService : IUserService
     {
         private List<Klant> _klanten;
         private List<Administrator> _admins;
@@ -22,7 +22,7 @@ namespace Services.Users
             await Task.Delay(100);
             Klant klant = _klanten.Find(k => k.Id == request.KlantId);
             klant.FirstName = request.Klant.FirstName;
-            klant.Name= request.Klant.Name;
+            klant.Name = request.Klant.Name;
             klant.Email = request.Klant.Email;
             klant.PhoneNumber = request.Klant.PhoneNumber;
         }
@@ -55,36 +55,43 @@ namespace Services.Users
             List<ProjectDto.Index> projecten = new();
             UserResponse.DetailKlant response = new();
             Klant k = _klanten.Single(x => x.Id == request.KlantId);
-            k.Projecten.ForEach(p => projecten.Add(new ProjectDto.Index()
+            if (k is not null)
             {
-                Id = p.Id,
-                Name = p.Name,
-                Klant = k
-            }));
-            var kdto = new KlantDto.Detail()
-            {
-                Id = k.Id,
-                Name = k.Name,
-                FirstName = k.FirstName,
-                Email = k.Email,
-                PhoneNumber = k.PhoneNumber,
-                Projects = projecten,
-                contactPersoon = k.ContactPersoon,
-                ReserveContactPersoon = k.ContactPersoonReserv
-        };
+                k.Projecten.ForEach(p => projecten.Add(new ProjectDto.Index()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Klant = k
+                }));
+                var kdto = new KlantDto.Detail()
+                {
+                    Id = k.Id,
+                    Name = k.Name,
+                    FirstName = k.FirstName,
+                    Email = k.Email,
+                    PhoneNumber = k.PhoneNumber,
+                    Projects = projecten,
+                    contactPersoon = k.ContactPersoon,
+                    ReserveContactPersoon = k.ContactPersoonReserv
+                };
 
-                
-            if (k is InterneKlant)
-            {
-                InterneKlant kI = (InterneKlant)k;
-                kdto.Opleiding = kI.Opleiding;
+
+                if (k is InterneKlant)
+                {
+                    InterneKlant kI = (InterneKlant)k;
+                    kdto.Opleiding = kI.Opleiding;
+                }
+                else
+                {
+                    ExterneKlant kE = (ExterneKlant)k;
+                    kdto.Bedrijf = kE.Bedrijfsnaam;
+                }
+                response.Klant = kdto;
             }
             else
             {
-                ExterneKlant kE = (ExterneKlant)k;
-                kdto.Bedrijf = kE.Bedrijfsnaam;
+                response.Klant = new KlantDto.Detail { Id = -1 };
             }
-            response.Klant = kdto;
             return response;
         }
 
@@ -93,7 +100,6 @@ namespace Services.Users
             await Task.Delay(100);
             UserResponse.AllKlantenIndex response = new();
             List<Administrator> admins;
-
            response.Klanten = admins.Select(x => new AdminUserDto.Index
             {
                 Id = x.Id,
@@ -102,9 +108,7 @@ namespace Services.Users
                 Password = x.Password,
                 Role = x.Role,
             })
-
         }*/
 
         // create shit
     }
-}

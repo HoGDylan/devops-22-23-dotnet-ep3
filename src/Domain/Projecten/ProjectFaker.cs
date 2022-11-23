@@ -33,9 +33,7 @@ namespace Domain.Projecten
             CustomInstantiator(e => new Project($"Project: {e.Company.CompanyName()}"));
             RuleFor(x => x.Id, _ => id++);
             RuleFor(x => x.VirtualMachines, _ => VirtualMachineFaker.Instance.Generate(5));
-            RuleFor(x => x.Klant, _ => new UserFaker.Klant().Generate());
-
-
+            RuleFor(x => x.Klant, _ => UserFaker.Klant.Instance.Generate(1)[0]);
 
         }
 
@@ -55,7 +53,7 @@ namespace Domain.Projecten
             }
             else
             {
-                output = _projects.GetRange(0, count - 1);
+                output = _projects.GetRange(0, count);
             }
 
             return output;

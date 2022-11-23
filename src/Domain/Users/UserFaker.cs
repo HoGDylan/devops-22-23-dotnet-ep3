@@ -1,17 +1,35 @@
 ﻿using Bogus;
 using Domain.Projecten;
 using Shared.Utility;
-
+using System.Security.Cryptography;
 
 namespace Domain.Users
 {
     public static class UserFaker
     {
-        private static volatile int id = 1;
+        private static int id = 1;
+
+
+        public class Klant : Faker<Users.Klant>
+        {
+
+            private List<Users.Klant> _klanten = new();
+
+            private static Klant _instance;
+            public static Klant Instance
+            {
+                get
+                {
+                    if (_instance is null)
+                    {
+                        _instance = new Klant();
+                    }
+                    return _instance;
+                }
+            }
 
 
 
-        public class Klant : Faker<Users.Klant>{
             public Klant()
             {
                 if (id % 2 == 0)
@@ -40,39 +58,79 @@ namespace Domain.Users
 
                 RuleFor(e => e.Id, _ => id++);
             }
-        }
 
-        public class Administrators : Faker<Administrator>
-        {
-            public Administrators()
+            public override List<Users.Klant> Generate(int count, string ruleSets = null)
             {
-                CustomInstantiator(e => new Administrator(
-                    e.Person.LastName,
-                    e.Person.FirstName,
-                    GeneratePhoneNumber(),
-                    e.Person.Email,
-                    PasswordGenerator.Generate(20, 2, 2, 2, 2),
-                    e.PickRandom<AdminRole>()
-                    ));
+                List<Users.Klant> output;
+
+                if (_klanten.Count() < count)
+                {
+                    output = base.Generate(count, ruleSets);
+                    output.ForEach(e => _klanten.Add(e));
+                }
+                else
+                {
+                    if (count == 1)
+                    {
+                        output = new List<Users.Klant>() { _klanten[RandomNumberGenerator.GetInt32(0, _klanten.Count())] };
+                    }
+                    else
+                    {
+                        output = _klanten.GetRange(0, count);
+                    }
+
+                }
+
+                return output;
             }
 
         }
 
-        private static string GeneratePhoneNumber()
-        {
-            string output = "04";
-
-
-            for (int i = 0; i < 8; i++)
+            public class Administrators : Faker<Administrator>
             {
-                output += (new Random().Next(0, 10)).ToString();
+                private static Administrators _instance = null;
+
+                public static Administrators Instance
+                {
+                    get
+                    {
+                        if (_instance is null)
+                        {
+                            _instance = new Administrators();
+                        }
+                        return _instance;
+                    }
+                }
+
+                public Administrators()
+                {
+                    CustomInstantiator(e => new Administrator(
+                        e.Person.LastName,
+                        e.Person.FirstName,
+                        GeneratePhoneNumber(),
+                        e.Person.Email,
+                        PasswordGenerator.Generate(20, 2, 2, 2, 2),
+                        e.PickRandom<AdminRole>()
+                        ));
+                }
+
             }
 
-            return output;
+            private static string GeneratePhoneNumber()
+            {
+                string output = "04";
+
+
+                for (int i = 0; i < 8; i++)
+                {
+                    output += (new Random().Next(0, 10)).ToString();
+                }
+
+                return output;
+            }
+
+
+
+
         }
-
-
-
-
     }
-}
