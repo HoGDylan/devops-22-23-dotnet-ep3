@@ -19,14 +19,16 @@ else
                         <button class="btn btn-sm" type="button" @onclick="() => RedirectToDetailsPage(server.Id)"></button>
                     </div>
                     <div class="card-body">
-                        <p>Serveraddress: @server.ServerAddress</p>
+                        <p>Id: @server.Id</p>
+                        <p>Naam: @server.Name</p>
+                        <p>Serveradres: @server.ServerAddress</p>
+                        <br>
                         <p>Aantal vCPU's:' @server.Hardware.Amount_vCPU</p>
                         <p>Vrije vCPU's: @server.HardWareAvailable.Amount_vCPU</p>
                         <p>Totale opslag: @(server.Hardware.Storage > 1000 ? (server.Hardware.Storage / 1000).ToString() + " TB" : server.Hardware.Storage + " GB")   </p>
                         <p>Vrije opslag: @(server.HardWareAvailable.Storage > 1000 ?  (server.HardWareAvailable.Storage / 1000).ToString() + " TB" : server.HardWareAvailable.Storage + " GB")</p>
                         <p>Totale memory: @(server.Hardware.Memory > 1000? (server.Hardware.Memory /1000).ToString() + " GB" : server.Hardware.Memory + " GB")</p>
                         <p>Vrije memory: @(server.HardWareAvailable.Memory > 1000? (server.HardWareAvailable.Memory / 1000).ToString() + " GB" : server.HardWareAvailable.Memory + " MB") </p>
-
                     </div>
                 </div>
             </div>
