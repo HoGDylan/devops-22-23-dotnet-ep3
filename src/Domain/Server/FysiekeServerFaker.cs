@@ -22,16 +22,12 @@ namespace Domain.Server
 
         private Hardware GenerateRandomHardware()
         {
-            int[] _memoryOptions = { 1024, 2048, 4096, 8192, 16384 };
-            int[] _storageOptions = { 1000, 2000, 5000, 10000, 20000 };
+            int[] _memoryOptions = { 64000, 128000, 256000, 512000, 1024000 };
+            int[] _storageOptions = { 10000, 20000, 50000, 100000, 200000 };
+            int[] _cpus = { 24, 32, 40, 48, 56, 64 };
             List<Hardware> res = new();
 
-            for (int i = 0; i < 100; i++)
-            {
-                res.Add(new Hardware(_memoryOptions[new Random().Next(0, _memoryOptions.Count())], _storageOptions[new Random().Next(0, _storageOptions.Count())], new Random().Next(50, 200)));
-            }
-
-            return res[RandomNumberGenerator.GetInt32(0, res.Count())];
+            return new Hardware(_memoryOptions[new Random().Next(0, _memoryOptions.Count())], _storageOptions[new Random().Next(0, _storageOptions.Count())], _cpus[new Random().Next(0, _cpus.Count())]);
         }
     }
 }
