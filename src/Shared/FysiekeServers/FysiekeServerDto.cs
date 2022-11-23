@@ -15,13 +15,14 @@ namespace Shared.FysiekeServers
             public int Id { get; set; }
             public String Name { get; set; }
             public String ServerAddress { get; set; }
+            public Hardware Hardware { get; set; }
+            public Hardware HardWareAvailable { get; set; }
 
         }
         
-        public class Detail : Index
+        public class Detail
         {
-            public Hardware Hardware { get; set; }
-            public Hardware HardWareAvailable { get; set; }
+            public int Id { get; set; }
             public List<VirtualMachineDto.Detail> VirtualMachines { get; set; }
         }
     }
