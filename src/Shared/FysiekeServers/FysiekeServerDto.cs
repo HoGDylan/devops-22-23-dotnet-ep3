@@ -23,7 +23,7 @@ namespace Shared.FysiekeServers
         public class Detail
         {
             public int Id { get; set; }
-            public List<VirtualMachineDto.Detail> VirtualMachines { get; set; }
+            public List<VirtualMachineDto.Rapportage> VirtualMachines { get; set; }
         }
     }
 }

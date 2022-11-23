@@ -1,6 +1,8 @@
 ﻿using Bogus;
 using Domain.Server;
 using Shared.FysiekeServers;
+using Shared.VirtualMachines;
+using System.Linq;
 
 namespace Services.FysiekeServer
 {
@@ -21,15 +23,25 @@ namespace Services.FysiekeServer
             throw new NotImplementedException();
         }
 
-        public Task<FysiekeServerResponse.Details> GetDetailsAsync(FysiekeServerRequest.Detail request)
+        public async  Task<FysiekeServerResponse.Details> GetDetailsAsync(FysiekeServerRequest.Detail request)
         {
             FysiekeServerResponse.Details response = new();
-            
-            if(_servers.Any(e => e.Id == request.ServerId))
+            response.Server = new FysiekeServerDto.Detail();
+
+
+            if (_servers.Any(e => e.Id == request.ServerId))
             {
-                !
+                List<VirtualMachineDto.Rapportage> vms = _servers.Find(e => e.Id == request.ServerId).VirtualMachines.Select(e => new VirtualMachineDto.Rapportage() { Id = e.Id, Name = e.Name, Statistics = e.Statistics }).ToList();
                 response.Server.Id = request.ServerId;
-                
+                response.Server.VirtualMachines = vms;
+
+
+            }
+            else
+            {
+                response.Server.Id = -1;
+            }
+            return response;
         }
 
         public Task<FysiekeServerResponse.Launched> DeployVirtualMachine(FysiekeServerRequest.Approve request)

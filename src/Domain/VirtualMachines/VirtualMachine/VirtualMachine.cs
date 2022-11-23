@@ -4,7 +4,7 @@ using Domain.Projecten;
 using Domain.Server;
 using Domain.VirtualMachines.BackUp;
 using Domain.VirtualMachines.Contract;
-using Domain.VirtualMachines.Statistieken;
+using Domain.Statistics;
 using System.Net;
 
 namespace Domain.VirtualMachines.VirtualMachine

@@ -13,6 +13,7 @@ using Domain.Server;
 using Domain.Users;
 using Domain.VirtualMachines.BackUp;
 using Domain.VirtualMachines.Contract;
+using Domain.Statistics;
 using Shared.Utility;
 
 namespace Domain.VirtualMachines.VirtualMachine
@@ -20,11 +21,6 @@ namespace Domain.VirtualMachines.VirtualMachine
 
     public class VirtualMachineFaker : Faker<VirtualMachine>
     {
-
-
-
-
-
 
         //private readonly IEnumerable<DateTime?> _dateOptions = GenerateRandomDatesIncNull();
 
@@ -50,11 +46,13 @@ namespace Domain.VirtualMachines.VirtualMachine
         public VirtualMachineFaker()
         {
             int id = 1;
+            VMContract contract = VMContractFaker.Instance.GenerateOne();
+            Hardware hardware = GenerateRandomHardware(false);
 
             CustomInstantiator(e => new VirtualMachine(
                 e.Commerce.ProductName(),
                 e.PickRandom<OperatingSystemEnum>(),
-                e.PickRandom(GenerateRandomHardware(false)),
+                e.PickRandom(hardware),
                 e.PickRandom(GenerateRandomBackups())
                 ));
 
@@ -63,6 +61,7 @@ namespace Domain.VirtualMachines.VirtualMachine
             RuleFor(x => x.Mode, x => x.PickRandom<VirtualMachineMode>());
             RuleFor(x => x.Contract, _ => VMContractFaker.Instance.GenerateOne());
             RuleFor(x => x.FysiekeServer, _ => new FysiekeServer("Mock Server", GenerateRandomHardware(true), "mock-server_adres.hogent.be"));
+            RuleFor(x => x.Statistics, _ => new Statistic(contract.StartDate, contract.EndDate, hardware));
 
         }
 
