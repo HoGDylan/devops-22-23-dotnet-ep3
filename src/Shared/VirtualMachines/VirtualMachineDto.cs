@@ -4,6 +4,7 @@ using Domain.Server;
 using Domain.Users;
 using Domain.VirtualMachines.BackUp;
 using Domain.VirtualMachines.Contract;
+using Domain.Statistics;
 using Domain.VirtualMachines.VirtualMachine;
 using FluentValidation;
 
@@ -26,6 +27,13 @@ public static class VirtualMachineDto
         public Backup BackUp { get; set; }
         public FysiekeServer? FysiekeServer { get; set; }
         public VMConnection? VMConnection { get; set; }
+    }
+
+    public class Rapportage
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public Statistic Statistics { get; set; }
     }
     public class Edit
     {

@@ -13,13 +13,12 @@ partial class Index
     {
         var response = await FysiekeServerService.GetAllServers();
         Servers = response.Servers;
-        Console.WriteLine(Servers is null);
     }
 
 
     public void RedirectToDetailsPage(int id)
     {
-        Router.NavigateTo($"rapportage/{id}");
+        Router.NavigateTo($"servers/{id}");
 
     }
 }

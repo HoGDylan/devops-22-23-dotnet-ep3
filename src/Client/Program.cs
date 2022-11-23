@@ -32,6 +32,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
     {
         options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin-Consultant", "Admin-Beheer"));
         options.AddPolicy("BeheerOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin-Beheer"));
+        options.AddPolicy("LoggedIn", policy => policy.RequireAuthenticatedUser());
+        options.AddPolicy("Guest", policy => policy.RequireClaim(ClaimTypes.Name, "Guest"));
 
     });
 // builder.Services.AddSingleton<AuthenticationStateProvider, FakeAuthenticationProvider>();
