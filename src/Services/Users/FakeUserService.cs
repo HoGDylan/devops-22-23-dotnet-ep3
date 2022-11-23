@@ -55,7 +55,7 @@ namespace Services.Users
             List<ProjectDto.Index> projecten = new();
             UserResponse.DetailKlant response = new();
             Klant k = _klanten.Single(x => x.Id == request.KlantId);
-            if(k is not null)
+            if (k is not null)
             {
                 k.Projecten.ForEach(p => projecten.Add(new ProjectDto.Index()
                 {
@@ -73,9 +73,9 @@ namespace Services.Users
                     Projects = projecten,
                     contactPersoon = k.ContactPersoon,
                     ReserveContactPersoon = k.ContactPersoonReserv
-            };
+                };
 
-                
+
                 if (k is InterneKlant)
                 {
                     InterneKlant kI = (InterneKlant)k;
@@ -90,7 +90,7 @@ namespace Services.Users
             }
             else
             {
-                response.Klant = new KlantDto.Detail { Id = -1};
+                response.Klant = new KlantDto.Detail { Id = -1 };
             }
             return response;
         }
@@ -112,3 +112,4 @@ namespace Services.Users
 
         // create shit
     }
+}

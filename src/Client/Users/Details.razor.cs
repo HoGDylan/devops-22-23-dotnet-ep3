@@ -14,7 +14,6 @@ public partial class Details
 
     protected override async Task OnInitializedAsync()
     {
-        StateHasChanged();
         await GetKlantAsync();
         
     }
@@ -37,6 +36,7 @@ public partial class Details
     {
         if(!Edit)
         {
+
             GetKlantAsync().Wait();
         }
     }

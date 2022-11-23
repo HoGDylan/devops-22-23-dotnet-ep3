@@ -12,5 +12,6 @@ partial class Index
     {
         var response = await FysiekeServerService.GetAllServers();
         Servers = response.Servers;
+        Console.WriteLine(Servers is null);
     }
 }
