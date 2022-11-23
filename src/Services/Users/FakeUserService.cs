@@ -55,36 +55,43 @@ namespace Services.Users
             List<ProjectDto.Index> projecten = new();
             UserResponse.DetailKlant response = new();
             Klant k = _klanten.Single(x => x.Id == request.KlantId);
-            k.Projecten.ForEach(p => projecten.Add(new ProjectDto.Index()
+            if(k is not null)
             {
-                Id = p.Id,
-                Name = p.Name,
-                Klant = k
-            }));
-            var kdto = new KlantDto.Detail()
-            {
-                Id = k.Id,
-                Name = k.Name,
-                FirstName = k.FirstName,
-                Email = k.Email,
-                PhoneNumber = k.PhoneNumber,
-                Projects = projecten,
-                contactPersoon = k.ContactPersoon,
-                ReserveContactPersoon = k.ContactPersoonReserv
-        };
+                k.Projecten.ForEach(p => projecten.Add(new ProjectDto.Index()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Klant = k
+                }));
+                var kdto = new KlantDto.Detail()
+                {
+                    Id = k.Id,
+                    Name = k.Name,
+                    FirstName = k.FirstName,
+                    Email = k.Email,
+                    PhoneNumber = k.PhoneNumber,
+                    Projects = projecten,
+                    contactPersoon = k.ContactPersoon,
+                    ReserveContactPersoon = k.ContactPersoonReserv
+            };
 
                 
-            if (k is InterneKlant)
-            {
-                InterneKlant kI = (InterneKlant)k;
-                kdto.Opleiding = kI.Opleiding;
+                if (k is InterneKlant)
+                {
+                    InterneKlant kI = (InterneKlant)k;
+                    kdto.Opleiding = kI.Opleiding;
+                }
+                else
+                {
+                    ExterneKlant kE = (ExterneKlant)k;
+                    kdto.Bedrijf = kE.Bedrijfsnaam;
+                }
+                response.Klant = kdto;
             }
             else
             {
-                ExterneKlant kE = (ExterneKlant)k;
-                kdto.Bedrijf = kE.Bedrijfsnaam;
+                response.Klant = new KlantDto.Detail { Id = -1};
             }
-            response.Klant = kdto;
             return response;
         }
 

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Domain.VirtualMachines.Statistics
 {
-    public class StatisticsFaker : Faker<Statistics>
-    {
+    /*    public class StatisticsFaker : Faker<Statistics>
+        {
 
 
 
-    }
+        }*/
 }
