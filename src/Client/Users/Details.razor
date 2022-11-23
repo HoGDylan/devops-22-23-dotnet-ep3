@@ -1,5 +1,8 @@
 ﻿@page "/klant/{Id:int}"
 @using Client.Users.Components
+
+@attribute [Authorize]
+
 @if (Loading)
 {
     <div class="card-body center">

@@ -1,5 +1,6 @@
 ﻿@page "/klanten"
 @attribute [Authorize (policy: "AdminOnly" )]
+
 @if(Klanten is null ||Klanten.Count() == 0){
     <p>Geen klanten...</p>
 }
