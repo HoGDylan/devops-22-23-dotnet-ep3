@@ -1,18 +1,16 @@
-<<<<<<< HEAD
-﻿@page "/rapportage/{Id:int}"
-@attribute [Authorize("AdminOnly")]
-
-<div>
-    <DropDownList DataSource="chartFilter">
-
-    </DropDownList>
-</div>
-
-
-=======
 ﻿@page "/servers/{Id:int}"
 @attribute [Authorize("AdminOnly")]
 
 <div>
->>>>>>> 97c5d12392ecab0e74235c6222107a958ed28bf8
+    <EditForm Model="@Model">
+        <InputSelect @onchange="MakeDynamicChart" Value="@KeuzeChart" class="form-control">
+            @foreach (var optie in chartFilter)
+            {
+                <option value="@optie">@optie</option>
+            }
+        </InputSelect>
+    </EditForm>
+</div>
+
+
 
