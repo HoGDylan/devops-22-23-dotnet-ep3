@@ -14,8 +14,7 @@ namespace Shared.FysiekeServers
 
         public class Details
         {
-            public FysiekeServerDto.Detail Server { get; set; } // gedetailleerd overzicht van server zijn hardware in gebruik + niet, + serveradress
-            public List<VirtualMachineDto.Detail> VirtualMachines { get; set; } //overzicht VM met status | naam | project | hardware | contract
+            public FysiekeServerDto.Detail Server { get; set; } 
         }
         
         public class Launched
