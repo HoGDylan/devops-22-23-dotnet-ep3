@@ -23,7 +23,7 @@ namespace Domain.Server
         public String Naam { get { return _name; } private set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
         public String ServerAddress { get { return _serverAddress; } private set { _serverAddress =  Guard.Against.NullOrEmpty(value, nameof(_serverAddress)); } }
         public Hardware HardWare { get { return _hardWare; } private set {_hardWare =  Guard.Against.Null(value, nameof(_hardWare)); } }
-        public Hardware HardWareAvailable { get; private set; }
+        public Hardware HardWareAvailable { get; set; }
         public List<VirtualMachine> VirtualMachines { get; private set; }
 
 

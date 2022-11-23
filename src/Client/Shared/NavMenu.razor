@@ -12,7 +12,7 @@
                 <NavLink class="nav-link subtitle is-6" href="login">
                     <span class="icon-text">
                         <span class="icon is-medium">
-                            <i class="fas fa-computer"></i>
+                            <i class="fas fa-sharp fa-solid fa-user"></i>
                         </span>
                         <span class="navtab-name">Log in</span>
                     </span>
@@ -22,24 +22,24 @@
                 <NavLink class="nav-link subtitle is-6" href="register">
                     <span class="icon-text">
                         <span class="icon is-medium">
-                            <i class="fas fa-computer"></i>
+                            <i class="fas fa-sharp fa-solid fa-address-card"></i>
                         </span>
                         <span class="navtab-name">Registreer</span>
                     </span>
                 </NavLink>
             </div>
         </AuthorizeView>
-        <AuthorizeView Policy="LoggedIn" >
+        <AuthorizeView Policy="LoggedIn">
             <div class="nav-item px-2">
                 <NavLink class="nav-link subtitle is-6" href="klant/HIER_MOET_NOG_ID_DOORGEGEVEN_WORDEN" Match="NavLinkMatch.All">
                     <span class="icon-text">
                         <span class="icon is-medium">
-                            <i class="fas fa-computer"></i>
+                            <i class="fas fa-sharp fa-solid fa-user"></i>
                         </span>
                         <span class="navtab-name">Profiel</span>
                     </span>
                 </NavLink>
-            </div
+            </div>
             <div class="nav-item px-2">
                 <NavLink class="nav-link subtitle is-6" href="virtualmachines" Match="NavLinkMatch.All">
                     <span class="icon-text">
@@ -63,6 +63,9 @@
         </AuthorizeView>
       
         <AuthorizeView Policy="AdminOnly">
+            <br />
+            <br />
+
             <div class="nav-item px-2">
                 <NavLink class="nav-link subtitle is-6" href="klanten">
                     <span class="icon-text">
@@ -77,7 +80,7 @@
                 <NavLink class="nav-link subtitle is-6" href="beheerders">
                     <span class="icon-text">
                         <span class="icon is-medium">
-                            <i class="fas fa-key"></i>
+                            <i class="fas fa-solid fa-users-gear"></i>
                         </span>
                         <span class="navtab-name">Beheerders</span>
                     </span>
@@ -87,7 +90,7 @@
                 <NavLink class="nav-link subtitle is-6" href="servers">
                     <span class="icon-text">
                         <span class="icon is-medium">
-                            <i class="fi-bar-chart"></i>
+                            <i class="fas fa-sharp fa-solid fa-server"></i>
                         </span>
                         <span class="navtab-name">Servers</span>
                     </span>
