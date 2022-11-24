@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Components;
 using Shared.FysiekeServers;
+using Shared.VirtualMachines;
 using Smart.Blazor;
+using System.Runtime.CompilerServices;
 using UnlockedData.Chartist.Blazor;
 using UnlockedData.Chartist.Blazor.Core.Data;
 
@@ -8,28 +10,42 @@ namespace Client.Rapportage;
 
 partial class Details
 {
-    public string KeuzeChart { get; set; }
-    public string Model { get; set; }
-    string[] chartFilter = new string[] { "Per Uur", "Dagelijks", "Wekenlijks", "Maandenlijks" };
     [Parameter] public int Id { get; set; }
     
     [Inject] IFysiekeServerService Service { get; set; }
-    private FysiekeServerDto.Detail server_response;
+    private FysiekeServerDto.Detail server;
+    private List<VirtualMachineDto.Rapportage> virtualMachinesServer = new();
+    public Dictionary<int, bool> Collapsed { get; set; } = new Dictionary<int, bool>();
+    public List<int> Loading { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
         FysiekeServerRequest.Detail request = new FysiekeServerRequest.Detail() { ServerId = Id };
         var response = await Service.GetDetailsAsync(request);
-        server_response = response.Server;
-
-        
+        server = response.Server;
+        virtualMachinesServer = server.VirtualMachines;
     }
 
-    public static void MakeDynamicChart()
+    public async void Toggle(int id)
     {
-   
-       
+        bool check = false;
 
+        if (!Collapsed.ContainsKey(id))
+        {
+            check = true;
+            Collapsed.Add(id, true);
+        }
+        else
+        {
+            Collapsed[id] = !Collapsed[id];
+        }
+
+        if (check)
+        {
+            Loading.Add(id);
+            Loading.Remove(id);
+        }
+        StateHasChanged();
     }
 
 }

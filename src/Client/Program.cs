@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Client.Shared;
 using System.Security.Claims;
 
+
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
