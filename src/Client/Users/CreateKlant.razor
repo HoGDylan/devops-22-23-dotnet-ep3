@@ -1,21 +1,21 @@
 ﻿@page "/register"
 
-<form>
+<form method="post">
     <h1 class="title is-3">Gebruiker</h1>
     <div class="field columns">
         <div class="column">
-            <label class="label">Voornaam</label>
+            <label for="firstName" class="label">Voornaam</label>
             <p class="control has-icons-left">
-                <input class="input" type="text" placeholder="Jan">
+                <input id="firstName" name="firstName" class="input" type="text" value="" placeholder="Jan">
                 <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                 </span>
             </p>
         </div>
         <div class="column">
-            <label class="label">Achternaam</label>
+            <label for="lastName" class="label">Achternaam</label>
             <p class="control has-icons-left">
-                <input class="input" type="text" placeholder="Jansens">
+                <input name="lastName" class="input" type="text" value="" placeholder="Jansens">
                 <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                 </span>
