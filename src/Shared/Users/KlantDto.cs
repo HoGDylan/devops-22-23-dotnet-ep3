@@ -41,6 +41,7 @@ public static class KlantDto
         public string PhoneNumber { get; set; }
         [Required(ErrorMessage = "Je moet een email ingeven.")]
         [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public Course? Opleiding { get; set; }
         public string? Bedrijf { get; set; }
