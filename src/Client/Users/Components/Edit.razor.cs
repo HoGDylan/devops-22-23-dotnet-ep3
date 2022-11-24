@@ -33,7 +33,7 @@ partial class Edit
         UserRequest.DetailKlant request = new()
         {
             KlantId = klant.Id,
-        };
+        }
         await UserService.GetDetailKlant(request);
     }
 

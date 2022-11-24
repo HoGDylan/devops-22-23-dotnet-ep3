@@ -5,6 +5,7 @@ namespace Client.Users;
 
 public partial class Details
 {
+    private KlantDto.Mutate model = new();
     public bool Loading = false;
     public bool Edit = false;
     public bool Intern = false;
@@ -15,7 +16,7 @@ public partial class Details
     protected override async Task OnInitializedAsync()
     {
         await GetKlantAsync();
-        
+        ObjectToMutate();
     }
 
     private async Task GetKlantAsync()
@@ -37,15 +38,46 @@ public partial class Details
         Edit = !Edit;
     }
 
-    private async void CheckboxChanged(object sender, EventArgs e)
+/*    private async void CheckboxChanged()
     {
         if (!Edit)
         {
-            Loading = true;
-            await Task.Delay(100);
+
             GetKlantAsync();
+            Console.WriteLine(Loading);
             Loading = false;
         }
         
+    }*/
+
+    private async void EditKlant()
+    {
+
+        UserRequest.Edit request = new()
+        {
+            KlantId = Klant.Id,
+            Klant = model
+        };
+        await UserService.EditAsync(request);
+
+        var response = await UserService.GetDetailKlant(new UserRequest.DetailKlant() { KlantId = Klant.Id });
+        Klant = response.Klant;
+    }
+
+    public void ObjectToMutate()
+    {
+        model.FirstName = Klant.FirstName;
+        model.Name = Klant.Name;
+        model.Email = Klant.Email;
+        model.PhoneNumber = Klant.PhoneNumber;
+        if (Klant.Opleiding is not null)
+        {
+            model.Opleiding = Klant.Opleiding;
+        }
+        else
+        {
+            model.Bedrijf = Klant.Bedrijf;
+        }
+
     }
 }
