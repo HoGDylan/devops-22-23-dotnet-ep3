@@ -191,8 +191,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Users\Components\" />
-  </ItemGroup>
-
 </Project>
