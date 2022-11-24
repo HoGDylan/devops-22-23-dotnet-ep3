@@ -15,8 +15,8 @@ else
             <div class="column is-one-third-widescreen is-half-desktop">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">@server.Name</h3>
-                        <button class="btn btn-sm" type="button" @onclick="() => RedirectToDetailsPage(server.Id)">Rapportering</button>
+                        <h3 class="card-header-title">@server.Name</h3>
+                        <i class="card-header-icon fa fa-solid fa-square-poll-vertical fa-2x" @onclick="() => RedirectToDetailsPage(server.Id)"></i>
                     </div>
                     <div class="card-body">
                         <p>Id: @server.Id</p>
