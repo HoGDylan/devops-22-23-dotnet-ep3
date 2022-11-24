@@ -23,7 +23,7 @@ else
                         <p>Naam: @server.Name</p>
                         <p>Serveradres: @server.ServerAddress</p>
                         <br>
-                        <p>Aantal vCPU's:' @server.Hardware.Amount_vCPU</p>
+                        <p>Aantal vCPU's: @server.Hardware.Amount_vCPU</p>
                         <p>Vrije vCPU's: @server.HardWareAvailable.Amount_vCPU</p>
                         <p>Totale opslag: @(server.Hardware.Storage > 1000 ? (server.Hardware.Storage / 1000).ToString() + " TB" : server.Hardware.Storage + " GB")   </p>
                         <p>Vrije opslag: @(server.HardWareAvailable.Storage > 1000 ?  (server.HardWareAvailable.Storage / 1000).ToString() + " TB" : server.HardWareAvailable.Storage + " GB")</p>

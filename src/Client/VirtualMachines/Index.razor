@@ -58,7 +58,10 @@ else if (_projects.Count() == 0) {
                                             <td><span class="@vm.Mode.GetDotIcon()"></span>@vm.Mode.GetString()</td>
                                             <td>@vm.Name</td>
                                             <td>@(project.Klant.FirstName + " " +  project.Klant.Name)</td>
-                                            <td><button @onclick="() => NavigateToVMDetails(vm.Id)">Details</button><button>Meer</button></td>
+                                            <td>
+                                                <button @onclick="() => NavigateToVMDetails(vm.Id)">Details</button>
+                                                <button>Meer</button>
+                                            </td>
                                         </tr>
 
                                     }

@@ -16,7 +16,9 @@ else
     <div class="columns is-desktop is-multiline">
         <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
-                <h3 class="card-title">Algemeen</h3>
+                <div class="card-header">
+                    <h3 class="card-header-title">Algemeen</h3>
+                </div>
                 <div class="card-body">
                     <p>ID: @Virtualmachine.Id</p>
                     <p>Naam: @FormatCapitalLetter(Virtualmachine.Name)</p>
@@ -27,16 +29,20 @@ else
         </div>
         <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
-                <h3 class="card-title">Back Up</h3>
+                <div class="card-header">
+                    <h3 class="card-header-title">Back Up</h3>
+                </div>
                 <div class="card-body">
-                    <p>Backup Type: @FormatCapitalLetter(Virtualmachine.BackUp.Type.ToString())</p>
+                    <p>Backup Type: @FormatCapitalLetter(Virtualmachine.BackUp.Type.GetString())</p>
                     <p>Laatste Back up: @Virtualmachine.BackUp.LastBackup.ToString()</p>
                 </div>
             </div>
         </div>
         <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
-                <h3 class="card-title">VM Periode</h3>
+                <div class="card-header">
+                    <h3 class="card-header-title">VM Periode</h3>
+                </div>
                 <div class="card-body">
                     <p>ID: @Virtualmachine.Contract.Id</p>
                     <p>Datum start: @Virtualmachine.Contract.StartDate.ToString()</p>
@@ -47,7 +53,9 @@ else
 
         <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
-                <h3 class="card-title">Hardware</h3>
+                <div class="card-header">
+                    <h3 class="card-header-title">Hardware</h3>
+                </div>
                 <div class="card-body">
                     <p>Memory/RAM: @Virtualmachine.Hardware.Memory GB </p>
                     <p>Aantal Cores: @Virtualmachine.Hardware.Amount_vCPU</p>
@@ -57,7 +65,9 @@ else
         </div>
         <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
-                <h3 class="card-title">Connectie</h3>
+                <div class="card-header">
+                    <h3 class="card-header-title">Connectie</h3>
+                </div>
                 <div class="card-body">
                     @if (Virtualmachine.VMConnection is null)
                     {

@@ -36,4 +36,16 @@ public partial class Details
     {
         Edit = !Edit;
     }
+
+    private async void CheckboxChanged(object sender, EventArgs e)
+    {
+        if (!Edit)
+        {
+            Loading = true;
+            await Task.Delay(100);
+            GetKlantAsync();
+            Loading = false;
+        }
+        
+    }
 }
