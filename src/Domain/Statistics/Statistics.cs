@@ -27,7 +27,7 @@ public class Statistic
     }
 
 
-    public List<DataPoint> GetStatistics()
+    public List<DataPoint> GetFakeStatisticsPerHour()
     {
         if(_dataPoints == null)
         {
