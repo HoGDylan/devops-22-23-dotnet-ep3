@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Net.Http.Json;
 
-namespace Client.Rapportage
+namespace Client.Servers
 {
     public class FysiekeServerService : IFysiekeServerService
     {
@@ -25,6 +25,11 @@ namespace Client.Rapportage
         }
 
         public Task<FysiekeServerResponse.Details> GetDetailsAsync(FysiekeServerRequest.Detail request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FysiekeServerResponse.ResourcesAvailable> GetAvailableHardWareOnDate(FysiekeServerRequest.Date date)
         {
             throw new NotImplementedException();
         }

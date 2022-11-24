@@ -25,6 +25,10 @@ namespace Shared.FysiekeServers
         {
             public int ServerId { get; set; }
         }
+        public class Date
+        {
+            public DateTime OnDate { get; set; }
+        }
 
     }
 }

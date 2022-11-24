@@ -1,0 +1,22 @@
+﻿.card-body {
+    padding: 1rem;
+}
+
+.card-header {
+    background-color: black;
+}
+
+.card-header-title {
+    color: white;
+}
+
+.form-container{
+    position:relative;
+    height: 150px;
+    border: 1px solid black;
+}
+.form-container:first-child{
+    position:absolute;
+    top: 50%;
+    tranform: translateY(-50%);
+}
