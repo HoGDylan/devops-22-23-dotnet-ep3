@@ -11,6 +11,11 @@ namespace Client.Servers
         private List<FysiekeServerDto.Beschikbaarheid> Servers { get; set; }
         private DateTime Date { get; set; } = DateTime.Now;
 
+        protected override async Task OnInitializedAsync()
+        {
+            base.OnInitializedAsync();
+            await GetAvailableResources();
+        }
 
         private async Task GetAvailableResources()
         {
