@@ -1,4 +1,4 @@
-﻿<div class="top-row ps-3 navbar">
+﻿<div class="top-row ps-3 navbar has-background-black">
     <h3 class="title is-4 logo" href="https://www.hogent.be/">Virtual IT Company</h3>
     <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
@@ -62,7 +62,9 @@
             </div>
         </AuthorizeView>
       
+
         <AuthorizeView Policy="AdminOnly">
+            <br />
             <div class="nav-item px-2">
                 <NavLink class="nav-link subtitle is-6" href="klanten">
                     <span class="icon-text">
