@@ -169,5 +169,19 @@ namespace Services.VirtualMachines
             return response;
 
         }
+
+        public async Task<VirtualMachineResponse.Rapport> RapporteringAsync(VirtualMachineRequest.GetDetail request)
+        {
+            await Task.Delay(100);
+            VirtualMachineResponse.Rapport response = new();
+            var vm = _virtualMachines.SingleOrDefault(x => x.Id == request.VirtualMachineId);
+            VirtualMachineDto.Rapportage dto = new();
+                dto.Statistics = vm.Statistics;
+                dto.Id = vm.Id;
+                dto.Name = vm.Name;
+            response.VirtualMachine = dto;
+            return response;
+
+        }
     }
 }

@@ -29,6 +29,10 @@
             public int VM_Id { get; set; }
         }
 
+        public class Rapport
+        {
+            public VirtualMachineDto.Rapportage VirtualMachine { get; set; }
+        }
 
 
     }

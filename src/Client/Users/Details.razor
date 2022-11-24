@@ -64,10 +64,11 @@ else
                         <input type="text" readonly class="input" value="@Klant.Bedrijf">
                     }
                     </div>
+                   <div>
+                   <p class="label">Contcatpersoon: </p>
                     @if (Klant.contactPersoon is not null)
                     {
-                    <div>
-                        <p class="label">Contcatpersoon: </p>
+                   
                         <div>
                                 <label class="label">Email Contactpersoon</label>
                                 <input class="input" readonly type="@Klant.contactPersoon.Email">
@@ -75,11 +76,14 @@ else
                         <div>
                             <label class="label">Gsm-nummer Contactpersoon</label>
                             <input class="input" readonly type="@Klant.contactPersoon.PhoneNumber">
-                        </div>   
-                     </div>
-              
-                    }
-                    </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <p class="input">Deze klant heeft geen contactpersoon</p>
+                                }
+                            </div>
+                </div>
                 }
                 else{
                         <EditForm Model="@model" OnValidSubmit="@EditKlant">

@@ -1,7 +1,8 @@
 @page "/servers/{Id:int}"
-@using Client.Rapportage.Component
+@using Client.Servers.Component
 @attribute [Authorize("AdminOnly")]
 
+<h5>Virtualmachines van server</h5>
 <div class="accordion">
     @foreach (var vm in virtualMachinesServer)
     {
