@@ -1,0 +1,38 @@
+﻿@page "/beschikbaarheid"
+
+@attribute [Authorize("AdminOnly")]
+<h1 class="is-title-3">Beschikbaarheden op datum</h1>
+
+ <div class="container">
+    <div class="form-container">
+    <form onsubmit="@GetAvailableResources()">
+        <div class="flex">
+            <label for="date">Datum:</label>
+            <input type="date" name="date" @bind="Date"/>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+    </div>
+    @if (Servers is not null && Servers.Count() > 0)
+    {
+        <h2 class="is-title-2">Beschikbaarheden op datum: @Date.ToShortDateString()</h2>
+        <div class="columns is-desktop is-multiline">
+
+            @foreach(var server in Servers)
+            {
+            <div class="column is-one-third-widescreen is-half-desktop">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-header-title">Server: @server.Id</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Geheugen/Ram: @(server.AvailableHardware.Memory > 1000 ? (server.AvailableHardware.Memory / 1000).ToString() + " GB" : server.AvailableHardware.Memory + " MB")</p>
+                        <p>Opslag: @(server.AvailableHardware.Storage > 1000000 ? (server.AvailableHardware.Storage / 1000000).ToString() + " TB" : server.AvailableHardware.Storage + " GB")</p>
+                        <p>Aantal Cores: @server.AvailableHardware.Amount_vCPU</p>
+                    </div>
+                </div>  
+            </div> 
+            }
+        </div>
+    }
+</div>

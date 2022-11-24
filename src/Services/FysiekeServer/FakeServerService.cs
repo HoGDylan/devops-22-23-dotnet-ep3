@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Domain.Common;
 using Domain.Server;
 using Shared.FysiekeServers;
 using Shared.VirtualMachines;
@@ -63,5 +64,32 @@ namespace Services.FysiekeServer
             respons.Count = _servers.Count();
             return respons;
         }
+
+        public async Task<FysiekeServerResponse.ResourcesAvailable> GetAvailableHardWareOnDate(FysiekeServerRequest.Date date)
+        {
+
+            FysiekeServerResponse.ResourcesAvailable response = new();
+            response.Servers = new List<FysiekeServerDto.Beschikbaarheid>();
+
+            Dictionary<int, Hardware> output = new();
+
+
+            foreach (var server in _servers)
+            {
+                Hardware max = server.HardWare;
+                int id = server.Id;
+
+                foreach (var vm in server.VirtualMachines)
+                {
+                    if (vm.Contract.EndDate > date.OnDate)
+                    {
+                        max = new Hardware(max.Memory - vm.Hardware.Memory, max.Storage - vm.Hardware.Storage, max.Amount_vCPU - vm.Hardware.Amount_vCPU);
+                    }
+                }
+            response.Servers.Add(new FysiekeServerDto.Beschikbaarheid() { Id = server.Id, AvailableHardware = max });
+
+        };
+            return response;
+       }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Shared.FysiekeServers;
 
-namespace Client.Rapportage;
+namespace Client.Servers;
 
-partial class Index 
+public partial class Index 
 {
     [Inject] public IFysiekeServerService FysiekeServerService { get; set; }
     [Inject] public NavigationManager Router { get; set; }

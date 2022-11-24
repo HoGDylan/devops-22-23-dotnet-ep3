@@ -16,11 +16,15 @@ namespace Shared.FysiekeServers
 
         public Task<FysiekeServerResponse.Available> GetAllServers();
 
+
+        public Task<FysiekeServerResponse.ResourcesAvailable> GetAvailableHardWareOnDate(FysiekeServerRequest.Date date);
+
+
+
         /*
         
         ik denk dat dit genoeg is ?
         eventueel naar volgende sprints kunnen we hier nog:
-         •  methode aan toevoegen om te zien hoeveel verbruik er is op een VM ( GetVmAnalytics(TimePeriods.Weekly)  of TimePeriods.Hourly, .. )
          •  methode aan toevoegen om te zien hoeveel verbruik er is van alle VM's op een bepaalde server ( GetAnalytics(Timeperiods.Daily, ... )
 
         Backuptype veranderen naar Timeperiod enum, zodat we deze ook hier kunnen gebruiken.

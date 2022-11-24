@@ -25,5 +25,11 @@ namespace Shared.FysiekeServers
             public int Id { get; set; }
             public List<VirtualMachineDto.Rapportage> VirtualMachines { get; set; }
         }
+
+        public class Beschikbaarheid
+        {
+            public int Id { get; set; }
+            public Hardware AvailableHardware { get; set; }
+        }
     }
 }
