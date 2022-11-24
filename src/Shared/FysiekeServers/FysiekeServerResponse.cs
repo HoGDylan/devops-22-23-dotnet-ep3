@@ -21,5 +21,10 @@ namespace Shared.FysiekeServers
         {
             public VirtualMachineDto.Detail VirtualMachine { get; set; } // VirtualMachine heeft een VMConnection gekregen en wordt teruggeven.
         }
+
+        public class ResourcesAvailable
+        {
+            public List<FysiekeServerDto.Beschikbaarheid> Servers { get; set; }
+        }
     }
 }

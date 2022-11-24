@@ -52,7 +52,7 @@ namespace Domain.VirtualMachines.VirtualMachine
            
             CustomInstantiator(e =>
                 {
-                    hardware = GenerateRandomHardware(false);
+                    hardware = GenerateRandomHardware();
                     contract = VMContractFaker.Instance.GenerateOne();
 
                     return new VirtualMachine(
@@ -67,7 +67,7 @@ namespace Domain.VirtualMachines.VirtualMachine
             RuleFor(x => x.Connection, _ => new Random().Next(0, 2) % 1 == 0 ? new VMConnection("MOCK-FQDN", GetRandomIpAddress(), "MOCK-USER", PasswordGenerator.Generate(20, 3, 3, 3, 3)) : null);
             RuleFor(x => x.Mode, x => x.PickRandom<VirtualMachineMode>());
             RuleFor(x => x.Contract, _ => contract);
-            RuleFor(x => x.FysiekeServer, _ => new FysiekeServer("Mock Server", GenerateRandomHardware(true), "mock-server_adres.hogent.be"));
+            RuleFor(x => x.FysiekeServer, _ => new FysiekeServer("Mock Server", FysiekeServerFaker.GenerateRandomHardware(), "mock-server_adres.hogent.be"));
             
         }
 
@@ -112,16 +112,14 @@ namespace Domain.VirtualMachines.VirtualMachine
 
         }
 
-        private Hardware GenerateRandomHardware(bool server)
+        private Hardware GenerateRandomHardware()
         {
-            List<Hardware> res = new();
+
+            int[] _memoryOptions = { 1_000, 2_000, 4_000, 8_000, 16_000, 32_000 };
+            int[] _storageOptions = { 250, 1_000, 2_000, 5_000, 10_000, 20_000, 50_000, 100_000, 200_000, 500_000};
 
 
-            int[] _memoryOptions = { 1, 2, 4, 8, 16, 32, 64 };
-            int[] _storageOptions = { 30, 50, 75, 100, 150, 200, 250, 300, 500 };
-
-
-            return new Hardware(_memoryOptions[new Random().Next(0, _memoryOptions.Count())] * (server ? 15 : 1), _storageOptions[new Random().Next(0, _storageOptions.Count())] * (server ? 15 : 1), new Random().Next(1, 13) * (server ? 15 : 1));
+            return new Hardware(_memoryOptions[new Random().Next(0, _memoryOptions.Count())], _storageOptions[new Random().Next(0, _storageOptions.Count())], new Random().Next(1, 9));
         }
 
         private Backup GenerateRandomBackups()

@@ -6,9 +6,9 @@ using System.Runtime.CompilerServices;
 using UnlockedData.Chartist.Blazor;
 using UnlockedData.Chartist.Blazor.Core.Data;
 
-namespace Client.Rapportage;
+namespace Client.Servers;
 
-partial class Details
+public partial class Details
 {
     [Parameter] public int Id { get; set; }
     

@@ -22,18 +22,18 @@ namespace Domain.Server
                 });
        
             RuleFor(e => e.Id, _ => id++);
-            RuleFor(e => e.VirtualMachines, _ => VirtualMachineFaker.Instance.Generate(10));
+            RuleFor(e => e.VirtualMachines, _ => VirtualMachineFaker.Instance.Generate(12));
             RuleFor(e => e.HardWareAvailable, _ => new Hardware( hw.Memory - new Random().Next(1, hw.Memory), hw.Storage -  new Random().Next(1, hw.Storage), hw.Amount_vCPU - new Random().Next(1, hw.Amount_vCPU)));
             
         }
 
 
-        private Hardware GenerateRandomHardware()
+        public static Hardware GenerateRandomHardware()
         {
-            int[] _memoryOptions = { 64000, 128000, 256000, 512000, 1024000 };
-            int[] _storageOptions = { 10000, 20000, 50000, 100000, 200000 };
-            int[] _cpus = { 24, 32, 40, 48, 56, 64 };
-            List<Hardware> res = new();
+            int[] _memoryOptions = { 256_000, 512_000};
+            int[] _storageOptions = { 5_000_000, 10_000_000, 20_000_000 };
+            int[] _cpus = { 112,120,150,200 };
+
 
             return new Hardware(_memoryOptions[new Random().Next(0, _memoryOptions.Count())], _storageOptions[new Random().Next(0, _storageOptions.Count())], _cpus[new Random().Next(0, _cpus.Count())]);
         }
