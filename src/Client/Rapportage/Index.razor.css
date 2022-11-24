@@ -3,7 +3,7 @@
 }
 
 .card-header {
-    background-color: black;
+    background-color: black !important;
 }
 
 .card-header-title {
