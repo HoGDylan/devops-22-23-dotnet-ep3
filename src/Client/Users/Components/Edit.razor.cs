@@ -28,6 +28,15 @@ partial class Edit
         klant = response.Klant;
     }
 
+    private async void GetKlant()
+    {
+        UserRequest.DetailKlant request = new()
+        {
+            KlantId= klant.Id,
+        }
+        await UserService.GetDetailKlant(request);
+    }
+
     public void ObjectToMutate()
     {
         model.FirstName = klant.FirstName;
