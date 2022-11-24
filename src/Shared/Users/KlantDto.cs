@@ -31,14 +31,17 @@ public static class KlantDto
 
     public class Mutate
     {
-      //  [Required(ErrorMessage = "Je moet een voornaam ingeven.")]
-      //  [StringLength(20, ErrorMessage = "Naam is te lang")]
+        [Required(ErrorMessage = "Je moet een voornaam ingeven.")]
+        [StringLength(20, ErrorMessage = "Naam is te lang")]
         public string FirstName { get; set; }
-       // [Required(ErrorMessage = "Je moet een naam ingeven.")]
+        [Required(ErrorMessage = "Je moet een naam ingeven.")]
         public string Name { get; set; }
-       // [Required(ErrorMessage = "Je moet een gsm-nummer ingeven.")]
+        [Required(ErrorMessage = "Je moet een gsm-nummer ingeven.")]
+        
         public string PhoneNumber { get; set; }
-        //[Required(ErrorMessage = "Je moet een email ingeven.")]
+        [Required(ErrorMessage = "Je moet een email ingeven.")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage ="Je moet een geldig e-mailadres invoeren.")]
         public string Email { get; set; }
         public Course? Opleiding { get; set; }
         public string? Bedrijf { get; set; }
