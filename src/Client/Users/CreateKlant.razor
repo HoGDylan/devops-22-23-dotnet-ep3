@@ -6,7 +6,7 @@
         <div class="column">
             <label for="firstName" class="label">Voornaam</label>
             <p class="control has-icons-left">
-                <input id="firstName" name="firstName" class="input" type="text" value="" placeholder="Jan">
+                <input id="firstName" name="firstName" class="input" type="text" placeholder="Jan">
                 <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                 </span>
@@ -26,66 +26,44 @@
         <div class="column">
             <div class="field">
                 <label class="label">Email</label>
-                <p class="control has-icons-left has-icons-right">
-                    <input class="input @(isEmail ? "" : "is-danger")" type="email" placeholder="user@@example.be">
+                <p class="control has-icons-left">
+                    <input class="input" type="email" placeholder="user@@example.be" @bind="emailValue" @bind:event="oninput">
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
-                    <span class="icon is-small is-right">
-                        <i class="@(isEmail ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
-                    </span>
-                    @if (!isEmail)
-                    {
-                    <p class="has-text-danger">Dit is geen geldig email!</p>
-                    }
                 </p>
             </div>
         </div>
         <div class="column">
             <div class="field">
                 <label class="label">Telefoon</label>
-                <p class="control has-icons-left has-icons-right">
-                    <input class="input @(isPhonenumber ? "" : "is-danger")" type="tel" placeholder="Telefoonnummer">
+                <p class="control has-icons-left">
+                    <input class="input" type="tel" placeholder="Telefoonnummer">
                     <span class="icon is-small is-left">
                         <i class="fas fa-phone"></i>
                     </span>
-                    <span class="icon is-small is-right">
-                        <i class="@(isPhonenumber ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
-                    </span>
-                    @if (!validPassword)
-                    {
-                        <!--Dit moet specifieker zeggen waaraan niet wordt voldaan-->
-                    <p class="has-text-danger">Dit is geen geldig telefoonnummer!</p>
-                    }
                 </p>
             </div>
         </div>
     </div>
     <div class="field">
         <label class="label">Wachtwoord</label>
-        <p class="control has-icons-left has-icons-right">
-            <input class="input @(validPassword ? "" : "is-danger")" type="password" placeholder="Wachtwoord">
+        <p class="control has-icons-left">
+            <input class="input" type="password" placeholder="Wachtwoord">
             <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
             </span>
-            <span class="icon is-small is-right">
-                <i class="@(isEmail ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
-            </span>
-            @if (!validPassword) {
-            <!--Dit moet specifieker zeggen waaraan niet wordt voldaan-->
-            <p class="has-text-danger">Dit is geen geldig wachtwoord!</p>
-            }
         </p>
     </div>
     <div class="field">
         <label class="label">Relatie</label>
         <div class="control">
             <label class="radio">
-                <input type="radio" name="relation" checked @onclick="@(() => toggleRelation())">
+                <input type="radio" name="relation" checked @onchange="toggleRelation">
                 Intern
             </label>
             <label class="radio">
-                <input type="radio" name="relation" @onclick="@(() => toggleRelation())">
+                <input type="radio" name="relation" @onchange="toggleRelation">
                 Extern
             </label>
         </div>
@@ -124,7 +102,7 @@
                 <div class="column">
                     <label class="label">Type</label>
                     <div class="control has-icons-left">
-                        <div class="select is-primary">
+                        <div class="select is-primary is-fullwidth">
                             <select>
                                 <option>VOKA</option>
                                 <option>UNISEF</option>
@@ -166,18 +144,11 @@
             <div class="column">
                 <div class="field">
                     <label class="label">Email</label>
-                    <p class="control has-icons-left has-icons-right">
-                        <input class="input @(isEmailContact ? "" : "is-danger")" type="email" placeholder="user@@example.be">
+                    <p class="control has-icons-left">
+                        <input class="input" type="email" placeholder="user@@example.be">
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
-                        <span class="icon is-small is-right">
-                            <i class="@(isEmailContact ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
-                        </span>
-                        @if (!isEmail)
-                        {
-                        <p class="has-text-danger">Dit is geen geldig email!</p>
-                        }
                     </p>
                 </div>
             </div>
@@ -185,18 +156,10 @@
                 <div class="field">
                     <label class="label">Telefoon</label>
                     <p class="control has-icons-left has-icons-right">
-                        <input class="input @(isPhonenumberContact ? "" : "is-danger")" type="tel" placeholder="Telefoonnummer">
+                        <input class="input" type="tel" placeholder="Telefoonnummer">
                         <span class="icon is-small is-left">
                             <i class="fas fa-phone"></i>
                         </span>
-                        <span class="icon is-small is-right">
-                            <i class="@(isPhonenumberContact ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
-                        </span>
-                        @if (!validPassword)
-                        {
-                            <!--Dit moet specifieker zeggen waaraan niet wordt voldaan-->
-                        <p class="has-text-danger">Dit is geen geldig telefoonnummer!</p>
-                        }
                     </p>
                 </div>
             </div>
@@ -226,37 +189,22 @@
             <div class="column">
                 <div class="field">
                     <label class="label">Email</label>
-                    <p class="control has-icons-left has-icons-right">
-                        <input class="input @(isEmailResContact ? "" : "is-danger")" type="email" placeholder="user@@example.be">
+                    <p class="control has-icons-left">
+                        <input class="input" type="email" placeholder="user@@example.be">
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
-                        <span class="icon is-small is-right">
-                            <i class="@(isEmailResContact ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
-                        </span>
-                        @if (!isEmail)
-                        {
-                        <p class="has-text-danger">Dit is geen geldig email!</p>
-                        }
                     </p>
                 </div>
             </div>
             <div class="column">
                 <div class="field">
                     <label class="label">Telefoon</label>
-                    <p class="control has-icons-left has-icons-right">
-                        <input class="input @(isPhonenumberResContact ? "" : "is-danger")" type="tel" placeholder="Telefoonnummer">
+                    <p class="control has-icons-left">
+                        <input class="input" type="tel" placeholder="Telefoonnummer">
                         <span class="icon is-small is-left">
                             <i class="fas fa-phone"></i>
                         </span>
-                        <span class="icon is-small is-right">
-                            <i class="@(isPhonenumberResContact ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
-                        </span>
-                        @if (!validPassword)
-                        {
-                            <!--Dit moet specifieker zeggen waaraan niet wordt voldaan-->
-                        <p class="has-text-danger">Dit is geen geldig telefoonnummer!</p>
-                        }
                     </p>
                 </div>
             </div>
@@ -271,14 +219,17 @@
 </form>
 
 @code {
+    /*
     public Boolean isEmail { get; set; } = false;
     public Boolean isEmailContact { get; set; } = false;
     public Boolean isEmailResContact { get; set; } = false;
     public Boolean isPhonenumber { get; set; } = false;
     public Boolean isPhonenumberContact { get; set; } = false;
     public Boolean isPhonenumberResContact { get; set; } = false;
-    public Boolean validPassword { get; set; } = false;
+    public Boolean validPassword { get; set; } = false;*/
     public Boolean isIntern { get; set; } = true;
+
+    private string? emailValue { get; set; }
 
     public void toggleRelation() {
         isIntern = !isIntern;
