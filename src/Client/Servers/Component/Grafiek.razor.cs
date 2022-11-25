@@ -31,7 +31,7 @@ namespace Client.Servers.Component
         protected override async Task OnInitializedAsync()
         {
             await getVirtualmachine();
-            _data = vm.Statistics.GetFakeStatisticsPerHour();
+            //_data = vm.Statistics.GetFakeStatisticsPerHour();
             ConfigureLineConfig();
         }
 
@@ -93,7 +93,7 @@ namespace Client.Servers.Component
             LineConf.Data.Datasets.Add(cpuDataset);
             LineConf.Data.Datasets.Add(memoryDataset);
             LineConf.Data.Datasets.Add(storageDataset);
-            LineConf.Data.Labels.A
+            //LineConf.Data.Labels.A
         }
 
         private void instellenAxes()
@@ -122,8 +122,8 @@ namespace Client.Servers.Component
                 }
             };
         }
-        private async Task SetupCompletedCallback() =>
-        await jsRuntime.InvokeVoidAsync("workaroundGradient", LineConf.CanvasId);
+        //private async Task SetupCompletedCallback() =>
+       // await jsRuntime.InvokeVoidAsync("workaroundGradient", LineConf.CanvasId);
     }
 }
 

@@ -27,7 +27,8 @@ namespace Shared.FysiekeServers
         }
         public class Date
         {
-            public DateTime OnDate { get; set; }
+            public DateTime FromDate { get; set; }
+            public DateTime ToDate { get; set; }
         }
 
     }

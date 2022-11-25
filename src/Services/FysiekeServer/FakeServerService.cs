@@ -81,7 +81,7 @@ namespace Services.FysiekeServer
 
                 foreach (var vm in server.VirtualMachines)
                 {
-                    if (vm.Contract.EndDate > date.OnDate)
+                    if (vm.Contract.EndDate > date.ToDate)
                     {
                         max = new Hardware(max.Memory - vm.Hardware.Memory, max.Storage - vm.Hardware.Storage, max.Amount_vCPU - vm.Hardware.Amount_vCPU);
                     }
