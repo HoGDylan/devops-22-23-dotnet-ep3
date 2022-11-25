@@ -116,7 +116,7 @@ public class Statistic
                     return DateTime.Parse($"{dt.Day}/{dt.Month}/{dt.Year} 00:00");
 
                 }
-
+                
             default: throw new ArgumentException("No valid period provided");
         }
     }
@@ -127,10 +127,10 @@ public class Statistic
     {
         switch (period)
         {
-            case StatisticsPeriod.HOURLY: return DateTime.Now.Hour - StartTime.Hour;
-            case StatisticsPeriod.DAILY: return DateTime.Now.Day - StartTime.Day;
-            case StatisticsPeriod.WEEKLY: return (DateTime.Now.Day - StartTime.Day) % 7;
-            case StatisticsPeriod.MONTHLY: return (DateTime.Now.Day - StartTime.Day) % 30;
+            case StatisticsPeriod.HOURLY: return (int)Math.Floor((DateTime.Now - StartTime).TotalHours);
+            case StatisticsPeriod.DAILY: return (int) Math.Floor((DateTime.Now - StartTime).TotalDays);
+            case StatisticsPeriod.WEEKLY: return (int) Math.Floor((DateTime.Now - StartTime).TotalDays % 7);
+            case StatisticsPeriod.MONTHLY: return (int) Math.Floor((DateTime.Now - StartTime).TotalDays % 30);
         }
 
         return 0;
