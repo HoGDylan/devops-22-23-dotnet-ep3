@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using Shared.FysiekeServers;
 
 namespace Client.Servers;
@@ -14,7 +14,6 @@ public partial class Index
         var response = await FysiekeServerService.GetAllServers();
         Servers = response.Servers;
     }
-
 
     public void RedirectToDetailsPage(int id)
     {

@@ -34,6 +34,7 @@ public static class VirtualMachineDto
         public int Id { get; set; }
         public string Name { get; set; }
         public Statistic Statistics { get; set; }
+
     }
     public class Edit
     {

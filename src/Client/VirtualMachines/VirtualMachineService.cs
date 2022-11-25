@@ -49,5 +49,12 @@ namespace Client.VirtualMachines
         {
             throw new NotImplementedException();
         }
+
+        public async Task<VirtualMachineResponse.Rapport> RapporteringAsync(VirtualMachineRequest.GetDetail request)
+        {
+            var queryParameters = request.GetQueryString();
+            var response = await client.GetFromJsonAsync<VirtualMachineResponse.Rapport>($"{endpoint}?{queryParameters}");
+            return response;
+        }
     }
 }
