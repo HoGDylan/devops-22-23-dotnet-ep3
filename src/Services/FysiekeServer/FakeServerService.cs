@@ -81,7 +81,8 @@ namespace Services.FysiekeServer
 
                 foreach (var vm in server.VirtualMachines)
                 {
-                    if (vm.Contract.EndDate > date.ToDate)
+                    if (vm.Contract.EndDate >= date.ToDate && vm.Contract.StartDate <= date.ToDate ) 
+                        // als de contract duur later is dan gevraagde periode en de begin periode voor of gelijk aan eind datum is. -> resources zullen niet beschikbaar zijn
                     {
                         max = new Hardware(max.Memory - vm.Hardware.Memory, max.Storage - vm.Hardware.Storage, max.Amount_vCPU - vm.Hardware.Amount_vCPU);
                     }
