@@ -1,6 +1,6 @@
 using Domain.Common;
 using Microsoft.AspNetCore.Components;
-using Shared.FysiekeServers;
+using Shared.Servers;
 
 namespace Client.Servers
 {

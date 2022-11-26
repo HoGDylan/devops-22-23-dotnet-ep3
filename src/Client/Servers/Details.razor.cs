@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Components;
-using Shared.FysiekeServers;
+using Shared.Servers;
 using Shared.VirtualMachines;
 using Smart.Blazor;
 using System.Runtime.CompilerServices;
