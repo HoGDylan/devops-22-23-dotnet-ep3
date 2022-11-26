@@ -15,14 +15,10 @@ namespace Domain.Statistics.Datapoints
 
 
 
-
-
         public Hardware GenerateRandomHardWareUsage(Hardware hardware)
         {
 
             return new Hardware((int)Math.Floor(hardware.Memory * new Random().NextDouble()), (int)Math.Floor(hardware.Storage * new Random().NextDouble()), (int)Math.Floor(hardware.Amount_vCPU * new Random().NextDouble()));
-
-
         }
 
 
