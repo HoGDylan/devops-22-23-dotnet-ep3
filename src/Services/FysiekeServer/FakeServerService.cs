@@ -82,12 +82,13 @@ namespace Services.Server
 
                 foreach (var vm in server.VirtualMachines)
                 {
-                    if (vm.Contract.EndDate >= date.ToDate && vm.Contract.StartDate <= date.ToDate)
-                    // als de contract duur later is dan gevraagde periode en de begin periode voor of gelijk aan eind datum is. -> resources zullen niet beschikbaar zijn
+                    if (vm.Contract.EndDate < date.FromDate || vm.Contract.StartDate > date.ToDate)
                     {
-                        max = new Hardware(max.Memory - vm.Hardware.Memory, max.Storage - vm.Hardware.Storage, max.Amount_vCPU - vm.Hardware.Amount_vCPU);
+                        continue;
                     }
+                     max = new Hardware(max.Memory - vm.Hardware.Memory, max.Storage - vm.Hardware.Storage, max.Amount_vCPU - vm.Hardware.Amount_vCPU);       
                 }
+
                 response.Servers.Add(new FysiekeServerDto.Beschikbaarheid() { Id = server.Id, AvailableHardware = max });
 
             };
@@ -134,6 +135,7 @@ namespace Services.Server
                             inUse.Add(value, new Hardware(current.Memory + _vm.Hardware.Memory, current.Storage + _vm.Hardware.Storage, current.Amount_vCPU + _vm.Hardware.Amount_vCPU));
 
                         }
+                        value.AddDays(1);
                     }
                 }
             }
