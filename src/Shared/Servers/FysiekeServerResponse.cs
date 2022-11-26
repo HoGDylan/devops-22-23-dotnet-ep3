@@ -1,6 +1,7 @@
-﻿using Shared.VirtualMachines;
+﻿using Domain.Common;
+using Shared.VirtualMachines;
 
-namespace Shared.FysiekeServers
+namespace Shared.Servers
 {
     public static class FysiekeServerResponse
     {
@@ -25,6 +26,10 @@ namespace Shared.FysiekeServers
         public class ResourcesAvailable
         {
             public List<FysiekeServerDto.Beschikbaarheid> Servers { get; set; }
+        }
+        public class GraphValues
+        {
+            public Dictionary<DateTime, Hardware> GraphData { get; set; }
         }
     }
 }

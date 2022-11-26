@@ -41,13 +41,6 @@ public static class VirtualMachineDto
         public String Name { get; set; }
         public Backup Backup { get; set; }
     }
-
-    public class Beschikbaarheid
-    {
-        public int Id { get; set; }
-        public VMContract Contract { get; set; }
-        public Hardware Hardware { get; set; }
-    }
       public class Mutate
     {
         public String Name { get; set; }   

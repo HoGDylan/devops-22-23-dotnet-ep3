@@ -68,6 +68,8 @@ namespace Domain.VirtualMachines.VirtualMachine
             RuleFor(x => x.Mode, x => x.PickRandom<VirtualMachineMode>());
             RuleFor(x => x.Contract, _ => contract);
             RuleFor(x => x.FysiekeServer, _ => new FysiekeServer("Mock Server", FysiekeServerFaker.GenerateRandomHardware(), "mock-server_adres.hogent.be"));
+
+
             RuleFor(x => x.Statistics, _ => new Statistic(contract.StartDate, contract.EndDate, hardware));
         }
 

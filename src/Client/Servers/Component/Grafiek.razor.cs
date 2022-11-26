@@ -11,7 +11,7 @@ using Domain.Statistics;
 using Domain.Statistics.Datapoints;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Shared.FysiekeServers;
+using Shared.Servers;
 using Shared.VirtualMachines;
 using Smart.Blazor;
 using System.Collections.Generic;
@@ -32,7 +32,7 @@ namespace Client.Servers.Component
         {
             Loading = true;
             await getVirtualmachine();
-            _data = vm.Statistics.GetFakeStatisticsPerHour();
+            //_data = vm.Statistics.GetFakeStatisticsPerHour();
             ConfigureLineConfig();
             Loading = false;
         }

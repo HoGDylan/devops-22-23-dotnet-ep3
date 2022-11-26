@@ -8,9 +8,6 @@ public class Statistic
 {
 
 
-    private List<DataPoint> _dataPoints; 
-    private DataPointsFaker _faker;
-
 
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
@@ -22,16 +19,15 @@ public class Statistic
         StartTime = start;
         EndTime = end;
         Hardware = hardware;
-
-        _faker = new DataPointsFaker(hardware);
-
     }
 
 
     public Dictionary<DateTime, DataPoint> GetFakeStatistics(StatisticsPeriod period)
     {
-        List<DataPoint> _dataPoints = _faker.Generate(GetAmountOfTicks(period));
-        List<DateTime> _datePoints = GetFakeDataPoints(period);
+        DataPointsFaker.Instance.Hardware = Hardware;
+        List<DataPoint> _dataPoints = DataPointsFaker.Instance.Generate(GetAmountOfTicks(period));
+
+        List <DateTime> _datePoints = GetFakeDataPoints(period);
 
         Dictionary<DateTime, DataPoint> output = new();
 

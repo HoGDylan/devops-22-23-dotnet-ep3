@@ -1,4 +1,4 @@
-﻿using Shared.FysiekeServers;
+﻿using Shared.Servers;
 using System.Globalization;
 using System.Net.Http.Json;
 

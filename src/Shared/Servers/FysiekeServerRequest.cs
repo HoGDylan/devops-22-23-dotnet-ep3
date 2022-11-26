@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.FysiekeServers
+namespace Shared.Servers
 {
     public static class FysiekeServerRequest
     {
@@ -27,7 +27,8 @@ namespace Shared.FysiekeServers
         }
         public class Date
         {
-            public DateTime OnDate { get; set; }
+            public DateTime FromDate { get; set; }
+            public DateTime ToDate { get; set; }
         }
 
     }

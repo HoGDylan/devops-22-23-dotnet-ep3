@@ -5,17 +5,20 @@
 
  <div class="container">
     <div class="form-container">
-    <form onsubmit="@GetAvailableResources()">
         <div class="flex">
-            <label for="date">Datum:</label>
-            <input type="date" name="date" @bind="Date"/>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <label class="px-4" for="date">Start Datum:</label>
+            <input class type="date" name="date" @bind="DateStart"/>
         </div>
-    </form>
+        <div class="flex">
+            <label class="px-4" for="date">Eind Datum:</label>
+            <input class="mr-4" type="date" name="date" @bind="DateEnd" />
+        </div>
+        <div>
+            <button class="btn btn-primary" type="submit" @onclick="GetAvailableResources">Submit</button>
+        </div>
     </div>
     @if (Servers is not null && Servers.Count() > 0)
     {
-        <h2 class="is-title-2">Beschikbaarheden op datum: @Date.ToShortDateString()</h2>
         <div class="columns is-desktop is-multiline">
 
             @foreach(var server in Servers)
