@@ -27,19 +27,22 @@ namespace Client.Servers.Component
         private List<DataPoint> _data = new();
         private VirtualMachineDto.Rapportage vm;
         private ChartJs.Blazor.Chart _chart;
-
+        private bool Loading = false;
         protected override async Task OnInitializedAsync()
         {
+            Loading = true;
             await getVirtualmachine();
             _data = vm.Statistics.GetFakeStatisticsPerHour();
             ConfigureLineConfig();
+            Loading = false;
         }
 
         private async Task getVirtualmachine()
         {
+
             var response = await VirtualMachineService.RapporteringAsync(new VirtualMachineRequest.GetDetail { VirtualMachineId = Id });
             vm = response.VirtualMachine;
-            Console.WriteLine(vm.Statistics is null);
+            Console.WriteLine(vm.Statistics.Hardware is null);
         }
 
         private void ConfigureLineConfig()
@@ -52,7 +55,7 @@ namespace Client.Servers.Component
                 Title = new OptionsTitle
                 {
                     Display = true,
-                    Text = $"Grafiek Virtualmachine"
+                    Text = $"Grafiek Virtualmachine\n{vm.Name}"
                 },
                 Tooltips = new Tooltips
                 {
@@ -80,20 +83,17 @@ namespace Client.Servers.Component
 
             _data.ForEach(data =>
         {
-            /* cpuData.Add(data.HardWareInUse.Amount_vCPU);
+             LineConf.Data.Labels.Add(data.Tick.ToString());
+             cpuData.Add(data.HardWareInUse.Amount_vCPU);
              memoryData.Add(data.HardWareInUse.Memory);
-             storageData.Add(data.HardWareInUse.Storage);*/
-            cpuData.Add(450);
-            memoryData.Add(450);
-            storageData.Add(450);
+             storageData.Add(data.HardWareInUse.Storage);
         });
-            IDataset<int> cpuDataset = new LineDataset<int>() { Label = "vCpu", BorderColor = "#F01010", Fill =FillingMode.Origin };
-            IDataset<int> memoryDataset = new LineDataset<int>() { Label = "Memory", BorderColor = "#32F010", Fill = FillingMode.Origin };
-            IDataset<int> storageDataset = new LineDataset<int>() { Label = "Storage", BorderColor = "#1046F0", Fill = FillingMode.Origin };
+            IDataset<int> cpuDataset = new LineDataset<int>() { Label = "vCpu", BackgroundColor= "#F01010", Fill =FillingMode.Origin };
+            IDataset<int> memoryDataset = new LineDataset<int>() { Label = "Memory", BackgroundColor = "#32F010", Fill = FillingMode.Origin };
+            IDataset<int> storageDataset = new LineDataset<int>() { Label = "Storage", BackgroundColor = "#1046F0", Fill = FillingMode.Origin };
             LineConf.Data.Datasets.Add(cpuDataset);
             LineConf.Data.Datasets.Add(memoryDataset);
             LineConf.Data.Datasets.Add(storageDataset);
-            LineConf.Data.Labels.A
         }
 
         private void instellenAxes()
@@ -122,8 +122,6 @@ namespace Client.Servers.Component
                 }
             };
         }
-        private async Task SetupCompletedCallback() =>
-        await jsRuntime.InvokeVoidAsync("workaroundGradient", LineConf.CanvasId);
     }
 }
 

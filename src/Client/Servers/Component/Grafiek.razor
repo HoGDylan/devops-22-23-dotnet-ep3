@@ -1,5 +1,16 @@
 ﻿
 <div>
-    <Chart Config="@LineConf" @ref="_chart"></Chart>
+    @if (Loading)
+    {
+    <div class="card-body center">
+        <span class="icon is-large">
+            <i class="fas fa-lg fa-solid fa-spinner fa-spin"></i>
+        </span>
+    </div>
+    }
+    else
+    {
+        <Chart Config="@LineConf" @ref="_chart"/>
+    }
 </div>
 
