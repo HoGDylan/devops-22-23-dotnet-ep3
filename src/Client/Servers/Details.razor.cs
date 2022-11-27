@@ -28,11 +28,9 @@ public partial class Details
 
     public async void Toggle(int id)
     {
-        bool check = false;
 
         if (!Collapsed.ContainsKey(id))
         {
-            check = true;
             Collapsed.Add(id, true);
         }
         else
@@ -40,11 +38,6 @@ public partial class Details
             Collapsed[id] = !Collapsed[id];
         }
 
-        if (check)
-        {
-            Loading.Add(id);
-            Loading.Remove(id);
-        }
         StateHasChanged();
     }
 

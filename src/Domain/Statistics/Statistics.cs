@@ -52,19 +52,23 @@ public class Statistic
             switch (period)
             {
                 case StatisticsPeriod.HOURLY:
-                    output.Add(start.AddHours(i));
+                    start = new DateTime(start.AddHours(1).Ticks);
+                    output.Add(start);
                     break;
 
                 case StatisticsPeriod.DAILY:
-                    output.Add(start.AddDays(i));
+                    start = new DateTime(start.AddDays(1).Ticks);
+                    output.Add(start);
                     break;
 
                 case StatisticsPeriod.WEEKLY:
-                    output.Add(start.AddDays(i * 7));
+                    start = new DateTime(start.AddDays(7).Ticks);
+                    output.Add(start);
                     break;
 
                 case StatisticsPeriod.MONTHLY:
-                    output.Add(start.AddMonths(i));
+                    start = new DateTime(start.AddMonths(1).Ticks);
+                    output.Add(start);
                     break;
             }
 
@@ -90,7 +94,6 @@ public class Statistic
             case StatisticsPeriod.DAILY:
                 {
                     DateTime dt = StartTime.AddDays(1);
-                    
                     return DateTime.Parse($"{dt.Day}/{dt.Month}/{dt.Year} 00:00");
 
                 }
