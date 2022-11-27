@@ -49,7 +49,7 @@ public static class KlantDto
         {
             public Validator()
             {
-                RuleFor(x => x.FirstName).NotNull().NotEmpty().Length(1, 250);
+                RuleFor(x => x.FirstName).NotNull().NotEmpty().Length(1, 250).Matches("^[a-z ,.'éèëàçù-]+$");
                 RuleFor(x => x.Name).NotNull().NotEmpty().Length(1, 250);
                 RuleFor(x => PropertyValidator.IsValidEmail(x.Email));
                 RuleFor(x => PropertyValidator.IsPhoneNumberValid(x.PhoneNumber));
@@ -62,11 +62,17 @@ public static class KlantDto
     {
         public string Password { get; set; }
 
-        public class Validator : AbstractValidator<Create>
+        public new class Validator : AbstractValidator<Create>
         {
             public Validator()
             {
-                RuleFor(x => PropertyValidator.IsValidPassword(x.Password));
+                RuleFor(x => x.FirstName).NotNull().NotEmpty().Length(1, 250).Matches("^[a-z ,.'éèëàçù-]+$");
+                RuleFor(x => x.Name).NotNull().NotEmpty().Length(1, 250).Matches("^[a-z ,.'éèëàçù-]+$");
+                RuleFor(x => PropertyValidator.IsValidEmail(x.Email));
+                RuleFor(x => PropertyValidator.IsPhoneNumberValid(x.PhoneNumber));
+                RuleFor(x => x.Opleiding).NotEmpty();
+                RuleFor(x => x.Bedrijf).NotEmpty();
+                RuleFor(x => x.Password).Matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$");
             }
         }
 

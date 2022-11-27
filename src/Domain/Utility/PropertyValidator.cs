@@ -30,11 +30,6 @@ namespace Domain.Utility
 
             return true;
         }
-        public static bool IsValidPassword(string password)
-        {
-
-            return true;
-        }
     }
 }
 

@@ -12,7 +12,11 @@ namespace Client.Users
         [Inject] NavigationManager NavMan { get; set; }
         public Boolean isIntern { get; set; } = true;
 
-        private string? emailValue { get; set; }
+        protected override async Task OnInitializedAsync()
+        {
+            model.Contactpersoon = new Domain.Common.ContactDetails();
+            model.ReserveContactpersoon = new Domain.Common.ContactDetails();
+        }
 
         public void toggleRelation()
         {

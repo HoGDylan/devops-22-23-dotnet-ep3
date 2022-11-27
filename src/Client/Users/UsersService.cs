@@ -30,6 +30,10 @@ namespace Client.Users
         {
             
         }
+        public async Task CreateAsync(UserRequest.Create request)
+        {
+
+        }
 
         public Task<UserResponse.AllAdminsIndex> GetAllAdminsIndex(UserRequest.AllAdminUsers request)
         {
