@@ -32,7 +32,7 @@ namespace Domain.Server
         {
             int[] _memoryOptions = { 256_000, 512_000};
             int[] _storageOptions = { 5_000_000, 10_000_000, 20_000_000 };
-            int[] _cpus = { 112,120,150,200 };
+            int[] _cpus = { 130,140,150,160 };
 
 
             return new Hardware(_memoryOptions[new Random().Next(0, _memoryOptions.Count())], _storageOptions[new Random().Next(0, _storageOptions.Count())], _cpus[new Random().Next(0, _cpus.Count())]);

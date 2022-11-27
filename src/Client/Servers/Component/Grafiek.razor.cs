@@ -2,6 +2,7 @@
 using ChartJs.Blazor.Common;
 using ChartJs.Blazor.Common.Axes;
 using ChartJs.Blazor.Common.Enums;
+using ChartJs.Blazor.Common.Handlers;
 using ChartJs.Blazor.LineChart;
 using ChartJs.Blazor.Util;
 using Domain.Statistics.Datapoints;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Components;
 using Shared.VirtualMachines;
 using System.Data;
 using System.Drawing;
+using Xamarin.Forms.Internals;
 
 namespace Client.Servers.Component
 {
@@ -22,7 +24,7 @@ namespace Client.Servers.Component
         private Dictionary<DateTime, DataPoint> _data = new();
         private VirtualMachineDto.Rapportage vm;
 
-        private ChartJs.Blazor.Chart _chart;
+        private Chart _chart;
 
         private bool Loading = false;
         protected override async Task OnInitializedAsync()
@@ -43,16 +45,22 @@ namespace Client.Servers.Component
 
         private void ConfigureLineConfig()
         {
+
             _config = new LineConfig
             {
                 Options = new LineOptions
                 {
-                    Responsive = true,
-                    Title = new OptionsTitle
+                    //https://www.chartjs.org/docs/latest/developers/plugins.html <- heb ik nodig, maar vind nergens alternatief voor c#
+
+                    Legend = new Legend()
                     {
-                        Display = true,
-                        Text = "ChartJs.Blazor Line Chart"
+                        Labels = new LegendLabels()
+                        {
+                            Padding = 10,
+                        }
                     },
+                    Responsive = true,
+                    
                     Tooltips = new Tooltips
                     {
                         Mode = InteractionMode.Nearest,
@@ -85,7 +93,8 @@ namespace Client.Servers.Component
                             }
                         }
                     }
-                    }
+                    },
+                    
                 }
             };
             AddLabels();
@@ -115,13 +124,14 @@ namespace Client.Servers.Component
             _config.Data.Datasets.Add(storage);
             _config.Data.Datasets.Add(cores);
 
+           
             foreach (LineDataset<int> dataSet in _config.Data.Datasets)
             {
                 switch (dataSet.Label)
                 {
                     case "RAM (GB)":
                         {
-                            dataSet.AddRange(_data.Select(e => e.Value.HardWareInUse.Memory / 1000));
+                            dataSet.AddRange(_data.Select(e => (e.Value.HardWareInUse.Memory / 1000)));
                             break;
                         }
                     case "Opslag (GB)":

@@ -42,3 +42,11 @@
     float: right;
     margin-bottom: 1rem;
 }
+
+.chartjs-render-monitor {
+    height: 60% !important;
+    width: 75% !important;
+    margin: auto !important;
+    padding: 2rem 0rem;
+
+}

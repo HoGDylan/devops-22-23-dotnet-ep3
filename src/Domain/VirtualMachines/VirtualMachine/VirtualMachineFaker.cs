@@ -22,9 +22,6 @@ namespace Domain.VirtualMachines.VirtualMachine
     public class VirtualMachineFaker : Faker<VirtualMachine>
     {
 
-        //private readonly IEnumerable<DateTime?> _dateOptions = GenerateRandomDatesIncNull();
-
-
         private List<VirtualMachine> _virtualMachines = new();
 
 
@@ -121,7 +118,7 @@ namespace Domain.VirtualMachines.VirtualMachine
             int[] _storageOptions = { 250, 1_000, 2_000, 5_000, 10_000, 20_000, 50_000, 100_000, 200_000, 500_000};
 
 
-            return new Hardware(_memoryOptions[new Random().Next(0, _memoryOptions.Count())], _storageOptions[new Random().Next(0, _storageOptions.Count())], new Random().Next(1, 9));
+            return new Hardware(_memoryOptions[new Random().Next(0, _memoryOptions.Count())], _storageOptions[new Random().Next(0, _storageOptions.Count())], new Random().Next(1, 8));
         }
 
         private Backup GenerateRandomBackups()
