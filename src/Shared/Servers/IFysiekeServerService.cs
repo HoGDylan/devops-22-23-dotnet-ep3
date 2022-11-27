@@ -18,7 +18,7 @@ namespace Shared.Servers
 
 
         public Task<FysiekeServerResponse.ResourcesAvailable> GetAvailableHardWareOnDate(FysiekeServerRequest.Date date);
-
+        public Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer();
 
 
         /*

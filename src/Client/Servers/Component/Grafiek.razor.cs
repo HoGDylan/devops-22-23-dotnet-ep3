@@ -143,7 +143,6 @@ namespace Client.Servers.Component
                             dataSet.AddRange(_data.Select(e => e.Value.HardWareInUse.Amount_vCPU));
                             break;
                         }
-
                 }
             }
         }

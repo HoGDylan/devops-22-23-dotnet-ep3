@@ -19,10 +19,6 @@ namespace Services.Server
         }
 
 
-        public Task<FysiekeServerResponse.Available> GetAvailableServersByHardWareAsync(FysiekeServerRequest.Order request)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<FysiekeServerResponse.Details> GetDetailsAsync(FysiekeServerRequest.Detail request)
         {
@@ -66,6 +62,12 @@ namespace Services.Server
             return respons;
         }
 
+        public Task<FysiekeServerResponse.Available> GetAvailableServersByHardWareAsync(FysiekeServerRequest.Order request)
+        {
+            throw new NotImplementedException();
+        }
+
+
         public async Task<FysiekeServerResponse.ResourcesAvailable> GetAvailableHardWareOnDate(FysiekeServerRequest.Date date)
         {
 
@@ -93,53 +95,57 @@ namespace Services.Server
             return response;
         }
 
-
-        public async Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer(FysiekeServerRequest.Detail request)
+        public async Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer()
         {
-            FysiekeServer? server = _servers.FirstOrDefault(e => e.Id == request.ServerId);
-
             Dictionary<DateTime, Hardware> inUse = new();
 
             DateTime today = DateTime.Now;
 
-            if(server is not null)
+            if(_servers.Count > 0)
             {
-                foreach (var _vm in server.VirtualMachines)
+                foreach(var _server in _servers)
                 {
-                    if (_vm.Contract.EndDate > today)
+                    if(_server.VirtualMachines.Count > 0)
                     {
-
-                        DateTime end = DateTime.Parse($"{_vm.Contract.EndDate.Day}/{_vm.Contract.EndDate.Month}/{_vm.Contract.EndDate.Year} 00:00");
-                        DateTime start;
-
-                        if (_vm.Contract.StartDate <= today)
+                        foreach (var _vm in _server.VirtualMachines)
                         {
-                            start = DateTime.Parse($"{today.Day}/{today.Month}/{today.Year} 00:00");
-                        }
-                        else
-                        {
-                            start = DateTime.Parse($"{_vm.Contract.StartDate.Day}/{_vm.Contract.StartDate.Month}/{_vm.Contract.StartDate.Year} 00:00");
-                        }
-
-                        DateTime value = start;
-                        for (int i = 0; i < end.Subtract(start).TotalDays; i++)
-                        {
-                            if (!inUse.ContainsKey(value))
+                            if (_vm.Contract.EndDate > today)
                             {
-                                inUse.Add(value, _vm.Hardware);
-                            }
-                            else
-                            {
-                                Hardware current = inUse[value];
-                                inUse.Remove(value);
-                                inUse.Add(value, new Hardware(current.Memory + _vm.Hardware.Memory, current.Storage + _vm.Hardware.Storage, current.Amount_vCPU + _vm.Hardware.Amount_vCPU));
 
+                                DateTime end = DateTime.Parse($"{31}/{12}/{DateTime.Now.Year + 1} 23:00");
+                                DateTime start;
+
+                                if (_vm.Contract.StartDate <= today)
+                                {
+                                    start = DateTime.Parse($"{today.Day}/{today.Month}/{today.Year} 00:00");
+                                }
+                                else
+                                {
+                                    start = DateTime.Parse($"{_vm.Contract.StartDate.Day}/{_vm.Contract.StartDate.Month}/{_vm.Contract.StartDate.Year} 00:00");
+                                }
+
+                                DateTime value = start;
+                                for (int i = 0; i < end.Subtract(start).TotalDays; i++)
+                                {
+                                    if (!inUse.ContainsKey(value))
+                                    {
+                                        inUse.Add(value, _vm.Hardware);
+                                    }
+                                    else
+                                    {
+                                        Hardware current = inUse[value];
+                                        inUse.Remove(value);
+                                        inUse.Add(value, new Hardware(current.Memory + _vm.Hardware.Memory, current.Storage + _vm.Hardware.Storage, current.Amount_vCPU + _vm.Hardware.Amount_vCPU));
+
+                                    }
+                                    value.AddDays(1);
+                                }
                             }
-                            value.AddDays(1);
                         }
                     }
                 }
-            }
+                }
+                
             return new FysiekeServerResponse.GraphValues() { GraphData = inUse };
         }
     }

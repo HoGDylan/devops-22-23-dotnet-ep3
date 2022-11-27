@@ -9,6 +9,7 @@ namespace Client.Servers
         [Inject] public IFysiekeServerService FysiekeServerService { get; set; }
 
         private List<FysiekeServerDto.Beschikbaarheid> Servers { get; set; }
+        private Dictionary<DateTime, Hardware> _graphValues = new();
         private DateTime DateStart { get; set; } = DateTime.Now;
         private DateTime DateEnd { get; set; } = DateTime.Now;
 
@@ -23,6 +24,12 @@ namespace Client.Servers
         {
             var response = await FysiekeServerService.GetAvailableHardWareOnDate(new FysiekeServerRequest.Date() { FromDate = DateStart, ToDate = DateEnd });
             Servers = response.Servers;
+        }
+
+        private async Task GetAvailableResourcesTotal()
+        {
+            var response = await FysiekeServerService.GetGraphValueForServer();
+            _graphValues = response.GraphData;
         }
 
 
