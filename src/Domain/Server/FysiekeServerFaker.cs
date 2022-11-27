@@ -1,9 +1,6 @@
 ﻿using Bogus;
 using Domain.Common;
-using Domain.VirtualMachines;
 using Domain.VirtualMachines.VirtualMachine;
-using System;
-using System.Security.Cryptography;
 
 namespace Domain.Server
 {
@@ -30,9 +27,9 @@ namespace Domain.Server
 
         public static Hardware GenerateRandomHardware()
         {
-            int[] _memoryOptions = { 256_000, 512_000};
-            int[] _storageOptions = { 5_000_000, 10_000_000, 20_000_000 };
-            int[] _cpus = { 130,140,150,160 };
+            int[] _memoryOptions = { 312_000, 388_000, 420_000, 512_000};
+            int[] _storageOptions = { 10_000_000, 20_000_000, 30_000_000 };
+            int[] _cpus = { 300,400 };
 
 
             return new Hardware(_memoryOptions[new Random().Next(0, _memoryOptions.Count())], _storageOptions[new Random().Next(0, _storageOptions.Count())], _cpus[new Random().Next(0, _cpus.Count())]);

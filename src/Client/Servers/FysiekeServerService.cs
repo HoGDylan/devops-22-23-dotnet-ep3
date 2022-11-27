@@ -33,5 +33,10 @@ namespace Client.Servers
         {
             throw new NotImplementedException();
         }
+
+        public Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -8,23 +8,27 @@
         <div class="flex">
             <label class="px-4" for="date">Start Datum:</label>
             <input type="date" name="date" @bind="DateStart" />
-        </div>
-        <div class="flex">
             <label class="px-4" for="date">Eind Datum:</label>
             <input class="mr-4" type="date" name="date" @bind="DateEnd" />
-        </div>
-        <div class="flex">
             <button class="btn btn-primary" type="submit" @onclick="GetAvailableResources">Submit</button>
+        </div>
+        <div>
             <i class="fa-solid fa-square-poll-vertical fa-2x" @onclick="Toggle"></i>
         </div>
     </div>
-
-    @if (_active)
+    @if (loading)
     {
-        <p>Graph</p>
+        <span class="icon is-large">
+            <i class="fas fa-lg fa-solid fa-spinner fa-spin"></i>
+        </span>
     }
-
-    @if (Servers is not null && Servers.Count() > 0)
+    else if(_active)
+    {
+        <div class="graph-container">
+            <Client.Servers.Component.Graph Data="_data"/>
+        </div>
+    }
+    else if (Servers is not null && Servers.Count() > 0)
     {
         <div class="columns is-desktop is-multiline">
 
@@ -50,5 +54,18 @@
 
                         
 @code{
-    private bool active = false;
+    private bool _active = false;
+    private bool loading = false;
+
+    private async void Toggle()
+    {
+        _active = !_active;
+
+        if(_data.Count == 0){
+            loading = true;
+            await GetAvailableResourcesTotal();
+            loading = false;
+        }
+        StateHasChanged();
+    }
 }

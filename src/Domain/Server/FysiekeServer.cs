@@ -23,7 +23,7 @@ namespace Domain.Server
         public String Naam { get { return _name; } private set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
         public String ServerAddress { get { return _serverAddress; } private set { _serverAddress =  Guard.Against.NullOrEmpty(value, nameof(_serverAddress)); } }
         public Hardware HardWare { get { return _hardWare; } private set {_hardWare =  Guard.Against.Null(value, nameof(_hardWare)); } }
-        public Hardware HardWareAvailable { get; set; }
+        public Hardware HardWareAvailable { get; set; }  //dit zou weg mogen
         public List<VirtualMachine> VirtualMachines { get; private set; }
 
 
@@ -50,32 +50,6 @@ namespace Domain.Server
             vm.Mode = VirtualMachineMode.READY;
         }
 
-
-        public void AddToServer(VirtualMachine vm)
-        {
-            HardWareAvailable.Memory -= vm.Hardware.Memory;
-            HardWareAvailable.Amount_vCPU -= vm.Hardware.Amount_vCPU;
-            HardWareAvailable.Storage -= vm.Hardware.Storage;
-            AddConnection(vm);
-            _vms.Add(vm);
-        }
-
-        public void RemoveFromServer(VirtualMachine vm)
-        {
-            if (_vms.Contains(vm))
-            {
-                HardWareAvailable.Memory += vm.Hardware.Memory;
-                HardWareAvailable.Amount_vCPU += vm.Hardware.Amount_vCPU;
-                HardWareAvailable.Storage += vm.Hardware.Storage;
-                _vms.Remove(vm);
-            }
-        }
-
-        //kan eventueel weg als we met service gaan werken
-        public VirtualMachine GetVirtualMachineById(int id)
-        {
-            return _vms.First(x => x.Id == id);
-        }
 
 
         //IP om te connecteren met de VM

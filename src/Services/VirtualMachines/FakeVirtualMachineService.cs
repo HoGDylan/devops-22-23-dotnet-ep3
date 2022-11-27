@@ -14,7 +14,7 @@ namespace Services.VirtualMachines
 
         public FakeVirtualMachineService()
         {
-            _virtualMachines = VirtualMachineFaker.Instance.Generate(100);
+            _virtualMachines = VirtualMachineFaker.Instance.Generate(12);
         }
 
         public async Task DeleteAsync(VirtualMachineRequest.Delete request)

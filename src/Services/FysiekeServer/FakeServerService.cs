@@ -79,14 +79,20 @@ namespace Services.Server
             foreach (var server in _servers)
             {
                 Hardware max = server.HardWare;
-
                 foreach (var vm in server.VirtualMachines)
                 {
                     if (vm.Contract.EndDate < date.FromDate || vm.Contract.StartDate > date.ToDate)
                     {
                         continue;
                     }
-                     max = new Hardware(max.Memory - vm.Hardware.Memory, max.Storage - vm.Hardware.Storage, max.Amount_vCPU - vm.Hardware.Amount_vCPU);       
+                    else
+                    {
+                        Console.WriteLine(max.ToString());
+                        Console.WriteLine(server.VirtualMachines.Count());
+                        max = new Hardware(max.Memory - vm.Hardware.Memory, max.Storage - vm.Hardware.Storage, max.Amount_vCPU - vm.Hardware.Amount_vCPU);
+
+                    }
+
                 }
 
                 response.Servers.Add(new FysiekeServerDto.Beschikbaarheid() { Id = server.Id, AvailableHardware = max });
@@ -95,13 +101,17 @@ namespace Services.Server
             return response;
         }
 
+        //retourneert data voor de volgende 3 maanden
         public async Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer()
         {
-            Dictionary<DateTime, Hardware> inUse = new();
+            Dictionary<DateTime, Hardware> max = new();
 
+            Hardware maxHardware = GetMaxCapacity();
             DateTime today = DateTime.Now;
+            DateTime end = DateTime.Parse($"{today.AddDays(90).Day}/{today.AddDays(90).Month}/{today.AddDays(90).Year} 23:00");
+            DateTime start;
 
-            if(_servers.Count > 0)
+            if (_servers.Count > 0)
             {
                 foreach(var _server in _servers)
                 {
@@ -110,10 +120,7 @@ namespace Services.Server
                         foreach (var _vm in _server.VirtualMachines)
                         {
                             if (_vm.Contract.EndDate > today)
-                            {
-
-                                DateTime end = DateTime.Parse($"{31}/{12}/{DateTime.Now.Year + 1} 23:00");
-                                DateTime start;
+                            { 
 
                                 if (_vm.Contract.StartDate <= today)
                                 {
@@ -123,30 +130,50 @@ namespace Services.Server
                                 {
                                     start = DateTime.Parse($"{_vm.Contract.StartDate.Day}/{_vm.Contract.StartDate.Month}/{_vm.Contract.StartDate.Year} 00:00");
                                 }
-
+                                
                                 DateTime value = start;
                                 for (int i = 0; i < end.Subtract(start).TotalDays; i++)
                                 {
-                                    if (!inUse.ContainsKey(value))
+                                    if (!max.ContainsKey(value))
                                     {
-                                        inUse.Add(value, _vm.Hardware);
+                                        max.Add(value, new Hardware(maxHardware.Memory - _vm.Hardware.Memory, maxHardware.Storage - _vm.Hardware.Storage, maxHardware.Amount_vCPU - _vm.Hardware.Amount_vCPU));
                                     }
                                     else
                                     {
-                                        Hardware current = inUse[value];
-                                        inUse.Remove(value);
-                                        inUse.Add(value, new Hardware(current.Memory + _vm.Hardware.Memory, current.Storage + _vm.Hardware.Storage, current.Amount_vCPU + _vm.Hardware.Amount_vCPU));
+                                        Hardware current = max[value];
+                                        max.Remove(value);
+                                        max.Add(value, new Hardware(current.Memory - _vm.Hardware.Memory, current.Storage - _vm.Hardware.Storage, current.Amount_vCPU - _vm.Hardware.Amount_vCPU));
 
                                     }
-                                    value.AddDays(1);
+                                    value = value.AddDays(1);
                                 }
                             }
                         }
                     }
                 }
-                }
+            }
+            foreach(var kv in max)
+            {
+                Console.WriteLine($"{kv.Key}:{kv.Value}");
+            }
                 
-            return new FysiekeServerResponse.GraphValues() { GraphData = inUse };
+            return new FysiekeServerResponse.GraphValues() { GraphData = max };
+        }
+
+
+
+        private Hardware GetMaxCapacity()
+        {
+            Hardware maxHardware = new Hardware(0, 0, 0);
+
+            foreach (var server in _servers)
+            {
+                maxHardware.Memory += server.HardWare.Memory;
+                maxHardware.Storage += server.HardWare.Storage;
+                maxHardware.Amount_vCPU += server.HardWare.Amount_vCPU;
+            }
+            return maxHardware;
+
         }
     }
 }

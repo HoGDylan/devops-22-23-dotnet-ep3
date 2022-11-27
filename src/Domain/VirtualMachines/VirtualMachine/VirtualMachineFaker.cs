@@ -114,7 +114,7 @@ namespace Domain.VirtualMachines.VirtualMachine
         private Hardware GenerateRandomHardware()
         {
 
-            int[] _memoryOptions = { 1_000, 2_000, 4_000, 8_000, 16_000, 32_000 };
+            int[] _memoryOptions = { 1_000, 2_000, 4_000, 8_000, 16_000 };
             int[] _storageOptions = { 250, 1_000, 2_000, 5_000, 10_000, 20_000, 50_000, 100_000, 200_000, 500_000};
 
 
