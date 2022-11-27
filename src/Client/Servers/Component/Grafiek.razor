@@ -1,4 +1,4 @@
-﻿
+﻿    
 <div>
     @if (Loading)
     {
@@ -8,9 +8,9 @@
         </span>
     </div>
     }
-    else
-    {
-        <Chart Config="@LineConf" @ref="_chart"/>
+    else{
+    
+        <Chart Config="_config" @ref="_chart"/>
     }
 </div>
 

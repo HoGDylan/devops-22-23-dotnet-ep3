@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using Smart.Blazor;
+using System.Web;
 
 namespace Client.Extentions
 {
@@ -12,5 +13,9 @@ namespace Client.Extentions
 
             return string.Join("&", properties.ToArray());
         }
+
+        
+
+
     }
 }

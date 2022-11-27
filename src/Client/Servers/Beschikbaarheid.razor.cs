@@ -15,7 +15,7 @@ namespace Client.Servers
 
         protected override async Task OnInitializedAsync()
         {
-            base.OnInitializedAsync();
+            await base.OnInitializedAsync();
             await GetAvailableResources();
         }
 
