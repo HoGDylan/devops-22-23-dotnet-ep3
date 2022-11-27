@@ -1,5 +1,6 @@
 ﻿using Domain.Users;
 using Shared.Projects;
+using Shared.VirtualMachines;
 using System.Runtime.CompilerServices;
 
 namespace Shared.Users;
@@ -18,6 +19,11 @@ public static class UserRequest
     public class DetailKlant
     {
         public int KlantId { get; set; }
+    }
+
+    public class Create
+    {
+        public KlantDto.Create Klant { get; set; }
     }
 
     public class Edit

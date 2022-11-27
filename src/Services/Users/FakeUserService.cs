@@ -1,4 +1,6 @@
-﻿using Domain.Users;
+﻿using Domain;
+using Domain.Common;
+using Domain.Users;
 using Shared.Projects;
 using Shared.Users;
 
@@ -17,6 +19,36 @@ namespace Services.Users
             _admins = UserFaker.Administrators.Instance.Generate(3);
 
         }
+        public async Task CreateAsync(UserRequest.Create request)
+        {
+            await Task.Delay(100);
+            if(request.Klant.Opleiding.HasValue)
+            {
+                Klant klant = new InterneKlant(
+                    request.Klant.Name,
+                    request.Klant.FirstName,
+                    request.Klant.PhoneNumber,
+                    request.Klant.Email,
+                    request.Klant.Password,
+                    request.Klant.Opleiding.Value);
+                _klanten.Add(klant);
+            }
+            else if(!request.Klant.Bedrijf.Equals(null)) //if() nodig of weglaten?
+            {
+                Klant klant = new ExterneKlant(
+                    request.Klant.Name,
+                    request.Klant.FirstName,
+                    request.Klant.PhoneNumber,
+                    request.Klant.Email,
+                    request.Klant.Password,
+                    request.Klant.Bedrijf,
+                    request.Klant.Contactpersoon,
+                    request.Klant.ReserveContactpersoon);
+                _klanten.Add(klant);
+            }
+            //TODO: response die id van nieuwe klant terugstuurt
+        }
+
         public async Task EditAsync(UserRequest.Edit request)
         {
             await Task.Delay(100);

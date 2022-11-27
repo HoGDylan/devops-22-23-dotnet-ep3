@@ -42,8 +42,8 @@ public static class KlantDto
         public string Email { get; set; }
         public Course? Opleiding { get; set; }
         public string? Bedrijf { get; set; }
-        public ContactDetails? contactPersoon { get; set; }
-        public ContactDetails? ReserveContactPersoon { get; set; }
+        public ContactDetails? Contactpersoon { get; set; }
+        public ContactDetails? ReserveContactpersoon { get; set; }
 
         public class Validator : AbstractValidator<Mutate>
         {
@@ -57,5 +57,18 @@ public static class KlantDto
                 RuleFor(x => x.Bedrijf).NotEmpty();
             }
         }
+    }
+    public class Create : Mutate
+    {
+        public string Password { get; set; }
+
+        public class Validator : AbstractValidator<Create>
+        {
+            public Validator()
+            {
+                RuleFor(x => PropertyValidator.IsValidPassword(x.Password));
+            }
+        }
+
     }
 }

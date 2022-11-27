@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bogus.DataSets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,11 @@ namespace Domain.Utility
             if (!phoneNumber.StartsWith("0")) throw new ArgumentException("Phone number must start with 0");
             if (phoneNumber.StartsWith("04") && phoneNumber.Length != 10) throw new ArgumentException("Phone number is not correct");
             if (!phoneNumber.StartsWith("04") && phoneNumber.Length != 9) throw new ArgumentException("Landline number is not correct");
+
+            return true;
+        }
+        public static bool IsValidPassword(string password)
+        {
 
             return true;
         }

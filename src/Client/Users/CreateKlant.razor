@@ -217,22 +217,3 @@
         <span>Account aanmaken</span>
     </button>
 </form>
-
-@code {
-    /*
-    public Boolean isEmail { get; set; } = false;
-    public Boolean isEmailContact { get; set; } = false;
-    public Boolean isEmailResContact { get; set; } = false;
-    public Boolean isPhonenumber { get; set; } = false;
-    public Boolean isPhonenumberContact { get; set; } = false;
-    public Boolean isPhonenumberResContact { get; set; } = false;
-    public Boolean validPassword { get; set; } = false;*/
-    public Boolean isIntern { get; set; } = true;
-
-    private string? emailValue { get; set; }
-
-    public void toggleRelation() {
-        isIntern = !isIntern;
-    }
-
-}
