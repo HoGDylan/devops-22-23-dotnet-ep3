@@ -45,7 +45,42 @@ public static class KlantDto
         public string Email { get; set; }
         public Course? Opleiding { get; set; }
         public string? Bedrijf { get; set; }
-        public ContactDetails? contactPersoon { get; set; }
-        public ContactDetails? ReserveContactPersoon { get; set; }
+        public BedrijfType Type { get; set; }
+        public ContactDetails? Contactpersoon { get; set; }
+        public ContactDetails? ReserveContactpersoon { get; set; }
+
+        public class Validator : AbstractValidator<Mutate>
+        {
+            public Validator()
+            {
+                RuleFor(x => x.FirstName).NotNull().NotEmpty().Length(1, 250).Matches("^[a-z ,.'éèëàçù-]+$");
+                RuleFor(x => x.Name).NotNull().NotEmpty().Length(1, 250);
+                RuleFor(x => PropertyValidator.IsValidEmail(x.Email));
+                RuleFor(x => PropertyValidator.IsPhoneNumberValid(x.PhoneNumber));
+                RuleFor(x => x.Opleiding).NotEmpty();
+                RuleFor(x => x.Bedrijf).NotEmpty();
+                RuleFor(x => x.Type).NotEmpty();
+            }
+        }
+    }
+    public class Create : Mutate
+    {
+        public string Password { get; set; }
+
+        public new class Validator : AbstractValidator<Create>
+        {
+            public Validator()
+            {
+                RuleFor(x => x.FirstName).NotNull().NotEmpty().Length(1, 250).Matches("^[a-z ,.'éèëàçù-]+$");
+                RuleFor(x => x.Name).NotNull().NotEmpty().Length(1, 250).Matches("^[a-z ,.'éèëàçù-]+$");
+                RuleFor(x => PropertyValidator.IsValidEmail(x.Email));
+                RuleFor(x => PropertyValidator.IsPhoneNumberValid(x.PhoneNumber));
+                RuleFor(x => x.Opleiding).NotEmpty();
+                RuleFor(x => x.Bedrijf).NotEmpty();
+                RuleFor(x => x.Type).NotEmpty();
+                RuleFor(x => x.Password).Matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$");
+            }
+        }
+
     }
 }
