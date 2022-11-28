@@ -42,6 +42,7 @@ public static class KlantDto
         public string Email { get; set; }
         public Course? Opleiding { get; set; }
         public string? Bedrijf { get; set; }
+        public BedrijfType Type { get; set; }
         public ContactDetails? Contactpersoon { get; set; }
         public ContactDetails? ReserveContactpersoon { get; set; }
 
@@ -55,6 +56,7 @@ public static class KlantDto
                 RuleFor(x => PropertyValidator.IsPhoneNumberValid(x.PhoneNumber));
                 RuleFor(x => x.Opleiding).NotEmpty();
                 RuleFor(x => x.Bedrijf).NotEmpty();
+                RuleFor(x => x.Type).NotEmpty();
             }
         }
     }
@@ -72,6 +74,7 @@ public static class KlantDto
                 RuleFor(x => PropertyValidator.IsPhoneNumberValid(x.PhoneNumber));
                 RuleFor(x => x.Opleiding).NotEmpty();
                 RuleFor(x => x.Bedrijf).NotEmpty();
+                RuleFor(x => x.Type).NotEmpty();
                 RuleFor(x => x.Password).Matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$");
             }
         }

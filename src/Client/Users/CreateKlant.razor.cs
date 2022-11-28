@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Shared.Users;
 using Shared.VirtualMachines;
+using Domain.Users;
 
 namespace Client.Users
 {

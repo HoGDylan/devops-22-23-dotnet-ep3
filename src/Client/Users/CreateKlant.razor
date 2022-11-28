@@ -1,4 +1,5 @@
 ﻿@page "/register"
+@using Domain.Users;
 
 <EditForm Model="model" OnValidSubmit="RegistreerKlant">
     <DataAnnotationsValidator />
@@ -75,14 +76,14 @@
             <label class="label">Opleiding</label>
             <div class="control has-icons-left">
                 <div class="select is-primary">
-                    <select>
-                        <option>IT & Digitale Inovatie</option>
-                        <option>Opleiding B</option>
-                        <option>Opleiding C</option>
-                        <option>Opleiding D</option>
-                        <option>Opleiding E</option>
-                        <option>Opleiding F</option>
-                    </select>
+                    <InputSelect @bind-Value="model.Opleiding">
+                        <option value="@Course.TOEGEPASTE_INFORMATICA">IT & Digitale Inovatie</option>
+                        <option value="@Course.AGRO_EN_BIOTECHNOLOGIE">Agro- & Biotechnologie</option>
+                        <option value="@Course.BIOMEDISCHE_LABORATORIUMTECHNOLOGIE">Biomedische Laboratoriumtechnologie</option>
+                        <option value="@Course.CHEMIE">Chemie</option>
+                        <option value="@Course.DIGITAL_DESIGN_AND_DEVELOPMENT">Digital Design & Development</option>
+                        <option value="@Course.ELEKTROMECHANICA">Electromechanica</option>
+                    </InputSelect>
                 </div>
                 <div class="icon is-small is-left">
                     <i class="fas fa-graduation-cap"></i>
@@ -95,7 +96,7 @@
                 <div class="column">
                     <label class="label">Bedrijf</label>
                     <p class="control has-icons-left has-icons-right">
-                        <input class="input" type="text" placeholder="Bedrijfsnaam">
+                        <InputText class="input" placeholder="Bedrijfsnaam" @bind-Value="model.Bedrijf" />
                         <span class="icon is-small is-left">
                             <i class="fas fa-briefcase"></i>
                         </span>
@@ -105,14 +106,10 @@
                     <label class="label">Type</label>
                     <div class="control has-icons-left">
                         <div class="select is-primary is-fullwidth">
-                            <select>
-                                <option>VOKA</option>
-                                <option>UNISEF</option>
-                                <option>Type C</option>
-                                <option>Type D</option>
-                                <option>Type E</option>
-                                <option>Type F</option>
-                            </select>
+                            <InputSelect @bind-Value="model.Type">
+                                <option value="@BedrijfType.VOKA">VOKA</option>
+                                <option value="@BedrijfType.UNISEF">UNISEF</option>
+                            </InputSelect>
                         </div>
                         <div class="icon is-small is-left">
                             <i class="fas fa-briefcase"></i>
@@ -212,7 +209,7 @@
             </div>
         </div>
     }
-    <button class="button is-rechts is-success" type="submit">
+    <button class="button is-rechts is-success" type="submit" @onclick="RegistreerKlant">
         <span class="icon is-small">
           <i class="fas fa-check"></i>
         </span>

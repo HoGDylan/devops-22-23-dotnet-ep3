@@ -53,6 +53,7 @@ namespace Domain.Users
                          e.Person.Email,
                          PasswordGenerator.Generate(20, 2, 2, 2, 2),
                          e.Company.CompanyName(),
+                         new BedrijfType(),
                          new Common.ContactDetails(GeneratePhoneNumber(), e.Person.Email, e.Person.FirstName, e.Person.LastName),
                          new Common.ContactDetails(GeneratePhoneNumber(), e.Person.Email, e.Person.FirstName, e.Person.LastName)
                    ));

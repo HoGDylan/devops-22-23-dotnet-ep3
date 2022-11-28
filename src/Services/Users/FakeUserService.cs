@@ -42,6 +42,7 @@ namespace Services.Users
                     request.Klant.Email,
                     request.Klant.Password,
                     request.Klant.Bedrijf,
+                    request.Klant.Type,
                     request.Klant.Contactpersoon,
                     request.Klant.ReserveContactpersoon);
                 _klanten.Add(klant);
