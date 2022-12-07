@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "BeheerderBeheren")]
     [ApiController]
     [Route("api/[controller]")]
     public class FysiekeServerController : ControllerBase
@@ -30,7 +30,6 @@ namespace Server.Controllers
             return fysiekeServerService.GetDetailAsync(request);
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpDelete("{FysiekeServerId}")]
         public Task DeleteAsync([FromRoute] FysiekeServerRequest.Delete request)
         {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "BeheerderBeheren")]
     [ApiController]
     [Route("api/[controller]")]
     public class VMContractController : ControllerBase
@@ -30,7 +30,6 @@ namespace Server.Controllers
             return VMContractService.GetDetailAsync(request);
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpDelete("{VMContractId}")]
         public Task DeleteAsync([FromRoute] VMContractRequest.Delete request)
         {

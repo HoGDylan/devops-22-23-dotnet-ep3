@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
-    //[Authorize(Roles = "Admin")]
     [ApiController]
     [Route("api/[controller]")]
     public class VirtualMachineController : ControllerBase
@@ -18,7 +17,7 @@ namespace Server.Controllers
         }
 
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Klant")]
         [HttpGet]
         public Task<VirtualMachineResponse.GetIndex> GetIndexAsync([FromQuery] VirtualMachineRequest.GetIndex request)
         {
@@ -32,26 +31,28 @@ namespace Server.Controllers
             return "hello";
         }*/
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Klant")]
         [HttpGet("{VirtualMachineId}")]
         public Task<VirtualMachineResponse.GetDetail> GetDetailAsync([FromRoute] VirtualMachineRequest.GetDetail request)
         {
             return virtualMachineService.GetDetailAsync(request);
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "BeheerderBeheren")]
         [HttpDelete("{VirtualMachineId}")]
         public Task DeleteAsync([FromRoute] VirtualMachineRequest.Delete request)
         {
             return virtualMachineService.DeleteAsync(request);
         }
 
+        [Authorize(Roles = "BeheerderBeheren")]
         [HttpPost]
         public Task<VirtualMachineResponse.Create> CreateAsync([FromBody] VirtualMachineRequest.Create request)
         {
             return virtualMachineService.CreateAsync(request);
         }
 
+        [Authorize(Roles = "BeheerderBeheren")]
         [HttpPut]
         public Task<VirtualMachineResponse.Edit> EditAsync([FromBody] VirtualMachineRequest.Edit request)
         {

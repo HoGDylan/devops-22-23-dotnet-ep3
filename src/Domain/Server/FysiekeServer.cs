@@ -1,47 +1,67 @@
 ﻿using Ardalis.GuardClauses;
 using Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Domain.Users;
+using Domain.VirtualMachines.VirtualMachine;
+using Domain.Utility;
+using System.Net;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Server
 {
     public class FysiekeServer : Entity
     {
+
+        private readonly List<VirtualMachine> _vms = new(); //only contains active VMs running on this server
+
+        private string _name;
+        private string _serverAddress;
+        private Hardware _hardWare;
+
+
         public int Id { get; set; }
-        public String Name { get; set; }
-        public String ServerAddress { get; set; }
+        public String Naam { get { return _name; } private set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
+        public String ServerAddress { get { return _serverAddress; } private set { _serverAddress = Guard.Against.NullOrEmpty(value, nameof(_serverAddress)); } }
+        public Hardware HardWare { get { return _hardWare; } private set { _hardWare = Guard.Against.Null(value, nameof(_hardWare)); } }
+        public Hardware HardWareAvailable { get; set; }  //dit zou weg mogen
+        public List<VirtualMachine> VirtualMachines { get; private set; }
 
-        public Hardware HardWare { get; set; }
-        public int MemoryAvailable { get; set; }
-        public int StorageAvailable { get; set; }
-        public int VCPUsAvailable { get; set; }
-        public int Memory { get; }
-        public int Storage { get; }
-        public int Amount_vCPU { get; }
 
-        public FysiekeServer(string naam, Hardware hw, string s_adres, int mem_available, int stor_available, int vCPU_avaiable)
+        public FysiekeServer(string naam, Hardware hw, string s_adres)
         {
-            this.Name = Guard.Against.NullOrEmpty(naam, nameof(naam));
-            this.ServerAddress = Guard.Against.NullOrEmpty(s_adres, nameof(s_adres));
-            this.MemoryAvailable = Guard.Against.Negative(mem_available, nameof(mem_available));
-            this.StorageAvailable = Guard.Against.Negative(stor_available, nameof(stor_available));
-            this.VCPUsAvailable = Guard.Against.Negative(vCPU_avaiable, nameof(vCPU_avaiable));
-            this.HardWare = Guard.Against.Null(hw, nameof(hw));
+
+            this.Naam = naam;
+            this.HardWare = hw;
+            this.ServerAddress = s_adres;
+            this.HardWareAvailable = hw;
+            this.VirtualMachines = new();
         }
 
-        public FysiekeServer(string name, string serverAddress, int memory, int storage, int amount_vCPU, int memoryAvailable, int storageAvailable, int vCPUsAvailable)
+
+        public void AddConnection(VirtualMachine vm)
         {
-            Name = name;
-            ServerAddress = serverAddress;
-            Memory = memory;
-            Storage = storage;
-            Amount_vCPU = amount_vCPU;
-            MemoryAvailable = memoryAvailable;
-            StorageAvailable = storageAvailable;
-            VCPUsAvailable = vCPUsAvailable;
+            string pass = PasswordGenerator.Generate(RandomNumberGenerator.GetInt32(10) + 20, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(3) + 1);
+
+
+
+
+
+            vm.Connection = new VMConnection(ServerAddress, GetRandomIpAddress(), "admin", pass);
+            vm.Mode = VirtualMachineMode.READY;
         }
+
+
+
+        //IP om te connecteren met de VM
+        public IPAddress GetRandomIpAddress()
+        {
+            var random = new Random();
+            string ip = $"{random.Next(1, 255)}.{random.Next(0, 255)}.{random.Next(0, 255)}.{random.Next(0, 255)}";
+
+
+            return IPAddress.Parse(ip);
+
+        }
+
     }
 }

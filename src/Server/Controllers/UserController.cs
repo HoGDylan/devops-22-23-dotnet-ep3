@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "BeheerderBeheren")]
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase

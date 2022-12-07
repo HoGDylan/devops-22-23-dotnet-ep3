@@ -1,4 +1,6 @@
 ﻿using Ardalis.GuardClauses;
+using Domain.Common;
+using Domain.Projecten;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +11,31 @@ namespace Domain.Users
 {
     public abstract class Klant : Gebruiker
     {
-        public Gebruiker ContactPersoon { get; set; }
-        public Gebruiker ContactPersoonReserve { get; set; }
-        public String Project { get; set; }
 
-        protected Klant(string name, string phoneNumber, string email, string password, Gebruiker contactPersoon, Gebruiker contactPersoon2, string project) : base(name, phoneNumber, email, password)
+
+        private ContactDetails? _contactPs;
+        private ContactDetails? _contactPs2;
+        private List<Project> _projecten = new();
+
+
+
+        public ContactDetails? ContactPersoon { get { return _contactPs; } set { _contactPs = Guard.Against.Null(value, nameof(_contactPs)); } }
+        public ContactDetails? ContactPersoonReserv { get { return _contactPs2; } set { _contactPs2 = Guard.Against.Null(value, nameof(_contactPs2)); } }
+        public List<Project> Projecten { get { return _projecten; } }
+
+
+        public Klant(string name, string firstname, string phoneNumber, string email, string password) : base(name, firstname, phoneNumber, email, password)
         {
-            this.ContactPersoon = Guard.Against.Null(contactPersoon, nameof(contactPersoon));
-            this.ContactPersoonReserve = Guard.Against.Null(contactPersoon2, nameof(contactPersoon2));
-            this.Project = Guard.Against.NullOrEmpty(project, nameof(project));
         }
 
-
-
+        public void addProject(Project p)
+        {
+            if (_projecten == null)
+            {
+                _projecten = new List<Project>();
+            }
+            _projecten.Add(p);
+        }
 
 
     }
