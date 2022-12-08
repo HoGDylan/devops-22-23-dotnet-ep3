@@ -12,10 +12,7 @@ namespace Persistence.Data.Configuration
             builder.Property(p => p.PhoneNumber).IsRequired();
             builder.Property(p => p.Email).IsRequired();
             builder.Property(p => p.Password).IsRequired();
-            builder.Property(p => p.HogentEmail);
-            builder.Property(p => p.ContactPersoon).IsRequired();
-            builder.Property(p => p.ContactPersoonReserve).IsRequired();
-            builder.Property(p => p.Project).IsRequired();
+            builder.HasOne(p => p.ContactPersoon).WithMany().HasForeignKey(u => u.Id).IsRequired();
 
         }
     }

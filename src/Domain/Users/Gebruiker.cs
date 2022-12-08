@@ -2,6 +2,7 @@
 using Bogus.DataSets;
 using Domain.Common;
 using Domain.Utility;
+using System;
 
 namespace Domain
 {
@@ -39,5 +40,10 @@ namespace Domain
             this.Password = password;
         }
 
+
+
+        public Gebruiker()
+        {
+        }
     }
 }

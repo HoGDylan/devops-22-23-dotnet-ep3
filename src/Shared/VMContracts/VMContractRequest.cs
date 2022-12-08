@@ -6,7 +6,6 @@ namespace Shared.VMContracts
         {
             public int CustomerId { get; set; }
             public int VMId { get; set; }
-            public int BeheerderId { get; set; }
             public DateTime StartDate { get; set; }
             public DateTime EndDate { get; set; }
         }

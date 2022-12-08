@@ -36,9 +36,9 @@ namespace Server
             services.AddControllersWithViews().AddFluentValidation(config =>
             {
                 config.RegisterValidatorsFromAssemblyContaining<VirtualMachineDto.Mutate.Validator>();
-                config.ImplicitlyValidateChildProperties = true;
+                config.ImplicitlyValidateChildProperties = true; 
             });
-            services.AddAuthentication(options =>
+            services.AddAuthentication(options => 
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -81,7 +81,7 @@ namespace Server
                 app.UseHsts();
             }
 
-            //dataInitializer.SeedData();
+            dataInitializer.SeedData();
 
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();

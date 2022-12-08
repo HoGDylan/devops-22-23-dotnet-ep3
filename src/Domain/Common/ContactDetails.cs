@@ -1,6 +1,6 @@
 using Ardalis.GuardClauses;
 using Domain.Utility;
-
+using System;
 using System.Threading.Tasks;
 
 namespace Domain.Common
@@ -17,6 +17,8 @@ namespace Domain.Common
         public String Email { get { return _email; } set { if (PropertyValidator.IsValidEmail(value)) _email = value; } }
         public String FirstName { get { return _fName; } set { _fName = Guard.Against.NullOrEmpty(value, nameof(_fName)); } }
         public String LastName { get { return _lName; } set { _lName = Guard.Against.NullOrEmpty(value, nameof(_lName)); } }
+
+        public int Id { get; set; }
 
         public ContactDetails() { }
 

@@ -1,7 +1,9 @@
 ﻿using Domain.Common;
-using Domain.Contract;
+using Domain.VirtualMachines.Contract;
 using Domain.VirtualMachines;
 using FluentValidation;
+using Domain.VirtualMachines.VirtualMachine;
+using Domain.VirtualMachines.BackUp;
 
 namespace Shared.VirtualMachines
 {

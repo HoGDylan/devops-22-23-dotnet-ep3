@@ -6,6 +6,8 @@ using Domain.Utility;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Collections.Generic;
+using System;
 
 namespace Domain.Server
 {
@@ -20,21 +22,27 @@ namespace Domain.Server
 
 
         public int Id { get; set; }
-        public String Naam { get { return _name; } private set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
-        public String ServerAddress { get { return _serverAddress; } private set { _serverAddress = Guard.Against.NullOrEmpty(value, nameof(_serverAddress)); } }
-        public Hardware HardWare { get { return _hardWare; } private set { _hardWare = Guard.Against.Null(value, nameof(_hardWare)); } }
+        public String Name { get { return _name; } set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
+        public String ServerAddress { get { return _serverAddress; } set { _serverAddress = Guard.Against.NullOrEmpty(value, nameof(_serverAddress)); } }
+        public Hardware HardWare { get { return _hardWare; } set { _hardWare = Guard.Against.Null(value, nameof(_hardWare)); } }
         public Hardware HardWareAvailable { get; set; }  //dit zou weg mogen
         public List<VirtualMachine> VirtualMachines { get; private set; }
 
 
-        public FysiekeServer(string naam, Hardware hw, string s_adres)
+        public FysiekeServer(string Name, Hardware hw, string s_adres)
         {
 
-            this.Naam = naam;
+            this.Name = Name;
             this.HardWare = hw;
             this.ServerAddress = s_adres;
             this.HardWareAvailable = hw;
             this.VirtualMachines = new();
+        }
+
+        public FysiekeServer()
+        {
+
+
         }
 
 

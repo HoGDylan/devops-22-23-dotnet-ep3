@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Users
 {
-    public abstract class Klant : Gebruiker
+    public class Klant : Gebruiker
     {
 
 
@@ -27,7 +27,9 @@ namespace Domain.Users
         public Klant(string name, string firstname, string phoneNumber, string email, string password) : base(name, firstname, phoneNumber, email, password)
         {
         }
-
+        public Klant()
+        {
+        }
         public void addProject(Project p)
         {
             if (_projecten == null)

@@ -9,13 +9,12 @@ namespace Domain.Common
 {
     public class Hardware : ValueObject
     {
-
         private int _memory;
         private int _storage;
         private int _amountVCPU;
 
 
-
+        public int Id { get; set; }
         public int Memory
         {
             get { return _memory; }
@@ -40,6 +39,11 @@ namespace Domain.Common
             this.Memory = m;
             this.Storage = s;
             this.Amount_vCPU = a_vCPU;
+        }
+
+
+        public Hardware()
+        {
         }
         protected override IEnumerable<object> GetEqualityComponents()
         {

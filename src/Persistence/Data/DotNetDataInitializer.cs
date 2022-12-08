@@ -1,4 +1,6 @@
 ﻿using Domain.VirtualMachines;
+using Domain.VirtualMachines.VirtualMachine;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Data
 {
@@ -16,13 +18,17 @@ namespace Persistence.Data
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
-                //SeedVirtualMachines();
+                SeedVirtualMachines();
             }
         }
 
         private void SeedVirtualMachines()
         {
-            var products = new VirtualMachineFaker();
+            var virtualMachines = new VirtualMachineFaker()
+                .Generate(100); ;
+
+            //_dbContext.VirtualMachines.AddRange(virtualMachines);
+            _dbContext.SaveChanges();
         }
     }
 }

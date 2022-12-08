@@ -1,4 +1,4 @@
-using Domain.Contract;
+using Domain.VirtualMachines.Contract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,7 +10,6 @@ namespace Persistence.Data.Configuration
         {
             builder.Property(p => p.CustomerId).IsRequired();
             builder.Property(p => p.VMId).IsRequired();
-            builder.Property(p => p.BeheerderId).IsRequired();
             builder.Property(p => p.StartDate).IsRequired();
             builder.Property(p => p.EndDate).IsRequired();
         }

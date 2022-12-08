@@ -3,7 +3,7 @@ using System.Linq;
 using Persistence.Data;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Domain.Contract;
+using Domain.VirtualMachines.Contract;
 using System;
 
 namespace Services.VMContracts
@@ -30,7 +30,6 @@ namespace Services.VMContracts
             var VMContract = _VMContracts.Add(new VMContract(
                 request.VMContract.CustomerId,
                 request.VMContract.VMId,
-                request.VMContract.BeheerderId,
                 request.VMContract.StartDate,
                 request.VMContract.EndDate
             ));
@@ -57,7 +56,6 @@ namespace Services.VMContracts
                 // You could use a VMContract.Edit method here.
                 VMContract.CustomerId = model.CustomerId;
                 VMContract.VMId = model.VMId;
-                VMContract.BeheerderId = model.BeheerderId;
                 VMContract.StartDate = model.StartDate;
                 VMContract.EndDate = model.EndDate;
 
@@ -79,7 +77,6 @@ namespace Services.VMContracts
                     Id = x.Id,
                     CustomerId = x.CustomerId,
                     VMId = x.VMId,
-                    BeheerderId = x.BeheerderId,
                     StartDate = x.StartDate,
                     EndDate = x.EndDate
 
@@ -97,7 +94,6 @@ namespace Services.VMContracts
                 Id = x.Id,
                 CustomerId = x.CustomerId,
                 VMId = x.VMId,
-                BeheerderId = x.BeheerderId,
                 StartDate = x.StartDate,
                 EndDate = x.EndDate
             }).ToListAsync();

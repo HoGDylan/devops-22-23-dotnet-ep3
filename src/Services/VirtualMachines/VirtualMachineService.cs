@@ -3,8 +3,10 @@ using System.Linq;
 using Persistence.Data;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Domain.VirtualMachines;
+using Domain.VirtualMachines.VirtualMachine;
 using System;
+using Domain.Common;
+using Domain.VirtualMachines.BackUp;
 
 namespace Services.VirtualMachines
 {
@@ -29,16 +31,9 @@ namespace Services.VirtualMachines
             VirtualMachineResponse.Create response = new();
             var virtualMachine = _virtualMachines.Add(new VirtualMachine(
                 request.VirtualMachine.Name,
-                request.VirtualMachine.Project,
                 request.VirtualMachine.OperatingSystem,
-                request.VirtualMachine.Mode,
-                request.VirtualMachine.Memory,
-                request.VirtualMachine.Storage,
-                request.VirtualMachine.Amount_vCPU,
-                request.VirtualMachine._contract,
-                request.VirtualMachine.Connection,
-                request.VirtualMachine.Type,
-                request.VirtualMachine.LastBackup
+                new Hardware(request.VirtualMachine.Memory, request.VirtualMachine.Storage, request.VirtualMachine.Amount_vCPU),
+                new Backup(request.VirtualMachine.Type, request.VirtualMachine.LastBackup)
             ));
             await _dbContext.SaveChangesAsync();
             response.VirtualMachineId = virtualMachine.Entity.Id;
@@ -62,13 +57,11 @@ namespace Services.VirtualMachines
 
                 // You could use a VirtualMachine.Edit method here.
                 virtualMachine.Name = model.Name;
-                virtualMachine.Project = model.Project;
                 virtualMachine.OperatingSystem = model.OperatingSystem;
                 virtualMachine.Mode = model.Mode;
                 virtualMachine.Hardware.Memory = model.Memory;
                 virtualMachine.Hardware.Storage = model.Storage;
                 virtualMachine.Hardware.Amount_vCPU = model.Amount_vCPU;
-                virtualMachine._contract = model._contract;
                 virtualMachine.Connection = model.Connection;
                 virtualMachine.BackUp.Type = model.Type;
                 virtualMachine.BackUp.LastBackup = model.LastBackup;
@@ -91,13 +84,11 @@ namespace Services.VirtualMachines
                 {
                     Id = x.Id,
                     Name = x.Name,
-                    Project = x.Project,
                     OperatingSystem = x.OperatingSystem,
                     Mode = x.Mode,
                     Memory = x.Hardware.Memory,
                     Storage = x.Hardware.Storage,
                     Amount_vCPU = x.Hardware.Amount_vCPU,
-                    _contract = x._contract,
                     Connection = x.Connection,
                     Type = x.BackUp.Type,
                     LastBackup = (DateTime)x.BackUp.LastBackup
@@ -125,13 +116,11 @@ namespace Services.VirtualMachines
             {
                 Id = x.Id,
                 Name = x.Name,
-                Project = x.Project,
                 OperatingSystem = x.OperatingSystem,
                 Mode = x.Mode,
                 Memory = x.Hardware.Memory,
                 Storage = x.Hardware.Storage,
                 Amount_vCPU = x.Hardware.Amount_vCPU,
-                _contract = x._contract,
                 Connection = x.Connection,
                 Type = x.BackUp.Type,
                 LastBackup = (DateTime)x.BackUp.LastBackup

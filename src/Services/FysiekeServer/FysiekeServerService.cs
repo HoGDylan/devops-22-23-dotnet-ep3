@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Domain.Server;
 using System;
+using Domain.Common;
 
 namespace Services.FysiekeServers
 {
@@ -29,13 +30,8 @@ namespace Services.FysiekeServers
             FysiekeServerResponse.Create response = new();
             var fysiekeServer = _fysiekeServers.Add(new FysiekeServer(
                 request.FysiekeServer.Name,
-                request.FysiekeServer.ServerAddress,
-                request.FysiekeServer.Memory,
-                request.FysiekeServer.Storage,
-                request.FysiekeServer.Amount_vCPU,
-                request.FysiekeServer.MemoryAvailable,
-                request.FysiekeServer.StorageAvailable,
-                request.FysiekeServer.VCPUsAvailable
+                new Hardware(request.FysiekeServer.Memory, request.FysiekeServer.Storage, request.FysiekeServer.Amount_vCPU)
+                ,request.FysiekeServer.ServerAddress
              ));
             await _dbContext.SaveChangesAsync();
             response.FysiekeServerId = fysiekeServer.Entity.Id;
@@ -63,9 +59,9 @@ namespace Services.FysiekeServers
                 fysiekeServer.HardWare.Memory = model.Memory;
                 fysiekeServer.HardWare.Storage = model.Storage;
                 fysiekeServer.HardWare.Amount_vCPU = model.Amount_vCPU;
-                fysiekeServer.MemoryAvailable = model.MemoryAvailable;
-                fysiekeServer.StorageAvailable = model.StorageAvailable;
-                fysiekeServer.VCPUsAvailable = model.VCPUsAvailable;
+                fysiekeServer.HardWareAvailable.Memory = model.MemoryAvailable;
+                fysiekeServer.HardWareAvailable.Storage = model.StorageAvailable;
+                fysiekeServer.HardWareAvailable.Amount_vCPU = model.VCPUsAvailable;
 
 
 
@@ -90,9 +86,9 @@ namespace Services.FysiekeServers
                     Memory = x.HardWare.Memory,
                     Storage = x.HardWare.Storage,
                     Amount_vCPU = x.HardWare.Amount_vCPU,
-                    MemoryAvailable = x.MemoryAvailable,
-                    StorageAvailable = x.StorageAvailable,
-                    VCPUsAvailable = x.VCPUsAvailable,
+                    MemoryAvailable = x.HardWareAvailable.Memory,
+                    StorageAvailable = x.HardWareAvailable.Storage,
+                    VCPUsAvailable = x.HardWareAvailable.Amount_vCPU,
 
                 })
                 .SingleOrDefaultAsync();
@@ -117,9 +113,6 @@ namespace Services.FysiekeServers
                 Memory = x.HardWare.Memory,
                 Storage = x.HardWare.Storage,
                 Amount_vCPU = x.HardWare.Amount_vCPU,
-                MemoryAvailable = x.MemoryAvailable,
-                StorageAvailable = x.StorageAvailable,
-                VCPUsAvailable = x.VCPUsAvailable,
             }).ToListAsync();
             return response;
         }

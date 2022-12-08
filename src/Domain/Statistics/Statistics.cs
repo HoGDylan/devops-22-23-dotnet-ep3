@@ -1,6 +1,8 @@
 using Domain.Common;
 using Domain.Statistics.Datapoints;
 using Domain.VirtualMachines.Statistics;
+using System;
+using System.Collections.Generic;
 
 namespace Domain.Statistics;
 
@@ -13,6 +15,7 @@ public class Statistic
     public DateTime EndTime { get; set; }
     public Hardware Hardware { get; set; }
 
+    public int Id { get; set; }
 
     public Statistic(DateTime start, DateTime end, Hardware hardware)
     {
@@ -21,6 +24,10 @@ public class Statistic
         Hardware = hardware;
     }
 
+    public Statistic()
+    {
+
+    }
 
     public Dictionary<DateTime, DataPoint> GetFakeStatistics(StatisticsPeriod period)
     {
