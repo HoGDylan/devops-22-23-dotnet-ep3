@@ -17,8 +17,8 @@ namespace Server.Controllers
         }
 
 
-        [Authorize(Roles = "Klant")]
-        [HttpGet]
+        //[Authorize(Roles = "Klant")]
+        [HttpGet, AllowAnonymous]
         public Task<VirtualMachineResponse.GetIndex> GetIndexAsync([FromQuery] VirtualMachineRequest.GetIndex request)
         {
             return virtualMachineService.GetIndexAsync(request);

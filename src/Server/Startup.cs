@@ -9,11 +9,18 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Services.Common;
 using Services.VirtualMachines;
+using Services;
 using Shared.VirtualMachines;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Services.Users;
 using Shared.Users;
+using Shared.Projecten;
+using Services.Projecten;
+using Shared.FysiekeServers;
+using Shared.VMContracts;
+using Services.FysiekeServers;
+using Services.VMContracts;
 
 namespace Server
 {
@@ -36,9 +43,9 @@ namespace Server
             services.AddControllersWithViews().AddFluentValidation(config =>
             {
                 config.RegisterValidatorsFromAssemblyContaining<VirtualMachineDto.Mutate.Validator>();
-                config.ImplicitlyValidateChildProperties = true; 
+                config.ImplicitlyValidateChildProperties = true;
             });
-            services.AddAuthentication(options => 
+            services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -58,10 +65,14 @@ namespace Server
             services.AddAuth0ManagementClient().AddManagementAccessToken();
 
             services.AddRazorPages();
+            services.AddScoped<DotNetDataInitializer>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IVirtualMachineService, VirtualMachineService>();
+            services.AddScoped<IProjectenService, ProjectService>();
+            services.AddScoped<IFysiekeServerService, FysiekeServerService>();
+            services.AddScoped<IVMContractService, VMContractService>();
             services.AddScoped<IStorageService, BlobStorageService>();
-            services.AddScoped<DotNetDataInitializer>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

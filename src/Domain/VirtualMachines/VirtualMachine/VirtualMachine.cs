@@ -33,8 +33,9 @@ namespace Domain.VirtualMachines.VirtualMachine
 
         public Statistic Statistics { get { return _statistics; } set { _statistics = Guard.Against.Null(value, nameof(_statistics)); } }
 
-        public VirtualMachine(string n, OperatingSystemEnum os, Hardware h, Backup b)
+        public VirtualMachine(int Id, string n, OperatingSystemEnum os, Hardware h, Backup b)
         {
+            this.Id = Id;
             Name = n;
             OperatingSystem = os;
             Hardware = h;

@@ -9,7 +9,7 @@ namespace Persistence.Data.Configuration
         public void Configure(EntityTypeBuilder<Project> builder)
         {
             builder.Property(p => p.Name).IsRequired();
-            builder.Property(p => p.Klant).IsRequired();
+            builder.HasOne(p => p.User).WithMany().IsRequired();
             builder.HasMany(p => p.VirtualMachines).WithOne().HasForeignKey(u => u.Id).IsRequired();
 
 

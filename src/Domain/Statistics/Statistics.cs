@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Domain.Statistics;
 
-public class Statistic
+public class Statistic : Entity
 {
 
 
@@ -15,7 +15,7 @@ public class Statistic
     public DateTime EndTime { get; set; }
     public Hardware Hardware { get; set; }
 
-    public int Id { get; set; }
+
 
     public Statistic(DateTime start, DateTime end, Hardware hardware)
     {

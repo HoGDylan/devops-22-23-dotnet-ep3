@@ -7,7 +7,7 @@ namespace Shared.Projecten
     {
         public class GetIndex
         {
-            public List<ProjectenDto.Index> Projectens { get; set; } = new();
+            public List<ProjectenDto.Index> Projecten { get; set; } = new();
             public int TotalAmount { get; set; }
         }
 

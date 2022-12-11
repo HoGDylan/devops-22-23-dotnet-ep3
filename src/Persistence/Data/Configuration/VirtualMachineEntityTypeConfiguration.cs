@@ -25,8 +25,8 @@ namespace Persistence.Data.Configuration
             builder.Property(p => p.OperatingSystem).IsRequired();
             builder.Property(p => p.Mode).IsRequired();
             builder.HasOne(p => p.Hardware).WithMany().HasForeignKey(u => u.Id).IsRequired();
-            builder.HasOne(p => p.Contract).WithMany().HasForeignKey(u => u.Id);
-            builder.HasOne(p => p.Connection).WithMany().HasForeignKey(u => u.Id).IsRequired();
+            builder.HasOne(p => p.Contract).WithMany();
+            builder.HasOne(p => p.Connection).WithMany().IsRequired();
             builder.HasOne(p => p.BackUp).WithMany().HasForeignKey(u => u.Id).IsRequired();
             builder.HasOne(p => p.Statistics).WithMany().HasForeignKey(u => u.Id).IsRequired();
         }

@@ -7,6 +7,8 @@ using Persistence.Data.Configuration;
 using Domain.Common;
 using Domain.Statistics;
 using Domain.VirtualMachines.BackUp;
+using Domain.Projecten;
+using Domain.Users;
 
 namespace Persistence.Data
 {
@@ -23,7 +25,9 @@ namespace Persistence.Data
 
         public DbSet<VMContract> VMContracts { get; set; }
 
-        public DbSet<Gebruiker> Users { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Project> Projecten { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,10 +39,8 @@ namespace Persistence.Data
 
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.ApplyConfiguration(new ContactDetailsEntityTypeConfiguration());
-            //modelBuilder.Entity<ContactDetails>().Property(f => f.Id).ValueGeneratedOnAdd();
-            //modelBuilder.ApplyConfiguration(new HardwareEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new KlantEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ProjectEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new VMContractEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new FysiekeServerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new VirtualMachineEntityTypeConfiguration());

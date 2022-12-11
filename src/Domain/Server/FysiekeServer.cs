@@ -21,7 +21,6 @@ namespace Domain.Server
         private Hardware _hardWare;
 
 
-        public int Id { get; set; }
         public String Name { get { return _name; } set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
         public String ServerAddress { get { return _serverAddress; } set { _serverAddress = Guard.Against.NullOrEmpty(value, nameof(_serverAddress)); } }
         public Hardware HardWare { get { return _hardWare; } set { _hardWare = Guard.Against.Null(value, nameof(_hardWare)); } }

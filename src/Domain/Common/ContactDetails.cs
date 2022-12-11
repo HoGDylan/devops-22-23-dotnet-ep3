@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Common
 {
-    public class ContactDetails
+    public class ContactDetails : Entity
     {
 
         private string _phoneNumber;
@@ -18,7 +18,6 @@ namespace Domain.Common
         public String FirstName { get { return _fName; } set { _fName = Guard.Against.NullOrEmpty(value, nameof(_fName)); } }
         public String LastName { get { return _lName; } set { _lName = Guard.Against.NullOrEmpty(value, nameof(_lName)); } }
 
-        public int Id { get; set; }
 
         public ContactDetails() { }
 

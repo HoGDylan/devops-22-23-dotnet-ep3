@@ -10,7 +10,7 @@ namespace Shared.Projecten
         {
             public int Id { get; set; }
             public String Name { get; set; }
-            public Klant klant { get; set; }
+            public User user { get; set; }
             public List<VirtualMachine> VirtualMachines { get; set; }
 
         }
@@ -24,7 +24,7 @@ namespace Shared.Projecten
         {
             public int Id { get; set; }
             public String Name { get; set; }
-            public Klant klant { get; set; }
+            public User user { get; set; }
             public List<VirtualMachine> VirtualMachines { get; set; }
 
             /*public class Validator : AbstractValidator<Mutate>
