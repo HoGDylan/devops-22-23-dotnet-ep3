@@ -18,10 +18,10 @@ namespace Persistence.Data.Configuration
             builder.Property(p => p.HardWareAvailable.Amount_vCPU).IsRequired();*/
 
             builder.Property(p => p.Name).IsRequired();
-            builder.HasOne(p => p.HardWare).WithMany().HasForeignKey(u => u.Id).IsRequired();
+            builder.OwnsOne(p => p.HardWare);
             builder.Property(p => p.ServerAddress).IsRequired();
 
-            //builder.Property(p => p.HardWareAvailable);
+            builder.OwnsOne(p => p.HardWareAvailable);
         }
     }
 }

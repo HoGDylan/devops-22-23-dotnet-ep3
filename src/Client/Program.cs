@@ -11,6 +11,12 @@ using System.Threading.Tasks;
 using Client.Infrastructure;
 using Services.VirtualMachines;
 using Services.Users;
+using Shared.Projecten;
+using Shared.FysiekeServers;
+using Shared.VMContracts;
+using Services.Projecten;
+using Services.FysiekeServers;
+using Services.VMContracts;
 
 namespace Client
 {
@@ -36,6 +42,10 @@ namespace Client
 
             builder.Services.AddScoped<IVirtualMachineService, VirtualMachineService>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IVirtualMachineService, VirtualMachineService>();
+            builder.Services.AddScoped<IProjectenService, ProjectService>();
+            builder.Services.AddScoped<IFysiekeServerService, FysiekeServerService>();
+            builder.Services.AddScoped<IVMContractService, VMContractService>();
             builder.Services.AddSidepanel();
             builder.Services.AddHttpClient<StorageService>();
             await builder.Build().RunAsync();

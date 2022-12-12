@@ -28,7 +28,7 @@ namespace Domain.Users
 
 
 
-        public User(string name, string firstname, string phoneNumber, string email, string password, Role role, string bedrijfsnaam, Type type, List<Project> projecten, User user, string course) : base(name, firstname, phoneNumber, email, password)
+        public User(string name, string firstname, string phoneNumber, string email, string password, Role role, string bedrijfsnaam, Type type, string course) : base(name, firstname, phoneNumber, email, password)
         {
             this.Name = name;
             this.FirstName = firstname;
@@ -38,8 +38,6 @@ namespace Domain.Users
             this._role = role;
             this._bedrijfsNaam = bedrijfsnaam;
             this._type = type;
-            this._contactpersoon = user;
-            this._projecten = projecten;
             this._course = course;
         }
         public User()

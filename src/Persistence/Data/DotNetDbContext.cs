@@ -25,9 +25,11 @@ namespace Persistence.Data
 
         public DbSet<VMContract> VMContracts { get; set; }
 
-        //public DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public DbSet<Project> Projecten { get; set; }
+
+        public DbSet<Statistic> Statistics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,7 +50,7 @@ namespace Persistence.Data
             modelBuilder.ApplyConfiguration(new VMContractEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new FysiekeServerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new VirtualMachineEntityTypeConfiguration());
-
+            modelBuilder.ApplyConfiguration(new StatisticEntityTypeConfiguration());
         }
     }
 }

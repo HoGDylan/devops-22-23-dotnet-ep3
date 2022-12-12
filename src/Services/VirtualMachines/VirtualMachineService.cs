@@ -29,7 +29,7 @@ namespace Services.VirtualMachines
         public async Task<VirtualMachineResponse.Create> CreateAsync(VirtualMachineRequest.Create request)
         {
             VirtualMachineResponse.Create response = new();
-            var virtualMachine = _virtualMachines.Add(new VirtualMachine(1,
+            var virtualMachine = _virtualMachines.Add(new VirtualMachine(
                 request.VirtualMachine.Name,
                 request.VirtualMachine.OperatingSystem,
                 new Hardware(request.VirtualMachine.Memory, request.VirtualMachine.Storage, request.VirtualMachine.Amount_vCPU),

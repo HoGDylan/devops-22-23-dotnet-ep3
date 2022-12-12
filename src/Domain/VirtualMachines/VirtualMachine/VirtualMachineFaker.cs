@@ -52,7 +52,7 @@ namespace Domain.VirtualMachines.VirtualMachine
                     hardware = GenerateRandomHardware();
                     contract = VMContractFaker.Instance.GenerateOne();
 
-                    return new VirtualMachine(1,
+                    return new VirtualMachine(
                         e.Commerce.ProductName(),
                         e.PickRandom<OperatingSystemEnum>(),
                         hardware,

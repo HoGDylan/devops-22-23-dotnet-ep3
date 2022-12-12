@@ -43,8 +43,6 @@ namespace Domain.Users
                 e.PickRandom<Role>(),
                 null,
                 e.PickRandom<Type>(),
-                null,
-                null,
                 e.PickRandom<Course>().ToString()
             ));
 
