@@ -14,7 +14,7 @@ namespace Services.FysiekeServers
         public FysiekeServerService(DotNetDbContext dbContext)
         {
             _dbContext = dbContext;
-            _fysiekeServers = dbContext.fysiekeServers;
+            _fysiekeServers = dbContext.FysiekeServers;
         }
 
         private readonly DotNetDbContext _dbContext;

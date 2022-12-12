@@ -65,18 +65,18 @@ namespace Server
             services.AddAuth0ManagementClient().AddManagementAccessToken();
 
             services.AddRazorPages();
-            services.AddScoped<DotNetDataInitializer>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IVirtualMachineService, VirtualMachineService>();
             services.AddScoped<IProjectenService, ProjectService>();
             services.AddScoped<IFysiekeServerService, FysiekeServerService>();
             services.AddScoped<IVMContractService, VMContractService>();
             services.AddScoped<IStorageService, BlobStorageService>();
+            services.AddScoped<DotNetDataInitializer>();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DotNetDbContext dbContext,
             DotNetDataInitializer dataInitializer)
         {
             if (env.IsDevelopment())

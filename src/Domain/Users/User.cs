@@ -19,8 +19,8 @@ namespace Domain.Users
         public String BedrijfsNaam { get { return _bedrijfsNaam; } set { _bedrijfsNaam = Guard.Against.NullOrEmpty(value, nameof(_bedrijfsNaam)); } }
         public User Contactpersoon { get; set; }
         public List<Project> Projecten { get; set; }
-        public Role Role { get; set; }
-        public Type Type { get; set; }
+        public Role Role { get { return _role; } set { _role = Guard.Against.Null(value, nameof(_role)); } }
+        public Type Type { get { return _type; } set { _type = Guard.Against.Null(value, nameof(_type)); } }
         public String Course { get { return _course; } set { _course = Guard.Against.NullOrEmpty(value, nameof(_course)); } }
         public String TypeExtern { get { return _typeExtern; } set { _typeExtern = Guard.Against.NullOrEmpty(value, nameof(_typeExtern)); } }
 

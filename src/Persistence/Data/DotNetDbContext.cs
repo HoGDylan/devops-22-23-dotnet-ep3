@@ -21,23 +21,27 @@ namespace Persistence.Data
 
         public DbSet<VirtualMachine> VirtualMachines { get; set; }
 
-        public DbSet<FysiekeServer> fysiekeServers { get; set; }
+        public DbSet<FysiekeServer> FysiekeServers { get; set; }
 
         public DbSet<VMContract> VMContracts { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
 
         public DbSet<Project> Projecten { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<VMConnection>();
+
+            base.OnModelCreating(modelBuilder);
+
+
+            /*modelBuilder.Entity<VMConnection>();
             modelBuilder.Entity<Statistic>();
             modelBuilder.Entity<Backup>();
             modelBuilder.Entity<ContactDetails>();
-            modelBuilder.Entity<Hardware>();
+            modelBuilder.Entity<Hardware>();*/
 
-            base.OnModelCreating(modelBuilder);
+
 
             modelBuilder.ApplyConfiguration(new ProjectEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
