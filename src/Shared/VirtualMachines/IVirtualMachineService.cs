@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace Shared.VirtualMachines
 {
@@ -9,5 +9,5 @@ namespace Shared.VirtualMachines
         Task DeleteAsync(VirtualMachineRequest.Delete request);
         Task<VirtualMachineResponse.Create> CreateAsync(VirtualMachineRequest.Create request);
         Task<VirtualMachineResponse.Edit> EditAsync(VirtualMachineRequest.Edit request);
+            Task<VirtualMachineResponse.Rapport> RapporteringAsync(VirtualMachineRequest.GetDetail request);
     }
-}

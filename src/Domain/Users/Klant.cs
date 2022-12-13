@@ -33,6 +33,7 @@ namespace Domain.Users
         public void addProject(Project p)
         {
             if (_projecten == null)
+
             {
                 _projecten = new List<Project>();
             }

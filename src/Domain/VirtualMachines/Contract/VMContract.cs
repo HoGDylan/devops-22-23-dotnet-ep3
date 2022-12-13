@@ -1,4 +1,4 @@
-﻿using Ardalis.GuardClauses;
+using Ardalis.GuardClauses;
 using Domain.Common;
 using System;
 
@@ -33,3 +33,4 @@ namespace Domain.VirtualMachines.Contract
         }
     }
 }
+

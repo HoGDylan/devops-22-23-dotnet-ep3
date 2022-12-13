@@ -1,9 +1,17 @@
 ﻿@page "/"
+@using Append.Blazor.Sidepanel
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Home</PageTitle>
+<h1 class="title is-1">Virtual Machines</h1>
+<FakeLogin></FakeLogin>
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+@code {
+    [Inject] public ISidepanelService Sidepanel { get; set; }
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    private void ToggleFilterForm()
+    {
+        if (Sidepanel.IsOpen) Sidepanel.Close();
+        else Sidepanel.Open<Client.VirtualMachines.Components.VMFilter>("Virtual Machines", "Filter"); 
+    }
+}

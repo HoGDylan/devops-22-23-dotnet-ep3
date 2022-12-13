@@ -39,4 +39,3 @@ namespace Domain.Utility
        //School email
        if (mail_to_lower.Split("@")[1].Equals("student.hogent.be") || mail_to_lower.Split("@")[1].Equals("hogent.be") && (mail_to_lower.Split("@")[0].Contains("."))) {
           
-       }*/

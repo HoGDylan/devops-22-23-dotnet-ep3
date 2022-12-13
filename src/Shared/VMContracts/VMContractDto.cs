@@ -1,4 +1,10 @@
-﻿using FluentValidation;
+using FluentValidation;
+using Ardalis.GuardClauses;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Shared.VMContracts
 {
@@ -7,6 +13,7 @@ namespace Shared.VMContracts
         public class Index
         {
             public int Id { get; set; }
+
             public int CustomerId { get; set; }
             public int VMId { get; set; }
             public DateTime StartDate { get; set; }
@@ -39,6 +46,7 @@ namespace Shared.VMContracts
                     RuleFor(x => x.ImageAmount).GreaterThanOrEqualTo(1);
                 }
             }*/
+
         }
     }
 }

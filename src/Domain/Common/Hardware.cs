@@ -31,7 +31,6 @@ namespace Domain.Common
             set { _amountVCPU = Guard.Against.Negative(value, nameof(_amountVCPU)); }
         }
 
-        //Bandwidth? Gaan we hier rekening meehouden?
 
 
         public Hardware(int m, int s, int a_vCPU)
@@ -39,11 +38,13 @@ namespace Domain.Common
             this.Memory = m;
             this.Storage = s;
             this.Amount_vCPU = a_vCPU;
+
         }
 
 
         public Hardware()
         {
+
         }
         protected override IEnumerable<object> GetEqualityComponents()
         {

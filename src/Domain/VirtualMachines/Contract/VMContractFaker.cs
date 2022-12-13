@@ -77,3 +77,4 @@ namespace Domain.VirtualMachines.Contract
     }
 
 }
+

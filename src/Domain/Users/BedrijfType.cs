@@ -1,4 +1,6 @@
 namespace Domain.Users
+
+
 {
     public enum BedrijfType
     {
@@ -8,4 +10,6 @@ namespace Domain.Users
         UNISEF,
     }
 
+
 }
+

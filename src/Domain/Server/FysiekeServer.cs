@@ -9,6 +9,7 @@ using System.Text;
 using System.Collections.Generic;
 using System;
 
+
 namespace Domain.Server
 {
     public class FysiekeServer : Entity
@@ -19,6 +20,7 @@ namespace Domain.Server
         private string _name;
         private string _serverAddress;
         private Hardware _hardWare;
+
 
 
         public String Name { get { return _name; } set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
@@ -48,6 +50,7 @@ namespace Domain.Server
         public void AddConnection(VirtualMachine vm)
         {
             string pass = PasswordGenerator.Generate(RandomNumberGenerator.GetInt32(10) + 20, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(3) + 1);
+
 
 
 

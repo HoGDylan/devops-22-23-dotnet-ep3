@@ -4,6 +4,7 @@ using Domain.Common;
 using Domain.Utility;
 using System;
 
+
 namespace Domain
 {
     public abstract class Gebruiker : Entity
@@ -22,6 +23,7 @@ namespace Domain
         public String Email { get { return _email; } set { if (PropertyValidator.IsValidEmail(value)) _email = value; } }
         public String Password { get { return _password; } set { _password = Guard.Against.InvalidFormat(value, nameof(_password), @"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$"); } }
 
+
         /*
          * Password validation: 
              *  Min length: 6
@@ -30,6 +32,7 @@ namespace Domain
              *  1 Lowercase letter
              *  1 Digit
          */
+
 
         public Gebruiker(string name, string firstname, string phoneNumber, string email, string password)
         {
