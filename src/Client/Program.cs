@@ -5,17 +5,15 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Shared.VirtualMachines;
 using Shared.Users;
 using Client.Infrastructure;
-using Services.VirtualMachines;
-using Services.Users;
 using Shared.Projecten;
 using Shared.FysiekeServers;
 using Shared.VMContracts;
-using Services.Projecten;
-using Services.FysiekeServers;
 using Services.VMContracts;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Authorization;
-using Client.Shared;
+using Client.VirtualMachines;
+using Client.Servers;
+using Client.Users;
 
 namespace Client
 {
@@ -40,8 +38,7 @@ namespace Client
             }).AddAccountClaimsPrincipalFactory<ArrayClaimsPrincipalFactory<RemoteUserAccount>>();
 
             builder.Services.AddScoped<IVirtualMachineService, VirtualMachineService>();
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<IVirtualMachineService, VirtualMachineService>();
+            builder.Services.AddScoped<IUserService, UsersService>();
             builder.Services.AddScoped<IProjectenService, ProjectService>();
             builder.Services.AddScoped<IFysiekeServerService, FysiekeServerService>();
             builder.Services.AddScoped<IVMContractService, VMContractService>();
@@ -71,7 +68,7 @@ namespace Client
 
 
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             /*builder.Services.AddOidcAuthentication(options =>
             {
                 builder.Configuration.Bind("Auth0", options.ProviderOptions);
