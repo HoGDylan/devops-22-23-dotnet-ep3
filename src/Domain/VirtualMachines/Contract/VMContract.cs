@@ -1,6 +1,6 @@
-﻿using Ardalis.GuardClauses;
+using Ardalis.GuardClauses;
 using Domain.Common;
-
+using System;
 
 namespace Domain.VirtualMachines.Contract
 {
@@ -26,5 +26,11 @@ namespace Domain.VirtualMachines.Contract
             StartDate = start_d;
             EndDate = end_d;
         }
+
+        public VMContract()
+        {
+
+        }
     }
 }
+

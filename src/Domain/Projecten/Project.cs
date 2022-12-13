@@ -1,34 +1,37 @@
-﻿using Ardalis.GuardClauses;
+using Ardalis.GuardClauses;
 using Domain.Common;
 using Domain.Users;
 using Domain.VirtualMachines.VirtualMachine;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.Projecten
 {
 
-    public class Project : Entity 
+    public class Project : Entity
     {
 
-        private  List<VirtualMachine> _vms = new(); //contains all VMS on a certain project | inclusive not approved.
+        private List<VirtualMachine> _vms = new(); //contains all VMS on a certain project | inclusive not approved.
 
         private string _name;
-        private Klant _klant;
+        private User _user;
 
 
 
-        public int Id { get; set; }
-        public String Name { get { return _name; } set {_name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
-        public Klant Klant { get { return _klant; } set { _klant = Guard.Against.Null(value, nameof(_klant)); } }
+        public String Name { get { return _name; } set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
+        public User User { get { return _user; } set { _user = Guard.Against.Null(value, nameof(_user)); } }
         public List<VirtualMachine> VirtualMachines { get { return _vms; } set { _vms = Guard.Against.Null(value, nameof(_vms)); } }
 
-        public Project(string name) {
+        public Project(string name)
+        {
             this.Name = name;
         }
         public VirtualMachine GetVirtualMachineById(int id)
         {
             return _vms.First(e => e.Id == id);
         }
-        
+
 
         // name = substring dus meerdere mogelijkheden 
         public List<VirtualMachine> GetVirtualMachineByName(string name)
@@ -46,3 +49,4 @@ namespace Domain.Projecten
         }
     }
 }
+

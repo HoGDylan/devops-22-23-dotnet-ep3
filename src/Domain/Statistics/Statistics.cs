@@ -1,10 +1,12 @@
-﻿using Domain.Common;
+using Domain.Common;
 using Domain.Statistics.Datapoints;
 using Domain.VirtualMachines.Statistics;
+using System;
+using System.Collections.Generic;
 
 namespace Domain.Statistics;
 
-public class Statistic
+public class Statistic : Entity
 {
 
 
@@ -14,6 +16,7 @@ public class Statistic
     public Hardware Hardware { get; set; }
 
 
+
     public Statistic(DateTime start, DateTime end, Hardware hardware)
     {
         StartTime = start;
@@ -21,23 +24,27 @@ public class Statistic
         Hardware = hardware;
     }
 
+    public Statistic()
+    {
+
+    }
 
     public Dictionary<DateTime, DataPoint> GetFakeStatistics(StatisticsPeriod period)
     {
         DataPointsFaker.Instance.Hardware = Hardware;
         List<DataPoint> _dataPoints = DataPointsFaker.Instance.Generate(GetAmountOfTicks(period));
 
-        List <DateTime> _datePoints = GetFakeDataPoints(period);
+        List<DateTime> _datePoints = GetFakeDataPoints(period);
 
         Dictionary<DateTime, DataPoint> output = new();
 
-        for(int i = 0; i < _dataPoints.Count; i++)
+        for (int i = 0; i < _dataPoints.Count; i++)
         {
             output.Add(_datePoints[i], _dataPoints[i]);
         }
-        return output; 
-    
-        }
+        return output;
+
+    }
 
     private List<DateTime> GetFakeDataPoints(StatisticsPeriod period)
     {
@@ -45,9 +52,9 @@ public class Statistic
 
         int max = GetAmountOfTicks(period);
         DateTime start = FormatStartTime(period);
-        
 
-        for(int i = 0; i < max; i++)
+
+        for (int i = 0; i < max; i++)
         {
             switch (period)
             {
@@ -115,24 +122,24 @@ public class Statistic
                     return DateTime.Parse($"{dt.Day}/{dt.Month}/{dt.Year} 00:00");
 
                 }
-                
+
             default: throw new ArgumentException("No valid period provided");
         }
     }
 
-      
+
 
     private int GetAmountOfTicks(StatisticsPeriod period)
     {
         switch (period)
         {
             case StatisticsPeriod.HOURLY: return (int)Math.Floor((DateTime.Now - StartTime).TotalHours);
-            case StatisticsPeriod.DAILY: return (int) Math.Floor((DateTime.Now - StartTime).TotalDays);
-            case StatisticsPeriod.WEEKLY: return (int) Math.Floor((DateTime.Now - StartTime).TotalDays % 7);
-            case StatisticsPeriod.MONTHLY: return (int) Math.Floor((DateTime.Now - StartTime).TotalDays % 30);
+            case StatisticsPeriod.DAILY: return (int)Math.Floor((DateTime.Now - StartTime).TotalDays);
+            case StatisticsPeriod.WEEKLY: return (int)Math.Floor((DateTime.Now - StartTime).TotalDays % 7);
+            case StatisticsPeriod.MONTHLY: return (int)Math.Floor((DateTime.Now - StartTime).TotalDays % 30);
         }
 
         return 0;
     }
-    
+
 }

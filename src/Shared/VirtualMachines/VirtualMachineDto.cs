@@ -1,18 +1,15 @@
-﻿using Domain.Common;
-using Domain.Projecten;
-using Domain.Server;
-using Domain.Users;
-using Domain.VirtualMachines.BackUp;
+using Domain.Common;
 using Domain.VirtualMachines.Contract;
-using Domain.Statistics;
-using Domain.VirtualMachines.VirtualMachine;
+using Domain.VirtualMachines;
 using FluentValidation;
+using Domain.VirtualMachines.VirtualMachine;
+using Domain.VirtualMachines.BackUp;
 
-namespace Shared.VirtualMachines;
-
-public static class VirtualMachineDto
+namespace Shared.VirtualMachines
 {
-    public class Index
+    public static class VirtualMachineDto
+    {
+        public class Index
     {
         public int Id { get; set; }
         public String Name { get; set; }
@@ -67,6 +64,8 @@ public static class VirtualMachineDto
             }
         }
 
+
+    }
 
     }
 }

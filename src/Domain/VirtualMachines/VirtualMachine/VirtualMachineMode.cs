@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Domain.VirtualMachines.VirtualMachine
 {
     public enum VirtualMachineMode
+
     {
         WAITING_APPROVEMENT,       // No connection || No server
         READY,                     // has connection && server
@@ -14,22 +16,24 @@ namespace Domain.VirtualMachines.VirtualMachine
         PAUSED,
         STOPPED
 
+
     }
 
-    public static class Format{
+    public static class Format
+    {
         public static String GetString(this VirtualMachineMode mode)
         {
             switch (mode)
             {
-                case VirtualMachineMode.WAITING_APPROVEMENT: 
+                case VirtualMachineMode.WAITING_APPROVEMENT:
                     return "Wachten op goedkeuring";
-                case VirtualMachineMode.STOPPED: 
+                case VirtualMachineMode.STOPPED:
                     return "Gestopt";
-                case VirtualMachineMode.READY: 
+                case VirtualMachineMode.READY:
                     return "Gereed";
-                case VirtualMachineMode.RUNNING: 
+                case VirtualMachineMode.RUNNING:
                     return "Actief";
-                case VirtualMachineMode.PAUSED: 
+                case VirtualMachineMode.PAUSED:
                     return "Gepauzeerd";
 
                 default: throw new ArgumentException("No Case for: " + mode.ToString());
@@ -54,9 +58,12 @@ namespace Domain.VirtualMachines.VirtualMachine
                 default:
                     throw new ArgumentException("received invalid virtualmachinemode: " + mode.ToString());
             }
+
         }
     }
 
 
 
+
 };
+

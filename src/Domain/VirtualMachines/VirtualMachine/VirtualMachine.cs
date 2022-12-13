@@ -1,4 +1,4 @@
-﻿using Ardalis.GuardClauses;
+using Ardalis.GuardClauses;
 using Domain.Common;
 using Domain.Projecten;
 using Domain.Server;
@@ -28,10 +28,10 @@ namespace Domain.VirtualMachines.VirtualMachine
         public Hardware Hardware { get; set; }
         public Backup BackUp { get; set; }
         public VMConnection? Connection { get; set; }
-        public VMContract Contract { get { return _vmContract; } set { _vmContract = Guard.Against.Null(value, nameof(_vmContract)); } }
+        public VMContract Contract { get; set; }
         public FysiekeServer? FysiekeServer { get { return _server; } set { _server = Guard.Against.Null(value, nameof(_server)); } }
 
-        public Statistic Statistics { get { return _statistics; } set {_statistics = Guard.Against.Null(value, nameof(_statistics)); } }
+        public Statistic Statistics { get { return _statistics; } set { _statistics = Guard.Against.Null(value, nameof(_statistics)); } }
 
         public VirtualMachine(string n, OperatingSystemEnum os, Hardware h, Backup b)
         {
@@ -40,6 +40,11 @@ namespace Domain.VirtualMachines.VirtualMachine
             Hardware = h;
             BackUp = b;
             Mode = VirtualMachineMode.WAITING_APPROVEMENT;
+        }
+
+        public VirtualMachine()
+        {
+
         }
 
         public void AddConnection(string FQDN, IPAddress hostname, string username, string password)
@@ -52,3 +57,4 @@ namespace Domain.VirtualMachines.VirtualMachine
 
     }
 }
+

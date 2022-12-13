@@ -1,4 +1,4 @@
-﻿using Ardalis.GuardClauses;
+using Ardalis.GuardClauses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace Domain.VirtualMachines.VirtualMachine
         private IPAddress _hostname;
         private string _username;
         private string _password;
-
+        public int Id { get; set; }
         public string FQDN { get { return _fqdn; } set { _fqdn = Guard.Against.NullOrEmpty(value, nameof(_fqdn)); } }
         public IPAddress Hostname { get { return _hostname; } set { _hostname = Guard.Against.Null(value, nameof(_hostname)); } }
         public string Username { get { return _username; } set { _username = Guard.Against.NullOrEmpty(value, nameof(_username)); } }

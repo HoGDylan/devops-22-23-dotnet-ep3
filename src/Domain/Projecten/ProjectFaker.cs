@@ -1,4 +1,6 @@
-﻿using Bogus;
+using System.Collections.Generic;
+using System.Linq;
+using Bogus;
 using Domain.Users;
 using Domain.VirtualMachines.VirtualMachine;
 
@@ -32,7 +34,7 @@ namespace Domain.Projecten
             CustomInstantiator(e => new Project($"Project: {e.Company.CompanyName()}"));
             RuleFor(x => x.Id, _ => id++);
             RuleFor(x => x.VirtualMachines, _ => VirtualMachineFaker.Instance.Generate(5));
-            RuleFor(x => x.Klant, _ => UserFaker.Klant.Instance.Generate(1)[0]);
+            RuleFor(x => x.User, _ => UserFaker.Instance.Generate(1)[0]);
 
         }
 
@@ -60,3 +62,4 @@ namespace Domain.Projecten
 
     }
 }
+

@@ -1,4 +1,4 @@
-﻿using Domain.Common;
+using Domain.Common;
 
 
 namespace Domain.Statistics.Datapoints
@@ -10,10 +10,11 @@ namespace Domain.Statistics.Datapoints
 
         public DataPoint(int tick, Hardware hardware_in_use)
         {
-            Tick = tick; 
+            Tick = tick;
             HardWareInUse = hardware_in_use;
 
         }
 
     }
 }
+

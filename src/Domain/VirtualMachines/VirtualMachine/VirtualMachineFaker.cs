@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -46,7 +46,7 @@ namespace Domain.VirtualMachines.VirtualMachine
 
             Hardware hardware = null;
             VMContract contract = null;
-           
+
             CustomInstantiator(e =>
                 {
                     hardware = GenerateRandomHardware();
@@ -57,17 +57,17 @@ namespace Domain.VirtualMachines.VirtualMachine
                         e.PickRandom<OperatingSystemEnum>(),
                         hardware,
                         e.PickRandom(GenerateRandomBackups()));
-                 
+
                 });
 
             RuleFor(x => x.Id, _ => id++);
             RuleFor(x => x.Connection, _ => new Random().Next(0, 2) % 1 == 0 ? new VMConnection("MOCK-FQDN", GetRandomIpAddress(), "MOCK-USER", PasswordGenerator.Generate(20, 3, 3, 3, 3)) : null);
             RuleFor(x => x.Mode, x => x.PickRandom<VirtualMachineMode>());
-            RuleFor(x => x.Contract, _ => contract);
-            RuleFor(x => x.FysiekeServer, _ => new FysiekeServer("Mock Server", FysiekeServerFaker.GenerateRandomHardware(), "mock-server_adres.hogent.be"));
+            //RuleFor(x => x.Contract, _ => contract);
+            RuleFor(x => x.FysiekeServer, _ => new FysiekeServer("Mock Server", new Hardware(5, 5, 5), "mock-server_adres.hogent.be"));
 
 
-            RuleFor(x => x.Statistics, _ => new Statistic(contract.StartDate, contract.EndDate, hardware));
+            //RuleFor(x => x.Statistics, _ => new Statistic(contract.StartDate, contract.EndDate, hardware));
         }
 
 
@@ -115,7 +115,7 @@ namespace Domain.VirtualMachines.VirtualMachine
         {
 
             int[] _memoryOptions = { 1_000, 2_000, 4_000, 8_000, 16_000 };
-            int[] _storageOptions = { 250, 1_000, 2_000, 5_000, 10_000, 20_000, 50_000, 100_000, 200_000, 500_000};
+            int[] _storageOptions = { 250, 1_000, 2_000, 5_000, 10_000, 20_000, 50_000, 100_000, 200_000, 500_000 };
 
 
             return new Hardware(_memoryOptions[new Random().Next(0, _memoryOptions.Count())], _storageOptions[new Random().Next(0, _storageOptions.Count())], new Random().Next(1, 8));

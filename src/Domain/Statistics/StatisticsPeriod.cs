@@ -1,10 +1,8 @@
-﻿
-
 namespace Domain.VirtualMachines.Statistics
 {
     public enum StatisticsPeriod
     {
-        HOURLY, 
+        HOURLY,
         DAILY,
         WEEKLY,
         MONTHLY

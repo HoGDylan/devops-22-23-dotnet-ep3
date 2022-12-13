@@ -1,4 +1,4 @@
-﻿using Bogus;
+using Bogus;
 using Domain.VirtualMachines.VirtualMachine;
 using System;
 using System.Collections.Generic;
@@ -71,9 +71,10 @@ namespace Domain.VirtualMachines.Contract
             }
 
             output = _contracts[RandomNumberGenerator.GetInt32(0, _contracts.Count)];
-           
+
             return output;
         }
     }
-    
+
 }
+

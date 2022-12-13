@@ -1,13 +1,18 @@
-﻿using Domain.Users;
-using Shared.Projects;
-using Shared.VirtualMachines;
-using System.Runtime.CompilerServices;
-
-namespace Shared.Users;
-
-public static class UserRequest
+namespace Shared.Users
 {
-    public class AllKlantenIndex
+    public static class UserRequest
+    {
+        public class GetIndex
+        {
+            // Filter stuff here if you want to.
+        }
+
+        public class Create
+        {
+            public UserDto.Create User { get; set; }
+        }
+
+            public class AllKlantenIndex
     {
 
     }
@@ -31,4 +36,6 @@ public static class UserRequest
         public int KlantId { get; set; }
         public KlantDto.Mutate Klant { get; set; }
     }
+    }
 }
+

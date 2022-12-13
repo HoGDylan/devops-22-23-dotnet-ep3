@@ -1,4 +1,4 @@
-﻿using Bogus.DataSets;
+using Bogus.DataSets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

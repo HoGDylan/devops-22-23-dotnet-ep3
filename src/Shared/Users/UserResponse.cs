@@ -1,8 +1,19 @@
-﻿namespace Shared.Users;
+using System.Collections.Generic;
 
-public static class UserResponse
+namespace Shared.Users
 {
-    public class AllKlantenIndex
+    public static class UserResponse
+    {
+        public class GetIndex
+        {
+            public List<UserDto.Index> Users { get; set; } = new();
+        }
+
+        public class Create
+        {
+            public string Auth0UserId { get; set; }
+        }
+            public class AllKlantenIndex
     {
         public List<KlantDto.Index> Klanten { get; set; } = new();
         public int Total { get; set; }
@@ -28,4 +39,6 @@ public static class UserResponse
         public List<AdminUserDto.Index> Admins { get; set; } = new();
         public int Total { get; set; }
     }
+    }
 }
+
