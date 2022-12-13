@@ -1,6 +1,6 @@
 using Append.Blazor.Sidepanel;
 using Microsoft.AspNetCore.Components;
-using Shared.Projects;
+using Shared.Projecten;
 using Client.VirtualMachines.Components;
 using Microsoft.AspNetCore.Components.Web;
 using JetBrains.Annotations;
@@ -12,40 +12,40 @@ namespace Client.VirtualMachines
 {
     public partial class Index 
     {
-        [Inject] public IProjectService ProjectService { get; set; }
+        [Inject] public IProjectenService ProjectService { get; set; }
         [Inject] public ISidepanelService Sidepanel { get; set; }
 
 
         [Inject] NavigationManager Router { get; set; }
 
-        private List<ProjectDto.Index> _projects;
+        private List<ProjectenDto.Index> _projects;
 
-        private Dictionary<int, ProjectDto.Detail> _details = new Dictionary<int, ProjectDto.Detail>();
+        private Dictionary<int, ProjectenDto.Detail> _details = new Dictionary<int, ProjectenDto.Detail>();
 
         protected override async Task OnInitializedAsync()
         {
 
-            ProjectRequest.All request = new();
+            ProjectenRequest.GetIndex request = new();
 
             var response = await ProjectService.GetIndexAsync(request);
-            _projects = response.Projects;
+            _projects = response.Projecten;
 
         }
 
 
         public async Task GetVirtualMachines(int id)
         {
-                ProjectRequest.Detail request = new();
+                ProjectenRequest.GetDetail request = new();
 
-                request.ProjectId = id;
+                request.ProjectenId = id;
 
                 var response = await ProjectService.GetDetailAsync(request);
-                ProjectDto.Detail resp = new ProjectDto.Detail()
+                ProjectenDto.Detail resp = new ProjectenDto.Detail()
                 {
-                    Id = response.Project.Id,
-                    Klant = response.Project.Klant,
-                    Name = response.Project.Name,
-                    VirtualMachines = response.Project.VirtualMachines
+                    Id = response.Projecten.Id,
+                    user = response.Projecten.user,
+                    Name = response.Projecten.Name,
+                    VirtualMachines = response.Projecten.VirtualMachines
                 };
 
 

@@ -83,12 +83,8 @@ namespace Services.FysiekeServers
                     Id = x.Id,
                     Name = x.Name,
                     ServerAddress = x.ServerAddress,
-                    Memory = x.HardWare.Memory,
-                    Storage = x.HardWare.Storage,
-                    Amount_vCPU = x.HardWare.Amount_vCPU,
-                    MemoryAvailable = x.HardWareAvailable.Memory,
-                    StorageAvailable = x.HardWareAvailable.Storage,
-                    VCPUsAvailable = x.HardWareAvailable.Amount_vCPU,
+                    Hardware = x.HardWare,
+                    HardWareAvailable = x.HardWareAvailable,
 
                 })
                 .SingleOrDefaultAsync();
@@ -110,11 +106,39 @@ namespace Services.FysiekeServers
                 Id = x.Id,
                 Name = x.Name,
                 ServerAddress = x.ServerAddress,
-                Memory = x.HardWare.Memory,
-                Storage = x.HardWare.Storage,
-                Amount_vCPU = x.HardWare.Amount_vCPU,
+                Hardware = x.HardWare
             }).ToListAsync();
             return response;
+        }
+
+        public Task<FysiekeServerResponse.Available> GetAvailableServersByHardWareAsync(FysiekeServerRequest.Order request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FysiekeServerResponse.Launched> DeployVirtualMachine(FysiekeServerRequest.Approve request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FysiekeServerResponse.Details> GetDetailsAsync(FysiekeServerRequest.Detail request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FysiekeServerResponse.Available> GetAllServers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FysiekeServerResponse.ResourcesAvailable> GetAvailableHardWareOnDate(FysiekeServerRequest.Date date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer()
+        {
+            throw new NotImplementedException();
         }
     }
 }

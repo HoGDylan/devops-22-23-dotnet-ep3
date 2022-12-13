@@ -1,6 +1,8 @@
 ﻿using Bogus;
 using Domain.Common;
 using Domain.VirtualMachines.VirtualMachine;
+using System;
+using System.Linq;
 
 namespace Domain.Server
 {

@@ -1,22 +1,22 @@
 ﻿using Domain;
 using Domain.Common;
 using Domain.Users;
-using Shared.Projects;
+using Shared.Projecten;
 using Shared.Users;
 
 
 namespace Services.Users
 {
-    public class FakeUserService : IUserService
+    public class FakeUserService: IUserService
     {
-        private List<Klant> _klanten;
+        //private List<Klant> _klanten;
         private List<Administrator> _admins;
 
 
         public FakeUserService()
         {
-            _klanten = UserFaker.Klant.Instance.Generate(20);
-            _admins = UserFaker.Administrators.Instance.Generate(3);
+            /*_klanten = UserFake._users.Generate(20);
+            _admins = UserFaker.Administrators.Instance.Generate(3);*/
 
         }
         public async Task CreateAsync(UserRequest.Create request)
@@ -31,7 +31,7 @@ namespace Services.Users
                     request.Klant.Email,
                     request.Klant.Password,
                     request.Klant.Opleiding.Value);
-                _klanten.Add(klant);
+                //_klanten.Add(klant);
             }
             else if(!request.Klant.Bedrijf.Equals(null)) //if() nodig of weglaten?
             {
@@ -45,7 +45,7 @@ namespace Services.Users
                     request.Klant.Type,
                     request.Klant.Contactpersoon,
                     request.Klant.ReserveContactpersoon);
-                _klanten.Add(klant);
+                //_klanten.Add(klant);
             }
             //TODO: response die id van nieuwe klant terugstuurt
         }
@@ -53,11 +53,11 @@ namespace Services.Users
         public async Task EditAsync(UserRequest.Edit request)
         {
             await Task.Delay(100);
-            Klant klant = _klanten.Find(k => k.Id == request.KlantId);
+            /*Klant klant = _klanten.Find(k => k.Id == request.KlantId);
             klant.FirstName = request.Klant.FirstName;
             klant.Name = request.Klant.Name;
             klant.Email = request.Klant.Email;
-            klant.PhoneNumber = request.Klant.PhoneNumber;
+            klant.PhoneNumber = request.Klant.PhoneNumber;*/
         }
 
         public Task<UserResponse.AllAdminsIndex> GetAllAdminsIndex(UserRequest.AllAdminUsers request)
@@ -69,7 +69,7 @@ namespace Services.Users
         {
             await Task.Delay(100);
             UserResponse.AllKlantenIndex response = new();
-            response.Klanten = _klanten.Select(x => new KlantDto.Index
+            /*response.Klanten = _klanten.Select(x => new KlantDto.Index
             {
                 Id = x.Id,
                 Email = x.Email,
@@ -77,7 +77,7 @@ namespace Services.Users
                 Name = x.Name,
                 PhoneNumber = x.PhoneNumber,
             }).ToList();
-            response.Total = _klanten.Count;
+            response.Total = _klanten.Count;*/
 
             return response;
         }
@@ -85,16 +85,16 @@ namespace Services.Users
         public async Task<UserResponse.DetailKlant> GetDetailKlant(UserRequest.DetailKlant request)
         {
             await Task.Delay(100);
-            List<ProjectDto.Index> projecten = new();
+            List<ProjectenDto.Index> projecten = new();
             UserResponse.DetailKlant response = new();
-            Klant k = _klanten.Single(x => x.Id == request.KlantId);
+            /*Klant k = _klanten.Single(x => x.Id == request.KlantId);
             if (k is not null)
             {
                 k.Projecten.ForEach(p => projecten.Add(new ProjectDto.Index()
                 {
                     Id = p.Id,
                     Name = p.Name,
-                    Klant = k
+                    User = k
                 }));
                 var kdto = new KlantDto.Detail()
                 {
@@ -124,8 +124,18 @@ namespace Services.Users
             else
             {
                 response.Klant = new KlantDto.Detail { Id = -1 };
-            }
+            }*/
             return response;
+        }
+
+        public Task<UserResponse.GetIndex> GetIndexAsync(UserRequest.GetIndex request)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<UserResponse.Create> IUserService.CreateAsync(UserRequest.Create request)
+        {
+            throw new NotImplementedException();
         }
 
         /*public async Task<UserResponse.AllAdminsIndex> GetAllAdminsIndex(UserRequest.AllAdminUsers request)

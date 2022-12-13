@@ -9,6 +9,8 @@ namespace Shared.Users
 
         public class Create
         {
+            public KlantDto.Create Klant;
+
             public UserDto.Create User { get; set; }
         }
 
@@ -26,10 +28,10 @@ namespace Shared.Users
         public int KlantId { get; set; }
     }
 
-    public class Create
+    /*public class Create
     {
         public KlantDto.Create Klant { get; set; }
-    }
+    }*/
 
     public class Edit
     {

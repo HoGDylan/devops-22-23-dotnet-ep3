@@ -17,7 +17,7 @@ namespace Domain.Users
         public ContactDetails ResContactpersoon { get { return _contactpersoon; } set { _contactpersoon = value; } }
 
 
-        public ExterneKlant(string name, string firstname, string phoneNumber, string email, string password, string bedrijfsnaam, BedrijfType type, ContactDetails contactpersoon, ContactDetails resContactpersoon) : base(name, firstname, phoneNumber, email, password)
+        public ExterneKlant(string name, string firstname, string phoneNumber, string email, string password, string bedrijfsnaam, BedrijfType type, ContactDetails contactpersoon, ContactDetails resContactpersoon) /*: base(name, firstname, phoneNumber, email, password)*/
         {
             this.Bedrijfsnaam = bedrijfsnaam;
             this.Type = type;

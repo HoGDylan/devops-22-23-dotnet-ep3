@@ -1,5 +1,5 @@
 ﻿using Client.Extentions;
-using Shared.Projects;
+using Shared.Projecten;
 using Shared.Users;
 using System.Net.Http.Json;
 
@@ -40,6 +40,14 @@ namespace Client.Users
             throw new NotImplementedException();
         }
 
-        
+        public Task<UserResponse.GetIndex> GetIndexAsync(UserRequest.GetIndex request)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<UserResponse.Create> IUserService.CreateAsync(UserRequest.Create request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

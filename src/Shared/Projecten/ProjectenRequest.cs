@@ -4,7 +4,7 @@ namespace Shared.Projecten
     {
         public class GetIndex
         {
-            public string SearchTerm { get; set; }
+            public string? SearchTerm { get; set; }
 
         }
 

@@ -1,5 +1,5 @@
 ﻿using Client.Extentions;
-using Shared.Projects;
+using Shared.Projecten;
 using Shared.VirtualMachines;
 using System.Net.Http.Json;
 
@@ -38,10 +38,10 @@ namespace Client.VirtualMachines
             return response;
         }
 
-        public async Task<ProjectResponse.All> GetIndexAsync(ProjectResponse.All request)
+        public async Task<ProjectenResponse.GetIndex> GetIndexAsync(ProjectenResponse.GetIndex request)
         {
             var queryParameters = request.GetQueryString();
-            var response = await client.GetFromJsonAsync<ProjectResponse.All>($"{endpoint}?{queryParameters}");
+            var response = await client.GetFromJsonAsync<ProjectenResponse.GetIndex>($"{endpoint}?{queryParameters}");
             return response;
         }
 

@@ -36,11 +36,14 @@ namespace Persistence.Data
         {
             var statisticA = new Statistic(System.DateTime.Now, System.DateTime.Now, new Hardware(5, 5, 5));
             _dbContext.Statistics.AddRange(statisticA);
+            _dbContext.SaveChanges();
             var userA = new User("lastname A", "firstname A", "024561278", "firstnameA.lastnameA@mail.local", "passwordA1!", Role.Admin, "bedrijfsnaam A", Type.Intern, "course A");
             _dbContext.Users.AddRange(userA);
+            _dbContext.SaveChanges();
             var fysiekeServerA = new FysiekeServer("fysiekeServerA", new Hardware(5, 5, 5), "ServerAddressA");
             fysiekeServerA.HardWareAvailable = new Hardware(4, 4, 4);
             _dbContext.FysiekeServers.AddRange(fysiekeServerA);
+            _dbContext.SaveChanges();
             // var Projecten = new ProjectFaker().Generate(1);
             // var VirtualMachines = new VirtualMachineFaker().Generate(2);
             var virtualMachines1 = new List<VirtualMachine>();
@@ -49,6 +52,7 @@ namespace Persistence.Data
             virtualMachines1.Add(new VirtualMachine("1", OperatingSystemEnum.FEDORA_35, new Hardware(5, 5, 5), new Backup(BackUpType.DAILY, System.DateTime.Now)));
             var project1 = new Project("gegherg");
             project1.VirtualMachines = virtualMachines1;
+            userA.Id = 1;
             project1.User = userA;
             _dbContext.Projecten.AddRange(project1);
             _dbContext.SaveChanges();

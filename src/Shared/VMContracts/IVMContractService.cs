@@ -10,13 +10,13 @@ namespace Shared.VMContracts
     public interface IVMContractService
     {
         Task<VMContractResponse.GetIndex> GetIndexAsync(VMContractRequest.GetIndex request);
-        Task<VMContractResponse.GetDetail> GetDetailAsync(VMContractRequest.GetDetail request);
-        Task DeleteAsync(VMContractRequest.Delete request);
+        Task<VMContractResponse.GetDetail> GetDetailAsync(VMContractRequest.GetDetail request); //returns all info about specific vm duration + customer
+        Task <VMContractResponse.Delete> DeleteAsync(VMContractRequest.Delete request);
         Task<VMContractResponse.Create> CreateAsync(VMContractRequest.Create request);
         Task<VMContractResponse.Edit> EditAsync(VMContractRequest.Edit request);
 
-        Task<VMContractResponse.Index> GetFromDate(VMContractRequest.GetByDate request); // returns all contracts from a certain date until nullable enddate 
-        Task<VMContractResponse.Detail> GetDetailAsync(VMContractRequest.GetDetail request); //returns all info about specific vm duration + customer
+        //Task<VMContractResponse.Index> GetFromDate(VMContractRequest.GetByDate request); // returns all contracts from a certain date until nullable enddate 
+
         
         /*
       Als er een VM gecreërt word, krijgt deze automatisch een contract mee. Maar nog geen connectie.

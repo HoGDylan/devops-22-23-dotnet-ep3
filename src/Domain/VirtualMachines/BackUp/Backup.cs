@@ -1,4 +1,6 @@
 ﻿using Ardalis.GuardClauses;
+using System;
+using System.Collections.Generic;
 
 namespace Domain.VirtualMachines.BackUp
 {

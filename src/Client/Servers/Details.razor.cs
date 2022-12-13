@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Components;
-using Shared.Servers;
+using Shared.FysiekeServers;
 using Shared.VirtualMachines;
 using Smart.Blazor;
 using System.Runtime.CompilerServices;
@@ -11,7 +11,7 @@ namespace Client.Servers;
 public partial class Details
 {
     [Parameter] public int Id { get; set; }
-    
+
     [Inject] IFysiekeServerService Service { get; set; }
     private FysiekeServerDto.Detail server;
     private List<VirtualMachineDto.Rapportage> virtualMachinesServer = new();

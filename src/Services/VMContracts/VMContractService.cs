@@ -99,5 +99,15 @@ namespace Services.VMContracts
             }).ToListAsync();
             return response;
         }
+
+        public Task<VMContractResponse.Index> GetFromDate(VMContractRequest.GetByDate request)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<VMContractResponse.Delete> IVMContractService.DeleteAsync(VMContractRequest.Delete request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

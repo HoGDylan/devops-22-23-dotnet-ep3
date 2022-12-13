@@ -1,38 +1,38 @@
 ﻿using Client.Extentions;
-using Shared.Projects;
+using Shared.Projecten;
 using System.Net;
 using System.Net.Http.Json;
 
 namespace Client.VirtualMachines
 {
-    public class ProjectService : IProjectService
+    public class ProjectService : IProjectenService
     {
         private readonly HttpClient client;
         private string endpoint = "api/project";
 
-        public Task<ProjectResponse.Create> CreateAsync(ProjectRequest.Create request)
+        public Task<ProjectenResponse.Create> CreateAsync(ProjectenRequest.Create request)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(ProjectRequest.Delete request)
+        public Task DeleteAsync(ProjectenRequest.Delete request)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ProjectResponse.Edit> EditAsync(ProjectRequest.Edit request)
+        public Task<ProjectenResponse.Edit> EditAsync(ProjectenRequest.Edit request)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ProjectResponse.Detail> GetDetailAsync(ProjectRequest.Detail request)
+        public async Task<ProjectenResponse.GetDetail> GetDetailAsync(ProjectenRequest.GetDetail request)
         {
             var queryParameters = request.GetQueryString();
-            var response = await client.GetFromJsonAsync<ProjectResponse.Detail>($"{endpoint}?{queryParameters}");
+            var response = await client.GetFromJsonAsync<ProjectenResponse.GetDetail>($"{endpoint}?{queryParameters}");
             return response;
         }
 
-        public Task<ProjectResponse.All> GetIndexAsync(ProjectRequest.All request)
+        public Task<ProjectenResponse.GetIndex> GetIndexAsync(ProjectenRequest.GetIndex request)
         {
             /*
             var queryParameters = request.GetQueryString();

@@ -7,7 +7,7 @@ using Shared.VirtualMachines;
 
 namespace Services.VirtualMachines
 {
-    public class FakeVirtualMachineService : IVirtualMachineService
+    public class FakeVirtualMachineService: IVirtualMachineService
     {
 
         private List<VirtualMachine> _virtualMachines = new();
@@ -130,7 +130,7 @@ namespace Services.VirtualMachines
 
             if (vm == null)
             {
-                response.VM_Id = -1;
+                response.VirtualMachineId = -1;
             }
             else
             {
@@ -140,7 +140,7 @@ namespace Services.VirtualMachines
                 vm.Name = name;
                 vm.BackUp = backup;
 
-                response.VM_Id = vm.Id;
+                response.VirtualMachineId = vm.Id;
             }
 
             return response;
@@ -164,7 +164,7 @@ namespace Services.VirtualMachines
 
             _virtualMachines.Add(vm);
 
-            response.VM_Id = id;
+            response.VirtualMachineId = id;
 
             return response;
 

@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Users
 {
-    public class Klant : Gebruiker
+    public class Klant
+    { /*: Gebruiker
     {
 
 
@@ -38,7 +39,7 @@ namespace Domain.Users
                 _projecten = new List<Project>();
             }
             _projecten.Add(p);
-        }
+        }*/
 
 
     }

@@ -32,8 +32,8 @@ namespace Services.VirtualMachines
             var virtualMachine = _virtualMachines.Add(new VirtualMachine(
                 request.VirtualMachine.Name,
                 request.VirtualMachine.OperatingSystem,
-                new Hardware(request.VirtualMachine.Memory, request.VirtualMachine.Storage, request.VirtualMachine.Amount_vCPU),
-                new Backup(request.VirtualMachine.Type, request.VirtualMachine.LastBackup)
+                new Hardware(request.VirtualMachine.Hardware.Memory, request.VirtualMachine.Hardware.Storage, request.VirtualMachine.Hardware.Amount_vCPU),
+                new Backup(request.VirtualMachine.Backup.Type, request.VirtualMachine.Backup.LastBackup)
             ));
             await _dbContext.SaveChangesAsync();
             response.VirtualMachineId = virtualMachine.Entity.Id;
@@ -57,14 +57,7 @@ namespace Services.VirtualMachines
 
                 // You could use a VirtualMachine.Edit method here.
                 virtualMachine.Name = model.Name;
-                virtualMachine.OperatingSystem = model.OperatingSystem;
-                virtualMachine.Mode = model.Mode;
-                virtualMachine.Hardware.Memory = model.Memory;
-                virtualMachine.Hardware.Storage = model.Storage;
-                virtualMachine.Hardware.Amount_vCPU = model.Amount_vCPU;
-                virtualMachine.Connection = model.Connection;
-                virtualMachine.BackUp.Type = model.Type;
-                virtualMachine.BackUp.LastBackup = model.LastBackup;
+                virtualMachine.BackUp = model.Backup;
 
 
                 _dbContext.Entry(virtualMachine).State = EntityState.Modified;
@@ -86,12 +79,9 @@ namespace Services.VirtualMachines
                     Name = x.Name,
                     OperatingSystem = x.OperatingSystem,
                     Mode = x.Mode,
-                    Memory = x.Hardware.Memory,
-                    Storage = x.Hardware.Storage,
-                    Amount_vCPU = x.Hardware.Amount_vCPU,
-                    Connection = x.Connection,
-                    Type = x.BackUp.Type,
-                    LastBackup = (DateTime)x.BackUp.LastBackup
+                    Hardware = x.Hardware,
+                    VMConnection = x.Connection,
+                    BackUp = x.BackUp,
                 })
                 .SingleOrDefaultAsync();
             return response;
@@ -106,9 +96,6 @@ namespace Services.VirtualMachines
                 query = query.Where(x => x.Name.Contains(request.SearchTerm));
 
 
-            if (request.OnlyActiveVirtualMachines)
-                query = query.Where(x => x.IsEnabled);
-
             response.TotalAmount = query.Count();
 
             query.OrderBy(x => x.Name);
@@ -116,16 +103,14 @@ namespace Services.VirtualMachines
             {
                 Id = x.Id,
                 Name = x.Name,
-                OperatingSystem = x.OperatingSystem,
                 Mode = x.Mode,
-                Memory = x.Hardware.Memory,
-                Storage = x.Hardware.Storage,
-                Amount_vCPU = x.Hardware.Amount_vCPU,
-                Connection = x.Connection,
-                Type = x.BackUp.Type,
-                LastBackup = (DateTime)x.BackUp.LastBackup
             }).ToListAsync();
             return response;
+        }
+
+        public Task<VirtualMachineResponse.Rapport> RapporteringAsync(VirtualMachineRequest.GetDetail request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

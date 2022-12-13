@@ -1,13 +1,13 @@
 ﻿using Bogus;
 using Domain.Common;
 using Domain.Server;
-using Shared.Servers;
+using Shared.FysiekeServers;
 using Shared.VirtualMachines;
 using System.Linq;
 
 namespace Services.Server
 {
-    public class FakeServerService : IFysiekeServerService
+    public class FakeServerService  : IFysiekeServerService
     {
 
 
@@ -28,12 +28,12 @@ namespace Services.Server
 
             if (_servers.Any(e => e.Id == request.ServerId))
             {
-                List<VirtualMachineDto.Rapportage> vms = _servers.Find(e => e.Id == request.ServerId).VirtualMachines.FindAll(e => e.Connection is not null).Select(e => new VirtualMachineDto.Rapportage() { Id = e.Id, Name = e.Name, Statistics = e.Statistics }).ToList();
+                /*List<VirtualMachineDto.Rapportage> vms = _servers.Find(e => e.Id == request.ServerId).VirtualMachines.FindAll(e => e.Connection is not null).Select(e => new VirtualMachineDto.Rapportage() { Id = e.Id, Name = e.Name, Statistics = e.Statistics }).ToList();
                 response.Server.Id = request.ServerId;
-                response.Server.VirtualMachines = vms;
+                response.Server.VirtualMachines = vms;*/
 
 
-            }
+           }
             else
             {
                 response.Server.Id = -1;
@@ -52,7 +52,7 @@ namespace Services.Server
             respons.Servers = _servers.Select(s => new FysiekeServerDto.Index
             {
                 Id = s.Id,
-                Name = s.Naam,
+                Name = s.Name,
                 Hardware = s.HardWare,
                 HardWareAvailable = s.HardWareAvailable,
                 ServerAddress = s.ServerAddress
@@ -113,14 +113,14 @@ namespace Services.Server
 
             if (_servers.Count > 0)
             {
-                foreach(var _server in _servers)
+                foreach (var _server in _servers)
                 {
-                    if(_server.VirtualMachines.Count > 0)
+                    if (_server.VirtualMachines.Count > 0)
                     {
                         foreach (var _vm in _server.VirtualMachines)
                         {
                             if (_vm.Contract.EndDate > today)
-                            { 
+                            {
 
                                 if (_vm.Contract.StartDate <= today)
                                 {
@@ -130,7 +130,7 @@ namespace Services.Server
                                 {
                                     start = DateTime.Parse($"{_vm.Contract.StartDate.Day}/{_vm.Contract.StartDate.Month}/{_vm.Contract.StartDate.Year} 00:00");
                                 }
-                                
+
                                 DateTime value = start;
                                 for (int i = 0; i < end.Subtract(start).TotalDays; i++)
                                 {
@@ -152,11 +152,11 @@ namespace Services.Server
                     }
                 }
             }
-            foreach(var kv in max)
+            foreach (var kv in max)
             {
                 Console.WriteLine($"{kv.Key}:{kv.Value}");
             }
-                
+
             return new FysiekeServerResponse.GraphValues() { GraphData = max };
         }
 
@@ -174,6 +174,31 @@ namespace Services.Server
             }
             return maxHardware;
 
+        }
+
+        public Task<FysiekeServerResponse.GetIndex> GetIndexAsync(FysiekeServerRequest.GetIndex request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FysiekeServerResponse.GetDetail> GetDetailAsync(FysiekeServerRequest.GetDetail request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(FysiekeServerRequest.Delete request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FysiekeServerResponse.Create> CreateAsync(FysiekeServerRequest.Create request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FysiekeServerResponse.Edit> EditAsync(FysiekeServerRequest.Edit request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

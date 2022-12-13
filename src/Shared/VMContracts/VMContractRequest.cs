@@ -15,37 +15,39 @@ namespace Shared.VMContracts
             public int VMId { get; set; }
             public DateTime StartDate { get; set; }
             public DateTime EndDate { get; set; }
-
-        public class GetByDate
-        {
-            public DateTime Start { get; set; }
-            public DateTime? End { get; set; }
-
-
         }
 
-        public class GetDetail
-        {
+            public class GetByDate
+            {
+                public DateTime Start { get; set; }
+                public DateTime? End { get; set; }
 
-            public int VMContractId { get; set; }
-        }
 
-        public class Delete
-        {
-            public int VMContractId { get; set; }
-        }
+            }
 
-        public class Create
-        {
-            public VMContractDto.Mutate VMContract { get; set; }
-        }
+            public class GetDetail
+            {
 
-        public class Edit
-        {
-            public int VMContractId { get; set; }
-            public VMContractDto.Mutate VMContract { get; set; }
-            public int Id { get; set; }
+                public int VMContractId { get; set; }
+            }
 
-        }
+            public class Delete
+            {
+                public int VMContractId { get; set; }
+            }
+
+            public class Create
+            {
+                public VMContractDto.Mutate VMContract { get; set; }
+            }
+
+            public class Edit
+            {
+                public int VMContractId { get; set; }
+                public VMContractDto.Mutate VMContract { get; set; }
+                public int Id { get; set; }
+
+            }
+        
     }
 }

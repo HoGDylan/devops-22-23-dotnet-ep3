@@ -64,5 +64,25 @@ namespace Services.Users
             return response;
 
         }
+
+        public Task<UserResponse.AllKlantenIndex> GetAllKlanten(UserRequest.AllKlantenIndex request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UserResponse.DetailKlant> GetDetailKlant(UserRequest.DetailKlant request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UserResponse.AllAdminsIndex> GetAllAdminsIndex(UserRequest.AllAdminUsers request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task EditAsync(UserRequest.Edit request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

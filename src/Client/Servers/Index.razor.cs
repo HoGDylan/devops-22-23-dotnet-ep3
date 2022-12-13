@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Components;
-using Shared.Servers;
+using Shared.FysiekeServers;
 
 namespace Client.Servers;
 
-public partial class Index 
+public partial class Index
 {
     [Inject] public IFysiekeServerService FysiekeServerService { get; set; }
     [Inject] public NavigationManager Router { get; set; }

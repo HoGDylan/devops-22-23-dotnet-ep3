@@ -8,7 +8,7 @@ namespace Shared.Projecten
         public class GetIndex
         {
             public List<ProjectenDto.Index> Projecten { get; set; } = new();
-            public int TotalAmount { get; set; }
+            public int Total { get; set; }
         }
 
         public class GetDetail
@@ -23,7 +23,6 @@ namespace Shared.Projecten
         public class Create
         {
             public int ProjectenId { get; set; }
-            public Uri UploadUri { get; set; }
         }
 
         public class Edit

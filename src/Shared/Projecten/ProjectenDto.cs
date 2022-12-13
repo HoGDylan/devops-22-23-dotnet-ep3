@@ -11,13 +11,13 @@ namespace Shared.Projecten
             public int Id { get; set; }
             public String Name { get; set; }
             public User user { get; set; }
-            public List<VirtualMachine> VirtualMachines { get; set; }
+
 
         }
 
         public class Detail : Index
         {
-
+            public List<VirtualMachine> VirtualMachines { get; set; }
         }
 
         public class Mutate
@@ -27,16 +27,6 @@ namespace Shared.Projecten
             public User user { get; set; }
             public List<VirtualMachine> VirtualMachines { get; set; }
 
-            /*public class Validator : AbstractValidator<Mutate>
-            {
-                public Validator()
-                {
-                    RuleFor(x => x.Name).NotEmpty().Length(1, 250);
-                    RuleFor(x => x.Price).InclusiveBetween(1, 250);
-                    RuleFor(x => x.Category).NotEmpty().Length(1, 250);
-                    RuleFor(x => x.ImageAmount).GreaterThanOrEqualTo(1);
-                }
-            }*/
         }
     }
 }

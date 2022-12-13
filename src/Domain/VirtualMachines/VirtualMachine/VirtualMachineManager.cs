@@ -27,7 +27,7 @@ public class VirtualMachineManager
     {
         return _fysiekeServers.First(e => e.Id == id);
     }
-    public VirtualMachine CreateVM(string name, Project project, OperatingSystemEnum os, Hardware hw, Backup b, Klant k, DateTime start, DateTime end)
+    public VirtualMachine CreateVM(string name, Project project, OperatingSystemEnum os, Hardware hw, Backup b, User k, DateTime start, DateTime end)
     {
         FysiekeServer server = _fysiekeServers.First(e => e.VCPUsAvailable > hw.Amount_vCPU && e.StorageAvailable > hw.Storage && e.MemoryAvailable > hw.Memory);
         if (server == null)
@@ -73,7 +73,7 @@ public class VirtualMachineManager
     }
 }
 }
-    public void EditVM(int id, Hardware hw, BackUpType type, Klant k, VMConnection connection)
+    public void EditVM(int id, Hardware hw, BackUpType type, User k, VMConnection connection)
     {
         VirtualMachine vm = _vms.First(x => x.Id == id);
         if (vm != null)

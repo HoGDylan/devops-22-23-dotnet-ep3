@@ -5,9 +5,9 @@ using ChartJs.Blazor.LineChart;
 using ChartJs.Blazor.Util;
 using Domain.Common;
 using Microsoft.AspNetCore.Components;
-using Shared.Servers;
 using System.Drawing;
 using ChartJs.Blazor;
+using Shared.FysiekeServers;
 
 namespace Client.Servers
 {

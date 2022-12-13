@@ -95,7 +95,7 @@ namespace Services.Projecten
             /*if (request.OnlyActiveProjects)
                 query = query.Where(x => x.IsEnabled);*/
 
-            response.TotalAmount = query.Count();
+            response.Total = query.Count();
 
             query.OrderBy(x => x.Name);
             response.Projecten = await query.Select(x => new ProjectenDto.Index
@@ -103,7 +103,6 @@ namespace Services.Projecten
                 Id = x.Id,
                 Name = x.Name,
                 user = x.User,
-                VirtualMachines = x.VirtualMachines
             }).ToListAsync();
             return response;
         }

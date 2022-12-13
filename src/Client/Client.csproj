@@ -178,6 +178,9 @@
     <PackageReference Include="Smart.Blazor" Version="14.4.39" />
     <PackageReference Include="UnlockedData.Chartist.Blazor" Version="3.2.7" />
     <PackageReference Include="Xamarin.Forms.Bootstrap.Icons" Version="1.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -186,7 +189,6 @@
 	  
     <ProjectReference Include="..\Shared\Shared.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@ using Domain.VirtualMachines.BackUp;
 using Domain.VirtualMachines.VirtualMachine;
 using Microsoft.AspNetCore.Components.QuickGrid;
 using Shared.VirtualMachines;
-using Shared.Projects;
+using Shared.Projecten;
 
 namespace Client.VirtualMachines.Components;
 
@@ -12,11 +12,11 @@ public partial class VirtualMachineList
 {
     [Parameter] public int ProjectId { get; set; }
     [Inject] NavigationManager NavigationManager { get; set; }
-    [Inject] public IProjectService ProjectService { get; set; }
-    private List<VirtualMachineDto.Index> virtualmachinesOfProject = new();
+    [Inject] public IProjectenService ProjectService { get; set; }
+    private List<VirtualMachine> virtualmachinesOfProject = new();
     private VirtualMachineDto.Index vm;
-    private ProjectDto.Detail virtualMachines;
-    private IQueryable<VirtualMachineDto.Index> virtualmachinesQuery;
+    private ProjectenDto.Detail virtualMachines;
+    private IQueryable<VirtualMachine> virtualmachinesQuery;
     private int _total;
     /*record VirtualMachine(string Name, string Klant, string Os, string Hardware, DateOnly BackUp);*/
     /*IQueryable<VirtualMachine> vms = new[]
@@ -36,9 +36,9 @@ public partial class VirtualMachineList
         virtualMachines = response.VirtualMachines;
         _total = response.TotalAmount;*/
         //virtualMachines = response.VirtualMachines;
-        ProjectRequest.Detail request = new() { ProjectId = ProjectId };
+        ProjectenRequest.GetDetail request = new() { ProjectenId = ProjectId };
         var response = await ProjectService.GetDetailAsync(request);
-        virtualmachinesOfProject = response.Project.VirtualMachines;
+        virtualmachinesOfProject = response.Projecten.VirtualMachines;
         virtualmachinesQuery = virtualmachinesOfProject.AsQueryable();
     }
 
