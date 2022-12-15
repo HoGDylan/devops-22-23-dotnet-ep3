@@ -37,7 +37,7 @@ namespace Persistence.Data
             var statisticA = new Statistic(System.DateTime.Now, System.DateTime.Now, new Hardware(5, 5, 5));
             _dbContext.Statistics.AddRange(statisticA);
             _dbContext.SaveChanges();
-            var userA = new User("lastname A", "firstname A", "024561278", "firstnameA.lastnameA@mail.local", "passwordA1!", Role.Admin, "bedrijfsnaam A", Type.Intern, "course A");
+            var userA = new User("lastname A", "firstname A", "024561278", "firstnameA.lastnameA@mail.local", "passwordA1!", Role.Admin, "bedrijfsnaam A", Type.Intern, Course.AGRO_EN_BIOTECHNOLOGIE);
             _dbContext.Users.AddRange(userA);
             _dbContext.SaveChanges();
             var fysiekeServerA = new FysiekeServer("fysiekeServerA", new Hardware(5, 5, 5), "ServerAddressA");

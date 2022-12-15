@@ -18,7 +18,7 @@ public partial class VirtualMachineList
     private ProjectenDto.Detail virtualMachines;
     private IQueryable<VirtualMachine> virtualmachinesQuery;
     private int _total;
-    /*record VirtualMachine(string Name, string Klant, string Os, string Hardware, DateOnly BackUp);*/
+    /*record VirtualMachine(string Name, string User, string Os, string Hardware, DateOnly BackUp);*/
     /*IQueryable<VirtualMachine> vms = new[]
     {
         new VirtualMachine("KaliLinux_4gb_4vCpu", "Dellaware","KALI_LINUX", "100gb, 4gb, 4 cores" , new DateOnly(2022, 6,25)),

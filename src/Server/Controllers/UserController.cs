@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
-    [Authorize(Roles = "BeheerderBeheren")]
+    //[Authorize(Roles = "BeheerderBeheren")]
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
@@ -17,7 +17,7 @@ namespace Server.Controllers
             this.userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public Task<UserResponse.GetIndex> GetIndexAsync([FromQuery] UserRequest.GetIndex request)
         {
             return userService.GetIndexAsync(request);

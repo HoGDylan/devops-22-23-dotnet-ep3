@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Services.Server
 {
-    public class FakeServerService  : IFysiekeServerService
+    public class FakeServerService : IFysiekeServerService
     {
 
 
@@ -33,7 +33,7 @@ namespace Services.Server
                 response.Server.VirtualMachines = vms;*/
 
 
-           }
+            }
             else
             {
                 response.Server.Id = -1;

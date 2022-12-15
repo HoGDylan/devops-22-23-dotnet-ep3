@@ -112,5 +112,10 @@ namespace Services.VirtualMachines
         {
             throw new NotImplementedException();
         }
+
+        Task<VirtualMachineResponse.Delete> IVirtualMachineService.DeleteAsync(VirtualMachineRequest.Delete request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

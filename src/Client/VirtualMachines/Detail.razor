@@ -25,7 +25,7 @@ else
                     <p>Operating System: @FormatCapitalLetter(@Virtualmachine.OperatingSystem.ToString())</p>
                     <p>Status: @Virtualmachine.Mode.GetString()</p>
                 </div>
-            </div>  
+            </div>
         </div>
         <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
@@ -59,7 +59,8 @@ else
                 <div class="card-body">
                     <p>Memory/RAM: @Virtualmachine.Hardware.Memory GB </p>
                     <p>Aantal Cores: @Virtualmachine.Hardware.Amount_vCPU</p>
-                    <p>Storage: @(Virtualmachine.Hardware.Storage > 1000 ? (Virtualmachine.Hardware.Storage / 1000.0).ToString() + " GB" : Virtualmachine.Hardware.Storage + " MB")</p>
+                    <p>Storage: @(Virtualmachine.Hardware.Storage > 1000 ? (Virtualmachine.Hardware.Storage /
+                    1000.0).ToString() + " GB" : Virtualmachine.Hardware.Storage + " MB")</p>
                 </div>
             </div>
         </div>
@@ -83,51 +84,62 @@ else
                 </div>
             </div>
         </div>
+    </div>
+    <AuthorizeView Policy="AdminOnly">
+        <div>
+            <a @onclick="NavigateToUser">Naar User</a>
         </div>
-        <AuthorizeView Policy="AdminOnly">
-            <div>
-                <a @onclick="NavigateToKlant">Naar Klant</a>
-            </div>
-        </AuthorizeView>
+    </AuthorizeView>
 
 
-@code{
-    public string FormatCapitalLetter(string s){
+    @code {
+    public string FormatCapitalLetter(string s)
+    {
 
         string output = "";
 
-        char[] delimiters = { ' ', '_', '-','\t' };
+        char[] delimiters = { ' ', '_', '-', '\t' };
 
 
         string[] splitted = s.Split(delimiters);
 
-        if(splitted.Count() == 0){
-            try{
+        if (splitted.Count() == 0)
+        {
+            try
+            {
                 output = char.ToUpper(s[0]) + s.Substring(1).ToLower();
-            }catch(Exception e){
+            }
+            catch (Exception e)
+            {
                 //name is 1 letter
                 output = s.ToUpper();
             }
-        }else{
+        }
+        else
+        {
             foreach (var i in splitted)
             {
-                if(i.Length == 0){
+                if (i.Length == 0)
+                {
                     continue;
                 }
-                if(i.Length == 1){
+                if (i.Length == 1)
+                {
                     output += i.ToUpper();
                 }
-                if(i.Length > 1){
-                    output +=  (char.ToUpper(i[0]) + i.Substring(1).ToLower());
+                if (i.Length > 1)
+                {
+                    output += (char.ToUpper(i[0]) + i.Substring(1).ToLower());
                 }
                 output += " ";
             }
         }
-            if(output.Last().Equals(" ")){
-                output.Substring(0, output.Length - 1);
-            }
-            return output;
+        if (output.Last().Equals(" "))
+        {
+            output.Substring(0, output.Length - 1);
+        }
+        return output;
 
-        }   
     }
+}
 }

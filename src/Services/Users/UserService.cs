@@ -24,8 +24,8 @@ namespace Services.Users
             {
                 Email = x.Email,
                 PhoneNumber = x.PhoneNumber,
-                Firstname = x.FirstName,
-                Lastname = x.LastName,
+                FirstName = x.FirstName,
+                Name = x.LastName,
                 //HogentEmail = x.HogentEmail
             }).ToList();
 
@@ -40,8 +40,8 @@ namespace Services.Users
             {
                 Email = request.User.Email,
                 PhoneNumber = request.User.PhoneNumber,
-                FirstName = request.User.Firstname,
-                LastName = request.User.Lastname,
+                FirstName = request.User.FirstName,
+                LastName = request.User.Name,
                 Password = request.User.Password,
                 //HogentEmail = request.User.HogentEmail,
                 Connection = "Username-Password-Authentication" // Name of the Database connection
@@ -65,12 +65,7 @@ namespace Services.Users
 
         }
 
-        public Task<UserResponse.AllKlantenIndex> GetAllKlanten(UserRequest.AllKlantenIndex request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UserResponse.DetailKlant> GetDetailKlant(UserRequest.DetailKlant request)
+        public Task<UserResponse.Detail> GetDetail(UserRequest.Detail request)
         {
             throw new NotImplementedException();
         }
@@ -80,7 +75,7 @@ namespace Services.Users
             throw new NotImplementedException();
         }
 
-        public Task EditAsync(UserRequest.Edit request)
+        public Task<UserResponse.Edit> EditAsync(UserRequest.Edit request)
         {
             throw new NotImplementedException();
         }

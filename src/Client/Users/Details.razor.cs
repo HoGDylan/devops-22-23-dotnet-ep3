@@ -5,32 +5,32 @@ namespace Client.Users;
 
 public partial class Details
 {
-    private KlantDto.Mutate model = new();
+    private UserDto.Mutate model = new();
     public bool Loading = false;
     public bool Edit = false;
     public bool Intern = false;
-    private KlantDto.Detail Klant;
+    private UserDto.Detail User;
     [Parameter] public int Id { get; set; }
     [Inject] public IUserService UserService { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        await GetKlantAsync();
+        await GetUserAsync();
         ObjectToMutate();
     }
 
-    private async Task GetKlantAsync()
+    private async Task GetUserAsync()
     {
         Loading = true;
-        var request = new UserRequest.DetailKlant();
-        request.KlantId = Id;
-        var response = await UserService.GetDetailKlant(request);
-        Klant = response.Klant;
-        if (Klant.Opleiding is not null)
+        var request = new UserRequest.Detail();
+        request.UserId = Id;
+        var response = await UserService.GetDetail(request);
+        User = response.User;
+        if (User.Course is not null)
         {
             Intern = true;
         }
-        Console.WriteLine(Klant.Projects.Count()==0);
+        Console.WriteLine(User.Projects.Count() == 0);
         Loading = false;
     }
     public void Toggle()
@@ -38,45 +38,45 @@ public partial class Details
         Edit = !Edit;
     }
 
-/*    private async void CheckboxChanged()
-    {
-        if (!Edit)
+    /*    private async void CheckboxChanged()
         {
+            if (!Edit)
+            {
 
-            GetKlantAsync();
-            Console.WriteLine(Loading);
-            Loading = false;
-        }
-        
-    }*/
+                GetUserAsync();
+                Console.WriteLine(Loading);
+                Loading = false;
+            }
 
-    private async void EditKlant()
+        }*/
+
+    private async void EditUser()
     {
 
         UserRequest.Edit request = new()
         {
-            KlantId = Klant.Id,
-            Klant = model
+            UserId = User.Id,
+            User = model
         };
         await UserService.EditAsync(request);
 
-        var response = await UserService.GetDetailKlant(new UserRequest.DetailKlant() { KlantId = Klant.Id });
-        Klant = response.Klant;
+        var response = await UserService.GetDetail(new UserRequest.Detail() { UserId = User.Id });
+        User = response.User;
     }
 
     public void ObjectToMutate()
     {
-        model.FirstName = Klant.FirstName;
-        model.Name = Klant.Name;
-        model.Email = Klant.Email;
-        model.PhoneNumber = Klant.PhoneNumber;
-        if (Klant.Opleiding is not null)
+        model.FirstName = User.FirstName;
+        model.Name = User.Name;
+        model.Email = User.Email;
+        model.PhoneNumber = User.PhoneNumber;
+        if (User.Course is not null)
         {
-            model.Opleiding = Klant.Opleiding;
+            model.Course = User.Course;
         }
         else
         {
-            model.Bedrijf = Klant.Bedrijf;
+            model.Bedrijf = User.Bedrijf;
         }
 
     }

@@ -8,7 +8,7 @@ namespace Client.Users
 {
     public partial class CreateKlant
     {
-        public KlantDto.Create model = new();
+        public UserDto.Create model = new();
         [Inject] public IUserService userService { get; set; }
         [Inject] NavigationManager NavMan { get; set; }
         public Boolean isIntern { get; set; } = true;
@@ -16,7 +16,6 @@ namespace Client.Users
         protected override async Task OnInitializedAsync()
         {
             model.Contactpersoon = new Domain.Common.ContactDetails();
-            model.ReserveContactpersoon = new Domain.Common.ContactDetails();
         }
 
         public void toggleRelation()
@@ -28,11 +27,11 @@ namespace Client.Users
         {
             UserRequest.Create request = new()
             {
-                Klant = model
+                User = model
             };
             await userService.CreateAsync(request);
 
-            //TODO: klant inloggen
+            //TODO: User inloggen
             NavMan.NavigateTo($"/virtualmachines");
         }
     }

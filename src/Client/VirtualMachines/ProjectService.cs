@@ -32,14 +32,14 @@ namespace Client.VirtualMachines
             return response;
         }
 
-        public Task<ProjectenResponse.GetIndex> GetIndexAsync(ProjectenRequest.GetIndex request)
+        public async Task<ProjectenResponse.GetIndex> GetIndexAsync(ProjectenRequest.GetIndex request)
         {
-            /*
+
             var queryParameters = request.GetQueryString();
-            var response = await client.GetFromJsonAsync<ProjectResponse.All>($"{endpoint}?{queryParameters}");
+            var response = await client.GetFromJsonAsync<ProjectenResponse.GetIndex>($"{endpoint}?{queryParameters}");
             return response;
-            */
-            return null;
+
+
         }
     }
 }

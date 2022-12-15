@@ -8,17 +8,17 @@ namespace Server.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    public class ProjectenController : ControllerBase
+    public class ProjectController : ControllerBase
     {
         private readonly IProjectenService projectenService;
 
-        public ProjectenController(IProjectenService projectenService)
+        public ProjectController(IProjectenService projectenService)
         {
             this.projectenService = projectenService;
         }
 
-        [Authorize(Roles = "Klant")]
-        [HttpGet]
+        //[Authorize(Roles = "Klant")]
+        [HttpGet, AllowAnonymous]
         public Task<ProjectenResponse.GetIndex> GetIndexAsync([FromQuery] ProjectenRequest.GetIndex request)
         {
             return projectenService.GetIndexAsync(request);

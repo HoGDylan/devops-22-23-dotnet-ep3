@@ -5,7 +5,7 @@ using System.Net.Http.Json;
 
 namespace Client.VirtualMachines
 {
-    
+
     public class VirtualMachineService : IVirtualMachineService
     {
 
@@ -44,17 +44,21 @@ namespace Client.VirtualMachines
             var response = await client.GetFromJsonAsync<ProjectenResponse.GetIndex>($"{endpoint}?{queryParameters}");
             return response;
         }
+        public async Task<VirtualMachineResponse.Rapport> RapporteringAsync(VirtualMachineRequest.GetDetail request)
+        {
+            var queryParameters = request.GetQueryString();
+            var response = await client.GetFromJsonAsync<VirtualMachineResponse.Rapport>($"{endpoint}?{queryParameters}");
+            return response;
+        }
 
         public Task<VirtualMachineResponse.GetIndex> GetIndexAsync(VirtualMachineRequest.GetIndex request)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<VirtualMachineResponse.Rapport> RapporteringAsync(VirtualMachineRequest.GetDetail request)
+        Task<VirtualMachineResponse.Delete> IVirtualMachineService.DeleteAsync(VirtualMachineRequest.Delete request)
         {
-            var queryParameters = request.GetQueryString();
-            var response = await client.GetFromJsonAsync<VirtualMachineResponse.Rapport>($"{endpoint}?{queryParameters}");
-            return response;
+            throw new NotImplementedException();
         }
     }
 }

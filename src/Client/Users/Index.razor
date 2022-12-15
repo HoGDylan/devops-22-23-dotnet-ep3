@@ -1,11 +1,13 @@
 ﻿@page "/klanten"
-@attribute [Authorize (policy: "AdminOnly" )]
+@attribute [Authorize(policy: "AdminOnly")]
 
-@if(Klanten is null ||Klanten.Count() == 0){
+@if (Users is null || Users.Count() == 0)
+{
     <p>Geen klanten...</p>
 }
-else{
-        <div class="card-body table is-striped is-hoverable">
+else
+{
+    <div class="card-body table is-striped is-hoverable">
         <table>
             <thead>
                 <tr>
@@ -16,26 +18,24 @@ else{
                     <th>Acties</th>
                 </tr>
             </thead>
-                @foreach (var kl in Klanten)
-                {
+            @foreach (var kl in Users)
+            {
                 <tbody>
-                        <tr>
-                            <td>@kl.Id</td>
-                            <td>@kl.FirstName @kl.Name</td>
-                            <td>@kl.PhoneNumber</td>
-                            <td>@kl.Email</td>
-                            <td>
+                    <tr>
+                        <td>@kl.Id</td>
+                        <td>@kl.FirstName @kl.Name</td>
+                        <td>@kl.PhoneNumber</td>
+                        <td>@kl.Email</td>
+                        <td>
                             <button @onclick="() => NavToDetail(kl.Id)">
-                                    Details
-                                </button>
-                            </td>
-                        </tr>
+                                Details
+                            </button>
+                        </td>
+                    </tr>
 
                 </tbody>
-                }
-            </table>
-        </div>
+            }
+        </table>
+    </div>
 
 }
-
-

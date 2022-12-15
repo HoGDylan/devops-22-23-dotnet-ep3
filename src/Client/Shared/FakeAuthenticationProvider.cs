@@ -14,21 +14,29 @@ namespace Client.Shared
         {
             new Claim(ClaimTypes.Name, "Fake Consultant Admin"),
             new Claim(ClaimTypes.Email, "fake-consultant@gmail.com"),
-            new Claim(ClaimTypes.Role, "Admin-Consultant"),
+            new Claim(ClaimTypes.Role, "BeheerderZien"),
         }, "Fake Authentication"));
 
         public static ClaimsPrincipal AdminBeheer => new(new ClaimsIdentity(new[]
         {
             new Claim(ClaimTypes.Name, "Fake Beheer Admin"),
             new Claim(ClaimTypes.Email, "fake-beheer@gmail.com"),
-            new Claim(ClaimTypes.Role, "Admin-Beheer"),
+            new Claim(ClaimTypes.Role, "BeheerderBeheren"),
         }, "Fake Authentication"));
 
-        public static ClaimsPrincipal Customer => new(new ClaimsIdentity(new[]
+        public static ClaimsPrincipal Klant => new(new ClaimsIdentity(new[]
 {
             new Claim(ClaimTypes.Name, "Fake Customer"),
             new Claim(ClaimTypes.Email, "fake-customer@gmail.com"),
-            new Claim(ClaimTypes.Role, "Customer"),
+            new Claim(ClaimTypes.Role, "Klant"),
+        }, "Fake Authentication"));
+
+
+        public static ClaimsPrincipal Admin => new(new ClaimsIdentity(new[]
+{
+            new Claim(ClaimTypes.Name, "Fake Admin"),
+            new Claim(ClaimTypes.Email, "fake-admin@gmail.com"),
+            new Claim(ClaimTypes.Role, "Admin"),
         }, "Fake Authentication"));
 
 

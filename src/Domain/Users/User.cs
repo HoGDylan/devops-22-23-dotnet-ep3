@@ -13,7 +13,7 @@ namespace Domain.Users
         private List<Project> _projecten;
         private Role _role;
         private Type _type;
-        private string _course;
+        private Course _course;
         private string _typeExtern;
 
         public String BedrijfsNaam { get { return _bedrijfsNaam; } set { _bedrijfsNaam = Guard.Against.NullOrEmpty(value, nameof(_bedrijfsNaam)); } }
@@ -21,14 +21,14 @@ namespace Domain.Users
         public List<Project> Projecten { get; set; }
         public Role Role { get { return _role; } set { _role = Guard.Against.Null(value, nameof(_role)); } }
         public Type Type { get { return _type; } set { _type = Guard.Against.Null(value, nameof(_type)); } }
-        public String Course { get { return _course; } set { _course = Guard.Against.NullOrEmpty(value, nameof(_course)); } }
+        public Course Course { get { return _course; } set { _course = Guard.Against.Null(value, nameof(_course)); } }
         public String TypeExtern { get { return _typeExtern; } set { _typeExtern = Guard.Against.NullOrEmpty(value, nameof(_typeExtern)); } }
 
 
 
 
 
-        public User(string name, string firstname, string phoneNumber, string email, string password, Role role, string bedrijfsnaam, Type type, string course) : base(name, firstname, phoneNumber, email, password)
+        public User(string name, string firstname, string phoneNumber, string email, string password, Role role, string bedrijfsnaam, Type type, Course course) : base(name, firstname, phoneNumber, email, password)
         {
             this.Name = name;
             this.FirstName = firstname;

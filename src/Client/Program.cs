@@ -29,7 +29,7 @@ namespace Client
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
                    .CreateClient("AuthenticatedServerAPI"));
 
-            builder.Services.AddHttpClient<PublicClient>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+            //builder.Services.AddHttpClient<PublicClient>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
             builder.Services.AddOidcAuthentication(options =>
             {
                 builder.Configuration.Bind("Auth0", options.ProviderOptions);
@@ -56,8 +56,8 @@ namespace Client
             //AUTHENTICATION
             builder.Services.AddAuthorizationCore(options =>
             {
-                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin-Consultant", "Admin-Beheer"));
-                options.AddPolicy("BeheerOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin-Beheer"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
+                options.AddPolicy("BeheerOnly", policy => policy.RequireClaim(ClaimTypes.Role, "BeheerderZien"));
                 options.AddPolicy("LoggedIn", policy => policy.RequireAuthenticatedUser());
                 options.AddPolicy("Guest", policy => policy.RequireClaim(ClaimTypes.Name, "Guest"));
 

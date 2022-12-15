@@ -18,7 +18,7 @@ namespace Server.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public Task<FysiekeServerResponse.GetIndex> GetIndexAsync([FromQuery] FysiekeServerRequest.GetIndex request)
         {
             return fysiekeServerService.GetIndexAsync(request);

@@ -31,7 +31,7 @@ namespace Services.FysiekeServers
             var fysiekeServer = _fysiekeServers.Add(new FysiekeServer(
                 request.FysiekeServer.Name,
                 new Hardware(request.FysiekeServer.Memory, request.FysiekeServer.Storage, request.FysiekeServer.Amount_vCPU)
-                ,request.FysiekeServer.ServerAddress
+                , request.FysiekeServer.ServerAddress
              ));
             await _dbContext.SaveChangesAsync();
             response.FysiekeServerId = fysiekeServer.Entity.Id;
@@ -95,9 +95,6 @@ namespace Services.FysiekeServers
         {
             FysiekeServerResponse.GetIndex response = new();
             var query = _fysiekeServers.AsQueryable().AsNoTracking();
-
-            if (!string.IsNullOrWhiteSpace(request.SearchTerm))
-                query = query.Where(x => x.Name.Contains(request.SearchTerm));
             response.TotalAmount = query.Count();
 
             query.OrderBy(x => x.Name);
@@ -126,10 +123,6 @@ namespace Services.FysiekeServers
             throw new NotImplementedException();
         }
 
-        public Task<FysiekeServerResponse.Available> GetAllServers()
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<FysiekeServerResponse.ResourcesAvailable> GetAvailableHardWareOnDate(FysiekeServerRequest.Date date)
         {

@@ -1,4 +1,6 @@
-﻿using Shared.FysiekeServers;
+﻿using Client.Extentions;
+using Client.Infrastructure;
+using Shared.FysiekeServers;
 using System.Globalization;
 using System.Net.Http.Json;
 
@@ -7,11 +9,20 @@ namespace Client.Servers
     public class FysiekeServerService : IFysiekeServerService
     {
         private readonly HttpClient _httpClient;
-        private const string endpoint = "api/fysiekeservers";
 
-        public Task<FysiekeServerResponse.GetIndex> GetIndexAsync(FysiekeServerRequest.GetIndex request)
+        private const string endpoint = "api/fysiekeserver";
+
+        public FysiekeServerService(HttpClient _httpClient)
         {
-            throw new NotImplementedException();
+            this._httpClient = _httpClient;
+
+        }
+
+        public async Task<FysiekeServerResponse.GetIndex> GetIndexAsync(FysiekeServerRequest.GetIndex request)
+        {
+            //var queryParameters = request.GetQueryString();
+            var response = await _httpClient.GetFromJsonAsync<FysiekeServerResponse.GetIndex>($"{endpoint}");
+            return response;
         }
 
         public Task<FysiekeServerResponse.GetDetail> GetDetailAsync(FysiekeServerRequest.GetDetail request)
@@ -49,10 +60,6 @@ namespace Client.Servers
             throw new NotImplementedException();
         }
 
-        public Task<FysiekeServerResponse.Available> GetAllServers()
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<FysiekeServerResponse.ResourcesAvailable> GetAvailableHardWareOnDate(FysiekeServerRequest.Date date)
         {
@@ -63,20 +70,6 @@ namespace Client.Servers
         {
             throw new NotImplementedException();
         }
-
-
-        /*public async Task<FysiekeServerResponse.Available> GetAllServers()
-        {
-            var response = await _httpClient.GetFromJsonAsync<FysiekeServerResponse.Available>($"{endpoint}");
-            return response;
-        }*/
-
-
-
-
-
-
-
 
     }
 }

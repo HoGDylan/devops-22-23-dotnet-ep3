@@ -7,7 +7,7 @@ using Shared.VirtualMachines;
 
 namespace Services.VirtualMachines
 {
-    public class FakeVirtualMachineService: IVirtualMachineService
+    public class FakeVirtualMachineService : IVirtualMachineService
     {
 
         private List<VirtualMachine> _virtualMachines = new();
@@ -176,12 +176,17 @@ namespace Services.VirtualMachines
             VirtualMachineResponse.Rapport response = new();
             var vm = _virtualMachines.SingleOrDefault(x => x.Id == request.VirtualMachineId);
             VirtualMachineDto.Rapportage dto = new();
-                dto.Statistics = vm.Statistics;
-                dto.Id = vm.Id;
-                dto.Name = vm.Name;
+            dto.Statistics = vm.Statistics;
+            dto.Id = vm.Id;
+            dto.Name = vm.Name;
             response.VirtualMachine = dto;
             return response;
 
+        }
+
+        Task<VirtualMachineResponse.Delete> IVirtualMachineService.DeleteAsync(VirtualMachineRequest.Delete request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

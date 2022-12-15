@@ -11,8 +11,10 @@ public partial class Index
 
     protected override async Task OnInitializedAsync()
     {
-        var response = await FysiekeServerService.GetAllServers();
-        Servers = response.Servers;
+        FysiekeServerRequest.GetIndex request = new();
+
+        var response = await FysiekeServerService.GetIndexAsync(request);
+        Servers = response.FysiekeServers;
     }
 
     public void RedirectToDetailsPage(int id)

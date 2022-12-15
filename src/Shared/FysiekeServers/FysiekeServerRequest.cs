@@ -7,7 +7,6 @@ namespace Shared.FysiekeServers
     {
         public class GetIndex
         {
-            public string? SearchTerm { get; set; }
 
         }
 

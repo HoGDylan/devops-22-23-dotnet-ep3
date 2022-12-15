@@ -13,7 +13,7 @@ public partial class Detail
     [Inject] NavigationManager NavMan { get; set; }
     [Parameter] public int Id { get; set; }
 
-    public bool Initialized { get; set; } =  false;
+    public bool Initialized { get; set; } = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -24,9 +24,9 @@ public partial class Detail
         Initialized = true;
     }
 
-    private void NavigateToKlant()
+    private void NavigateToUser()
     {
-        NavMan.NavigateTo($"/klant/{Virtualmachine.Contract.CustomerId}");
+        NavMan.NavigateTo($"/User/{Virtualmachine.Contract.CustomerId}");
     }
 
     public void NavigateToReport()

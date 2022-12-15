@@ -1,4 +1,4 @@
-﻿@page "/klant/{Id:int}"
+﻿@page "/User/{Id:int}"
 
 @attribute [Authorize]
 
@@ -12,81 +12,85 @@
 }
 else
 {
-    @if (Klant.Id == -1)
+    @if (User.Id == -1)
     {
-        <p>Klant bestaat niet...</p>
+        <p>User bestaat niet...</p>
     }
-    else{
-    <h1>Details @Klant.FirstName @Klant.Name</h1>
+    else
+    {
+        <h1>Details @User.FirstName @User.Name</h1>
 
-    <div>
-       <div class="ml-4">
-            <h2 class="mb-2">Algemene info</h2> 
+        <div>
             <div class="ml-4">
-                <div class="form-check form-switch">
-                    <input @onclick="@Toggle" class="form-check-input" type="checkbox" id="switch" @bind="@Edit"/>
-                    <label class="form-check-labelv" for="switch">Klant wijzigen?</label>
-                 </div>
-            @if(Intern){
-                <h3 class="mb-2 mt-0">Interne Klant</h3>
-            }
-            else{
-                <h3 class="mb-2 mt-0">Externe Klant</h3>
-            }
-            @if(!Edit)
-            {
-                <div class="ml-8">
-                    <div>
-                        <label class="label">Voornaam: </label>
-                            <input type="text" readonly class="input" value="@Klant.FirstName">
+                <h2 class="mb-2">Algemene info</h2>
+                <div class="ml-4">
+                    <div class="form-check form-switch">
+                        <input @onclick="@Toggle" class="form-check-input" type="checkbox" id="switch" @bind="@Edit" />
+                        <label class="form-check-labelv" for="switch">User wijzigen?</label>
                     </div>
-                    <div>
-                        <label class="label">Naam: </label>
-                            <input type="text" readonly class="input" value="@Klant.Name">
-                    </div>
-                    <div>
-                        <label class="label">Email: </label>
-                        <input type="text" readonly class="input" value="@Klant.Email">
-                    </div>
-                    <div>
-                        <label class="label">Gms-nummer: </label>
-                            <input type="text" readonly class="input" value="@Klant.PhoneNumber">
-                    </div>
-                    <div>
-                    @if(Intern)
+                    @if (Intern)
                     {
-                        <label class="label">Opleiding : </label>
-                        <input type="text" readonly class="input" value="@Klant.Opleiding">
+                        <h3 class="mb-2 mt-0">Interne User</h3>
                     }
                     else
                     {
-                        <label class="label">Bedrijf:</label>
-                        <input type="text" readonly class="input" value="@Klant.Bedrijf">
+                        <h3 class="mb-2 mt-0">Externe User</h3>
                     }
-                    </div>
-                   <div>
-                   <p class="label">Contcatpersoon: </p>
-                    @if (Klant.contactPersoon is not null)
+                    @if (!Edit)
                     {
-                   
-                        <div>
-                                <label class="label">Email Contactpersoon</label>
-                                <input class="input" readonly type="@Klant.contactPersoon.Email">
-                        </div>
-                        <div>
-                            <label class="label">Gsm-nummer Contactpersoon</label>
-                            <input class="input" readonly type="@Klant.contactPersoon.PhoneNumber">
+                        <div class="ml-8">
+                            <div>
+                                <label class="label">Voornaam: </label>
+                                <input type="text" readonly class="input" value="@User.FirstName">
+                            </div>
+                            <div>
+                                <label class="label">Naam: </label>
+                                <input type="text" readonly class="input" value="@User.Name">
+                            </div>
+                            <div>
+                                <label class="label">Email: </label>
+                                <input type="text" readonly class="input" value="@User.Email">
+                            </div>
+                            <div>
+                                <label class="label">Gms-nummer: </label>
+                                <input type="text" readonly class="input" value="@User.PhoneNumber">
+                            </div>
+                            <div>
+                                @if (Intern)
+                                {
+                                    <label class="label">Opleiding : </label>
+                                    <input type="text" readonly class="input" value="@User.Course">
+                                }
+                                else
+                                {
+                                    <label class="label">Bedrijf:</label>
+                                    <input type="text" readonly class="input" value="@User.Bedrijf">
+                                }
+                            </div>
+                            <div>
+                                <p class="label">Contcatpersoon: </p>
+                                @if (User.contactPersoon is not null)
+                                {
+
+                                    <div>
+                                        <label class="label">Email Contactpersoon</label>
+                                        <input class="input" readonly type="@User.contactPersoon.Email">
+                                    </div>
+                                    <div>
+                                        <label class="label">Gsm-nummer Contactpersoon</label>
+                                        <input class="input" readonly type="@User.contactPersoon.PhoneNumber">
                                     </div>
                                 }
                                 else
                                 {
-                                    <p class="input">Deze klant heeft geen contactpersoon</p>
+                                    <p class="input">Deze User heeft geen contactpersoon</p>
                                 }
                             </div>
-                </div>
-                }
-                else{
-                        <EditForm Model="@model" OnValidSubmit="@EditKlant">
+                        </div>
+                    }
+                    else
+                    {
+                        <EditForm Model="@model" OnValidSubmit="@EditUser">
                             <DataAnnotationsValidator />
                             <ValidationSummary />
                             <div>
@@ -105,12 +109,12 @@ else
                                 <label class="label">Gms-nummer: </label>
                                 <InputText class="input" @bind-Value="@model.PhoneNumber" />
                             </div>
-                            @if (model.Opleiding is not null)
+                            @if (model.Course is not null)
                             {
-                                @*        <div>
-                                                <label>Opleiding</label>
-                                                <InputText class="input" @bind-Value="@model.Opleiding"/>
-                                                </div>*@
+                                @* <div>
+                                    <label>Opleiding</label>
+                                    <InputText class="input" @bind-Value="@model.Opleiding"/>
+                                    </div>*@
                             }
                             else
                             {
@@ -134,11 +138,11 @@ else
                                     </div>
                                 </div>
                             }
-                            <button class="button mt-2" type="submit" @onclick="@EditKlant">Klant wijzigen</button>
+                            <button class="button mt-2" type="submit" @onclick="@EditUser">User wijzigen</button>
                         </EditForm>
-                }
+                    }
+                </div>
             </div>
         </div>
-    </div>
     }
 }
