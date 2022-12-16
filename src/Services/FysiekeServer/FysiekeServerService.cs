@@ -103,7 +103,8 @@ namespace Services.FysiekeServers
                 Id = x.Id,
                 Name = x.Name,
                 ServerAddress = x.ServerAddress,
-                Hardware = x.HardWare
+                Hardware = x.HardWare,
+                HardWareAvailable = x.HardWareAvailable
             }).ToListAsync();
             return response;
         }

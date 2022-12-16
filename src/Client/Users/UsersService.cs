@@ -21,7 +21,7 @@ namespace Client.Users
             var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
 
             var queryParam = request.GetQueryString();
-            var response = await HttpClient.GetFromJsonAsync<UserResponse.AllAdminsIndex>($"{endpoint}?queryParam");
+            var response = await HttpClient.GetFromJsonAsync<UserResponse.AllAdminsIndex>($"{endpoint}?{queryParam}");
             return response;
         }
 
@@ -30,7 +30,7 @@ namespace Client.Users
             var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
 
             var queryParam = request.GetQueryString();
-            var response = await HttpClient.GetFromJsonAsync<UserResponse.GetIndex>($"{endpoint}?queryParam");
+            var response = await HttpClient.GetFromJsonAsync<UserResponse.GetIndex>($"{endpoint}?{queryParam}");
             return response;
         }
 
@@ -39,7 +39,7 @@ namespace Client.Users
             var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
 
             var queryParam = request.GetQueryString();
-            var response = await HttpClient.GetFromJsonAsync<UserResponse.Create>($"{endpoint}?queryParam");
+            var response = await HttpClient.GetFromJsonAsync<UserResponse.Create>($"{endpoint}?{queryParam}");
             return response;
         }
 
@@ -48,7 +48,7 @@ namespace Client.Users
             var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
 
             var queryParam = request.GetQueryString();
-            var response = await HttpClient.GetFromJsonAsync<UserResponse.Detail>($"{endpoint}?queryParam");
+            var response = await HttpClient.GetFromJsonAsync<UserResponse.Detail>($"{endpoint}?{queryParam}");
             return response;
         }
 
@@ -57,7 +57,7 @@ namespace Client.Users
             var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
 
             var queryParam = request.GetQueryString();
-            var response = await HttpClient.GetFromJsonAsync<UserResponse.Edit>($"{endpoint}?queryParam");
+            var response = await HttpClient.GetFromJsonAsync<UserResponse.Edit>($"{endpoint}?{queryParam}");
             return response;
         }
     }
