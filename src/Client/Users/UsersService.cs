@@ -7,46 +7,57 @@ namespace Client.Users
 {
     public class UsersService : IUserService
     {
-        private readonly HttpClient _httpClient;
+
+        private readonly IHttpClientFactory _IHttpClientFactory;
         private const string endpoint = "api/User";
-        public UsersService(HttpClient client)
+        public UsersService(IHttpClientFactory _IHttpClientFactory)
         {
-            this._httpClient = client;
+            this._IHttpClientFactory = _IHttpClientFactory;
         }
 
 
         public async Task<UserResponse.AllAdminsIndex> GetAllAdminsIndex(UserRequest.AllAdminUsers request)
         {
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
+
             var queryParam = request.GetQueryString();
-            var response = await _httpClient.GetFromJsonAsync<UserResponse.AllAdminsIndex>($"{endpoint}?queryParam");
+            var response = await HttpClient.GetFromJsonAsync<UserResponse.AllAdminsIndex>($"{endpoint}?queryParam");
             return response;
         }
 
         public async Task<UserResponse.GetIndex> GetIndexAsync(UserRequest.GetIndex request)
         {
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
+
             var queryParam = request.GetQueryString();
-            var response = await _httpClient.GetFromJsonAsync<UserResponse.GetIndex>($"{endpoint}?queryParam");
+            var response = await HttpClient.GetFromJsonAsync<UserResponse.GetIndex>($"{endpoint}?queryParam");
             return response;
         }
 
         public async Task<UserResponse.Create> CreateAsync(UserRequest.Create request)
         {
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
+
             var queryParam = request.GetQueryString();
-            var response = await _httpClient.GetFromJsonAsync<UserResponse.Create>($"{endpoint}?queryParam");
+            var response = await HttpClient.GetFromJsonAsync<UserResponse.Create>($"{endpoint}?queryParam");
             return response;
         }
 
         public async Task<UserResponse.Detail> GetDetail(UserRequest.Detail request)
         {
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
+
             var queryParam = request.GetQueryString();
-            var response = await _httpClient.GetFromJsonAsync<UserResponse.Detail>($"{endpoint}?queryParam");
+            var response = await HttpClient.GetFromJsonAsync<UserResponse.Detail>($"{endpoint}?queryParam");
             return response;
         }
 
         public async Task<UserResponse.Edit> EditAsync(UserRequest.Edit request)
         {
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
+
             var queryParam = request.GetQueryString();
-            var response = await _httpClient.GetFromJsonAsync<UserResponse.Edit>($"{endpoint}?queryParam");
+            var response = await HttpClient.GetFromJsonAsync<UserResponse.Edit>($"{endpoint}?queryParam");
             return response;
         }
     }

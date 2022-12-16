@@ -25,11 +25,6 @@ namespace Shared.Users
             public int Id { get; set; }
         }
 
-        /*public class Create
-        {
-            public int Id { get; set; }
-        }*/
-
         public class AllAdminsIndex
         {
             public List<AdminUserDto.Index> Admins { get; set; } = new();

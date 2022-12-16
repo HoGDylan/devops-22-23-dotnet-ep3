@@ -7,8 +7,17 @@ namespace Client.VirtualMachines
 {
     public class ProjectService : IProjectenService
     {
-        private readonly HttpClient client;
+        private readonly IHttpClientFactory _IHttpClientFactory;
         private string endpoint = "api/project";
+
+
+        public ProjectService(/*HttpClient _httpClient,*/ IHttpClientFactory _IHttpClientFactory)
+        {
+            /*this._httpClient = _httpClient;*/
+            this._IHttpClientFactory = _IHttpClientFactory;
+
+
+        }
 
         public Task<ProjectenResponse.Create> CreateAsync(ProjectenRequest.Create request)
         {
@@ -27,16 +36,19 @@ namespace Client.VirtualMachines
 
         public async Task<ProjectenResponse.GetDetail> GetDetailAsync(ProjectenRequest.GetDetail request)
         {
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
+
             var queryParameters = request.GetQueryString();
-            var response = await client.GetFromJsonAsync<ProjectenResponse.GetDetail>($"{endpoint}?{queryParameters}");
+            var response = await HttpClient.GetFromJsonAsync<ProjectenResponse.GetDetail>($"{endpoint}?{queryParameters}");
             return response;
         }
 
         public async Task<ProjectenResponse.GetIndex> GetIndexAsync(ProjectenRequest.GetIndex request)
         {
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
 
             var queryParameters = request.GetQueryString();
-            var response = await client.GetFromJsonAsync<ProjectenResponse.GetIndex>($"{endpoint}?{queryParameters}");
+            var response = await HttpClient.GetFromJsonAsync<ProjectenResponse.GetIndex>($"{endpoint}?{queryParameters}");
             return response;
 
 

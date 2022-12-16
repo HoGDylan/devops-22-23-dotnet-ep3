@@ -8,7 +8,6 @@ using Client.Infrastructure;
 using Shared.Projecten;
 using Shared.FysiekeServers;
 using Shared.VMContracts;
-using Services.VMContracts;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Authorization;
 using Client.VirtualMachines;
@@ -24,12 +23,6 @@ namespace Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddHttpClient("AuthenticatedServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
-                   .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-            builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
-                   .CreateClient("AuthenticatedServerAPI"));
-
-            //builder.Services.AddHttpClient<PublicClient>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
             builder.Services.AddOidcAuthentication(options =>
             {
                 builder.Configuration.Bind("Auth0", options.ProviderOptions);
@@ -66,7 +59,12 @@ namespace Client
             builder.Services.AddScoped<Shared.FakeAuthenticationProvider>();
             builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<Shared.FakeAuthenticationProvider>());
 
+            builder.Services.AddHttpClient("AuthenticatedServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+            // .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+            //builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
+            //       .CreateClient("AuthenticatedServerAPI"));
 
+            //builder.Services.AddHttpClient<PublicClient>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
             //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             /*builder.Services.AddOidcAuthentication(options =>

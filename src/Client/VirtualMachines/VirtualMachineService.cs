@@ -9,11 +9,13 @@ namespace Client.VirtualMachines
     public class VirtualMachineService : IVirtualMachineService
     {
 
-        private readonly HttpClient client;
+        /*private readonly HttpClient client;*/
+
+        private readonly IHttpClientFactory _IHttpClientFactory;
         private const string endpoint = "api/virtualmachine";
-        public VirtualMachineService(HttpClient client)
+        public VirtualMachineService(IHttpClientFactory _IHttpClientFactory)
         {
-            this.client = client;
+            this._IHttpClientFactory = _IHttpClientFactory;
         }
 
         public Task<VirtualMachineResponse.Create> CreateAsync(VirtualMachineRequest.Create request)
@@ -33,21 +35,30 @@ namespace Client.VirtualMachines
 
         public async Task<VirtualMachineResponse.GetDetail> GetDetailAsync(VirtualMachineRequest.GetDetail request)
         {
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
+
+
             var queryParameters = request.GetQueryString();
-            var response = await client.GetFromJsonAsync<VirtualMachineResponse.GetDetail>($"{endpoint}?{queryParameters}");
+            var response = await HttpClient.GetFromJsonAsync<VirtualMachineResponse.GetDetail>($"{endpoint}?{queryParameters}");
             return response;
         }
 
         public async Task<ProjectenResponse.GetIndex> GetIndexAsync(ProjectenResponse.GetIndex request)
         {
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
+
+
             var queryParameters = request.GetQueryString();
-            var response = await client.GetFromJsonAsync<ProjectenResponse.GetIndex>($"{endpoint}?{queryParameters}");
+            var response = await HttpClient.GetFromJsonAsync<ProjectenResponse.GetIndex>($"{endpoint}?{queryParameters}");
             return response;
         }
         public async Task<VirtualMachineResponse.Rapport> RapporteringAsync(VirtualMachineRequest.GetDetail request)
         {
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
+
+
             var queryParameters = request.GetQueryString();
-            var response = await client.GetFromJsonAsync<VirtualMachineResponse.Rapport>($"{endpoint}?{queryParameters}");
+            var response = await HttpClient.GetFromJsonAsync<VirtualMachineResponse.Rapport>($"{endpoint}?{queryParameters}");
             return response;
         }
 

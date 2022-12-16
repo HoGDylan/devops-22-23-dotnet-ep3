@@ -1,28 +1,38 @@
 ﻿using Client.Extentions;
 using Client.Infrastructure;
+using Domain.Server;
 using Shared.FysiekeServers;
 using System.Globalization;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace Client.Servers
 {
     public class FysiekeServerService : IFysiekeServerService
     {
-        private readonly HttpClient _httpClient;
+        /*private readonly HttpClient _httpClient;*/
+
+        private readonly IHttpClientFactory _IHttpClientFactory;
 
         private const string endpoint = "api/fysiekeserver";
 
-        public FysiekeServerService(HttpClient _httpClient)
+        public FysiekeServerService(/*HttpClient _httpClient,*/ IHttpClientFactory _IHttpClientFactory)
         {
-            this._httpClient = _httpClient;
+            /*this._httpClient = _httpClient;*/
+            this._IHttpClientFactory = _IHttpClientFactory;
+
 
         }
 
         public async Task<FysiekeServerResponse.GetIndex> GetIndexAsync(FysiekeServerRequest.GetIndex request)
         {
             //var queryParameters = request.GetQueryString();
-            var response = await _httpClient.GetFromJsonAsync<FysiekeServerResponse.GetIndex>($"{endpoint}");
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
+
+            var response = await HttpClient.GetFromJsonAsync<FysiekeServerResponse.GetIndex>($"{endpoint}");
             return response;
+
+
         }
 
         public Task<FysiekeServerResponse.GetDetail> GetDetailAsync(FysiekeServerRequest.GetDetail request)

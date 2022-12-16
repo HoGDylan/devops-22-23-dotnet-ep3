@@ -32,7 +32,7 @@ namespace Services.FysiekeServers
                 request.FysiekeServer.Name,
                 new Hardware(request.FysiekeServer.Memory, request.FysiekeServer.Storage, request.FysiekeServer.Amount_vCPU)
                 , request.FysiekeServer.ServerAddress
-             ));
+             )/*HardWareAvailable = new Hardware(request.FysiekeServer.MemoryAvailable, request.FysiekeServer.StorageAvailable, request.FysiekeServer.VCPUsAvailable)*/);
             await _dbContext.SaveChangesAsync();
             response.FysiekeServerId = fysiekeServer.Entity.Id;
             return response;
