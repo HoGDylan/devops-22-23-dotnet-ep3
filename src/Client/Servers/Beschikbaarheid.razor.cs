@@ -40,7 +40,7 @@ namespace Client.Servers
         private async Task GetAvailableResourcesTotal()
         {
             loading = true;
-            var response = await FysiekeServerService.GetGraphValueForServer();
+            var response = await FysiekeServerService.GetGraphValueForServer(new FysiekeServerRequest.GetIndex() );
             _data = response.GraphData;
             loading = false;
         }

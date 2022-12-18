@@ -102,7 +102,7 @@ namespace Services.Server
         }
 
         //retourneert data voor de volgende 3 maanden
-        public async Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer()
+        public async Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer(FysiekeServerResponse.GetIndex request)
         {
             Dictionary<DateTime, Hardware> max = new();
 
@@ -197,6 +197,11 @@ namespace Services.Server
         }
 
         public Task<FysiekeServerResponse.Edit> EditAsync(FysiekeServerRequest.Edit request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer(FysiekeServerRequest.GetIndex request)
         {
             throw new NotImplementedException();
         }

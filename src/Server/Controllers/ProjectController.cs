@@ -24,8 +24,8 @@ namespace Server.Controllers
             return projectenService.GetIndexAsync(request);
         }
 
-        [Authorize(Roles = "Klant")]
-        [HttpGet("{ProjectenId}")]
+        //[Authorize(Roles = "Klant")]
+        [HttpGet("{ProjectenId}"), AllowAnonymous]
         public Task<ProjectenResponse.GetDetail> GetDetailAsync([FromRoute] ProjectenRequest.GetDetail request)
         {
             return projectenService.GetDetailAsync(request);

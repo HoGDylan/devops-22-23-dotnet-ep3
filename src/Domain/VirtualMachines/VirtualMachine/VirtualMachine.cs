@@ -29,9 +29,9 @@ namespace Domain.VirtualMachines.VirtualMachine
         public Backup BackUp { get; set; }
         public VMConnection? Connection { get; set; }
         public VMContract Contract { get; set; }
-        public FysiekeServer? FysiekeServer { get { return _server; } set { _server = Guard.Against.Null(value, nameof(_server)); } }
+        public FysiekeServer? FysiekeServer { get; set; }
 
-        public Statistic Statistics { get { return _statistics; } set { _statistics = Guard.Against.Null(value, nameof(_statistics)); } }
+        public Statistic Statistics { get; set; }
 
         public VirtualMachine(string n, OperatingSystemEnum os, Hardware h, Backup b)
         {

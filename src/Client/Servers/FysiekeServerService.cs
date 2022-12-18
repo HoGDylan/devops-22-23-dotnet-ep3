@@ -71,14 +71,21 @@ namespace Client.Servers
         }
 
 
-        public Task<FysiekeServerResponse.ResourcesAvailable> GetAvailableHardWareOnDate(FysiekeServerRequest.Date date)
+        public async Task<FysiekeServerResponse.ResourcesAvailable> GetAvailableHardWareOnDate(FysiekeServerRequest.Date date)
         {
-            throw new NotImplementedException();
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
+
+            var response = await HttpClient.GetFromJsonAsync<FysiekeServerResponse.ResourcesAvailable>($"{endpoint}");
+            return response;
+
         }
 
-        public Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer()
+        public async Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer(FysiekeServerRequest.GetIndex request)
         {
-            throw new NotImplementedException();
+            var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
+
+            var response = await HttpClient.GetFromJsonAsync<FysiekeServerResponse.GraphValues>($"{endpoint}");
+            return response;
         }
 
     }

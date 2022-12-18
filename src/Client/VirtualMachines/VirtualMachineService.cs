@@ -38,8 +38,8 @@ namespace Client.VirtualMachines
             var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
 
 
-            var queryParameters = request.GetQueryString();
-            var response = await HttpClient.GetFromJsonAsync<VirtualMachineResponse.GetDetail>($"{endpoint}?{queryParameters}");
+            var queryParameters = request.VirtualMachineId;
+            var response = await HttpClient.GetFromJsonAsync<VirtualMachineResponse.GetDetail>($"{endpoint}/{queryParameters}");
             return response;
         }
 
@@ -49,7 +49,7 @@ namespace Client.VirtualMachines
 
 
             var queryParameters = request.GetQueryString();
-            var response = await HttpClient.GetFromJsonAsync<ProjectenResponse.GetIndex>($"{endpoint}?{queryParameters}");
+            var response = await HttpClient.GetFromJsonAsync<ProjectenResponse.GetIndex>($"{endpoint}/{queryParameters}");
             return response;
         }
         public async Task<VirtualMachineResponse.Rapport> RapporteringAsync(VirtualMachineRequest.GetDetail request)
@@ -58,7 +58,7 @@ namespace Client.VirtualMachines
 
 
             var queryParameters = request.GetQueryString();
-            var response = await HttpClient.GetFromJsonAsync<VirtualMachineResponse.Rapport>($"{endpoint}?{queryParameters}");
+            var response = await HttpClient.GetFromJsonAsync<VirtualMachineResponse.Rapport>($"{endpoint}/{queryParameters}");
             return response;
         }
 

@@ -24,8 +24,8 @@ namespace Server.Controllers
             return virtualMachineService.GetIndexAsync(request);
         }
 
-        [Authorize(Roles = "Klant")]
-        [HttpGet("{VirtualMachineId}")]
+        //[Authorize(Roles = "Klant")]
+        [HttpGet("{VirtualMachineId}"), AllowAnonymous]
         public Task<VirtualMachineResponse.GetDetail> GetDetailAsync([FromRoute] VirtualMachineRequest.GetDetail request)
         {
             return virtualMachineService.GetDetailAsync(request);

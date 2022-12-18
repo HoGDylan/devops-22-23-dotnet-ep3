@@ -47,8 +47,8 @@ namespace Client.Users
         {
             var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
 
-            var queryParam = request.GetQueryString();
-            var response = await HttpClient.GetFromJsonAsync<UserResponse.Detail>($"{endpoint}?{queryParam}");
+            var queryParam = request.UserId;
+            var response = await HttpClient.GetFromJsonAsync<UserResponse.Detail>($"{endpoint}/{queryParam}");
             return response;
         }
 

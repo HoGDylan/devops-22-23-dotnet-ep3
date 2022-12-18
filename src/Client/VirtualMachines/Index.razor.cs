@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace Client.VirtualMachines
 {
-    public partial class Index 
+    public partial class Index
     {
         [Inject] public IProjectenService ProjectService { get; set; }
         [Inject] public ISidepanelService Sidepanel { get; set; }
@@ -35,28 +35,28 @@ namespace Client.VirtualMachines
 
         public async Task GetVirtualMachines(int id)
         {
-                ProjectenRequest.GetDetail request = new();
+            ProjectenRequest.GetDetail request = new();
 
-                request.ProjectenId = id;
+            request.ProjectenId = id;
 
-                var response = await ProjectService.GetDetailAsync(request);
-                ProjectenDto.Detail resp = new ProjectenDto.Detail()
-                {
-                    Id = response.Projecten.Id,
-                    user = response.Projecten.user,
-                    Name = response.Projecten.Name,
-                    VirtualMachines = response.Projecten.VirtualMachines
-                };
+            var response = await ProjectService.GetDetailAsync(request);
+            ProjectenDto.Detail resp = new ProjectenDto.Detail()
+            {
+                Id = response.Projecten.Id,
+                user = response.Projecten.user,
+                Name = response.Projecten.Name,
+                VirtualMachines = response.Projecten.VirtualMachines
+            };
 
 
-                _details.Add(id, resp);
+            _details.Add(id, resp);
 
-          
+
         }
         public void NavigateToVMDetails(int id)
         {
             Router.NavigateTo("virtualmachine/" + id);
         }
 
-    }   
+    }
 }

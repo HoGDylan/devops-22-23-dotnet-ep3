@@ -10,7 +10,7 @@ namespace Client.VirtualMachines
 
     {
         private readonly IHttpClientFactory _IHttpClientFactory;
-        private string endpoint = "api/project";
+        private string endpoint = "api/VMContract";
 
 
         public VMContractService(/*HttpClient _httpClient,*/ IHttpClientFactory _IHttpClientFactory)

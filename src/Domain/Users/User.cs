@@ -22,7 +22,7 @@ namespace Domain.Users
         public Role Role { get { return _role; } set { _role = Guard.Against.Null(value, nameof(_role)); } }
         public Type Type { get { return _type; } set { _type = Guard.Against.Null(value, nameof(_type)); } }
         public Course Course { get { return _course; } set { _course = Guard.Against.Null(value, nameof(_course)); } }
-        public String TypeExtern { get { return _typeExtern; } set { _typeExtern = Guard.Against.NullOrEmpty(value, nameof(_typeExtern)); } }
+        public String TypeExtern { get; set; }
 
 
 

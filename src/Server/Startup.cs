@@ -21,6 +21,7 @@ using Shared.FysiekeServers;
 using Shared.VMContracts;
 using Services.FysiekeServers;
 using Services.VMContracts;
+using Auth0Net.DependencyInjection.HttpClient;
 
 namespace Server
 {
@@ -35,6 +36,7 @@ namespace Server
 
         public void ConfigureServices(IServiceCollection services)
         {
+
             var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("DotNet"));
             services.AddDbContext<DotNetDbContext>(options =>
                 options.UseSqlServer(builder.ConnectionString)
