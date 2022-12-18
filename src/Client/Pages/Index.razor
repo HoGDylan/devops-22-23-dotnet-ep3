@@ -3,7 +3,10 @@
 
 <PageTitle>Home</PageTitle>
 <h1 class="title is-1">Virtual Machines</h1>
+
+<!--Switch to us Auth0 -->
 <FakeLogin></FakeLogin>
+<!--<Client.Layout.AccessControl></Client.Layout.AccessControl>-->
 
 
 @code {
@@ -12,6 +15,6 @@
     private void ToggleFilterForm()
     {
         if (Sidepanel.IsOpen) Sidepanel.Close();
-        else Sidepanel.Open<Client.VirtualMachines.Components.VMFilter>("Virtual Machines", "Filter"); 
+        else Sidepanel.Open<Client.VirtualMachines.Components.VMFilter>("Virtual Machines", "Filter");
     }
 }

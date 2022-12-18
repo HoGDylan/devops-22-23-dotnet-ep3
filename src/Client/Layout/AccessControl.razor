@@ -1,7 +1,8 @@
-﻿<!--@using Microsoft.AspNetCore.Components.Authorization-->
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @using Microsoft.AspNetCore.Components.Web
 
 @inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
 <!--
 <AuthorizeView>
     <Authorized>
@@ -23,11 +24,14 @@
     <strong>Inloggen</strong>
 </a>
 
-@code { private Task BeginSignOut(MouseEventArgs args)
+@code {
+    private async Task BeginSignOut(MouseEventArgs args)
     {
-        throw new NotImplementedException("Logout is currently not supported.");
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
     }
-    private Task BeginSignIn(MouseEventArgs args)
+    private async Task BeginSignIn(MouseEventArgs args)
     {
-        throw new NotImplementedException("Login is currently not supported.");
-    } }
+        Navigation.NavigateTo("authentication/login");
+    }
+}

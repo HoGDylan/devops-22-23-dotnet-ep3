@@ -56,6 +56,8 @@ namespace Client
 
             });
             //builder.Services.AddSingleton<AuthenticationStateProvider, FakeAuthenticationProvider>();
+
+            //Disble both to do login via Auth0
             builder.Services.AddScoped<Shared.FakeAuthenticationProvider>();
             builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<Shared.FakeAuthenticationProvider>());
 
