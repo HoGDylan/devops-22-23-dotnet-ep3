@@ -12,14 +12,14 @@ else if (Virtualmachine.Id == -1)
 }
 else
 {
-    <h1>Detailpagina</h1>
+    <h1 data-test-id=virtualmachine-detail-title>Detailpagina</h1>
     <div class="columns is-desktop is-multiline">
         <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-header-title">Algemeen</h3>
                 </div>
-                <div class="card-body" data-test-id=virtualmachine-detail-title>
+                <div class="card-body">
                     <p>ID: @Virtualmachine.Id</p>
                     <p>Naam: @FormatCapitalLetter(Virtualmachine.Name)</p>
                     <p>Operating System: @FormatCapitalLetter(@Virtualmachine.OperatingSystem.ToString())</p>
@@ -38,18 +38,21 @@ else
                 </div>
             </div>
         </div>
-        <div class="column is-one-third-widescreen is-half-desktop">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-header-title">VM Periode</h3>
-                </div>
-                <div class="card-body">
-                    <p>ID: @Virtualmachine.Contract.Id</p>
-                    <p>Datum start: @Virtualmachine.Contract.StartDate.ToString()</p>
-                    <p>Datum einde: @Virtualmachine.Contract.EndDate.ToString()</p>
+        @if (Virtualmachine.Contract != null)
+        {
+            <div class="column is-one-third-widescreen is-half-desktop">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-header-title">VM Periode</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>ID: @Virtualmachine.Contract.Id</p>
+                        <p>Datum start: @Virtualmachine.Contract.StartDate.ToString()</p>
+                        <p>Datum einde: @Virtualmachine.Contract.EndDate.ToString()</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
 
         <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
