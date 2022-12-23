@@ -1,4 +1,4 @@
-﻿using Client.Extentions;
+﻿/*using Client.Extentions;
 using Shared.Projecten;
 using Shared.Users;
 using System.Net.Http.Json;
@@ -62,3 +62,4 @@ namespace Client.Users
         }
     }
 }
+*/

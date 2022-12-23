@@ -10,7 +10,7 @@ using Domain.VirtualMachines.Contract;
 using Domain.VirtualMachines.VirtualMachine;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-
+/*
 namespace Persistence.Data
 {
     public class DotNetDataInitializer
@@ -69,4 +69,4 @@ namespace Persistence.Data
             _dbContext.SaveChanges();
         }
     }
-}
+}*/

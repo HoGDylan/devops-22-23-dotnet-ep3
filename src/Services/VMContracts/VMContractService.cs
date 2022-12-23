@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Domain.VirtualMachines.Contract;
 using System;
 
+/*
 namespace Services.VMContracts
 {
     public class VMContractService : IVMContractService
@@ -111,3 +112,4 @@ namespace Services.VMContracts
         }
     }
 }
+*/

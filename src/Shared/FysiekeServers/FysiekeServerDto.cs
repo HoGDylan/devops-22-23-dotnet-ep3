@@ -1,8 +1,12 @@
 ﻿using Domain.Common;
-using FluentValidation;
 using Shared.VirtualMachines;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Shared.FysiekeServers
+namespace Shared.Servers
 {
     public static class FysiekeServerDto
     {
@@ -16,8 +20,9 @@ namespace Shared.FysiekeServers
 
         }
 
-        public class Detail : Index
+        public class Detail
         {
+            public int Id { get; set; }
             public List<VirtualMachineDto.Rapportage> VirtualMachines { get; set; }
         }
 
@@ -26,21 +31,5 @@ namespace Shared.FysiekeServers
             public int Id { get; set; }
             public Hardware AvailableHardware { get; set; }
         }
-
-        public class Mutate
-        {
-            public String Name { get; set; }
-            public String ServerAddress { get; set; }
-            public int Memory { get; set; }
-            public int Storage { get; set; }
-            public int Amount_vCPU { get; set; }
-            public int MemoryAvailable { get; set; }
-            public int StorageAvailable { get; set; }
-            public int VCPUsAvailable { get; set; }
-        }
-
-
-
-
     }
 }

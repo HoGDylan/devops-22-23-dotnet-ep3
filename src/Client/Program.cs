@@ -5,14 +5,19 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Shared.VirtualMachines;
 using Shared.Users;
 using Client.Infrastructure;
-using Shared.Projecten;
-using Shared.FysiekeServers;
+using Shared.Projects;
+using Shared.Servers;
 using Shared.VMContracts;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Authorization;
 using Client.VirtualMachines;
 using Client.Servers;
 using Client.Users;
+using Services.VirtualMachines;
+using Services.Projects;
+using Services.Server;
+using Services.VMContracts;
+using Services.Users;
 
 namespace Client
 {
@@ -30,35 +35,35 @@ namespace Client
                 options.ProviderOptions.AdditionalProviderParameters.Add("audience", builder.Configuration["Auth0:Audience"]);
             }).AddAccountClaimsPrincipalFactory<ArrayClaimsPrincipalFactory<RemoteUserAccount>>();
 
-            builder.Services.AddScoped<IVirtualMachineService, VirtualMachineService>();
+            /*builder.Services.AddScoped<IVirtualMachineService, VirtualMachineService>();
             builder.Services.AddScoped<IUserService, UsersService>();
             builder.Services.AddScoped<IProjectenService, ProjectService>();
             builder.Services.AddScoped<IFysiekeServerService, FysiekeServerService>();
             builder.Services.AddScoped<IVMContractService, VMContractService>();
+            */
             builder.Services.AddSidepanel();
             builder.Services.AddHttpClient<StorageService>();
             //await builder.Build().RunAsync();
 
             //MOCKDATA
-            //builder.Services.AddSingleton<IVirtualMachineService, FakeVirtualMachineService>();
-            //builder.Services.AddSingleton<IUserService, FakeUserService>();
-            //builder.Services.AddSingleton<IProjectenService, FakeProjectService>();
-            //builder.Services.AddSingleton<IFysiekeServerService, FakeServerService>();
-            //builder.Services.AddSingleton<IVMContractService, FakeVMContractService>();
+            builder.Services.AddSingleton<IVirtualMachineService, FakeVirtualMachineService>();
+            builder.Services.AddSingleton<IUserService, FakeUserService>();
+            builder.Services.AddSingleton<IProjectService, FakeProjectService>();
+            builder.Services.AddSingleton<IFysiekeServerService, FakeServerService>();
+            builder.Services.AddSingleton<IVMContractService, FakeVMContractService>();
 
             //AUTHENTICATION
             builder.Services.AddAuthorizationCore(options =>
             {
-                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
-                options.AddPolicy("BeheerOnly", policy => policy.RequireClaim(ClaimTypes.Role, "BeheerderZien"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin-Consultant", "Admin-Beheer"));
+                options.AddPolicy("BeheerOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin-Beheer"));
                 options.AddPolicy("LoggedIn", policy => policy.RequireAuthenticatedUser());
                 options.AddPolicy("Guest", policy => policy.RequireClaim(ClaimTypes.Name, "Guest"));
-
             });
-            //builder.Services.AddSingleton<AuthenticationStateProvider, FakeAuthenticationProvider>();
+                //builder.Services.AddSingleton<AuthenticationStateProvider, FakeAuthenticationProvider>();
 
-            //Disble both to do login via Auth0
-            builder.Services.AddScoped<Shared.FakeAuthenticationProvider>();
+                //Disble both to do login via Auth0
+                builder.Services.AddScoped<Shared.FakeAuthenticationProvider>();
             builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<Shared.FakeAuthenticationProvider>());
 
             builder.Services.AddHttpClient("AuthenticatedServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));

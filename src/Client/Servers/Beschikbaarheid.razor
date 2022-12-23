@@ -22,10 +22,10 @@
             <i class="fas fa-lg fa-solid fa-spinner fa-spin"></i>
         </span>
     }
-    else if(_active)
+    else if (_active)
     {
         <div class="graph-container">
-            <Client.Servers.Component.Graph Data="_data"/>
+            <Client.Servers.Component.Graph Data="_data" />
         </div>
     }
     else if (Servers is not null && Servers.Count() > 0)
@@ -52,8 +52,8 @@
 </div>
 
 
-                        
-@code{
+
+@code {
     private bool _active = false;
     private bool loading = false;
 
@@ -61,7 +61,8 @@
     {
         _active = !_active;
 
-        if(_data.Count == 0){
+        if (_data.Count == 0)
+        {
             loading = true;
             await GetAvailableResourcesTotal();
             loading = false;

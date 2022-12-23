@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Collections.Generic;
 using System;
-
+using System.Linq;
 
 namespace Domain.Server
 {
@@ -22,35 +22,28 @@ namespace Domain.Server
         private Hardware _hardWare;
 
 
-
-        public String Name { get { return _name; } set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
-        public String ServerAddress { get { return _serverAddress; } set { _serverAddress = Guard.Against.NullOrEmpty(value, nameof(_serverAddress)); } }
-        public Hardware HardWare { get { return _hardWare; } set { _hardWare = Guard.Against.Null(value, nameof(_hardWare)); } }
+        public int Id { get; set; }
+        public String Naam { get { return _name; } private set { _name = Guard.Against.NullOrEmpty(value, nameof(_name)); } }
+        public String ServerAddress { get { return _serverAddress; } private set { _serverAddress = Guard.Against.NullOrEmpty(value, nameof(_serverAddress)); } }
+        public Hardware HardWare { get { return _hardWare; } private set { _hardWare = Guard.Against.Null(value, nameof(_hardWare)); } }
         public Hardware HardWareAvailable { get; set; }  //dit zou weg mogen
         public List<VirtualMachine> VirtualMachines { get; private set; }
 
 
-        public FysiekeServer(string Name, Hardware hw, string s_adres)
+        public FysiekeServer(string naam, Hardware hw, string s_adres)
         {
 
-            this.Name = Name;
+            this.Naam = naam;
             this.HardWare = hw;
             this.ServerAddress = s_adres;
             this.HardWareAvailable = hw;
             this.VirtualMachines = new();
         }
 
-        public FysiekeServer()
-        {
-
-
-        }
-
 
         public void AddConnection(VirtualMachine vm)
         {
             string pass = PasswordGenerator.Generate(RandomNumberGenerator.GetInt32(10) + 20, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(5) + 1, RandomNumberGenerator.GetInt32(3) + 1);
-
 
 
 

@@ -1,35 +1,33 @@
-using System.Collections.Generic;
+using Shared.Users;
 
-namespace Shared.Users
+namespace Shared.Users;
+
+public static class UserResponse
 {
-    public static class UserResponse
+    public class AllKlantenIndex
     {
-        public class GetIndex
-        {
-            public List<UserDto.Index> Users { get; set; } = new();
-            public int TotalAmount { get; set; }
-        }
+        public List<KlantDto.Index> Klanten { get; set; } = new();
+        public int Total { get; set; }
+    }
 
-        public class Create
-        {
-            public string Auth0UserId { get; set; }
-        }
+    public class DetailKlant
+    {
+        public KlantDto.Detail Klant { get; set; }
+    }
 
-        public class Detail
-        {
-            public UserDto.Detail User { get; set; }
-        }
+    public class Edit
+    {
+        public int Id { get; set; }
+    }
 
-        public class Edit
-        {
-            public int Id { get; set; }
-        }
+    public class Create
+    {
 
-        public class AllAdminsIndex
-        {
-            public List<AdminUserDto.Index> Admins { get; set; } = new();
-            public int Total { get; set; }
-        }
+    }
+
+    public class AllAdminsIndex
+    {
+        public List<AdminUserDto.Index> Admins { get; set; } = new();
+        public int Total { get; set; }
     }
 }
-

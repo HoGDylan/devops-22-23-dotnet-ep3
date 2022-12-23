@@ -24,9 +24,9 @@ public partial class Detail
         Initialized = true;
     }
 
-    private void NavigateToUser()
+    private void NavigateToKlant()
     {
-        NavMan.NavigateTo($"/User/{Virtualmachine.Contract.CustomerId}");
+        NavMan.NavigateTo($"/klant/{Virtualmachine.Contract.CustomerId}");
     }
 
     public void NavigateToReport()

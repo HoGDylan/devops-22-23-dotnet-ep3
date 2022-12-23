@@ -1,4 +1,3 @@
-using Shared.Projecten;
 using System.Linq;
 using Persistence.Data;
 using System.Threading.Tasks;
@@ -6,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Domain.Projecten;
 using System;
 using Domain.Common;
-
-
+using Shared.Projects;
+/*
 namespace Services.Projecten
 {
-    public class ProjectService : IProjectenService
+    public class ProjectService : IProjectService
     {
         public ProjectService(DotNetDbContext dbContext)
         {
@@ -92,8 +91,8 @@ namespace Services.Projecten
                 query = query.Where(x => x.Name.Contains(request.SearchTerm));
 
 
-            /*if (request.OnlyActiveProjects)
-                query = query.Where(x => x.IsEnabled);*/
+            if (request.OnlyActiveProjects)
+                query = query.Where(x => x.IsEnabled);
 
             response.Total = query.Count();
 
@@ -108,3 +107,4 @@ namespace Services.Projecten
         }
     }
 }
+*/

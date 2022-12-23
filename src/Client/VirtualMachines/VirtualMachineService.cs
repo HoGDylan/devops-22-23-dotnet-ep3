@@ -1,5 +1,5 @@
-﻿using Client.Extentions;
-using Shared.Projecten;
+﻿/*using Client.Extentions;
+using Shared.Projects;
 using Shared.VirtualMachines;
 using System.Net.Http.Json;
 
@@ -9,7 +9,7 @@ namespace Client.VirtualMachines
     public class VirtualMachineService : IVirtualMachineService
     {
 
-        /*private readonly HttpClient client;*/
+        private readonly HttpClient client;
 
         private readonly IHttpClientFactory _IHttpClientFactory;
         private const string endpoint = "api/virtualmachine";
@@ -73,3 +73,4 @@ namespace Client.VirtualMachines
         }
     }
 }
+*/

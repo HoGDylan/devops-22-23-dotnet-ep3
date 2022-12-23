@@ -28,10 +28,10 @@ namespace Domain.VirtualMachines.VirtualMachine
         public Hardware Hardware { get; set; }
         public Backup BackUp { get; set; }
         public VMConnection? Connection { get; set; }
-        public VMContract Contract { get; set; }
-        public FysiekeServer? FysiekeServer { get; set; }
+        public VMContract Contract { get { return _vmContract; } set { _vmContract = Guard.Against.Null(value, nameof(_vmContract)); } }
+        public FysiekeServer? FysiekeServer { get { return _server; } set { _server = Guard.Against.Null(value, nameof(_server)); } }
 
-        public Statistic Statistics { get; set; }
+        public Statistic Statistics { get { return _statistics; } set { _statistics = Guard.Against.Null(value, nameof(_statistics)); } }
 
         public VirtualMachine(string n, OperatingSystemEnum os, Hardware h, Backup b)
         {
@@ -40,11 +40,6 @@ namespace Domain.VirtualMachines.VirtualMachine
             Hardware = h;
             BackUp = b;
             Mode = VirtualMachineMode.WAITING_APPROVEMENT;
-        }
-
-        public VirtualMachine()
-        {
-
         }
 
         public void AddConnection(string FQDN, IPAddress hostname, string username, string password)
@@ -57,4 +52,3 @@ namespace Domain.VirtualMachines.VirtualMachine
 
     }
 }
-

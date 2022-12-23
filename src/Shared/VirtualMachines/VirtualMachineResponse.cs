@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Shared.VirtualMachines
 {
     public static class VirtualMachineResponse
@@ -9,6 +6,7 @@ namespace Shared.VirtualMachines
         {
             public List<VirtualMachineDto.Index> VirtualMachines { get; set; } = new();
             public int TotalAmount { get; set; }
+
         }
 
         public class GetDetail
@@ -18,27 +16,24 @@ namespace Shared.VirtualMachines
 
         public class Delete
         {
+
         }
 
         public class Create
         {
-            public int VirtualMachineId { get; set; }
-
+            public int VM_Id { get; set; }
         }
 
         public class Edit
         {
-            public int VirtualMachineId { get; set; }
+            public int VM_Id { get; set; }
         }
-
-
-
 
         public class Rapport
         {
             public VirtualMachineDto.Rapportage VirtualMachine { get; set; }
         }
 
+
     }
 }
-

@@ -1,33 +1,39 @@
+using Domain.Users;
+using Shared.VirtualMachines;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Shared.Projecten
+namespace Shared.Projects
 {
-    public static class ProjectenResponse
+    public static class ProjectResponse
     {
-        public class GetIndex
+        public class All
         {
-            public List<ProjectenDto.Index> Projecten { get; set; } = new();
+            public List<ProjectDto.Index> Projects { get; set; }
             public int Total { get; set; }
         }
 
-        public class GetDetail
+        public class Detail
         {
-            public ProjectenDto.Detail Projecten { get; set; }
-        }
-
-        public class Delete
-        {
-        }
-
-        public class Create
-        {
-            public int ProjectenId { get; set; }
+            public ProjectDto.Detail Project { get; set; }
         }
 
         public class Edit
         {
-            public int ProjectenId { get; set; }
+            public int ProjectId { get; set; }
+        }
+
+        public class Create
+        {
+            public int ProjectId { get; set; }
+        }
+
+        public class Delete
+        {
+
         }
     }
 }

@@ -16,16 +16,15 @@ else
 {
     <h1 class="title is-3">Virtual Machines</h1>
 
-    <div class="accordion" data-test-id="virtualmachine-overview">
+    <div class="accordion">
         @foreach (var project in _projects)
         {
             <div class="card w-100 mb-3 @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id]? "active": "")">
                 <header class="card-header" @onclick="@(() => Toggle(project.Id))">
                     <p class="card-header-title">@project.Id. @project.Name</p>
-                    <button class="card-header-icon" aria-label="more options" data-test-id="virtualmachine-button">
+                    <button class="card-header-icon" aria-label="more options">
                         <span class="icon">
-                            <i class="oi @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id] ? "fa-solid fa-chevron-down" : "fa-solid fa-chevron-right")"
-                        aria-hidden="true"></i>
+                            <i class="oi @(Collapsed.ContainsKey(project.Id) && Collapsed[project.Id] ? "fa-solid fa-chevron-down" : "fa-solid fa-chevron-right")" aria-hidden="true"></i>
                         </span>
                     </button>
                 </header>
@@ -50,7 +49,7 @@ else
                                         <tr>
                                             <th>Status</th>
                                             <th>Virtual Machine</th>
-                                            <th>User</th>
+                                            <th>Klant</th>
                                             <th>Acties</th>
                                         </tr>
                                     </thead>
@@ -58,10 +57,10 @@ else
                                         @foreach (var vm in _details[project.Id].VirtualMachines)
                                         {
 
-                                            <tr data-test-id="virtualmachine-item">
+                                            <tr>
                                                 <td><span class="@vm.Mode.GetDotIcon()"></span>@vm.Mode.GetString()</td>
                                                 <td>@vm.Name</td>
-                                                <td>@(project.user.FirstName + " " + project.user.Name)</td>
+                                                <td>@(project.Klant.FirstName + " " + project.Klant.Name)</td>
                                                 <td>
                                                     <button @onclick="() => NavigateToVMDetails(vm.Id)">Details</button>
                                                     <button>Meer</button>

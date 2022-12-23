@@ -5,9 +5,9 @@ using ChartJs.Blazor.LineChart;
 using ChartJs.Blazor.Util;
 using Domain.Common;
 using Microsoft.AspNetCore.Components;
+using Shared.Servers;
 using System.Drawing;
 using ChartJs.Blazor;
-using Shared.FysiekeServers;
 
 namespace Client.Servers
 {
@@ -40,12 +40,9 @@ namespace Client.Servers
         private async Task GetAvailableResourcesTotal()
         {
             loading = true;
-            var response = await FysiekeServerService.GetGraphValueForServer(new FysiekeServerRequest.GetIndex() );
+            var response = await FysiekeServerService.GetGraphValueForServer();
             _data = response.GraphData;
             loading = false;
         }
     }
 }
-
-
-

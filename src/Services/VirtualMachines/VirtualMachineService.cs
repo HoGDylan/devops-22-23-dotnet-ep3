@@ -8,6 +8,7 @@ using System;
 using Domain.Common;
 using Domain.VirtualMachines.BackUp;
 
+/*
 namespace Services.VirtualMachines
 {
     public class VirtualMachineService : IVirtualMachineService
@@ -118,4 +119,4 @@ namespace Services.VirtualMachines
             throw new NotImplementedException();
         }
     }
-}
+}*/

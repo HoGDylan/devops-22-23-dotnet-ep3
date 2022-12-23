@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Components;
-using Shared.FysiekeServers;
+using Shared.Servers;
 
 namespace Client.Servers;
 
@@ -11,10 +11,8 @@ public partial class Index
 
     protected override async Task OnInitializedAsync()
     {
-        FysiekeServerRequest.GetIndex request = new();
-
-        var response = await FysiekeServerService.GetIndexAsync(request);
-        Servers = response.FysiekeServers;
+        var response = await FysiekeServerService.GetAllServers();
+        Servers = response.Servers;
     }
 
     public void RedirectToDetailsPage(int id)

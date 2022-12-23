@@ -12,7 +12,7 @@ else if (Virtualmachine.Id == -1)
 }
 else
 {
-    <h1 data-test-id=virtualmachine-detail-title>Detailpagina</h1>
+    <h1>Detailpagina</h1>
     <div class="columns is-desktop is-multiline">
         <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
@@ -38,21 +38,18 @@ else
                 </div>
             </div>
         </div>
-        @if (Virtualmachine.Contract != null)
-        {
-            <div class="column is-one-third-widescreen is-half-desktop">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-header-title">VM Periode</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>ID: @Virtualmachine.Contract.Id</p>
-                        <p>Datum start: @Virtualmachine.Contract.StartDate.ToString()</p>
-                        <p>Datum einde: @Virtualmachine.Contract.EndDate.ToString()</p>
-                    </div>
+        <div class="column is-one-third-widescreen is-half-desktop">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-header-title">VM Periode</h3>
+                </div>
+                <div class="card-body">
+                    <p>ID: @Virtualmachine.Contract.Id</p>
+                    <p>Datum start: @Virtualmachine.Contract.StartDate.ToString()</p>
+                    <p>Datum einde: @Virtualmachine.Contract.EndDate.ToString()</p>
                 </div>
             </div>
-        }
+        </div>
 
         <div class="column is-one-third-widescreen is-half-desktop">
             <div class="card">
@@ -62,8 +59,7 @@ else
                 <div class="card-body">
                     <p>Memory/RAM: @Virtualmachine.Hardware.Memory GB </p>
                     <p>Aantal Cores: @Virtualmachine.Hardware.Amount_vCPU</p>
-                    <p>Storage: @(Virtualmachine.Hardware.Storage > 1000 ? (Virtualmachine.Hardware.Storage /
-                    1000.0).ToString() + " GB" : Virtualmachine.Hardware.Storage + " MB")</p>
+                    <p>Storage: @(Virtualmachine.Hardware.Storage > 1000 ? (Virtualmachine.Hardware.Storage / 1000.0).ToString() + " GB" : Virtualmachine.Hardware.Storage + " MB")</p>
                 </div>
             </div>
         </div>
@@ -90,7 +86,7 @@ else
     </div>
     <AuthorizeView Policy="AdminOnly">
         <div>
-            <a @onclick="NavigateToUser">Naar User</a>
+            <a @onclick="NavigateToKlant">Naar Klant</a>
         </div>
     </AuthorizeView>
 

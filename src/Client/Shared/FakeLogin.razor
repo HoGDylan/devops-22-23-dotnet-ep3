@@ -8,7 +8,6 @@
     <button @onclick="SetKlant">Klant</button>
     <button @onclick="SetAdminCons">Admin - Consulteren</button>
     <button @onclick="SetAdminBeh">Admin - Beheren</button>
-    <button @onclick="SetAdmin">Admin</button>
     <p>Ingelogd als: @fakeAuthProvider.Current.FindFirst(ClaimTypes.Name)?.Value</p>
 </div>
 
@@ -19,7 +18,7 @@
     }
     void SetKlant()
     {
-        fakeAuthProvider.ChangeAuthenticationState(FakeAuthenticationProvider.Klant);
+        fakeAuthProvider.ChangeAuthenticationState(FakeAuthenticationProvider.Customer);
     }
     void SetAdminCons()
     {
@@ -28,10 +27,5 @@
     void SetAdminBeh()
     {
         fakeAuthProvider.ChangeAuthenticationState(FakeAuthenticationProvider.AdminBeheer);
-    }
-
-    void SetAdmin()
-    {
-        fakeAuthProvider.ChangeAuthenticationState(FakeAuthenticationProvider.Admin);
     }
 }

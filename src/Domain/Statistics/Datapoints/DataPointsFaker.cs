@@ -1,3 +1,4 @@
+
 using Bogus;
 using Domain.Common;
 using System;

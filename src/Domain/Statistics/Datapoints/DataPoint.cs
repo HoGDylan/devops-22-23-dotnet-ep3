@@ -17,4 +17,3 @@ namespace Domain.Statistics.Datapoints
 
     }
 }
-

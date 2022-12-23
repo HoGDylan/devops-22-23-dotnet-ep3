@@ -48,26 +48,26 @@ namespace Domain.VirtualMachines.VirtualMachine
             VMContract contract = null;
 
             CustomInstantiator(e =>
-                {
-                    hardware = GenerateRandomHardware();
-                    contract = VMContractFaker.Instance.GenerateOne();
+            {
+                hardware = GenerateRandomHardware();
+                contract = VMContractFaker.Instance.GenerateOne();
 
-                    return new VirtualMachine(
-                        e.Commerce.ProductName(),
-                        e.PickRandom<OperatingSystemEnum>(),
-                        hardware,
-                        e.PickRandom(GenerateRandomBackups()));
+                return new VirtualMachine(
+                    e.Commerce.ProductName(),
+                    e.PickRandom<OperatingSystemEnum>(),
+                    hardware,
+                    e.PickRandom(GenerateRandomBackups()));
 
-                });
+            });
 
             RuleFor(x => x.Id, _ => id++);
             RuleFor(x => x.Connection, _ => new Random().Next(0, 2) % 1 == 0 ? new VMConnection("MOCK-FQDN", GetRandomIpAddress(), "MOCK-USER", PasswordGenerator.Generate(20, 3, 3, 3, 3)) : null);
             RuleFor(x => x.Mode, x => x.PickRandom<VirtualMachineMode>());
-            //RuleFor(x => x.Contract, _ => contract);
-            RuleFor(x => x.FysiekeServer, _ => new FysiekeServer("Mock Server", new Hardware(5, 5, 5), "mock-server_adres.hogent.be"));
+            RuleFor(x => x.Contract, _ => contract);
+            RuleFor(x => x.FysiekeServer, _ => new FysiekeServer("Mock Server", FysiekeServerFaker.GenerateRandomHardware(), "mock-server_adres.hogent.be"));
 
 
-            //RuleFor(x => x.Statistics, _ => new Statistic(contract.StartDate, contract.EndDate, hardware));
+            RuleFor(x => x.Statistics, _ => new Statistic(contract.StartDate, contract.EndDate, hardware));
         }
 
 

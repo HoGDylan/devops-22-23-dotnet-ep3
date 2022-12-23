@@ -1,7 +1,7 @@
 using Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
+/*
 namespace Persistence.Data.Configuration
 {
     public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
@@ -23,4 +23,4 @@ namespace Persistence.Data.Configuration
 
         }
     }
-}
+}*/

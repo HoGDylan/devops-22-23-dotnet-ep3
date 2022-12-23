@@ -4,22 +4,9 @@ namespace Shared.VirtualMachines
 {
     public static class VirtualMachineRequest
     {
-
-
-       public class GetDetail
+        public class GetIndex
         {
-            public int VirtualMachineId { get; set; }
-        }
-
-        public class Delete
-        {
-            public int VirtualMachineId { get; set; }
-        }
-
-
-                public class GetIndex
-        {
-            public string? SearchTerm { get; set; } 
+            public string? SearchTerm { get; set; }
             public VirtualMachineMode? Status { get; set; }
             public OperatingSystemEnum? OperatingSystem { get; set; }
             public int? MinStorage { get; set; }
@@ -31,8 +18,15 @@ namespace Shared.VirtualMachines
 
         }
 
+        public class GetDetail
+        {
+            public int VirtualMachineId { get; set; }
+        }
 
-
+        public class Delete
+        {
+            public int VirtualMachineId { get; set; }
+        }
 
         public class Create
         {
@@ -47,17 +41,5 @@ namespace Shared.VirtualMachines
             public VirtualMachineDto.Edit VirtualMachine { get; set; }
 
         }
-
-        /*        public class Create
-        {
-            public VirtualMachineDto.Mutate VirtualMachine { get; set; }
-        }*/
-
-        /*public class Edit
-        {
-            public int VirtualMachineId { get; set; }
-            public VirtualMachineDto.Mutate VirtualMachine { get; set; }
-        }*/
     }
 }
-

@@ -1,35 +1,28 @@
-namespace Shared.Users
+using Domain.Users;
+using Shared.Projects;
+using System.Runtime.CompilerServices;
+
+namespace Shared.Users;
+
+public static class UserRequest
 {
-    public static class UserRequest
+    public class AllKlantenIndex
     {
-        public class GetIndex
-        {
 
-        }
+    }
+    public class AllAdminUsers
+    {
+        public List<AdminUserDto.Index> AdminUsers { get; set; }
+        public int Total { get; set; }
+    }
+    public class DetailKlant
+    {
+        public int KlantId { get; set; }
+    }
 
-        public class Create
-        {
-            //public KlantDto.Create Klant;
-
-            public UserDto.Create User { get; set; }
-        }
-
-        public class AllAdminUsers
-        {
-            public List<AdminUserDto.Index> AdminUsers { get; set; }
-            public int Total { get; set; }
-        }
-        public class Detail
-        {
-            public int UserId { get; set; }
-        }
-
-
-        public class Edit
-        {
-            public int UserId { get; set; }
-            public UserDto.Mutate User { get; set; }
-        }
+    public class Edit
+    {
+        public int KlantId { get; set; }
+        public KlantDto.Mutate Klant { get; set; }
     }
 }
-

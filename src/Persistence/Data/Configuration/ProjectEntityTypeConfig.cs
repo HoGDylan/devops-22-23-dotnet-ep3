@@ -3,7 +3,7 @@ using Domain.Users;
 using Domain.VirtualMachines.VirtualMachine;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
+/*
 namespace Persistence.Data.Configuration
 {
     public class ProjectEntityTypeConfiguration : IEntityTypeConfiguration<Project>
@@ -17,4 +17,4 @@ namespace Persistence.Data.Configuration
             builder.HasMany<VirtualMachine>(p => p.VirtualMachines).WithOne();
         }
     }
-}
+}*/

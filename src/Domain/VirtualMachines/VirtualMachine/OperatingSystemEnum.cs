@@ -16,4 +16,3 @@ namespace Domain.VirtualMachines.VirtualMachine
         FEDORA_35
     }
 }
-

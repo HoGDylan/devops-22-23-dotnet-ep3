@@ -130,7 +130,7 @@ namespace Services.VirtualMachines
 
             if (vm == null)
             {
-                response.VirtualMachineId = -1;
+                response.VM_Id = -1;
             }
             else
             {
@@ -140,7 +140,7 @@ namespace Services.VirtualMachines
                 vm.Name = name;
                 vm.BackUp = backup;
 
-                response.VirtualMachineId = vm.Id;
+                response.VM_Id = vm.Id;
             }
 
             return response;
@@ -164,7 +164,7 @@ namespace Services.VirtualMachines
 
             _virtualMachines.Add(vm);
 
-            response.VirtualMachineId = id;
+            response.VM_Id = id;
 
             return response;
 
@@ -182,11 +182,6 @@ namespace Services.VirtualMachines
             response.VirtualMachine = dto;
             return response;
 
-        }
-
-        Task<VirtualMachineResponse.Delete> IVirtualMachineService.DeleteAsync(VirtualMachineRequest.Delete request)
-        {
-            throw new NotImplementedException();
         }
     }
 }

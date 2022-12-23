@@ -1,4 +1,3 @@
-using Shared.FysiekeServers;
 using System.Linq;
 using Persistence.Data;
 using System.Threading.Tasks;
@@ -6,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Domain.Server;
 using System;
 using Domain.Common;
-
+using Shared.Servers;
+/*
 namespace Services.FysiekeServers
 {
     public class FysiekeServerService : IFysiekeServerService
@@ -32,7 +32,7 @@ namespace Services.FysiekeServers
                 request.FysiekeServer.Name,
                 new Hardware(request.FysiekeServer.Memory, request.FysiekeServer.Storage, request.FysiekeServer.Amount_vCPU)
                 , request.FysiekeServer.ServerAddress
-             )/*HardWareAvailable = new Hardware(request.FysiekeServer.MemoryAvailable, request.FysiekeServer.StorageAvailable, request.FysiekeServer.VCPUsAvailable)*/);
+             )HardWareAvailable = new Hardware(request.FysiekeServer.MemoryAvailable, request.FysiekeServer.StorageAvailable, request.FysiekeServer.VCPUsAvailable));
             await _dbContext.SaveChangesAsync();
             response.FysiekeServerId = fysiekeServer.Entity.Id;
             return response;
@@ -227,3 +227,4 @@ namespace Services.FysiekeServers
     }
 }
 
+*/

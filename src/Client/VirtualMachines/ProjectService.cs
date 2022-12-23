@@ -1,8 +1,8 @@
 ﻿using Client.Extentions;
-using Shared.Projecten;
+using Shared.Projects;
 using System.Net;
 using System.Net.Http.Json;
-
+/*
 namespace Client.VirtualMachines
 {
     public class ProjectService : IProjectenService
@@ -11,30 +11,30 @@ namespace Client.VirtualMachines
         private string endpoint = "api/project";
 
 
-        public ProjectService(/*HttpClient _httpClient,*/ IHttpClientFactory _IHttpClientFactory)
+        public ProjectService(HttpClient _httpClient,*IHttpClientFactory _IHttpClientFactory)
         {
-            /*this._httpClient = _httpClient;*/
+            this._httpClient = _httpClient;
             this._IHttpClientFactory = _IHttpClientFactory;
 
 
         }
 
-        public Task<ProjectenResponse.Create> CreateAsync(ProjectenRequest.Create request)
+        public Task<ProjectResponse.Create> CreateAsync(ProjectRequest.Create request)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(ProjectenRequest.Delete request)
+        public Task DeleteAsync(ProjectRequest.Delete request)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ProjectenResponse.Edit> EditAsync(ProjectenRequest.Edit request)
+        public Task<ProjectResponse.Edit> EditAsync(ProjectRequest.Edit request)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ProjectenResponse.GetDetail> GetDetailAsync(ProjectenRequest.GetDetail request)
+        public async Task<ProjectResponse.GetDetail> GetDetailAsync(ProjectRequest.GetDetail request)
         {
             var HttpClient = _IHttpClientFactory.CreateClient("AuthenticatedServerAPI");
             var queryParameters = request.ProjectenId;
@@ -54,3 +54,4 @@ namespace Client.VirtualMachines
         }
     }
 }
+*/

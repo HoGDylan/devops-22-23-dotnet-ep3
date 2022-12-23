@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using Domain.Common;
 using Domain.Server;
-using Shared.FysiekeServers;
+using Shared.Servers;
 using Shared.VirtualMachines;
 using System.Linq;
 
@@ -28,9 +28,9 @@ namespace Services.Server
 
             if (_servers.Any(e => e.Id == request.ServerId))
             {
-                /*List<VirtualMachineDto.Rapportage> vms = _servers.Find(e => e.Id == request.ServerId).VirtualMachines.FindAll(e => e.Connection is not null).Select(e => new VirtualMachineDto.Rapportage() { Id = e.Id, Name = e.Name, Statistics = e.Statistics }).ToList();
+                List<VirtualMachineDto.Rapportage> vms = _servers.Find(e => e.Id == request.ServerId).VirtualMachines.FindAll(e => e.Connection is not null).Select(e => new VirtualMachineDto.Rapportage() { Id = e.Id, Name = e.Name, Statistics = e.Statistics }).ToList();
                 response.Server.Id = request.ServerId;
-                response.Server.VirtualMachines = vms;*/
+                response.Server.VirtualMachines = vms;
 
 
             }
@@ -52,7 +52,7 @@ namespace Services.Server
             respons.Servers = _servers.Select(s => new FysiekeServerDto.Index
             {
                 Id = s.Id,
-                Name = s.Name,
+                Name = s.Naam,
                 Hardware = s.HardWare,
                 HardWareAvailable = s.HardWareAvailable,
                 ServerAddress = s.ServerAddress
@@ -102,7 +102,7 @@ namespace Services.Server
         }
 
         //retourneert data voor de volgende 3 maanden
-        public async Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer(FysiekeServerResponse.GetIndex request)
+        public async Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer()
         {
             Dictionary<DateTime, Hardware> max = new();
 
@@ -174,36 +174,6 @@ namespace Services.Server
             }
             return maxHardware;
 
-        }
-
-        public Task<FysiekeServerResponse.GetIndex> GetIndexAsync(FysiekeServerRequest.GetIndex request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<FysiekeServerResponse.GetDetail> GetDetailAsync(FysiekeServerRequest.GetDetail request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAsync(FysiekeServerRequest.Delete request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<FysiekeServerResponse.Create> CreateAsync(FysiekeServerRequest.Create request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<FysiekeServerResponse.Edit> EditAsync(FysiekeServerRequest.Edit request)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<FysiekeServerResponse.GraphValues> GetGraphValueForServer(FysiekeServerRequest.GetIndex request)
-        {
-            throw new NotImplementedException();
         }
     }
 }

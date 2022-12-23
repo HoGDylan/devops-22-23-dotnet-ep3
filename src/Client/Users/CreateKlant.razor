@@ -1,15 +1,12 @@
 ﻿@page "/register"
-@using Domain.Users;
 
-<EditForm Model="model" OnValidSubmit="RegistreerKlant">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+<form method="post">
     <h1 class="title is-3">Gebruiker</h1>
     <div class="field columns">
         <div class="column">
             <label for="firstName" class="label">Voornaam</label>
             <p class="control has-icons-left">
-                <InputText class="input" placeholder="Jan" @bind-Value="model.FirstName" />
+                <input id="firstName" name="firstName" class="input" type="text" value="" placeholder="Jan">
                 <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                 </span>
@@ -18,7 +15,7 @@
         <div class="column">
             <label for="lastName" class="label">Achternaam</label>
             <p class="control has-icons-left">
-                <InputText class="input" placeholder="Jansens" @bind-Value="model.Name" />
+                <input name="lastName" class="input" type="text" value="" placeholder="Jansens">
                 <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                 </span>
@@ -29,44 +26,67 @@
         <div class="column">
             <div class="field">
                 <label class="label">Email</label>
-                <p class="control has-icons-left">
-                    <InputText class="input" placeholder="user@example.be" @bind-Value="model.Email" />
+                <p class="control has-icons-left has-icons-right">
+                    <input class="input @(isEmail ? "" : "is-danger")" type="email" placeholder="user@@example.be">
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
+                    <span class="icon is-small is-right">
+                        <i class="@(isEmail ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
+                    </span>
+                    @if (!isEmail)
+                    {
+                    <p class="has-text-danger">Dit is geen geldig email!</p>
+                    }
                 </p>
             </div>
         </div>
         <div class="column">
             <div class="field">
                 <label class="label">Telefoon</label>
-                <p class="control has-icons-left">
-                    <InputText class="input" placeholder="Telefoonnummer" @bind-Value="model.PhoneNumber" />
+                <p class="control has-icons-left has-icons-right">
+                    <input class="input @(isPhonenumber ? "" : "is-danger")" type="tel" placeholder="Telefoonnummer">
                     <span class="icon is-small is-left">
                         <i class="fas fa-phone"></i>
                     </span>
+                    <span class="icon is-small is-right">
+                        <i class="@(isPhonenumber ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
+                    </span>
+                    @if (!validPassword)
+                    {
+                        <!--Dit moet specifieker zeggen waaraan niet wordt voldaan-->
+                    <p class="has-text-danger">Dit is geen geldig telefoonnummer!</p>
+                    }
                 </p>
             </div>
         </div>
     </div>
     <div class="field">
         <label class="label">Wachtwoord</label>
-        <p class="control has-icons-left">
-            <InputText class="input" type="password" placeholder="Wachtwoord" @bind-Value="model.Password" />
+        <p class="control has-icons-left has-icons-right">
+            <input class="input @(validPassword ? "" : "is-danger")" type="password" placeholder="Wachtwoord">
             <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
             </span>
+            <span class="icon is-small is-right">
+                <i class="@(isEmail ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
+            </span>
+            @if (!validPassword)
+            {
+                <!--Dit moet specifieker zeggen waaraan niet wordt voldaan-->
+            <p class="has-text-danger">Dit is geen geldig wachtwoord!</p>
+            }
         </p>
     </div>
     <div class="field">
         <label class="label">Relatie</label>
         <div class="control">
             <label class="radio">
-                <input type="radio" name="relation" checked @onchange="toggleRelation">
+                <input type="radio" name="relation" checked @onclick="@(() => toggleRelation())">
                 Intern
             </label>
             <label class="radio">
-                <input type="radio" name="relation" @onchange="toggleRelation">
+                <input type="radio" name="relation" @onclick="@(() => toggleRelation())">
                 Extern
             </label>
         </div>
@@ -77,15 +97,14 @@
             <label class="label">Opleiding</label>
             <div class="control has-icons-left">
                 <div class="select is-primary">
-                    <InputSelect @bind-Value="model.Course">
-                        <option value="@Course.TOEGEPASTE_INFORMATICA">IT & Digitale Inovatie</option>
-                        <option value="@Course.AGRO_EN_BIOTECHNOLOGIE">Agro- & Biotechnologie</option>
-                        <option value="@Course.BIOMEDISCHE_LABORATORIUMTECHNOLOGIE">Biomedische Laboratoriumtechnologie
-                        </option>
-                        <option value="@Course.CHEMIE">Chemie</option>
-                        <option value="@Course.DIGITAL_DESIGN_AND_DEVELOPMENT">Digital Design & Development</option>
-                        <option value="@Course.ELEKTROMECHANICA">Electromechanica</option>
-                    </InputSelect>
+                    <select>
+                        <option>IT & Digitale Inovatie</option>
+                        <option>Opleiding B</option>
+                        <option>Opleiding C</option>
+                        <option>Opleiding D</option>
+                        <option>Opleiding E</option>
+                        <option>Opleiding F</option>
+                    </select>
                 </div>
                 <div class="icon is-small is-left">
                     <i class="fas fa-graduation-cap"></i>
@@ -100,26 +119,30 @@
                 <div class="column">
                     <label class="label">Bedrijf</label>
                     <p class="control has-icons-left has-icons-right">
-                        <InputText class="input" placeholder="Bedrijfsnaam" @bind-Value="model.Bedrijf" />
+                        <input class="input" type="text" placeholder="Bedrijfsnaam">
                         <span class="icon is-small is-left">
                             <i class="fas fa-briefcase"></i>
                         </span>
                     </p>
                 </div>
-                <!--<div class="column">
+                <div class="column">
                     <label class="label">Type</label>
                     <div class="control has-icons-left">
-                        <div class="select is-primary is-fullwidth">
-                            <InputSelect @bind-Value="model.Type">
-                                <option value="@BedrijfType.VOKA">VOKA</option>
-                                <option value="@BedrijfType.UNISEF">UNISEF</option>
-                            </InputSelect>
+                        <div class="select is-primary">
+                            <select>
+                                <option>VOKA</option>
+                                <option>UNISEF</option>
+                                <option>Type C</option>
+                                <option>Type D</option>
+                                <option>Type E</option>
+                                <option>Type F</option>
+                            </select>
                         </div>
                         <div class="icon is-small is-left">
                             <i class="fas fa-briefcase"></i>
                         </div>
                     </div>
-                </div>-->
+                </div>
             </div>
         </div>
         <h1 class="title is-4">Contactpersoon</h1>
@@ -127,7 +150,7 @@
             <div class="column">
                 <label class="label">Voornaam</label>
                 <p class="control has-icons-left">
-                    <InputText class="input" placeholder="Jan" @bind-Value="model.Contactpersoon.FirstName" />
+                    <input class="input" type="text" placeholder="Jan">
                     <span class="icon is-small is-left">
                         <i class="fas fa-user"></i>
                     </span>
@@ -136,7 +159,7 @@
             <div class="column">
                 <label class="label">Achternaam</label>
                 <p class="control has-icons-left">
-                    <InputText class="input" placeholder="Jansens" @bind-Value="model.Contactpersoon.LastName" />
+                    <input class="input" type="text" placeholder="Jansens">
                     <span class="icon is-small is-left">
                         <i class="fas fa-user"></i>
                     </span>
@@ -147,11 +170,18 @@
             <div class="column">
                 <div class="field">
                     <label class="label">Email</label>
-                    <p class="control has-icons-left">
-                        <InputText class="input" placeholder="user@example.be" @bind-Value="model.Contactpersoon.Email" />
+                    <p class="control has-icons-left has-icons-right">
+                        <input class="input @(isEmailContact ? "" : "is-danger")" type="email" placeholder="user@@example.be">
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
+                        <span class="icon is-small is-right">
+                            <i class="@(isEmailContact ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
+                        </span>
+                        @if (!isEmail)
+                        {
+                        <p class="has-text-danger">Dit is geen geldig email!</p>
+                        }
                     </p>
                 </div>
             </div>
@@ -159,21 +189,28 @@
                 <div class="field">
                     <label class="label">Telefoon</label>
                     <p class="control has-icons-left has-icons-right">
-                        <InputText class="input" placeholder="Telefoonnummer"
-                        @bind-Value="model.Contactpersoon.PhoneNumber" />
+                        <input class="input @(isPhonenumberContact ? "" : "is-danger")" type="tel" placeholder="Telefoonnummer">
                         <span class="icon is-small is-left">
                             <i class="fas fa-phone"></i>
                         </span>
+                        <span class="icon is-small is-right">
+                            <i class="@(isPhonenumberContact ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
+                        </span>
+                        @if (!validPassword)
+                        {
+                            <!--Dit moet specifieker zeggen waaraan niet wordt voldaan-->
+                        <p class="has-text-danger">Dit is geen geldig telefoonnummer!</p>
+                        }
                     </p>
                 </div>
             </div>
         </div>
-        /*<h1 class="title is-4">Reserve Contactpersoon</h1>
+        <h1 class="title is-4">Reserve Contactpersoon</h1>
         <div class="field columns">
             <div class="column">
                 <label class="label">Voornaam</label>
                 <p class="control has-icons-left">
-                    <InputText class="input" placeholder="Jan" @bind-Value="model.ReserveContactpersoon.FirstName" />
+                    <input class="input" type="text" placeholder="Jan">
                     <span class="icon is-small is-left">
                         <i class="fas fa-user"></i>
                     </span>
@@ -182,7 +219,7 @@
             <div class="column">
                 <label class="label">Achternaam</label>
                 <p class="control has-icons-left">
-                    <InputText class="input" placeholder="Jansens" @bind-Value="model.ReserveContactpersoon.LastName" />
+                    <input class="input" type="text" placeholder="Jansens">
                     <span class="icon is-small is-left">
                         <i class="fas fa-user"></i>
                     </span>
@@ -193,33 +230,63 @@
             <div class="column">
                 <div class="field">
                     <label class="label">Email</label>
-                    <p class="control has-icons-left">
-                        <InputText class="input" placeholder="user@example.be"
-                        @bind-Value="model.ReserveContactpersoon.Email" />
+                    <p class="control has-icons-left has-icons-right">
+                        <input class="input @(isEmailResContact ? "" : "is-danger")" type="email" placeholder="user@@example.be">
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
+                        <span class="icon is-small is-right">
+                            <i class="@(isEmailResContact ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
+                        </span>
+                        @if (!isEmail)
+                        {
+                        <p class="has-text-danger">Dit is geen geldig email!</p>
+                        }
                     </p>
                 </div>
             </div>
             <div class="column">
                 <div class="field">
                     <label class="label">Telefoon</label>
-                    <p class="control has-icons-left">
-                        <InputText class="input" placeholder="Telefoonnummer"
-                        @bind-Value="model.ReserveContactpersoon.PhoneNumber" />
+                    <p class="control has-icons-left has-icons-right">
+                        <input class="input @(isPhonenumberResContact ? "" : "is-danger")" type="tel" placeholder="Telefoonnummer">
                         <span class="icon is-small is-left">
                             <i class="fas fa-phone"></i>
                         </span>
+                        <span class="icon is-small is-right">
+                            <i class="@(isPhonenumberResContact ? "fas fa-check" : "fas fa-exclamation-triangle has-text-danger")"></i>
+                        </span>
+                        @if (!validPassword)
+                        {
+                            <!--Dit moet specifieker zeggen waaraan niet wordt voldaan-->
+                        <p class="has-text-danger">Dit is geen geldig telefoonnummer!</p>
+                        }
                     </p>
                 </div>
             </div>
-        </div>*/
+        </div>
     }
-    <button class="button is-rechts is-success" type="submit" @onclick="RegistreerKlant">
+    <button class="button is-rechts is-success" type="submit">
         <span class="icon is-small">
             <i class="fas fa-check"></i>
         </span>
         <span>Account aanmaken</span>
     </button>
-</EditForm>
+</form>
+
+@code {
+    public Boolean isEmail { get; set; } = false;
+    public Boolean isEmailContact { get; set; } = false;
+    public Boolean isEmailResContact { get; set; } = false;
+    public Boolean isPhonenumber { get; set; } = false;
+    public Boolean isPhonenumberContact { get; set; } = false;
+    public Boolean isPhonenumberResContact { get; set; } = false;
+    public Boolean validPassword { get; set; } = false;
+    public Boolean isIntern { get; set; } = true;
+
+    public void toggleRelation()
+    {
+        isIntern = !isIntern;
+    }
+
+}

@@ -1,32 +1,43 @@
-namespace Shared.Projecten
+using Domain.Users;
+using Domain.VirtualMachines;
+using Shared.VirtualMachines;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Shared.Projects
 {
-    public static class ProjectenRequest
+    public static class ProjectRequest
     {
-        public class GetIndex
+        public class All
         {
-            public string? SearchTerm { get; set; }
+            public string? SearchTerm { get; set; } //filter will search on: project name + name of customer
 
         }
 
-        public class GetDetail
+        public class Detail
         {
-            public int ProjectenId { get; set; }
+            public int ProjectId { get; set; }
         }
 
         public class Delete
         {
-            public int ProjectenId { get; set; }
+            public int ProjectId { get; set; }
         }
 
         public class Create
         {
-            public ProjectenDto.Mutate Projecten { get; set; }
+            public ProjectDto.Mutate Project { get; set; }
         }
 
         public class Edit
         {
-            public int ProjectenId { get; set; }
-            public ProjectenDto.Mutate Projecten { get; set; }
+            public int ProjectId { get; set; }
+
+            public ProjectDto.Mutate Project { get; set; }
+
         }
     }
 }

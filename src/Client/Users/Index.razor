@@ -1,7 +1,7 @@
 ﻿@page "/klanten"
 @attribute [Authorize(policy: "AdminOnly")]
 
-@if (Users is null || Users.Count() == 0)
+@if (Klanten is null || Klanten.Count() == 0)
 {
     <p>Geen klanten...</p>
 }
@@ -18,7 +18,7 @@ else
                     <th>Acties</th>
                 </tr>
             </thead>
-            @foreach (var kl in Users)
+            @foreach (var kl in Klanten)
             {
                 <tbody>
                     <tr>

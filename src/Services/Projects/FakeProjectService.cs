@@ -1,12 +1,13 @@
 ﻿using Domain.Projecten;
-using Shared.Projecten;
 using Shared.VirtualMachines;
 using Domain.Users;
 using Domain.VirtualMachines.VirtualMachine;
+using Services.Projects;
+using Shared.Projects;
 
 namespace Services.Projects
 {
-    public class FakeProjectService : IProjectenService
+    public class FakeProjectService : IProjectService
     {
         private List<Project> _projects = new();
 
@@ -17,86 +18,86 @@ namespace Services.Projects
 
         }
 
-        public async Task<ProjectenResponse.Create> CreateAsync(ProjectenRequest.Create request)
+        public async Task<ProjectResponse.Create> CreateAsync(ProjectRequest.Create request)
         {
             await Task.Delay(100);
 
-            ProjectenResponse.Create response = new();
+            ProjectResponse.Create response = new();
 
-            var project = request.Projecten;
-            var customer = request.Projecten.user;
+            var project = request.Project;
+            var customer = request.Project.Klant;
 
             int id = _projects.Max(x => x.Id) + 1;
 
-            Project p = new Project(project.Name) { Id = id, User = customer };
+            Project p = new Project(project.Name) { Id = id, Klant = customer };
             _projects.Add(p);
 
 
 
-            response.ProjectenId = id;
+            response.ProjectId = id;
 
             return response;
         }
 
-        public async Task DeleteAsync(ProjectenRequest.Delete request)
+
+        public async Task DeleteAsync(ProjectRequest.Delete request)
         {
             await Task.Delay(100);
 
-            var proj = _projects.SingleOrDefault(x => x.Id == request.ProjectenId);
+            var proj = _projects.SingleOrDefault(x => x.Id == request.ProjectId);
             _projects.Remove(proj);
         }
 
-        public async Task<ProjectenResponse.Edit> EditAsync(ProjectenRequest.Edit request)
+        public async Task<ProjectResponse.Edit> EditAsync(ProjectRequest.Edit request)
         {
             await Task.Delay(100);
-            ProjectenResponse.Edit response = new();
+            ProjectResponse.Edit response = new();
 
-            var proj = _projects.SingleOrDefault(x => x.Id == request.ProjectenId);
+            var proj = _projects.SingleOrDefault(x => x.Id == request.ProjectId);
 
             if (proj == null)
             {
-                response.ProjectenId = -1;
+                response.ProjectId = -1;
                 return response;
             }
 
 
-            proj.Name = request.Projecten.Name;
-            proj.User = request.Projecten.user;
+            proj.Name = request.Project.Name;
+            proj.Klant = request.Project.Klant;
 
-            response.ProjectenId = proj.Id;
+            response.ProjectId = proj.Id;
             return response;
 
 
         }
 
-        public async Task<ProjectenResponse.GetDetail> GetDetailAsync(ProjectenRequest.GetDetail request)
+        public async Task<ProjectResponse.Detail> GetDetailAsync(ProjectRequest.Detail request)
         {
             await Task.Delay(1000);
-            ProjectenResponse.GetDetail response = new();
+            ProjectResponse.Detail response = new();
 
-            Project project = _projects.Single(e => e.Id == request.ProjectenId);
-            List<VirtualMachine> vms = new();
-            project.VirtualMachines.ForEach(e => vms.Add(new VirtualMachine { Id = e.Id, Mode = e.Mode, Name = e.Name }));
+            Project project = _projects.Single(e => e.Id == request.ProjectId);
+            List<VirtualMachineDto.Index> vms = new();
+            project.VirtualMachines.ForEach(e => vms.Add(new VirtualMachineDto.Index() { Id = e.Id, Mode = e.Mode, Name = e.Name }));
 
-            response.Projecten = new ProjectenDto.Detail() { Id = project.Id, user = project.User, VirtualMachines = vms };
+            response.Project = new ProjectDto.Detail() { Id = project.Id, Klant = project.Klant, VirtualMachines = vms };
 
 
 
             return response;
         }
 
-
-        public async Task<ProjectenResponse.GetIndex> GetIndexAsync(ProjectenRequest.GetIndex request)
+        public async Task<ProjectResponse.All> GetIndexAsync(ProjectRequest.All request)
         {
 
             await Task.Delay(100);
 
-            ProjectenResponse.GetIndex response = new();
+            ProjectResponse.All response = new();
             List<Project> projects;
 
             if (!string.IsNullOrWhiteSpace(request.SearchTerm))
             {
-                projects = _projects.FindAll(e => e.Name.Contains(request.SearchTerm, StringComparison.OrdinalIgnoreCase) || e.User.Name.Contains(request.SearchTerm, StringComparison.OrdinalIgnoreCase));
+                projects = _projects.FindAll(e => e.Name.Contains(request.SearchTerm, StringComparison.OrdinalIgnoreCase) || e.Klant.Name.Contains(request.SearchTerm, StringComparison.OrdinalIgnoreCase));
             }
             else
             {
@@ -104,18 +105,15 @@ namespace Services.Projects
             }
 
             response.Total = projects.Count();
-            response.Projecten = projects.Select(x => new ProjectenDto.Index
+            response.Projects = projects.Select(x => new ProjectDto.Index
             {
                 Id = x.Id,
                 Name = x.Name,
-                user = x.User
+                Klant = x.Klant
 
             }).ToList();
 
             return response;
         }
-
-
     }
 }
-

@@ -26,11 +26,5 @@ namespace Domain.VirtualMachines.Contract
             StartDate = start_d;
             EndDate = end_d;
         }
-
-        public VMContract()
-        {
-
-        }
     }
 }
-

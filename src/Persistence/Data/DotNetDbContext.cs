@@ -9,7 +9,7 @@ using Domain.Statistics;
 using Domain.VirtualMachines.BackUp;
 using Domain.Projecten;
 using Domain.Users;
-
+/*
 namespace Persistence.Data
 {
     public class DotNetDbContext : DbContext
@@ -37,11 +37,11 @@ namespace Persistence.Data
             base.OnModelCreating(modelBuilder);
 
 
-            /*modelBuilder.Entity<VMConnection>();
+            modelBuilder.Entity<VMConnection>();
             modelBuilder.Entity<Statistic>();
             modelBuilder.Entity<Backup>();
             modelBuilder.Entity<ContactDetails>();
-            modelBuilder.Entity<Hardware>();*/
+            modelBuilder.Entity<Hardware>();
 
 
 
@@ -54,3 +54,4 @@ namespace Persistence.Data
         }
     }
 }
+*/

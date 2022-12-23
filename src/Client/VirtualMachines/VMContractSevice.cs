@@ -1,4 +1,4 @@
-using Client.Extentions;
+/*using Client.Extentions;
 using Shared.Projecten;
 using Shared.VMContracts;
 using System.Net;
@@ -13,9 +13,9 @@ namespace Client.VirtualMachines
         private string endpoint = "api/VMContract";
 
 
-        public VMContractService(/*HttpClient _httpClient,*/ IHttpClientFactory _IHttpClientFactory)
+        public VMContractService(HttpClient _httpClient IHttpClientFactory _IHttpClientFactory)
         {
-            /*this._httpClient = _httpClient;*/
+            this._httpClient = _httpClient;
             this._IHttpClientFactory = _IHttpClientFactory;
 
 
@@ -51,3 +51,4 @@ namespace Client.VirtualMachines
         }
     }
 }
+*/

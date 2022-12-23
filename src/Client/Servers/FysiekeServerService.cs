@@ -1,24 +1,29 @@
 ﻿using Client.Extentions;
 using Client.Infrastructure;
 using Domain.Server;
-using Shared.FysiekeServers;
 using System.Globalization;
 using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace Client.Servers
 {
+    public class FysiekeServicerService
+    {
+
+    }
+}
+   /* 
     public class FysiekeServerService : IFysiekeServerService
     {
-        /*private readonly HttpClient _httpClient;*/
+        private readonly HttpClient _httpClient;
 
         private readonly IHttpClientFactory _IHttpClientFactory;
 
         private const string endpoint = "api/fysiekeserver";
 
-        public FysiekeServerService(/*HttpClient _httpClient,*/ IHttpClientFactory _IHttpClientFactory)
+        public FysiekeServerService(HttpClient _httpClient, IHttpClientFactory _IHttpClientFactory)
         {
-            /*this._httpClient = _httpClient;*/
+            this._httpClient = _httpClient;
             this._IHttpClientFactory = _IHttpClientFactory;
 
 
@@ -89,4 +94,5 @@ namespace Client.Servers
         }
 
     }
-}
+
+}*/
