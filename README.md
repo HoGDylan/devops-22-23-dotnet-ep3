@@ -41,10 +41,5 @@
 - clean solution
 - check of nugget packages wel oké zijn geïmporteerd.
 
-####  Running the application: 
-```yarn start```
-
-#### Running the tests:
-```yarn test```
 
 
