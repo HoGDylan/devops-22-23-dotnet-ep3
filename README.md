@@ -26,7 +26,7 @@
 - algemeen
   - VM allocatie (mockdata)
 
-
+## De app gebruiken
 ####  Before you run the application:
 - clone het project
 - open het binnen visual studio 2022
