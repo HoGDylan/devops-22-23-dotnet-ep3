@@ -1,8 +1,25 @@
 ﻿# DevOps Groep 10.
 
-* **Inloggen:**
-  * Aan de hand van de knoppen op de homepage kun je de fake authenticatie gebruiken van de applicatie. 
+
+## De app gebruiken
+####  Before you run the application:
+- clone het project
+- open het binnen visual studio 2022
+- build het project
+
+####  Running the application:
+- run :)
+
+#### Inloggen
+- Aan de hand van de knoppen op de homepage kun je de fake authenticatie gebruiken van de applicatie. 
  
+
+####  In case of errors:
+- build
+- clean solution
+- check of nugget packages wel oké zijn geïmporteerd.
+
+
 
 ## Functionaliteiten
 - als klant
@@ -25,21 +42,6 @@
   
 - algemeen
   - VM allocatie (mockdata)
-
-## De app gebruiken
-####  Before you run the application:
-- clone het project
-- open het binnen visual studio 2022
-- build het project
-
-####  Running the application:
-- run :)
-
-
-####  In case of errors:
-- build
-- clean solution
-- check of nugget packages wel oké zijn geïmporteerd.
 
 
 
