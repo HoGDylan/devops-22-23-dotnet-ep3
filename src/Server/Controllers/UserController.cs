@@ -18,15 +18,15 @@ namespace Server.Controllers
         }
 
         [HttpGet, AllowAnonymous]
-        public Task<UserResponse.GetIndex> GetIndexAsync([FromQuery] UserRequest.GetIndex request)
+        public Task<UserResponse.AllKlantenIndex> GetIndexAsync([FromQuery] UserRequest.AllKlantenIndex request)
         {
-            return userService.GetIndexAsync(request);
+            return userService.GetAllKlanten(request);
         }
 
         [HttpPost]
         public Task<UserResponse.Create> CreateAsync([FromBody] UserRequest.Create request)
         {
-            return userService.CreateAsync(request);
+            return userService.Create(request);
         }
     }
 }

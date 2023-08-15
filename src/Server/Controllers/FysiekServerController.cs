@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.FysiekeServers;
+using Shared.Servers;
 using System.Threading.Tasks;
 
 namespace Server.Controllers
@@ -10,6 +10,7 @@ namespace Server.Controllers
     [Route("api/[controller]")]
     public class FysiekeServerController : ControllerBase
     {
+        /* Veel mehtodes die niet bestaan
         private readonly IFysiekeServerService fysiekeServerService;
 
         public FysiekeServerController(IFysiekeServerService fysiekeServerService)
@@ -47,5 +48,6 @@ namespace Server.Controllers
         {
             return fysiekeServerService.EditAsync(request);
         }
+        */
     }
 }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Projecten;
+using Shared.Projects;
 using System.Threading.Tasks;
 
 namespace Server.Controllers
@@ -10,46 +10,46 @@ namespace Server.Controllers
     [Route("api/[controller]")]
     public class ProjectController : ControllerBase
     {
-        private readonly IProjectenService projectenService;
+        private readonly IProjectService projectService;
 
-        public ProjectController(IProjectenService projectenService)
+        public ProjectController(IProjectService projectenService)
         {
-            this.projectenService = projectenService;
+            this.projectService = projectenService;
         }
 
         //[Authorize(Roles = "Klant")]
         [HttpGet, AllowAnonymous]
-        public Task<ProjectenResponse.GetIndex> GetIndexAsync([FromQuery] ProjectenRequest.GetIndex request)
+        public Task<ProjectResponse.All> GetIndexAsync([FromQuery] ProjectRequest.All request)
         {
-            return projectenService.GetIndexAsync(request);
+            return projectService.GetIndexAsync(request);
         }
 
         //[Authorize(Roles = "Klant")]
         [HttpGet("{ProjectenId}"), AllowAnonymous]
-        public Task<ProjectenResponse.GetDetail> GetDetailAsync([FromRoute] ProjectenRequest.GetDetail request)
+        public Task<ProjectResponse.Detail> GetDetailAsync([FromRoute] ProjectRequest.Detail request)
         {
-            return projectenService.GetDetailAsync(request);
+            return projectService.GetDetailAsync(request);
         }
 
         [Authorize(Roles = "BeheerderBeheren")]
         [HttpDelete("{ProjectenId}")]
-        public Task DeleteAsync([FromRoute] ProjectenRequest.Delete request)
+        public Task DeleteAsync([FromRoute] ProjectRequest.Delete request)
         {
-            return projectenService.DeleteAsync(request);
+            return projectService.DeleteAsync(request);
         }
 
         [Authorize(Roles = "BeheerderBeheren")]
         [HttpPost]
-        public Task<ProjectenResponse.Create> CreateAsync([FromBody] ProjectenRequest.Create request)
+        public Task<ProjectResponse.Create> CreateAsync([FromBody] ProjectRequest.Create request)
         {
-            return projectenService.CreateAsync(request);
+            return projectService.CreateAsync(request);
         }
 
         [Authorize(Roles = "BeheerderBeheren")]
         [HttpPut]
-        public Task<ProjectenResponse.Edit> EditAsync([FromBody] ProjectenRequest.Edit request)
+        public Task<ProjectResponse.Edit> EditAsync([FromBody] ProjectRequest.Edit request)
         {
-            return projectenService.EditAsync(request);
+            return projectService.EditAsync(request);
         }
     }
 }

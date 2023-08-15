@@ -19,7 +19,7 @@ namespace Server.Controllers
 
 
         [HttpGet]
-        public Task<VMContractResponse.GetIndex> GetIndexAsync([FromQuery] VMContractRequest.GetIndex request)
+        public Task<VMContractResponse.Index> GetIndexAsync([FromQuery] VMContractRequest.GetIndex request)
         {
             return VMContractService.GetIndexAsync(request);
         }
