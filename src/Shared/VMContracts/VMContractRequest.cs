@@ -8,7 +8,6 @@ namespace Shared.VMContracts
 {
     public static class VMContractRequest
     {
-
         public class GetByDate
         {
             public DateTime Start { get; set; }
@@ -17,6 +16,23 @@ namespace Shared.VMContracts
         }
 
         public class GetDetail
+        {
+            public int Id { get; set; }
+        }
+
+        public class Create
+        {
+            public VMContractDto.Mutate VMContract { get; set; }
+        }
+
+        public class Edit
+        {
+            public int Id { get; set; }
+
+            public VMContractDto.Mutate VMContract { get; set; }
+        }
+
+        public class Delete
         {
             public int Id { get; set; }
         }

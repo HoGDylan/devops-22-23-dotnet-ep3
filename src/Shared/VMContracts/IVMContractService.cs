@@ -1,3 +1,4 @@
+using Shared.Projects;
 using Shared.VirtualMachines;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,10 @@ namespace Shared.VMContracts
     {
         Task<VMContractResponse.Index> GetFromDate(VMContractRequest.GetByDate request); // returns all contracts from a certain date until nullable enddate 
         Task<VMContractResponse.Detail> GetDetailAsync(VMContractRequest.GetDetail request); //returns all info about specific vm duration + customer
+        Task<VMContractResponse.Create> CreateAsync(VMContractRequest.Create request);
+        Task<VMContractResponse.Edit> EditAsync(VMContractRequest.Edit request);
+        Task DeleteAsync(VMContractRequest.Delete request);
+
 
         /*
       Als er een VM gecreërt word, krijgt deze automatisch een contract mee. Maar nog geen connectie.

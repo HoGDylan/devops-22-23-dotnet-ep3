@@ -16,5 +16,12 @@ namespace Shared.VMContracts
             public DateTime StartDate { get; set; }
             public DateTime EndDate { get; set; }
         }
+
+        public class Mutate
+        {
+            public DateTime StartDate { get; set; }
+
+            public DateTime EndDate { get; set; }
+        }
     }
 }

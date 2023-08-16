@@ -19,13 +19,13 @@ namespace Server.Controllers
 
 
         [HttpGet]
-        public Task<VMContractResponse.Index> GetIndexAsync([FromQuery] VMContractRequest.GetIndex request)
+        public Task<VMContractResponse.Index> GetIndexAsync([FromQuery] VMContractRequest.GetByDate request)
         {
-            return VMContractService.GetIndexAsync(request);
+            return VMContractService.GetFromDate(request);
         }
 
         [HttpGet("{VMContractId}")]
-        public Task<VMContractResponse.GetDetail> GetDetailAsync([FromRoute] VMContractRequest.GetDetail request)
+        public Task<VMContractResponse.Detail> GetDetailAsync([FromRoute] VMContractRequest.GetDetail request)
         {
             return VMContractService.GetDetailAsync(request);
         }

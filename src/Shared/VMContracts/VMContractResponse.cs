@@ -25,5 +25,15 @@ namespace Shared.VMContracts
             public DateTime StartDate { get; set; }
             public DateTime EndDate { get; set; }
         }
+
+        public class Edit
+        {
+            public int Id { get; set; }
+        }
+
+        public class Create
+        {
+            public int Id { get; set; }
+        }
     }
 }

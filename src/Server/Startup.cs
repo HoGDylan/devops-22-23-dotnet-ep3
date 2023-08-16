@@ -15,11 +15,11 @@ using System.Data.SqlClient;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Services.Users;
 using Shared.Users;
-using Shared.Projecten;
-using Services.Projecten;
-using Shared.FysiekeServers;
+using Shared.Projects;
+using Services.Projects;
+using Shared.Servers;
 using Shared.VMContracts;
-using Services.FysiekeServers;
+using Services.Servers;
 using Services.VMContracts;
 using Auth0Net.DependencyInjection.HttpClient;
 
@@ -67,13 +67,13 @@ namespace Server
             services.AddAuth0ManagementClient().AddManagementAccessToken();
 
             services.AddRazorPages();
-            services.AddScoped<IUserService, UserService>();
+            /*services.AddScoped<IUserService, UserService>();
             services.AddScoped<IVirtualMachineService, VirtualMachineService>();
             services.AddScoped<IProjectenService, ProjectService>();
             services.AddScoped<IFysiekeServerService, FysiekeServerService>();
             services.AddScoped<IVMContractService, VMContractService>();
             services.AddScoped<IStorageService, BlobStorageService>();
-            services.AddScoped<DotNetDataInitializer>();
+            services.AddScoped<DotNetDataInitializer>();*/
 
         }
 
